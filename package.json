@@ -1,0 +1,27 @@
+{
+  "name": "clipode",
+  "version": "0.1.0",
+  "description": "A terminal client for a self-hosted Paperclip instance",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "bin": { "clipode": "./bin/clipode.ts" },
+  "scripts": {
+    "start": "bun run bin/clipode.ts",
+    "typecheck": "bun check",
+    "test": "bun test",
+    "smoke": "bun run script/smoke.ts",
+    "live-probe": "bun run script/live-probe.ts",
+    "gen-types": "bun run script/gen-types.ts"
+  },
+  "dependencies": {
+    "@opentui/core": "0.9.7",
+    "@opentui/solid": "0.9.7",
+    "solid-js": "1.9.20"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.5",
+    "openapi-typescript": "7.13.0",
+    "typescript": "5.9.3"
+  }
+}

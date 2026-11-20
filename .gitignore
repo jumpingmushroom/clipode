@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.log
+.env
+.env.*
+# Syncthing temporaries
+.syncthing.*
+~syncthing~*
+# Raw responses from a real instance; only scrubbed copies go in test/fixtures
+.smoke/
