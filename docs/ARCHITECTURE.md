@@ -213,7 +213,7 @@ The three inbox shelves and the kinds of request come from paperclip-android's D
 
 ### Keys
 
-Defaults follow opencode and pasode, and every binding can be changed in the config file.
+Defaults follow opencode and pasode, and every binding can be changed in the config file. Bindings run on OpenTUI's own `@opentui/keymap` (the engine opencode uses): a timed leader, comma-separated alternatives, and a `mode` layer field that switches screen bindings off while a dialog is open. In binding strings a sequence is written without spaces: `<leader>i`, `gi`.
 
 | Key | Action |
 | --- | --- |
@@ -228,7 +228,7 @@ Defaults follow opencode and pasode, and every binding can be changed in the con
 | `ctrl+b` | Toggle sidebar |
 | `leader 1`..`9`, `leader .` `,` | Jump to and cycle tabs |
 | `leader c` | Switch company |
-| `leader shift+t` | Theme switcher with live preview |
+| `leader shift+t`, `ctrl+t` | Theme switcher with live preview (`ctrl+t` is from the mockup's palette) |
 | `leader h` | Help with every binding |
 | `r` | Refresh the current screen |
 | `ctrl+c` twice, `leader q` | Quit |
@@ -314,7 +314,7 @@ Plugins are listed under `plugins` in the config file, as a path or a `[path, op
 ### Themes
 
 - The theme schema is opencode's JSON format. Themes load from `~/.config/clipode/themes` and from `~/.config/opencode/themes`.
-- A small set of built-in themes ships in the binary, including opencode's default.
+- Built-in themes: `clipode-dark` and `clipode-light` (the agreed tokens), `system` (generated from the terminal palette, as in opencode), and opencode's `opencode`, `everforest`, `gruvbox`, `kanagawa`, `nord` and `solarized`. With no theme chosen, clipode follows the terminal with `clipode-dark` or `clipode-light`. An opencode palette maps onto clipode's tokens as background → background, backgroundPanel → panel, border → border, text → text, textMuted → muted, primary → accent, backgroundElement → selection, and success, warning and error unchanged.
 - Components use semantic tokens (text, muted, border, accent, success, warning, error, selection) and never raw colours.
 - Dark and light modes follow the terminal by default and can be forced.
 

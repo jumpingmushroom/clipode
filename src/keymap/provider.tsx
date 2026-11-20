@@ -1,0 +1,38 @@
+// The keymap: OpenTUI's keymap engine with a timed leader, comma-separated alternatives, and a "mode" layer field
+// so that an open dialog switches off the screen's bindings. Mode handling follows opencode packages/tui/src/context/keymap.tsx.
+import {
+  registerBackspacePopsPendingSequence,
+  registerCommaBindings,
+  registerEscapeClearsPendingSequence,
+  registerTimedLeader,
+} from "@opentui/keymap/addons/opentui"
+import { createDefaultOpenTuiKeymap } from "@opentui/keymap/opentui"
+import { KeymapProvider } from "@opentui/keymap/solid"
+import { useRenderer } from "@opentui/solid"
+import { onCleanup, type ParentProps } from "solid-js"
+
+export type Mode = "base" | "modal"
+const MODE_KEY = "clipode.mode"
+
+export function KeysProvider(props: ParentProps<{ leader?: string }>) {
+  const keymap = createDefaultOpenTuiKeymap(useRenderer())
+  const dispose = [
+    registerCommaBindings(keymap),
+    registerEscapeClearsPendingSequence(keymap),
+    registerBackspacePopsPendingSequence(keymap),
+    registerTimedLeader(keymap, { trigger: props.leader ?? "ctrl+x", name: "leader", timeoutMs: 2000 }),
+    // A layer with `mode: "base"` is active only while no dialog is open; `mode: "modal"` only while one is.
+    keymap.registerLayerFields({
+      mode(value, context) {
+        context.require(MODE_KEY, value)
+      },
+    }),
+  ]
+  keymap.setData(MODE_KEY, "base")
+  onCleanup(() => dispose.reverse().forEach((d) => d()))
+  return <KeymapProvider keymap={keymap}>{props.children}</KeymapProvider>
+}
+
+export function setMode(keymap: { setData(name: string, value: unknown): void }, mode: Mode) {
+  keymap.setData(MODE_KEY, mode)
+}

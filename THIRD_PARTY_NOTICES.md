@@ -8,7 +8,7 @@ Files ported from opencode start with a one-line comment naming their source pat
 
 https://github.com/anomalyco/opencode
 
-Terminal UI components, theme format and keymap model, ported from `packages/tui`.
+Terminal UI components (dialog, select, toast), the theme format, resolver, system theme and syntax rules, ported from `packages/tui` and `packages/theme`. The built-in themes `opencode`, `everforest`, `gruvbox`, `kanagawa`, `nord` and `solarized` are copied from `packages/tui/src/theme/assets`; each JSON file names its source in a `$source` field.
 
 ```text
 MIT License

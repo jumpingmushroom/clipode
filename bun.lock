@@ -6,6 +6,7 @@
       "name": "clipode",
       "dependencies": {
         "@opentui/core": "0.9.7",
+        "@opentui/keymap": "0.9.7",
         "@opentui/solid": "0.9.7",
         "solid-js": "1.9.20",
       },
@@ -101,6 +102,8 @@
     "@opentui/core-win32-arm64": ["@opentui/core-win32-arm64@0.9.7", "", { "os": "win32", "cpu": "arm64" }, "sha512-7HbIsZ/o57k0LAzEQha53OBmFfH77U/tNTun6kKlWnD7Pe082YCL1lKkF+BqLMYN1bCFWfusm7blVDWLulSR8A=="],
 
     "@opentui/core-win32-x64": ["@opentui/core-win32-x64@0.9.7", "", { "os": "win32", "cpu": "x64" }, "sha512-F73Q40dQQxsSMvHG1hCW5XDhXOCjlOAxNDhgS2/xx1pcSfVg9IiabmNShB6RJr6etkBGkm/B29LolMghv/DurA=="],
+
+    "@opentui/keymap": ["@opentui/keymap@0.9.7", "", { "dependencies": { "@opentui/core": "0.9.7" }, "peerDependencies": { "@opentui/react": "0.9.7", "@opentui/solid": "0.9.7", "react": ">=19.2.0", "solid-js": "^1.9.12" }, "optionalPeers": ["@opentui/react", "@opentui/solid", "react", "solid-js"] }, "sha512-Ish3jeOerUn8fb1VgMZvWzT/eIaS5fdZfo1YU4DDqkg8EwXBnjPFMrGOm81pXzx84/dnWedAbtlDR6Ot7KFefQ=="],
 
     "@opentui/solid": ["@opentui/solid@0.9.7", "", { "dependencies": { "@babel/core": "7.29.7", "@babel/preset-typescript": "7.27.1", "@opentui/core": "0.9.7", "babel-plugin-module-resolver": "5.0.2", "babel-preset-solid": "1.9.16", "entities": "7.0.1", "s-js": "^0.4.9" }, "peerDependencies": { "solid-js": "^1.9.12" } }, "sha512-mk4m9SU9Uv9XdEL6zjndp+nLkpx/CrLAc5B8wjlHYiQ5NSOLmF/ApCDt7t+XE5iGDDZ8UWhw4bfavqlmp3qY7A=="],
 
