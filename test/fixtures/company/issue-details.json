@@ -1,13 +1,13 @@
 {
-  "00000000-0000-4000-8000-000000000033": {
-    "id": "00000000-0000-4000-8000-000000000033",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+  "00000000-0000-4000-8000-000000000037": {
+    "id": "00000000-0000-4000-8000-000000000037",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "conversationAgentId": null,
     "conversationUserId": null,
     "conversationState": null,
     "conversationSessionGeneration": 0,
     "conversationBoundaryCommentId": null,
-    "projectId": "00000000-0000-4000-8000-000000000036",
+    "projectId": "00000000-0000-4000-8000-00000000003a",
     "projectWorkspaceId": null,
     "goalId": null,
     "parentId": null,
@@ -24,15 +24,15 @@
     "harnessKind": null,
     "priority": "medium",
     "reviewPolicy": null,
-    "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+    "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
     "assigneeUserId": null,
     "checkoutRunId": null,
     "executionRunId": null,
     "executionAgentNameKey": null,
     "executionLockedAt": null,
     "createdByAgentId": null,
-    "createdByUserId": "example createdByUserId",
-    "responsibleUserId": "example responsibleUserId",
+    "createdByUserId": "defaultResponsibleUserId-1",
+    "responsibleUserId": "defaultResponsibleUserId-1",
     "issueNumber": 222,
     "identifier": "DEMO-2",
     "originKind": "manual",
@@ -40,7 +40,7 @@
     "originRunId": null,
     "originIssueId": null,
     "originIdentityContextId": null,
-    "continuationIdentityContextId": "00000000-0000-4000-8000-00000000004e",
+    "continuationIdentityContextId": "00000000-0000-4000-8000-000000000052",
     "originFingerprint": "example originFingerprint",
     "requestDepth": 0,
     "billingCode": null,
@@ -53,7 +53,7 @@
     "monitorAttemptCount": 0,
     "monitorNotes": null,
     "monitorScheduledBy": null,
-    "executionWorkspaceId": "00000000-0000-4000-8000-00000000004f",
+    "executionWorkspaceId": "00000000-0000-4000-8000-000000000053",
     "workspaceBindingRevision": 1,
     "workspaceSelection": null,
     "workspacePendingSelection": null,
@@ -88,10 +88,10 @@
       "sampleBlockerIdentifier": "DEMO-1",
       "sampleStalledBlockerIdentifier": "DEMO-1",
       "blockingTreeLive": false,
-      "directBlockerIssueId": "00000000-0000-4000-8000-000000000032",
-      "terminalBlockerIssueId": "00000000-0000-4000-8000-000000000032",
+      "directBlockerIssueId": "00000000-0000-4000-8000-000000000036",
+      "terminalBlockerIssueId": "00000000-0000-4000-8000-000000000036",
       "terminalBlocker": {
-        "id": "00000000-0000-4000-8000-000000000032",
+        "id": "00000000-0000-4000-8000-000000000036",
         "identifier": "DEMO-1",
         "title": "example title"
       }
@@ -111,46 +111,46 @@
       "canRetry": false,
       "userAction": null,
       "sourceRunIds": [
-        "00000000-0000-4000-8000-000000000050"
+        "00000000-0000-4000-8000-000000000054"
       ],
-      "observedRunId": "00000000-0000-4000-8000-000000000050"
+      "observedRunId": "00000000-0000-4000-8000-000000000054"
     },
     "scheduledRetry": null,
     "activeRecoveryAction": null,
     "stalledDependencies": [],
     "blockedBy": [
       {
-        "id": "00000000-0000-4000-8000-000000000051",
+        "id": "00000000-0000-4000-8000-000000000055",
         "identifier": "DEMO-8",
         "title": "example title",
         "status": "done",
         "displayStatus": "done",
         "priority": "high",
-        "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+        "assigneeAgentId": "00000000-0000-4000-8000-00000000000f",
         "assigneeUserId": null,
         "scheduledRetry": null,
         "activeRecoveryAction": null
       },
       {
-        "id": "00000000-0000-4000-8000-000000000052",
+        "id": "00000000-0000-4000-8000-000000000056",
         "identifier": "DEMO-9",
         "title": "example title",
         "status": "done",
         "displayStatus": "done",
         "priority": "medium",
-        "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+        "assigneeAgentId": "00000000-0000-4000-8000-00000000000f",
         "assigneeUserId": null,
         "scheduledRetry": null,
         "activeRecoveryAction": null
       },
       {
-        "id": "00000000-0000-4000-8000-000000000032",
+        "id": "00000000-0000-4000-8000-000000000036",
         "identifier": "DEMO-1",
         "title": "example title",
         "status": "in_review",
         "displayStatus": "in_review",
         "priority": "medium",
-        "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+        "assigneeAgentId": "00000000-0000-4000-8000-00000000000f",
         "assigneeUserId": null,
         "scheduledRetry": null,
         "activeRecoveryAction": null
@@ -161,25 +161,25 @@
       "outbound": [
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000053",
+            "id": "00000000-0000-4000-8000-000000000057",
             "identifier": "DEMO-10",
             "title": "example title",
             "status": "done",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000f",
             "assigneeUserId": null
           },
           "mentionCount": 2,
           "sources": [
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000054",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000058",
               "label": "example label",
               "matchedText": "DEMO-10"
             },
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000055",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000059",
               "label": "example label",
               "matchedText": "DEMO-10"
             }
@@ -187,19 +187,19 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000051",
+            "id": "00000000-0000-4000-8000-000000000055",
             "identifier": "DEMO-8",
             "title": "example title",
             "status": "done",
             "priority": "high",
-            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000f",
             "assigneeUserId": null
           },
           "mentionCount": 1,
           "sources": [
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000056",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000005a",
               "label": "example label",
               "matchedText": "DEMO-8"
             }
@@ -207,19 +207,19 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000052",
+            "id": "00000000-0000-4000-8000-000000000056",
             "identifier": "DEMO-9",
             "title": "example title",
             "status": "done",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000f",
             "assigneeUserId": null
           },
           "mentionCount": 1,
           "sources": [
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000056",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000005a",
               "label": "example label",
               "matchedText": "DEMO-9"
             }
@@ -227,19 +227,19 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000032",
+            "id": "00000000-0000-4000-8000-000000000036",
             "identifier": "DEMO-1",
             "title": "example title",
             "status": "in_review",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000f",
             "assigneeUserId": null
           },
           "mentionCount": 1,
           "sources": [
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000056",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000005a",
               "label": "example label",
               "matchedText": "DEMO-1"
             }
@@ -249,12 +249,12 @@
       "inbound": [
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000053",
+            "id": "00000000-0000-4000-8000-000000000057",
             "identifier": "DEMO-10",
             "title": "example title",
             "status": "done",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000f",
             "assigneeUserId": null
           },
           "mentionCount": 2,
@@ -275,12 +275,12 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000051",
+            "id": "00000000-0000-4000-8000-000000000055",
             "identifier": "DEMO-8",
             "title": "example title",
             "status": "done",
             "priority": "high",
-            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000f",
             "assigneeUserId": null
           },
           "mentionCount": 2,
@@ -301,12 +301,12 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000052",
+            "id": "00000000-0000-4000-8000-000000000056",
             "identifier": "DEMO-9",
             "title": "example title",
             "status": "done",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000f",
             "assigneeUserId": null
           },
           "mentionCount": 2,
@@ -327,12 +327,12 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000032",
+            "id": "00000000-0000-4000-8000-000000000036",
             "identifier": "DEMO-1",
             "title": "example title",
             "status": "in_review",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000f",
             "assigneeUserId": null
           },
           "mentionCount": 2,
@@ -353,19 +353,19 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000057",
+            "id": "00000000-0000-4000-8000-00000000005b",
             "identifier": "DEMO-11",
             "title": "example title",
             "status": "done",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
             "assigneeUserId": null
           },
           "mentionCount": 1,
           "sources": [
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000058",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000005c",
               "label": "example label",
               "matchedText": "DEMO-2"
             }
@@ -383,9 +383,9 @@
     "documentSummaries": [],
     "legacyPlanDocument": null,
     "project": {
-      "id": "00000000-0000-4000-8000-000000000036",
-      "companyId": "00000000-0000-4000-8000-000000000001",
-      "urlKey": "example urlKey",
+      "id": "00000000-0000-4000-8000-00000000003a",
+      "companyId": "00000000-0000-4000-8000-000000000003",
+      "urlKey": "urlKey-22",
       "goalId": null,
       "goalIds": [],
       "goals": [],
@@ -423,11 +423,11 @@
     "goal": null,
     "mentionedProjects": [],
     "currentExecutionWorkspace": {
-      "id": "00000000-0000-4000-8000-00000000004f",
-      "companyId": "00000000-0000-4000-8000-000000000001",
+      "id": "00000000-0000-4000-8000-000000000053",
+      "companyId": "00000000-0000-4000-8000-000000000003",
       "projectId": null,
       "projectWorkspaceId": null,
-      "sourceIssueId": "00000000-0000-4000-8000-000000000033",
+      "sourceIssueId": "00000000-0000-4000-8000-000000000037",
       "mode": "example mode",
       "strategyType": "example strategyType",
       "name": "DEMO-2",
@@ -446,7 +446,7 @@
       "cleanupEligibleAt": null,
       "cleanupReason": null,
       "config": {
-        "environmentId": "00000000-0000-4000-8000-000000000029",
+        "environmentId": "00000000-0000-4000-8000-00000000002d",
         "provisionCommand": null,
         "runtimeProvisionCommand": null,
         "teardownCommand": null,
@@ -464,21 +464,21 @@
     "externalChannelBinding": null,
     "createdFrom": null
   },
-  "00000000-0000-4000-8000-000000000035": {
-    "id": "00000000-0000-4000-8000-000000000035",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+  "00000000-0000-4000-8000-000000000039": {
+    "id": "00000000-0000-4000-8000-000000000039",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "conversationAgentId": null,
     "conversationUserId": null,
     "conversationState": null,
     "conversationSessionGeneration": 0,
     "conversationBoundaryCommentId": null,
-    "projectId": "00000000-0000-4000-8000-000000000036",
+    "projectId": "00000000-0000-4000-8000-00000000003a",
     "projectWorkspaceId": null,
     "goalId": null,
     "parentId": null,
     "visibility": "open",
     "privacyRootIssueId": null,
-    "privacyParentIssueId": "00000000-0000-4000-8000-000000000059",
+    "privacyParentIssueId": "00000000-0000-4000-8000-00000000005d",
     "title": "example title",
     "titleNeedsGeneration": false,
     "description": "example description",
@@ -489,23 +489,23 @@
     "harnessKind": null,
     "priority": "medium",
     "reviewPolicy": null,
-    "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+    "assigneeAgentId": "00000000-0000-4000-8000-000000000007",
     "assigneeUserId": null,
     "checkoutRunId": null,
     "executionRunId": null,
     "executionAgentNameKey": null,
     "executionLockedAt": null,
-    "createdByAgentId": "00000000-0000-4000-8000-000000000005",
+    "createdByAgentId": "00000000-0000-4000-8000-000000000009",
     "createdByUserId": null,
-    "responsibleUserId": "example responsibleUserId",
+    "responsibleUserId": "defaultResponsibleUserId-1",
     "issueNumber": 245,
     "identifier": "DEMO-3",
     "originKind": "manual",
     "originId": null,
-    "originRunId": "00000000-0000-4000-8000-00000000005a",
+    "originRunId": "00000000-0000-4000-8000-00000000005e",
     "originIssueId": null,
-    "originIdentityContextId": "00000000-0000-4000-8000-00000000005b",
-    "continuationIdentityContextId": "00000000-0000-4000-8000-000000000041",
+    "originIdentityContextId": "00000000-0000-4000-8000-00000000005f",
+    "continuationIdentityContextId": "00000000-0000-4000-8000-000000000045",
     "originFingerprint": "example originFingerprint",
     "requestDepth": 0,
     "billingCode": null,
@@ -518,7 +518,7 @@
     "monitorAttemptCount": 0,
     "monitorNotes": null,
     "monitorScheduledBy": null,
-    "executionWorkspaceId": "00000000-0000-4000-8000-00000000005c",
+    "executionWorkspaceId": "00000000-0000-4000-8000-000000000060",
     "workspaceBindingRevision": 1,
     "workspaceSelection": null,
     "workspacePendingSelection": null,
@@ -565,7 +565,7 @@
           "label": "example label",
           "responder": "example responder",
           "since": "2026-11-18T13:35:14.126Z",
-          "ref": "00000000-0000-4000-8000-000000000034"
+          "ref": "00000000-0000-4000-8000-000000000038"
         }
       ],
       "reason": "example reason"
@@ -580,9 +580,9 @@
       "canRetry": false,
       "userAction": null,
       "sourceRunIds": [
-        "00000000-0000-4000-8000-000000000042"
+        "00000000-0000-4000-8000-000000000046"
       ],
-      "observedRunId": "00000000-0000-4000-8000-000000000042"
+      "observedRunId": "00000000-0000-4000-8000-000000000046"
     },
     "scheduledRetry": null,
     "activeRecoveryAction": null,
@@ -590,13 +590,13 @@
     "blockedBy": [],
     "blocks": [
       {
-        "id": "00000000-0000-4000-8000-000000000059",
+        "id": "00000000-0000-4000-8000-00000000005d",
         "identifier": "DEMO-12",
         "title": "example title",
         "status": "blocked",
         "displayStatus": "blocked",
         "priority": "medium",
-        "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+        "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
         "assigneeUserId": null,
         "scheduledRetry": null,
         "activeRecoveryAction": null
@@ -606,12 +606,12 @@
       "outbound": [
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000038",
+            "id": "00000000-0000-4000-8000-00000000003c",
             "identifier": "DEMO-4",
             "title": "example title",
             "status": "in_review",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-00000000001f",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000023",
             "assigneeUserId": null
           },
           "mentionCount": 2,
@@ -624,7 +624,7 @@
             },
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-00000000005d",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000061",
               "label": "example label",
               "matchedText": "DEMO-4"
             }
@@ -632,12 +632,12 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000059",
+            "id": "00000000-0000-4000-8000-00000000005d",
             "identifier": "DEMO-12",
             "title": "example title",
             "status": "blocked",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
             "assigneeUserId": null
           },
           "mentionCount": 2,
@@ -660,19 +660,19 @@
       "inbound": [
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000059",
+            "id": "00000000-0000-4000-8000-00000000005d",
             "identifier": "DEMO-12",
             "title": "example title",
             "status": "blocked",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
             "assigneeUserId": null
           },
           "mentionCount": 1,
           "sources": [
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-00000000005e",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000062",
               "label": "example label",
               "matchedText": "DEMO-3"
             }
@@ -680,19 +680,19 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000057",
+            "id": "00000000-0000-4000-8000-00000000005b",
             "identifier": "DEMO-11",
             "title": "example title",
             "status": "done",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
             "assigneeUserId": null
           },
           "mentionCount": 1,
           "sources": [
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000058",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000005c",
               "label": "example label",
               "matchedText": "DEMO-3"
             }
@@ -700,13 +700,13 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-00000000005f",
+            "id": "00000000-0000-4000-8000-000000000063",
             "identifier": "DEMO-13",
             "title": "example title",
             "status": "todo",
             "priority": "medium",
             "assigneeAgentId": null,
-            "assigneeUserId": "example assigneeUserId"
+            "assigneeUserId": "defaultResponsibleUserId-1"
           },
           "mentionCount": 1,
           "sources": [
@@ -728,9 +728,9 @@
     "documentSummaries": [],
     "legacyPlanDocument": null,
     "project": {
-      "id": "00000000-0000-4000-8000-000000000036",
-      "companyId": "00000000-0000-4000-8000-000000000001",
-      "urlKey": "example urlKey",
+      "id": "00000000-0000-4000-8000-00000000003a",
+      "companyId": "00000000-0000-4000-8000-000000000003",
+      "urlKey": "urlKey-22",
       "goalId": null,
       "goalIds": [],
       "goals": [],
@@ -768,11 +768,11 @@
     "goal": null,
     "mentionedProjects": [],
     "currentExecutionWorkspace": {
-      "id": "00000000-0000-4000-8000-00000000005c",
-      "companyId": "00000000-0000-4000-8000-000000000001",
+      "id": "00000000-0000-4000-8000-000000000060",
+      "companyId": "00000000-0000-4000-8000-000000000003",
       "projectId": null,
       "projectWorkspaceId": null,
-      "sourceIssueId": "00000000-0000-4000-8000-000000000035",
+      "sourceIssueId": "00000000-0000-4000-8000-000000000039",
       "mode": "example mode",
       "strategyType": "example strategyType",
       "name": "DEMO-3",
@@ -791,7 +791,7 @@
       "cleanupEligibleAt": null,
       "cleanupReason": null,
       "config": {
-        "environmentId": "00000000-0000-4000-8000-000000000029",
+        "environmentId": "00000000-0000-4000-8000-00000000002d",
         "provisionCommand": null,
         "runtimeProvisionCommand": null,
         "teardownCommand": null,
@@ -809,36 +809,36 @@
     "externalChannelBinding": null,
     "createdFrom": {
       "issue": {
-        "id": "00000000-0000-4000-8000-000000000059",
+        "id": "00000000-0000-4000-8000-00000000005d",
         "identifier": "DEMO-12",
         "title": "example title",
         "status": "blocked"
       },
       "run": {
-        "id": "00000000-0000-4000-8000-00000000005a",
-        "agentId": "00000000-0000-4000-8000-000000000005"
+        "id": "00000000-0000-4000-8000-00000000005e",
+        "agentId": "00000000-0000-4000-8000-000000000009"
       },
       "agent": {
-        "id": "00000000-0000-4000-8000-000000000005",
+        "id": "00000000-0000-4000-8000-000000000009",
         "name": "example name"
       }
     }
   },
-  "00000000-0000-4000-8000-000000000038": {
-    "id": "00000000-0000-4000-8000-000000000038",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+  "00000000-0000-4000-8000-00000000003c": {
+    "id": "00000000-0000-4000-8000-00000000003c",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "conversationAgentId": null,
     "conversationUserId": null,
     "conversationState": null,
     "conversationSessionGeneration": 0,
     "conversationBoundaryCommentId": null,
-    "projectId": "00000000-0000-4000-8000-000000000036",
+    "projectId": "00000000-0000-4000-8000-00000000003a",
     "projectWorkspaceId": null,
     "goalId": null,
     "parentId": null,
     "visibility": "open",
     "privacyRootIssueId": null,
-    "privacyParentIssueId": "00000000-0000-4000-8000-000000000060",
+    "privacyParentIssueId": "00000000-0000-4000-8000-000000000064",
     "title": "example title",
     "titleNeedsGeneration": false,
     "description": "example description",
@@ -849,23 +849,23 @@
     "harnessKind": null,
     "priority": "medium",
     "reviewPolicy": null,
-    "assigneeAgentId": "00000000-0000-4000-8000-00000000001f",
+    "assigneeAgentId": "00000000-0000-4000-8000-000000000023",
     "assigneeUserId": null,
     "checkoutRunId": null,
     "executionRunId": null,
     "executionAgentNameKey": null,
     "executionLockedAt": null,
-    "createdByAgentId": "00000000-0000-4000-8000-000000000005",
+    "createdByAgentId": "00000000-0000-4000-8000-000000000009",
     "createdByUserId": null,
-    "responsibleUserId": "example responsibleUserId",
+    "responsibleUserId": "defaultResponsibleUserId-1",
     "issueNumber": 240,
     "identifier": "DEMO-4",
     "originKind": "manual",
     "originId": null,
-    "originRunId": "00000000-0000-4000-8000-000000000061",
+    "originRunId": "00000000-0000-4000-8000-000000000065",
     "originIssueId": null,
-    "originIdentityContextId": "00000000-0000-4000-8000-000000000062",
-    "continuationIdentityContextId": "00000000-0000-4000-8000-000000000063",
+    "originIdentityContextId": "00000000-0000-4000-8000-000000000066",
+    "continuationIdentityContextId": "00000000-0000-4000-8000-000000000067",
     "originFingerprint": "example originFingerprint",
     "requestDepth": 0,
     "billingCode": null,
@@ -878,7 +878,7 @@
     "monitorAttemptCount": 0,
     "monitorNotes": null,
     "monitorScheduledBy": null,
-    "executionWorkspaceId": "00000000-0000-4000-8000-000000000064",
+    "executionWorkspaceId": "00000000-0000-4000-8000-000000000068",
     "workspaceBindingRevision": 1,
     "workspaceSelection": null,
     "workspacePendingSelection": null,
@@ -925,7 +925,7 @@
           "label": "example label",
           "responder": "example responder",
           "since": "2026-11-18T13:16:03.838Z",
-          "ref": "00000000-0000-4000-8000-000000000037"
+          "ref": "00000000-0000-4000-8000-00000000003b"
         }
       ],
       "reason": "example reason"
@@ -940,9 +940,9 @@
       "canRetry": false,
       "userAction": null,
       "sourceRunIds": [
-        "00000000-0000-4000-8000-000000000065"
+        "00000000-0000-4000-8000-000000000069"
       ],
-      "observedRunId": "00000000-0000-4000-8000-000000000065"
+      "observedRunId": "00000000-0000-4000-8000-000000000069"
     },
     "scheduledRetry": null,
     "activeRecoveryAction": null,
@@ -950,13 +950,13 @@
     "blockedBy": [],
     "blocks": [
       {
-        "id": "00000000-0000-4000-8000-000000000060",
+        "id": "00000000-0000-4000-8000-000000000064",
         "identifier": "DEMO-14",
         "title": "example title",
         "status": "blocked",
         "displayStatus": "blocked",
         "priority": "medium",
-        "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+        "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
         "assigneeUserId": null,
         "scheduledRetry": null,
         "activeRecoveryAction": null
@@ -966,12 +966,12 @@
       "outbound": [
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000060",
+            "id": "00000000-0000-4000-8000-000000000064",
             "identifier": "DEMO-14",
             "title": "example title",
             "status": "blocked",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
             "assigneeUserId": null
           },
           "mentionCount": 3,
@@ -990,7 +990,7 @@
             },
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000066",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000006a",
               "label": "example label",
               "matchedText": "DEMO-14"
             }
@@ -1000,12 +1000,12 @@
       "inbound": [
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000059",
+            "id": "00000000-0000-4000-8000-00000000005d",
             "identifier": "DEMO-12",
             "title": "example title",
             "status": "blocked",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
             "assigneeUserId": null
           },
           "mentionCount": 2,
@@ -1018,7 +1018,7 @@
             },
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-00000000005e",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000062",
               "label": "example label",
               "matchedText": "DEMO-4"
             }
@@ -1026,12 +1026,12 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000035",
+            "id": "00000000-0000-4000-8000-000000000039",
             "identifier": "DEMO-3",
             "title": "example title",
             "status": "in_review",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000007",
             "assigneeUserId": null
           },
           "mentionCount": 2,
@@ -1044,7 +1044,7 @@
             },
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-00000000005d",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000061",
               "label": "example label",
               "matchedText": "DEMO-4"
             }
@@ -1052,19 +1052,19 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000060",
+            "id": "00000000-0000-4000-8000-000000000064",
             "identifier": "DEMO-14",
             "title": "example title",
             "status": "blocked",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
             "assigneeUserId": null
           },
           "mentionCount": 1,
           "sources": [
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000067",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000006b",
               "label": "example label",
               "matchedText": "DEMO-4"
             }
@@ -1072,19 +1072,19 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000057",
+            "id": "00000000-0000-4000-8000-00000000005b",
             "identifier": "DEMO-11",
             "title": "example title",
             "status": "done",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
             "assigneeUserId": null
           },
           "mentionCount": 1,
           "sources": [
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000058",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000005c",
               "label": "example label",
               "matchedText": "DEMO-4"
             }
@@ -1092,13 +1092,13 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-00000000005f",
+            "id": "00000000-0000-4000-8000-000000000063",
             "identifier": "DEMO-13",
             "title": "example title",
             "status": "todo",
             "priority": "medium",
             "assigneeAgentId": null,
-            "assigneeUserId": "example assigneeUserId"
+            "assigneeUserId": "defaultResponsibleUserId-1"
           },
           "mentionCount": 1,
           "sources": [
@@ -1118,17 +1118,17 @@
     "planDocument": null,
     "documentSummaries": [
       {
-        "id": "00000000-0000-4000-8000-000000000068",
-        "companyId": "00000000-0000-4000-8000-000000000001",
-        "issueId": "00000000-0000-4000-8000-000000000038",
+        "id": "00000000-0000-4000-8000-00000000006c",
+        "companyId": "00000000-0000-4000-8000-000000000003",
+        "issueId": "00000000-0000-4000-8000-00000000003c",
         "key": "example key",
         "title": "example title",
         "format": "example format",
-        "latestRevisionId": "00000000-0000-4000-8000-000000000069",
+        "latestRevisionId": "00000000-0000-4000-8000-00000000006d",
         "latestRevisionNumber": 1,
-        "createdByAgentId": "00000000-0000-4000-8000-00000000001f",
+        "createdByAgentId": "00000000-0000-4000-8000-000000000023",
         "createdByUserId": null,
-        "updatedByAgentId": "00000000-0000-4000-8000-00000000001f",
+        "updatedByAgentId": "00000000-0000-4000-8000-000000000023",
         "updatedByUserId": null,
         "lockedAt": null,
         "lockedByAgentId": null,
@@ -1140,9 +1140,9 @@
     ],
     "legacyPlanDocument": null,
     "project": {
-      "id": "00000000-0000-4000-8000-000000000036",
-      "companyId": "00000000-0000-4000-8000-000000000001",
-      "urlKey": "example urlKey",
+      "id": "00000000-0000-4000-8000-00000000003a",
+      "companyId": "00000000-0000-4000-8000-000000000003",
+      "urlKey": "urlKey-22",
       "goalId": null,
       "goalIds": [],
       "goals": [],
@@ -1180,11 +1180,11 @@
     "goal": null,
     "mentionedProjects": [],
     "currentExecutionWorkspace": {
-      "id": "00000000-0000-4000-8000-000000000064",
-      "companyId": "00000000-0000-4000-8000-000000000001",
+      "id": "00000000-0000-4000-8000-000000000068",
+      "companyId": "00000000-0000-4000-8000-000000000003",
       "projectId": null,
       "projectWorkspaceId": null,
-      "sourceIssueId": "00000000-0000-4000-8000-000000000038",
+      "sourceIssueId": "00000000-0000-4000-8000-00000000003c",
       "mode": "example mode",
       "strategyType": "example strategyType",
       "name": "DEMO-4",
@@ -1203,7 +1203,7 @@
       "cleanupEligibleAt": null,
       "cleanupReason": null,
       "config": {
-        "environmentId": "00000000-0000-4000-8000-000000000029",
+        "environmentId": "00000000-0000-4000-8000-00000000002d",
         "provisionCommand": null,
         "runtimeProvisionCommand": null,
         "teardownCommand": null,
@@ -1221,24 +1221,24 @@
     "externalChannelBinding": null,
     "createdFrom": {
       "issue": {
-        "id": "00000000-0000-4000-8000-000000000060",
+        "id": "00000000-0000-4000-8000-000000000064",
         "identifier": "DEMO-14",
         "title": "example title",
         "status": "blocked"
       },
       "run": {
-        "id": "00000000-0000-4000-8000-000000000061",
-        "agentId": "00000000-0000-4000-8000-000000000005"
+        "id": "00000000-0000-4000-8000-000000000065",
+        "agentId": "00000000-0000-4000-8000-000000000009"
       },
       "agent": {
-        "id": "00000000-0000-4000-8000-000000000005",
+        "id": "00000000-0000-4000-8000-000000000009",
         "name": "example name"
       }
     }
   },
-  "00000000-0000-4000-8000-000000000039": {
-    "id": "00000000-0000-4000-8000-000000000039",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+  "00000000-0000-4000-8000-00000000003d": {
+    "id": "00000000-0000-4000-8000-00000000003d",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "conversationAgentId": null,
     "conversationUserId": null,
     "conversationState": null,
@@ -1247,10 +1247,10 @@
     "projectId": null,
     "projectWorkspaceId": null,
     "goalId": null,
-    "parentId": "00000000-0000-4000-8000-00000000006a",
+    "parentId": "00000000-0000-4000-8000-00000000006e",
     "visibility": "open",
     "privacyRootIssueId": null,
-    "privacyParentIssueId": "00000000-0000-4000-8000-00000000006a",
+    "privacyParentIssueId": "00000000-0000-4000-8000-00000000006e",
     "title": "example title",
     "titleNeedsGeneration": false,
     "description": "example description",
@@ -1261,23 +1261,23 @@
     "harnessKind": null,
     "priority": "medium",
     "reviewPolicy": null,
-    "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+    "assigneeAgentId": "00000000-0000-4000-8000-000000000007",
     "assigneeUserId": null,
     "checkoutRunId": null,
     "executionRunId": null,
     "executionAgentNameKey": null,
     "executionLockedAt": null,
-    "createdByAgentId": "00000000-0000-4000-8000-000000000003",
+    "createdByAgentId": "00000000-0000-4000-8000-000000000007",
     "createdByUserId": null,
-    "responsibleUserId": "example responsibleUserId",
+    "responsibleUserId": "defaultResponsibleUserId-1",
     "issueNumber": 199,
     "identifier": "DEMO-5",
     "originKind": "manual",
     "originId": null,
-    "originRunId": "00000000-0000-4000-8000-00000000006b",
+    "originRunId": "00000000-0000-4000-8000-00000000006f",
     "originIssueId": null,
-    "originIdentityContextId": "00000000-0000-4000-8000-00000000006c",
-    "continuationIdentityContextId": "00000000-0000-4000-8000-00000000006d",
+    "originIdentityContextId": "00000000-0000-4000-8000-000000000070",
+    "continuationIdentityContextId": "00000000-0000-4000-8000-000000000071",
     "originFingerprint": "example originFingerprint",
     "requestDepth": 0,
     "billingCode": null,
@@ -1290,7 +1290,7 @@
     "monitorAttemptCount": 0,
     "monitorNotes": null,
     "monitorScheduledBy": null,
-    "executionWorkspaceId": "00000000-0000-4000-8000-00000000006e",
+    "executionWorkspaceId": "00000000-0000-4000-8000-000000000072",
     "workspaceBindingRevision": 0,
     "workspaceSelection": null,
     "workspacePendingSelection": null,
@@ -1301,7 +1301,7 @@
     "sourceTrust": null,
     "unblockDescriptor": {
       "owner": {
-        "agentId": "00000000-0000-4000-8000-000000000003"
+        "agentId": "00000000-0000-4000-8000-000000000007"
       },
       "action": "example action"
     },
@@ -1320,13 +1320,13 @@
     "watchdog": null,
     "ancestors": [
       {
-        "id": "00000000-0000-4000-8000-00000000006a",
+        "id": "00000000-0000-4000-8000-00000000006e",
         "identifier": "DEMO-15",
         "title": "example title",
         "description": "example description",
         "status": "done",
         "priority": "medium",
-        "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+        "assigneeAgentId": "00000000-0000-4000-8000-000000000007",
         "projectId": null,
         "goalId": null,
         "project": null,
@@ -1345,7 +1345,7 @@
       "sampleStalledBlockerIdentifier": null,
       "blockingTreeLive": false,
       "directBlockerIssueId": null,
-      "terminalBlockerIssueId": "00000000-0000-4000-8000-000000000039",
+      "terminalBlockerIssueId": "00000000-0000-4000-8000-00000000003d",
       "terminalBlocker": null
     },
     "reviewAttention": {
@@ -1363,9 +1363,9 @@
       "canRetry": false,
       "userAction": null,
       "sourceRunIds": [
-        "00000000-0000-4000-8000-00000000006f"
+        "00000000-0000-4000-8000-000000000073"
       ],
-      "observedRunId": "00000000-0000-4000-8000-00000000006f"
+      "observedRunId": "00000000-0000-4000-8000-000000000073"
     },
     "scheduledRetry": null,
     "activeRecoveryAction": null,
@@ -1376,12 +1376,12 @@
       "outbound": [
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-00000000006a",
+            "id": "00000000-0000-4000-8000-00000000006e",
             "identifier": "DEMO-15",
             "title": "example title",
             "status": "done",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000007",
             "assigneeUserId": null
           },
           "mentionCount": 3,
@@ -1400,7 +1400,7 @@
             },
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000070",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000074",
               "label": "example label",
               "matchedText": "DEMO-15"
             }
@@ -1410,13 +1410,13 @@
       "inbound": [
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000071",
+            "id": "00000000-0000-4000-8000-000000000075",
             "identifier": "DEMO-16",
             "title": "example title",
             "status": "todo",
             "priority": "medium",
             "assigneeAgentId": null,
-            "assigneeUserId": "example assigneeUserId"
+            "assigneeUserId": "defaultResponsibleUserId-1"
           },
           "mentionCount": 2,
           "sources": [
@@ -1436,19 +1436,19 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000072",
+            "id": "00000000-0000-4000-8000-000000000076",
             "identifier": "DEMO-17",
             "title": "example title",
             "status": "done",
             "priority": "low",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
             "assigneeUserId": null
           },
           "mentionCount": 1,
           "sources": [
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000073",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000077",
               "label": "example label",
               "matchedText": "DEMO-5"
             }
@@ -1456,19 +1456,19 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-00000000006a",
+            "id": "00000000-0000-4000-8000-00000000006e",
             "identifier": "DEMO-15",
             "title": "example title",
             "status": "done",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000007",
             "assigneeUserId": null
           },
           "mentionCount": 1,
           "sources": [
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000074",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000078",
               "label": "example label",
               "matchedText": "DEMO-5"
             }
@@ -1476,19 +1476,19 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000057",
+            "id": "00000000-0000-4000-8000-00000000005b",
             "identifier": "DEMO-11",
             "title": "example title",
             "status": "done",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
             "assigneeUserId": null
           },
           "mentionCount": 1,
           "sources": [
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000058",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000005c",
               "label": "example label",
               "matchedText": "DEMO-5"
             }
@@ -1496,13 +1496,13 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-00000000005f",
+            "id": "00000000-0000-4000-8000-000000000063",
             "identifier": "DEMO-13",
             "title": "example title",
             "status": "todo",
             "priority": "medium",
             "assigneeAgentId": null,
-            "assigneeUserId": "example assigneeUserId"
+            "assigneeUserId": "defaultResponsibleUserId-1"
           },
           "mentionCount": 1,
           "sources": [
@@ -1526,11 +1526,11 @@
     "goal": null,
     "mentionedProjects": [],
     "currentExecutionWorkspace": {
-      "id": "00000000-0000-4000-8000-00000000006e",
-      "companyId": "00000000-0000-4000-8000-000000000001",
+      "id": "00000000-0000-4000-8000-000000000072",
+      "companyId": "00000000-0000-4000-8000-000000000003",
       "projectId": null,
       "projectWorkspaceId": null,
-      "sourceIssueId": "00000000-0000-4000-8000-00000000006a",
+      "sourceIssueId": "00000000-0000-4000-8000-00000000006e",
       "mode": "example mode",
       "strategyType": "example strategyType",
       "name": "DEMO-15",
@@ -1549,7 +1549,7 @@
       "cleanupEligibleAt": null,
       "cleanupReason": null,
       "config": {
-        "environmentId": "00000000-0000-4000-8000-000000000029",
+        "environmentId": "00000000-0000-4000-8000-00000000002d",
         "provisionCommand": null,
         "runtimeProvisionCommand": null,
         "teardownCommand": null,
@@ -1567,24 +1567,24 @@
     "externalChannelBinding": null,
     "createdFrom": {
       "issue": {
-        "id": "00000000-0000-4000-8000-00000000006a",
+        "id": "00000000-0000-4000-8000-00000000006e",
         "identifier": "DEMO-15",
         "title": "example title",
         "status": "done"
       },
       "run": {
-        "id": "00000000-0000-4000-8000-00000000006b",
-        "agentId": "00000000-0000-4000-8000-000000000003"
+        "id": "00000000-0000-4000-8000-00000000006f",
+        "agentId": "00000000-0000-4000-8000-000000000007"
       },
       "agent": {
-        "id": "00000000-0000-4000-8000-000000000003",
+        "id": "00000000-0000-4000-8000-000000000007",
         "name": "example name"
       }
     }
   },
-  "00000000-0000-4000-8000-00000000003b": {
-    "id": "00000000-0000-4000-8000-00000000003b",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+  "00000000-0000-4000-8000-00000000003f": {
+    "id": "00000000-0000-4000-8000-00000000003f",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "conversationAgentId": null,
     "conversationUserId": null,
     "conversationState": null,
@@ -1596,7 +1596,7 @@
     "parentId": null,
     "visibility": "open",
     "privacyRootIssueId": null,
-    "privacyParentIssueId": "00000000-0000-4000-8000-000000000072",
+    "privacyParentIssueId": "00000000-0000-4000-8000-000000000076",
     "title": "example title",
     "titleNeedsGeneration": false,
     "description": "example description",
@@ -1607,23 +1607,23 @@
     "harnessKind": null,
     "priority": "medium",
     "reviewPolicy": null,
-    "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+    "assigneeAgentId": "00000000-0000-4000-8000-000000000007",
     "assigneeUserId": null,
     "checkoutRunId": null,
     "executionRunId": null,
     "executionAgentNameKey": null,
     "executionLockedAt": null,
-    "createdByAgentId": "00000000-0000-4000-8000-000000000005",
+    "createdByAgentId": "00000000-0000-4000-8000-000000000009",
     "createdByUserId": null,
-    "responsibleUserId": "example responsibleUserId",
+    "responsibleUserId": "defaultResponsibleUserId-1",
     "issueNumber": 174,
     "identifier": "DEMO-6",
     "originKind": "manual",
     "originId": null,
-    "originRunId": "00000000-0000-4000-8000-000000000075",
+    "originRunId": "00000000-0000-4000-8000-000000000079",
     "originIssueId": null,
-    "originIdentityContextId": "00000000-0000-4000-8000-000000000076",
-    "continuationIdentityContextId": "00000000-0000-4000-8000-000000000077",
+    "originIdentityContextId": "00000000-0000-4000-8000-00000000007a",
+    "continuationIdentityContextId": "00000000-0000-4000-8000-00000000007b",
     "originFingerprint": "example originFingerprint",
     "requestDepth": 0,
     "billingCode": null,
@@ -1636,7 +1636,7 @@
     "monitorAttemptCount": 0,
     "monitorNotes": null,
     "monitorScheduledBy": null,
-    "executionWorkspaceId": "00000000-0000-4000-8000-000000000078",
+    "executionWorkspaceId": "00000000-0000-4000-8000-00000000007c",
     "workspaceBindingRevision": 1,
     "workspaceSelection": null,
     "workspacePendingSelection": null,
@@ -1690,22 +1690,22 @@
       "canRetry": false,
       "userAction": null,
       "sourceRunIds": [
-        "00000000-0000-4000-8000-000000000079"
+        "00000000-0000-4000-8000-00000000007d"
       ],
-      "observedRunId": "00000000-0000-4000-8000-000000000079"
+      "observedRunId": "00000000-0000-4000-8000-00000000007d"
     },
     "scheduledRetry": null,
     "activeRecoveryAction": null,
     "stalledDependencies": [],
     "blockedBy": [
       {
-        "id": "00000000-0000-4000-8000-00000000007a",
+        "id": "00000000-0000-4000-8000-00000000007e",
         "identifier": "DEMO-18",
         "title": "example title",
         "status": "done",
         "displayStatus": "done",
         "priority": "medium",
-        "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+        "assigneeAgentId": "00000000-0000-4000-8000-000000000007",
         "assigneeUserId": null,
         "scheduledRetry": null,
         "activeRecoveryAction": null
@@ -1713,25 +1713,25 @@
     ],
     "blocks": [
       {
-        "id": "00000000-0000-4000-8000-000000000072",
+        "id": "00000000-0000-4000-8000-000000000076",
         "identifier": "DEMO-17",
         "title": "example title",
         "status": "done",
         "displayStatus": "done",
         "priority": "low",
-        "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+        "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
         "assigneeUserId": null,
         "scheduledRetry": null,
         "activeRecoveryAction": null
       },
       {
-        "id": "00000000-0000-4000-8000-00000000006a",
+        "id": "00000000-0000-4000-8000-00000000006e",
         "identifier": "DEMO-15",
         "title": "example title",
         "status": "done",
         "displayStatus": "done",
         "priority": "medium",
-        "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+        "assigneeAgentId": "00000000-0000-4000-8000-000000000007",
         "assigneeUserId": null,
         "scheduledRetry": null,
         "activeRecoveryAction": null
@@ -1741,12 +1741,12 @@
       "outbound": [
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000072",
+            "id": "00000000-0000-4000-8000-000000000076",
             "identifier": "DEMO-17",
             "title": "example title",
             "status": "done",
             "priority": "low",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
             "assigneeUserId": null
           },
           "mentionCount": 2,
@@ -1767,12 +1767,12 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-00000000007b",
+            "id": "00000000-0000-4000-8000-00000000007f",
             "identifier": "DEMO-19",
             "title": "example title",
             "status": "done",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
             "assigneeUserId": null
           },
           "mentionCount": 1,
@@ -1789,25 +1789,25 @@
       "inbound": [
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000072",
+            "id": "00000000-0000-4000-8000-000000000076",
             "identifier": "DEMO-17",
             "title": "example title",
             "status": "done",
             "priority": "low",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
             "assigneeUserId": null
           },
           "mentionCount": 2,
           "sources": [
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-000000000073",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000077",
               "label": "example label",
               "matchedText": "DEMO-6"
             },
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-00000000007c",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000080",
               "label": "example label",
               "matchedText": "DEMO-6"
             }
@@ -1815,19 +1815,19 @@
         },
         {
           "issue": {
-            "id": "00000000-0000-4000-8000-00000000006a",
+            "id": "00000000-0000-4000-8000-00000000006e",
             "identifier": "DEMO-15",
             "title": "example title",
             "status": "done",
             "priority": "medium",
-            "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000007",
             "assigneeUserId": null
           },
           "mentionCount": 1,
           "sources": [
             {
               "kind": "comment",
-              "sourceRecordId": "00000000-0000-4000-8000-00000000007d",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000081",
               "label": "example label",
               "matchedText": "DEMO-6"
             }
@@ -1846,11 +1846,11 @@
     "goal": null,
     "mentionedProjects": [],
     "currentExecutionWorkspace": {
-      "id": "00000000-0000-4000-8000-000000000078",
-      "companyId": "00000000-0000-4000-8000-000000000001",
+      "id": "00000000-0000-4000-8000-00000000007c",
+      "companyId": "00000000-0000-4000-8000-000000000003",
       "projectId": null,
       "projectWorkspaceId": null,
-      "sourceIssueId": "00000000-0000-4000-8000-00000000003b",
+      "sourceIssueId": "00000000-0000-4000-8000-00000000003f",
       "mode": "example mode",
       "strategyType": "example strategyType",
       "name": "DEMO-6",
@@ -1869,7 +1869,7 @@
       "cleanupEligibleAt": null,
       "cleanupReason": null,
       "config": {
-        "environmentId": "00000000-0000-4000-8000-000000000029",
+        "environmentId": "00000000-0000-4000-8000-00000000002d",
         "provisionCommand": null,
         "runtimeProvisionCommand": null,
         "teardownCommand": null,
@@ -1887,30 +1887,30 @@
     "externalChannelBinding": null,
     "createdFrom": {
       "issue": {
-        "id": "00000000-0000-4000-8000-000000000072",
+        "id": "00000000-0000-4000-8000-000000000076",
         "identifier": "DEMO-17",
         "title": "example title",
         "status": "done"
       },
       "run": {
-        "id": "00000000-0000-4000-8000-000000000075",
-        "agentId": "00000000-0000-4000-8000-000000000005"
+        "id": "00000000-0000-4000-8000-000000000079",
+        "agentId": "00000000-0000-4000-8000-000000000009"
       },
       "agent": {
-        "id": "00000000-0000-4000-8000-000000000005",
+        "id": "00000000-0000-4000-8000-000000000009",
         "name": "example name"
       }
     }
   },
-  "00000000-0000-4000-8000-00000000003d": {
-    "id": "00000000-0000-4000-8000-00000000003d",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+  "00000000-0000-4000-8000-000000000041": {
+    "id": "00000000-0000-4000-8000-000000000041",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "conversationAgentId": null,
     "conversationUserId": null,
     "conversationState": null,
     "conversationSessionGeneration": 0,
     "conversationBoundaryCommentId": null,
-    "projectId": "00000000-0000-4000-8000-000000000036",
+    "projectId": "00000000-0000-4000-8000-00000000003a",
     "projectWorkspaceId": null,
     "goalId": null,
     "parentId": null,
@@ -1927,15 +1927,15 @@
     "harnessKind": null,
     "priority": "medium",
     "reviewPolicy": null,
-    "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+    "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
     "assigneeUserId": null,
     "checkoutRunId": null,
     "executionRunId": null,
     "executionAgentNameKey": null,
     "executionLockedAt": null,
     "createdByAgentId": null,
-    "createdByUserId": "example createdByUserId",
-    "responsibleUserId": "example responsibleUserId",
+    "createdByUserId": "defaultResponsibleUserId-1",
+    "responsibleUserId": "defaultResponsibleUserId-1",
     "issueNumber": 54,
     "identifier": "DEMO-7",
     "originKind": "manual",
@@ -1943,7 +1943,7 @@
     "originRunId": null,
     "originIssueId": null,
     "originIdentityContextId": null,
-    "continuationIdentityContextId": "00000000-0000-4000-8000-00000000007e",
+    "continuationIdentityContextId": "00000000-0000-4000-8000-000000000082",
     "originFingerprint": "example originFingerprint",
     "requestDepth": 0,
     "billingCode": null,
@@ -1956,7 +1956,7 @@
     "monitorAttemptCount": 0,
     "monitorNotes": null,
     "monitorScheduledBy": null,
-    "executionWorkspaceId": "00000000-0000-4000-8000-00000000007f",
+    "executionWorkspaceId": "00000000-0000-4000-8000-000000000083",
     "workspaceBindingRevision": 1,
     "workspaceSelection": null,
     "workspacePendingSelection": null,
@@ -2010,9 +2010,9 @@
       "canRetry": false,
       "userAction": null,
       "sourceRunIds": [
-        "00000000-0000-4000-8000-000000000080"
+        "00000000-0000-4000-8000-000000000084"
       ],
-      "observedRunId": "00000000-0000-4000-8000-000000000080"
+      "observedRunId": "00000000-0000-4000-8000-000000000084"
     },
     "scheduledRetry": null,
     "activeRecoveryAction": null,
@@ -2028,9 +2028,9 @@
     "documentSummaries": [],
     "legacyPlanDocument": null,
     "project": {
-      "id": "00000000-0000-4000-8000-000000000036",
-      "companyId": "00000000-0000-4000-8000-000000000001",
-      "urlKey": "example urlKey",
+      "id": "00000000-0000-4000-8000-00000000003a",
+      "companyId": "00000000-0000-4000-8000-000000000003",
+      "urlKey": "urlKey-22",
       "goalId": null,
       "goalIds": [],
       "goals": [],
@@ -2068,11 +2068,11 @@
     "goal": null,
     "mentionedProjects": [],
     "currentExecutionWorkspace": {
-      "id": "00000000-0000-4000-8000-00000000007f",
-      "companyId": "00000000-0000-4000-8000-000000000001",
+      "id": "00000000-0000-4000-8000-000000000083",
+      "companyId": "00000000-0000-4000-8000-000000000003",
       "projectId": null,
       "projectWorkspaceId": null,
-      "sourceIssueId": "00000000-0000-4000-8000-00000000003d",
+      "sourceIssueId": "00000000-0000-4000-8000-000000000041",
       "mode": "example mode",
       "strategyType": "example strategyType",
       "name": "DEMO-7",
@@ -2091,7 +2091,7 @@
       "cleanupEligibleAt": null,
       "cleanupReason": null,
       "config": {
-        "environmentId": "00000000-0000-4000-8000-000000000029",
+        "environmentId": "00000000-0000-4000-8000-00000000002d",
         "provisionCommand": null,
         "runtimeProvisionCommand": null,
         "teardownCommand": null,

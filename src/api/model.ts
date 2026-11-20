@@ -1,0 +1,72 @@
+// Client-side shapes for the stores and screens. They hold no wire fields; src/api maps responses onto them.
+
+export type ItemKind = "question" | "confirmation" | "approval" | "failed_run" | "blocked" | "other"
+
+export type InboxItem = {
+  id: string
+  kind: ItemKind
+  title: string
+  /** Task identifier such as SKO-12; for a blocked task, the blocker. */
+  identifier: string | null
+  issueId: string | null
+  agentName: string | null
+  agentId: string | null
+  whyNow: string
+  severity: "low" | "medium" | "high" | string
+  createdAt: string
+  activityAt: string
+  decideBy: string | null
+  expiresAt: string | null
+  /** An active dismissal or snooze. */
+  snoozed: boolean
+  snoozedUntil: string | null
+  /** For kinds without a card: the summary the server wrote. */
+  summary: string | null
+  /** The blocked task, for blocked-task items. */
+  blocked: { identifier: string | null; title: string } | null
+  blockedTaskCount: number | null
+  /** The subject's own id: interaction, approval or run id. */
+  subjectId: string
+  /** Server-side source kind, for kinds shown as a generic row. */
+  sourceKind: string
+}
+
+export type Question = { prompt: string; options: string[]; multiple: boolean; allowOther: boolean }
+
+export type ItemDetail =
+  | { kind: "question"; questions: Question[] }
+  | { kind: "confirmation"; prompt: string; detailsMarkdown: string | null; acceptLabel: string; rejectLabel: string }
+  | { kind: "approval"; summary: string; identifier: string | null }
+  | { kind: "failed_run"; error: string; runId: string }
+  | { kind: "blocked"; description: string | null; blockers: { identifier: string | null; title: string; status: string }[] }
+  | { kind: "other"; summary: string | null }
+
+export type AgentSummary = {
+  id: string
+  name: string
+  role: string
+  title: string | null
+  status: string
+  adapterType: string
+}
+
+export type LiveRunSummary = {
+  id: string
+  agentId: string
+  agentName: string
+  issueId: string | null
+  status: string
+  startedAt: string | null
+  createdAt: string
+}
+
+export type TaskSummary = {
+  id: string
+  identifier: string | null
+  title: string
+  status: string
+  priority: string
+  assigneeAgentId: string | null
+}
+
+export type CompanySummary = { id: string; name: string; prefix: string | null }

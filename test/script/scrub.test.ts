@@ -34,6 +34,11 @@ test("scrubber replaces personal data and keeps structure, enums and timestamps"
   expect(out.count).toBe(3)
   expect(out.live).toBe(true)
   expect(out.decisionVerbs[0]).toEqual({ id: "accept", label: "example label" })
+  // Non-UUID ids stay distinct and stable.
+  const ids = scrub([{ id: "attention:a:1" }, { id: "attention:b:2" }, { id: "attention:a:1" }]) as { id: string }[]
+  expect(ids[0]!.id).not.toBe(ids[1]!.id)
+  expect(ids[0]!.id).toBe(ids[2]!.id)
+  expect(ids[0]!.id).not.toContain("attention")
   // The same real id maps to the same fake id everywhere, including object keys.
   expect(out.parentId).toBe(out.id)
   expect(Object.keys(out.byAgent)).toEqual([out.id])
@@ -56,7 +61,7 @@ test("log scrubbing keeps record and chunk structure and drops text", () => {
   const [first, second, third] = out.split("\n").map((l) => JSON.parse(l))
   expect(first.seq).toBe(1)
   expect(first.stream).toBe("stdout")
-  expect(JSON.parse(first.chunk.trim())).toEqual({ type: "acpx.tool_call", name: "Read", toolCallId: "example toolCallId", text: "example text", tag: "tool_call" })
+  expect(JSON.parse(first.chunk.trim())).toEqual({ type: "acpx.tool_call", name: "Read", toolCallId: "toolCallId-1", text: "example text", tag: "tool_call" })
   expect(second.chunk).toBe("example chunk")
   expect(JSON.parse(third.chunk).name).toBe("example name")
 })

@@ -1,9 +1,9 @@
 [
   {
     "id": 38181,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 1,
     "eventType": "example eventType",
     "stream": "system",
@@ -13,15 +13,15 @@
     "payload": {
       "host": "example host",
       "schema": "paperclip.legacy-case-handoff-cleanup-intent.v1",
-      "issueId": "00000000-0000-4000-8000-000000000057",
+      "issueId": "00000000-0000-4000-8000-00000000005b",
       "scratch": {
         "dir": "example dir",
         "metadata": {
-          "runId": "00000000-0000-4000-8000-0000000000b6",
-          "agentId": "00000000-0000-4000-8000-000000000005",
-          "issueId": "00000000-0000-4000-8000-000000000057",
+          "runId": "00000000-0000-4000-8000-0000000000ba",
+          "agentId": "00000000-0000-4000-8000-000000000009",
+          "issueId": "00000000-0000-4000-8000-00000000005b",
           "version": 1,
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "createdAt": "2026-11-20T14:18:53.334Z",
           "issueIdentifier": "DEMO-11"
         },
@@ -30,7 +30,7 @@
       "processPid": null,
       "runStartedAt": "2026-11-20T14:18:50.989Z",
       "processGroupId": null,
-      "controllerBootId": "00000000-0000-4000-8000-000000000196",
+      "controllerBootId": "00000000-0000-4000-8000-00000000019a",
       "processStartedAt": null
     },
     "sourceInstanceId": null,
@@ -42,9 +42,9 @@
   },
   {
     "id": 38182,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 2,
     "eventType": "example eventType",
     "stream": "system",
@@ -61,9 +61,9 @@
   },
   {
     "id": 38183,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 3,
     "eventType": "example eventType",
     "stream": "system",
@@ -85,9 +85,9 @@
   },
   {
     "id": 38184,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 4,
     "eventType": "example eventType",
     "stream": "system",
@@ -109,9 +109,9 @@
   },
   {
     "id": 38185,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 5,
     "eventType": "example eventType",
     "stream": "system",
@@ -133,9 +133,9 @@
   },
   {
     "id": 38186,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 6,
     "eventType": "example eventType",
     "stream": "system",
@@ -156,9 +156,9 @@
   },
   {
     "id": 38187,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 7,
     "eventType": "example eventType",
     "stream": "system",
@@ -179,9 +179,9 @@
   },
   {
     "id": 38188,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 8,
     "eventType": "example eventType",
     "stream": "system",
@@ -204,9 +204,9 @@
   },
   {
     "id": 38189,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 9,
     "eventType": "example eventType",
     "stream": "system",
@@ -216,15 +216,15 @@
     "payload": {
       "host": "example host",
       "schema": "paperclip.legacy-case-handoff-cleanup-intent.v1",
-      "issueId": "00000000-0000-4000-8000-000000000057",
+      "issueId": "00000000-0000-4000-8000-00000000005b",
       "scratch": {
         "dir": "example dir",
         "metadata": {
-          "runId": "00000000-0000-4000-8000-0000000000b6",
-          "agentId": "00000000-0000-4000-8000-000000000005",
-          "issueId": "00000000-0000-4000-8000-000000000057",
+          "runId": "00000000-0000-4000-8000-0000000000ba",
+          "agentId": "00000000-0000-4000-8000-000000000009",
+          "issueId": "00000000-0000-4000-8000-00000000005b",
           "version": 1,
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "createdAt": "2026-11-20T14:18:53.334Z",
           "issueIdentifier": "DEMO-11"
         },
@@ -233,7 +233,7 @@
       "processPid": 946,
       "runStartedAt": "2026-11-20T14:18:50.989Z",
       "processGroupId": null,
-      "controllerBootId": "00000000-0000-4000-8000-000000000196",
+      "controllerBootId": "00000000-0000-4000-8000-00000000019a",
       "processStartedAt": "2026-11-20T14:18:54.040Z"
     },
     "sourceInstanceId": null,
@@ -245,9 +245,9 @@
   },
   {
     "id": 38190,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 10,
     "eventType": "example eventType",
     "stream": "system",
@@ -268,9 +268,9 @@
   },
   {
     "id": 38191,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 11,
     "eventType": "example eventType",
     "stream": "system",
@@ -292,9 +292,9 @@
   },
   {
     "id": 38192,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 12,
     "eventType": "example eventType",
     "stream": "system",
@@ -317,9 +317,9 @@
   },
   {
     "id": 38193,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 13,
     "eventType": "example eventType",
     "stream": "system",
@@ -340,9 +340,9 @@
   },
   {
     "id": 38194,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 14,
     "eventType": "example eventType",
     "stream": "system",
@@ -363,9 +363,9 @@
   },
   {
     "id": 38195,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 15,
     "eventType": "example eventType",
     "stream": "system",
@@ -408,7 +408,7 @@
         "example_key_59": "example OPENCODE_CONFIG",
         "example_key_60": "example XDG_CONFIG_HOME",
         "example_key_1": "example XDG_RUNTIME_DIR",
-        "example_key_61": "00000000-0000-4000-8000-0000000000b6",
+        "example_key_61": "00000000-0000-4000-8000-0000000000ba",
         "example_key_62": "example PAPERCLIP_TMPDIR",
         "example_key_63": "example ANTHROPIC_API_KEY",
         "example_key_64": "example AWS_ACCESS_KEY_ID",
@@ -416,18 +416,18 @@
         "example_key_66": "example CLAUDE_CONFIG_DIR",
         "example_key_67": "example PAPERCLIP_API_KEY",
         "example_key_68": "example PAPERCLIP_API_URL",
-        "example_key_69": "00000000-0000-4000-8000-000000000057",
+        "example_key_69": "00000000-0000-4000-8000-00000000005b",
         "example_key_70": "example ANTHROPIC_BASE_URL",
         "example_key_71": "example OPENCODE_AUTH_JSON",
         "example_key_72": "example OPENROUTER_API_KEY",
         "example_key_73": "example OTEL_LOGS_EXPORTER",
-        "example_key_74": "00000000-0000-4000-8000-000000000005",
+        "example_key_74": "00000000-0000-4000-8000-000000000009",
         "example_key_75": "example AWS_DEFAULT_PROFILE",
         "example_key_76": "example OPENCODE_CONFIG_DIR",
         "example_key_77": "example ANTHROPIC_AUTH_TOKEN",
         "example_key_78": "example COPILOT_GITHUB_TOKEN",
         "example_key_79": "example OTEL_TRACES_EXPORTER",
-        "example_key_80": "00000000-0000-4000-8000-000000000001",
+        "example_key_80": "00000000-0000-4000-8000-000000000003",
         "example_key_81": "example AWS_SECRET_ACCESS_KEY",
         "example_key_82": "example OTEL_LOG_USER_PROMPTS",
         "example_key_83": "example OTEL_METRICS_EXPORTER",
@@ -481,29 +481,29 @@
       "prompt": "example prompt",
       "command": "example command",
       "context": {
-        "taskId": "00000000-0000-4000-8000-000000000057",
-        "actorId": "example actorId",
-        "issueId": "00000000-0000-4000-8000-000000000057",
-        "taskKey": "00000000-0000-4000-8000-000000000057",
-        "projectId": "00000000-0000-4000-8000-0000000000b1",
+        "taskId": "00000000-0000-4000-8000-00000000005b",
+        "actorId": "defaultResponsibleUserId-1",
+        "issueId": "00000000-0000-4000-8000-00000000005b",
+        "taskKey": "00000000-0000-4000-8000-00000000005b",
+        "projectId": "00000000-0000-4000-8000-0000000000b5",
         "wakeReason": "task_retry",
         "wakeSource": "example wakeSource",
         "triggeredBy": "example triggeredBy",
         "aiConnection": {
           "mode": "example mode",
           "method": "example method",
-          "grantId": "00000000-0000-4000-8000-000000000197",
+          "grantId": "00000000-0000-4000-8000-00000000019b",
           "identity": "example identity",
           "provider": "anthropic",
           "accountName": "example accountName",
-          "connectionId": "00000000-0000-4000-8000-000000000198",
-          "subscriptionId": "00000000-0000-4000-8000-000000000199",
+          "connectionId": "00000000-0000-4000-8000-00000000019c",
+          "subscriptionId": "00000000-0000-4000-8000-00000000019d",
           "sessionIdentity": "example sessionIdentity",
-          "responsibleUserId": "example responsibleUserId"
+          "responsibleUserId": "defaultResponsibleUserId-1"
         },
         "paperclipWake": {
           "issue": {
-            "id": "00000000-0000-4000-8000-000000000057",
+            "id": "00000000-0000-4000-8000-00000000005b",
             "title": "example title",
             "status": "in_progress",
             "priority": "medium",
@@ -555,43 +555,43 @@
           "chatCompletionUpdates": null,
           "documentReviewContext": null,
           "executionContinuation": {
-            "issueId": "00000000-0000-4000-8000-000000000057",
+            "issueId": "00000000-0000-4000-8000-00000000005b",
             "trigger": {
               "reason": "task_retry",
-              "sourceRunId": "00000000-0000-4000-8000-0000000000b7",
+              "sourceRunId": "00000000-0000-4000-8000-0000000000bb",
               "interactionId": null
             },
             "version": 1,
             "coverage": {
               "kind": "full_task_history",
-              "throughCommentId": "00000000-0000-4000-8000-000000000058",
+              "throughCommentId": "00000000-0000-4000-8000-00000000005c",
               "summaryThroughCommentId": null
             },
             "messages": [
               {
-                "id": "00000000-0000-4000-8000-000000000058",
+                "id": "00000000-0000-4000-8000-00000000005c",
                 "body": "example body",
                 "deleted": false,
-                "authorId": "00000000-0000-4000-8000-000000000005",
+                "authorId": "00000000-0000-4000-8000-000000000009",
                 "createdAt": "2026-11-20T14:03:00.769Z",
                 "updatedAt": "2026-11-20T14:03:00.769Z",
                 "authorType": "example authorType",
                 "sourceTrust": null,
-                "createdByRunId": "00000000-0000-4000-8000-0000000000b7"
+                "createdByRunId": "00000000-0000-4000-8000-0000000000bb"
               }
             ],
-            "companyId": "00000000-0000-4000-8000-000000000001",
+            "companyId": "00000000-0000-4000-8000-000000000003",
             "objective": "example objective",
             "completedWork": "example completedWork",
             "humanResponses": [],
             "recoveredFiles": [],
             "objectiveSource": {
-              "id": "00000000-0000-4000-8000-000000000057",
+              "id": "00000000-0000-4000-8000-00000000005b",
               "kind": "description",
               "revision": "example revision"
             },
             "completedActions": [],
-            "interruptedRunId": "00000000-0000-4000-8000-0000000000b7",
+            "interruptedRunId": "00000000-0000-4000-8000-0000000000bb",
             "originCommentIds": [],
             "recoveryOutcomes": [],
             "interactionOutcomes": [],
@@ -609,19 +609,19 @@
           "simplifiedEnglishInteractions": false,
           "externalInteractionContinuation": false
         },
-        "previousRunId": "00000000-0000-4000-8000-0000000000b7",
+        "previousRunId": "00000000-0000-4000-8000-0000000000bb",
         "skillVersions": {
-          "example_key_28": "00000000-0000-4000-8000-00000000019a",
-          "example_key_29": "00000000-0000-4000-8000-00000000019b",
-          "example_key_30": "00000000-0000-4000-8000-00000000019c",
-          "example_key_31": "00000000-0000-4000-8000-00000000019d",
-          "example_key_32": "00000000-0000-4000-8000-00000000019e",
-          "example_key_33": "00000000-0000-4000-8000-00000000019f",
-          "example_key_34": "00000000-0000-4000-8000-0000000001a0",
-          "example_key_35": "00000000-0000-4000-8000-0000000001a1"
+          "example_key_28": "00000000-0000-4000-8000-00000000019e",
+          "example_key_29": "00000000-0000-4000-8000-00000000019f",
+          "example_key_30": "00000000-0000-4000-8000-0000000001a0",
+          "example_key_31": "00000000-0000-4000-8000-0000000001a1",
+          "example_key_32": "00000000-0000-4000-8000-0000000001a2",
+          "example_key_33": "00000000-0000-4000-8000-0000000001a3",
+          "example_key_34": "00000000-0000-4000-8000-0000000001a4",
+          "example_key_35": "00000000-0000-4000-8000-0000000001a5"
         },
         "paperclipIssue": {
-          "id": "00000000-0000-4000-8000-000000000057",
+          "id": "00000000-0000-4000-8000-00000000005b",
           "title": "example title",
           "workMode": "standard",
           "identifier": "DEMO-11",
@@ -640,7 +640,7 @@
         },
         "paperclipSecrets": "example paperclipSecrets",
         "forceFreshSession": true,
-        "responsibleUserId": "example responsibleUserId",
+        "responsibleUserId": "defaultResponsibleUserId-1",
         "wakeTriggerDetail": "example wakeTriggerDetail",
         "paperclipWorkspace": {
           "cwd": "example cwd",
@@ -668,7 +668,7 @@
             "remote": {
               "path": null
             },
-            "leaseId": "00000000-0000-4000-8000-0000000001a6",
+            "leaseId": "00000000-0000-4000-8000-0000000001aa",
             "rebuild": {
               "mode": "example mode",
               "repoRef": null,
@@ -711,7 +711,7 @@
               "localPath": "example localPath",
               "remotePath": null,
               "providerLeaseId": null,
-              "executionWorkspaceId": "00000000-0000-4000-8000-0000000000b5"
+              "executionWorkspaceId": "00000000-0000-4000-8000-0000000000b9"
             },
             "summary": "example summary",
             "version": 1,
@@ -721,7 +721,7 @@
             },
             "additional": [],
             "pathAliases": [],
-            "environmentId": "00000000-0000-4000-8000-000000000029",
+            "environmentId": "00000000-0000-4000-8000-00000000002d",
             "providerLeaseId": null,
             "authoritativeRoot": "example authoritativeRoot",
             "outboundRestorePaths": []
@@ -730,14 +730,14 @@
           "worktreePath": null,
           "agentHomeForPermissions": "example agentHomeForPermissions"
         },
-        "taskRetryRequestId": "00000000-0000-4000-8000-0000000001a7",
+        "taskRetryRequestId": "00000000-0000-4000-8000-0000000001ab",
         "paperclipWorkspaces": [],
-        "executionWorkspaceId": "00000000-0000-4000-8000-0000000000b5",
+        "executionWorkspaceId": "00000000-0000-4000-8000-0000000000b9",
         "paperclipEnvironment": {
-          "id": "00000000-0000-4000-8000-000000000029",
+          "id": "00000000-0000-4000-8000-00000000002d",
           "name": "example name",
           "driver": "example driver",
-          "leaseId": "00000000-0000-4000-8000-0000000001a6",
+          "leaseId": "00000000-0000-4000-8000-0000000001aa",
           "workspaceRealization": {
             "mode": "example mode",
             "local": {
@@ -754,7 +754,7 @@
             "remote": {
               "path": null
             },
-            "leaseId": "00000000-0000-4000-8000-0000000001a6",
+            "leaseId": "00000000-0000-4000-8000-0000000001aa",
             "rebuild": {
               "mode": "example mode",
               "repoRef": null,
@@ -797,7 +797,7 @@
               "localPath": "example localPath",
               "remotePath": null,
               "providerLeaseId": null,
-              "executionWorkspaceId": "00000000-0000-4000-8000-0000000000b5"
+              "executionWorkspaceId": "00000000-0000-4000-8000-0000000000b9"
             },
             "summary": "example summary",
             "version": 1,
@@ -807,7 +807,7 @@
             },
             "additional": [],
             "pathAliases": [],
-            "environmentId": "00000000-0000-4000-8000-000000000029",
+            "environmentId": "00000000-0000-4000-8000-00000000002d",
             "providerLeaseId": null,
             "authoritativeRoot": "example authoritativeRoot",
             "outboundRestorePaths": []
@@ -823,49 +823,49 @@
           "assignment": {
             "owner": "example owner",
             "description": {
-              "id": "00000000-0000-4000-8000-000000000057",
+              "id": "00000000-0000-4000-8000-00000000005b",
               "revision": "example revision"
             }
           }
         },
         "executionContinuation": {
-          "issueId": "00000000-0000-4000-8000-000000000057",
+          "issueId": "00000000-0000-4000-8000-00000000005b",
           "trigger": {
             "reason": "task_retry",
-            "sourceRunId": "00000000-0000-4000-8000-0000000000b7",
+            "sourceRunId": "00000000-0000-4000-8000-0000000000bb",
             "interactionId": null
           },
           "version": 1,
           "coverage": {
             "kind": "full_task_history",
-            "throughCommentId": "00000000-0000-4000-8000-000000000058",
+            "throughCommentId": "00000000-0000-4000-8000-00000000005c",
             "summaryThroughCommentId": null
           },
           "messages": [
             {
-              "id": "00000000-0000-4000-8000-000000000058",
+              "id": "00000000-0000-4000-8000-00000000005c",
               "body": "example body",
               "deleted": false,
-              "authorId": "00000000-0000-4000-8000-000000000005",
+              "authorId": "00000000-0000-4000-8000-000000000009",
               "createdAt": "2026-11-20T14:03:00.769Z",
               "updatedAt": "2026-11-20T14:03:00.769Z",
               "authorType": "example authorType",
               "sourceTrust": null,
-              "createdByRunId": "00000000-0000-4000-8000-0000000000b7"
+              "createdByRunId": "00000000-0000-4000-8000-0000000000bb"
             }
           ],
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "objective": "example objective",
           "completedWork": "example completedWork",
           "humanResponses": [],
           "recoveredFiles": [],
           "objectiveSource": {
-            "id": "00000000-0000-4000-8000-000000000057",
+            "id": "00000000-0000-4000-8000-00000000005b",
             "kind": "description",
             "revision": "example revision"
           },
           "completedActions": [],
-          "interruptedRunId": "00000000-0000-4000-8000-0000000000b7",
+          "interruptedRunId": "00000000-0000-4000-8000-0000000000bb",
           "originCommentIds": [],
           "recoveryOutcomes": [],
           "interactionOutcomes": [],
@@ -874,7 +874,7 @@
         "paperclipCasesEnabled": false,
         "paperclipTaskMarkdown": "example paperclipTaskMarkdown",
         "connectionInstructions": null,
-        "executionIdentityRunId": "00000000-0000-4000-8000-0000000000b6",
+        "executionIdentityRunId": "00000000-0000-4000-8000-0000000000ba",
         "paperclipAgentJwtScope": {
           "kind": "standard"
         },
@@ -883,7 +883,7 @@
         "githubAuthenticationMode": "example githubAuthenticationMode",
         "paperclipHarnessCheckedOut": true,
         "queuedCommentSourceWakeIds": [
-          "00000000-0000-4000-8000-0000000001a7"
+          "00000000-0000-4000-8000-0000000001ab"
         ],
         "paperclipContinuationSummary": {
           "key": "example key",
@@ -929,9 +929,9 @@
   },
   {
     "id": 38196,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 16,
     "eventType": "example eventType",
     "stream": "system",
@@ -952,9 +952,9 @@
   },
   {
     "id": 38197,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 17,
     "eventType": "example eventType",
     "stream": "system",
@@ -975,9 +975,9 @@
   },
   {
     "id": 38198,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 18,
     "eventType": "example eventType",
     "stream": "system",
@@ -998,9 +998,9 @@
   },
   {
     "id": 38199,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 19,
     "eventType": "example eventType",
     "stream": "system",
@@ -1021,9 +1021,9 @@
   },
   {
     "id": 38200,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 20,
     "eventType": "example eventType",
     "stream": "system",
@@ -1044,9 +1044,9 @@
   },
   {
     "id": 38201,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 21,
     "eventType": "example eventType",
     "stream": "system",
@@ -1072,9 +1072,9 @@
   },
   {
     "id": 38202,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 22,
     "eventType": "example eventType",
     "stream": "system",
@@ -1095,9 +1095,9 @@
   },
   {
     "id": 38203,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 23,
     "eventType": "example eventType",
     "stream": "system",
@@ -1120,9 +1120,9 @@
   },
   {
     "id": 38204,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 24,
     "eventType": "example eventType",
     "stream": "system",
@@ -1142,9 +1142,9 @@
   },
   {
     "id": 38205,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 25,
     "eventType": "example eventType",
     "stream": "system",
@@ -1154,7 +1154,7 @@
     "payload": {
       "presentationDecision": {
         "schema": "paperclip.run_presentation_decision.v1",
-        "commentId": "00000000-0000-4000-8000-000000000195",
+        "commentId": "00000000-0000-4000-8000-000000000199",
         "reasonCodes": [
           "example reasonCodes"
         ],
@@ -1174,9 +1174,9 @@
   },
   {
     "id": 38206,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 26,
     "eventType": "example eventType",
     "stream": "system",
@@ -1196,9 +1196,9 @@
   },
   {
     "id": 38207,
-    "companyId": "00000000-0000-4000-8000-000000000001",
-    "runId": "00000000-0000-4000-8000-0000000000b6",
-    "agentId": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000003",
+    "runId": "00000000-0000-4000-8000-0000000000ba",
+    "agentId": "00000000-0000-4000-8000-000000000009",
     "seq": 27,
     "eventType": "example eventType",
     "stream": "system",

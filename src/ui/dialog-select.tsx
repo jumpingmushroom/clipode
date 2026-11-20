@@ -27,6 +27,8 @@ export type SelectProps<T> = {
   onMove?: (option: SelectOption<T>) => void
   /** A muted line under the list, such as "enter apply  esc cancel". */
   hint?: string
+  /** "modal" inside a dialog (the default); "base" when the list is a screen of its own. */
+  mode?: "base" | "modal"
 }
 
 export function DialogSelect<T>(props: SelectProps<T>) {
@@ -86,7 +88,7 @@ export function DialogSelect<T>(props: SelectProps<T>) {
 
   // Up and down only: a text field is focused, so j and k must reach it.
   useBindings(() => ({
-    mode: "modal",
+    mode: props.mode ?? "modal",
     bindings: [
       { key: "up,ctrl+p", cmd: () => move(-1) },
       { key: "down,ctrl+n", cmd: () => move(1) },

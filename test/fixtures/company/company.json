@@ -1,5 +1,5 @@
 {
-  "id": "00000000-0000-4000-8000-000000000001",
+  "id": "00000000-0000-4000-8000-000000000003",
   "name": "example name",
   "description": null,
   "status": "active",
@@ -9,14 +9,14 @@
   "issueCounter": 254,
   "budgetMonthlyCents": 0,
   "spentMonthlyCents": 0,
-  "defaultResponsibleUserId": "example defaultResponsibleUserId",
+  "defaultResponsibleUserId": "defaultResponsibleUserId-1",
   "requireBoardApprovalForNewAgents": false,
   "interactionResolverGovernance": {},
   "feedbackDataSharingEnabled": false,
   "feedbackDataSharingConsentAt": null,
   "feedbackDataSharingConsentByUserId": null,
   "feedbackDataSharingTermsVersion": null,
-  "logoAssetId": "00000000-0000-4000-8000-000000000002",
+  "logoAssetId": "00000000-0000-4000-8000-000000000004",
   "createdAt": "2026-11-08T19:43:27.763Z",
   "updatedAt": "2026-11-20T14:03:05.385Z",
   "logoUrl": "/demo/path"

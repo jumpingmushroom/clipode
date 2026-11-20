@@ -27,6 +27,12 @@ export function createScrubber() {
   const ids = new Map<string, string>()
   const identifiers = new Map<string, string>()
   const keys = new Map<string, string>()
+  const tokens = new Map<string, string>()
+  // Ids and keys that are not UUIDs (composite ids, dedup keys) stay distinct, so lists keep their identity.
+  const fakeToken = (key: string, real: string) => {
+    if (!tokens.has(real)) tokens.set(real, `${key}-${tokens.size + 1}`)
+    return tokens.get(real)!
+  }
 
   const fakeUuid = (real: string) => {
     if (!ids.has(real)) ids.set(real, `00000000-0000-4000-8000-${(ids.size + 1).toString(16).padStart(12, "0")}`)
@@ -49,6 +55,7 @@ export function createScrubber() {
     if (UUID.test(value)) return fakeUuid(value)
     if (ISO.test(value)) return value
     if ((ENUM_KEYS.has(key) || (log && LOG_KEYS.has(key)) || (parentKey === "decisionVerbs" && key === "id")) && TOKEN.test(value)) return value
+    if (key === "id" || key.endsWith("Id") || key.endsWith("Key")) return fakeToken(key, value)
     if (EMAIL.test(value)) return "user@example.com"
     if (IDENTIFIER.test(value)) return fakeIdentifier(value)
     if (key === "href" || key === "url" || key.endsWith("Url")) return "/demo/path"

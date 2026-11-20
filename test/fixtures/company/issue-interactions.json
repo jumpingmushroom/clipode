@@ -1,10 +1,10 @@
 {
-  "00000000-0000-4000-8000-000000000033": [],
-  "00000000-0000-4000-8000-000000000035": [
+  "00000000-0000-4000-8000-000000000037": [],
+  "00000000-0000-4000-8000-000000000039": [
     {
-      "id": "00000000-0000-4000-8000-00000000003e",
-      "companyId": "00000000-0000-4000-8000-000000000001",
-      "issueId": "00000000-0000-4000-8000-000000000035",
+      "id": "00000000-0000-4000-8000-000000000042",
+      "companyId": "00000000-0000-4000-8000-000000000003",
+      "issueId": "00000000-0000-4000-8000-000000000039",
       "kind": "ask_user_questions",
       "status": "answered",
       "continuationPolicy": "wake_assignee",
@@ -12,54 +12,54 @@
       "effectiveResolverPolicy": "human_only",
       "resolverPolicyProvenance": "explicit",
       "effectiveResolverPolicySource": "requested",
-      "idempotencyKey": "example idempotencyKey",
+      "idempotencyKey": "idempotencyKey-37",
       "originCommentIds": [],
       "sourceCommentId": null,
-      "sourceIdentityContextId": "00000000-0000-4000-8000-00000000003f",
-      "sourceRunId": "00000000-0000-4000-8000-000000000040",
+      "sourceIdentityContextId": "00000000-0000-4000-8000-000000000043",
+      "sourceRunId": "00000000-0000-4000-8000-000000000044",
       "title": "example title",
       "summary": null,
-      "createdByAgentId": "00000000-0000-4000-8000-000000000003",
+      "createdByAgentId": "00000000-0000-4000-8000-000000000007",
       "addresseeAgentId": null,
       "addresseeUserId": null,
       "createdByUserId": null,
       "resolvedByAgentId": null,
       "resolvedByRunId": null,
-      "resolvedByUserId": "example resolvedByUserId",
+      "resolvedByUserId": "defaultResponsibleUserId-1",
       "payload": {
         "version": 1,
         "supersedeOnUserComment": false,
         "questions": [
           {
-            "id": "example id",
+            "id": "id-38",
             "prompt": "example prompt",
             "selectionMode": "single",
             "required": true,
             "allowOther": false,
             "options": [
               {
-                "id": "example id",
+                "id": "id-39",
                 "label": "example label"
               },
               {
-                "id": "example id",
+                "id": "id-40",
                 "label": "example label"
               }
             ]
           },
           {
-            "id": "example id",
+            "id": "id-41",
             "prompt": "example prompt",
             "selectionMode": "single",
             "required": true,
             "allowOther": false,
             "options": [
               {
-                "id": "example id",
+                "id": "id-42",
                 "label": "example label"
               },
               {
-                "id": "example id",
+                "id": "id-43",
                 "label": "example label"
               }
             ]
@@ -69,33 +69,33 @@
           "schema": "paperclip.question_set.v1",
           "questions": [
             {
-              "id": "example id",
+              "id": "id-38",
               "prompt": "example prompt",
               "required": true,
               "answerMode": "single_select",
               "options": [
                 {
-                  "id": "example id",
+                  "id": "id-39",
                   "label": "example label"
                 },
                 {
-                  "id": "example id",
+                  "id": "id-40",
                   "label": "example label"
                 }
               ]
             },
             {
-              "id": "example id",
+              "id": "id-41",
               "prompt": "example prompt",
               "required": true,
               "answerMode": "single_select",
               "options": [
                 {
-                  "id": "example id",
+                  "id": "id-42",
                   "label": "example label"
                 },
                 {
-                  "id": "example id",
+                  "id": "id-43",
                   "label": "example label"
                 }
               ]
@@ -107,13 +107,13 @@
         "version": 1,
         "answers": [
           {
-            "questionId": "example questionId",
+            "questionId": "id-38",
             "optionIds": [
               "example optionIds"
             ]
           },
           {
-            "questionId": "example questionId",
+            "questionId": "id-41",
             "optionIds": [
               "example optionIds"
             ]
@@ -133,9 +133,9 @@
       }
     },
     {
-      "id": "00000000-0000-4000-8000-000000000034",
-      "companyId": "00000000-0000-4000-8000-000000000001",
-      "issueId": "00000000-0000-4000-8000-000000000035",
+      "id": "00000000-0000-4000-8000-000000000038",
+      "companyId": "00000000-0000-4000-8000-000000000003",
+      "issueId": "00000000-0000-4000-8000-000000000039",
       "kind": "request_confirmation",
       "status": "pending",
       "continuationPolicy": "wake_assignee_on_accept",
@@ -143,14 +143,14 @@
       "effectiveResolverPolicy": "human_only",
       "resolverPolicyProvenance": "explicit",
       "effectiveResolverPolicySource": "requested",
-      "idempotencyKey": "example idempotencyKey",
+      "idempotencyKey": "idempotencyKey-44",
       "originCommentIds": [],
       "sourceCommentId": null,
-      "sourceIdentityContextId": "00000000-0000-4000-8000-000000000041",
-      "sourceRunId": "00000000-0000-4000-8000-000000000042",
+      "sourceIdentityContextId": "00000000-0000-4000-8000-000000000045",
+      "sourceRunId": "00000000-0000-4000-8000-000000000046",
       "title": "example title",
       "summary": null,
-      "createdByAgentId": "00000000-0000-4000-8000-000000000003",
+      "createdByAgentId": "00000000-0000-4000-8000-000000000007",
       "addresseeAgentId": null,
       "addresseeUserId": null,
       "createdByUserId": null,
@@ -180,11 +180,11 @@
       }
     }
   ],
-  "00000000-0000-4000-8000-000000000038": [
+  "00000000-0000-4000-8000-00000000003c": [
     {
-      "id": "00000000-0000-4000-8000-000000000043",
-      "companyId": "00000000-0000-4000-8000-000000000001",
-      "issueId": "00000000-0000-4000-8000-000000000038",
+      "id": "00000000-0000-4000-8000-000000000047",
+      "companyId": "00000000-0000-4000-8000-000000000003",
+      "issueId": "00000000-0000-4000-8000-00000000003c",
       "kind": "connection_intent",
       "status": "cancelled",
       "continuationPolicy": "wake_assignee",
@@ -192,19 +192,19 @@
       "effectiveResolverPolicy": "human_only",
       "resolverPolicyProvenance": "explicit",
       "effectiveResolverPolicySource": "governed_action",
-      "idempotencyKey": "example idempotencyKey",
+      "idempotencyKey": "idempotencyKey-45",
       "originCommentIds": [],
       "sourceCommentId": null,
-      "sourceIdentityContextId": "00000000-0000-4000-8000-000000000044",
-      "sourceRunId": "00000000-0000-4000-8000-000000000045",
+      "sourceIdentityContextId": "00000000-0000-4000-8000-000000000048",
+      "sourceRunId": "00000000-0000-4000-8000-000000000049",
       "title": "example title",
       "summary": "example summary",
-      "createdByAgentId": "00000000-0000-4000-8000-00000000001f",
+      "createdByAgentId": "00000000-0000-4000-8000-000000000023",
       "addresseeAgentId": null,
-      "addresseeUserId": "example addresseeUserId",
+      "addresseeUserId": "defaultResponsibleUserId-1",
       "createdByUserId": null,
-      "resolvedByAgentId": "00000000-0000-4000-8000-00000000001f",
-      "resolvedByRunId": "00000000-0000-4000-8000-000000000046",
+      "resolvedByAgentId": "00000000-0000-4000-8000-000000000023",
+      "resolvedByRunId": "00000000-0000-4000-8000-00000000004a",
       "resolvedByUserId": null,
       "payload": {
         "version": 1,
@@ -212,7 +212,7 @@
         "serviceName": "example serviceName",
         "serviceLogoUrl": "/demo/path",
         "serviceDarkLogoUrl": null,
-        "requestingAgentId": "00000000-0000-4000-8000-00000000001f",
+        "requestingAgentId": "00000000-0000-4000-8000-000000000023",
         "requestingAgentName": "example requestingAgentName",
         "phase": "example phase"
       },
@@ -233,9 +233,9 @@
       }
     },
     {
-      "id": "00000000-0000-4000-8000-000000000047",
-      "companyId": "00000000-0000-4000-8000-000000000001",
-      "issueId": "00000000-0000-4000-8000-000000000038",
+      "id": "00000000-0000-4000-8000-00000000004b",
+      "companyId": "00000000-0000-4000-8000-000000000003",
+      "issueId": "00000000-0000-4000-8000-00000000003c",
       "kind": "connection_intent",
       "status": "cancelled",
       "continuationPolicy": "wake_assignee",
@@ -243,19 +243,19 @@
       "effectiveResolverPolicy": "human_only",
       "resolverPolicyProvenance": "explicit",
       "effectiveResolverPolicySource": "governed_action",
-      "idempotencyKey": "example idempotencyKey",
+      "idempotencyKey": "idempotencyKey-46",
       "originCommentIds": [],
       "sourceCommentId": null,
-      "sourceIdentityContextId": "00000000-0000-4000-8000-000000000044",
-      "sourceRunId": "00000000-0000-4000-8000-000000000045",
+      "sourceIdentityContextId": "00000000-0000-4000-8000-000000000048",
+      "sourceRunId": "00000000-0000-4000-8000-000000000049",
       "title": "example title",
       "summary": "example summary",
-      "createdByAgentId": "00000000-0000-4000-8000-00000000001f",
+      "createdByAgentId": "00000000-0000-4000-8000-000000000023",
       "addresseeAgentId": null,
-      "addresseeUserId": "example addresseeUserId",
+      "addresseeUserId": "defaultResponsibleUserId-1",
       "createdByUserId": null,
-      "resolvedByAgentId": "00000000-0000-4000-8000-00000000001f",
-      "resolvedByRunId": "00000000-0000-4000-8000-000000000046",
+      "resolvedByAgentId": "00000000-0000-4000-8000-000000000023",
+      "resolvedByRunId": "00000000-0000-4000-8000-00000000004a",
       "resolvedByUserId": null,
       "payload": {
         "version": 1,
@@ -263,7 +263,7 @@
         "serviceName": "example serviceName",
         "serviceLogoUrl": "/demo/path",
         "serviceDarkLogoUrl": null,
-        "requestingAgentId": "00000000-0000-4000-8000-00000000001f",
+        "requestingAgentId": "00000000-0000-4000-8000-000000000023",
         "requestingAgentName": "example requestingAgentName",
         "phase": "example phase"
       },
@@ -284,9 +284,9 @@
       }
     },
     {
-      "id": "00000000-0000-4000-8000-000000000037",
-      "companyId": "00000000-0000-4000-8000-000000000001",
-      "issueId": "00000000-0000-4000-8000-000000000038",
+      "id": "00000000-0000-4000-8000-00000000003b",
+      "companyId": "00000000-0000-4000-8000-000000000003",
+      "issueId": "00000000-0000-4000-8000-00000000003c",
       "kind": "ask_user_questions",
       "status": "pending",
       "continuationPolicy": "wake_assignee",
@@ -294,16 +294,16 @@
       "effectiveResolverPolicy": "human_only",
       "resolverPolicyProvenance": "explicit",
       "effectiveResolverPolicySource": "requested",
-      "idempotencyKey": "example idempotencyKey",
+      "idempotencyKey": "idempotencyKey-47",
       "originCommentIds": [
-        "00000000-0000-4000-8000-000000000048"
+        "00000000-0000-4000-8000-00000000004c"
       ],
       "sourceCommentId": null,
-      "sourceIdentityContextId": "00000000-0000-4000-8000-000000000049",
-      "sourceRunId": "00000000-0000-4000-8000-000000000046",
+      "sourceIdentityContextId": "00000000-0000-4000-8000-00000000004d",
+      "sourceRunId": "00000000-0000-4000-8000-00000000004a",
       "title": "example title",
       "summary": null,
-      "createdByAgentId": "00000000-0000-4000-8000-00000000001f",
+      "createdByAgentId": "00000000-0000-4000-8000-000000000023",
       "addresseeAgentId": null,
       "addresseeUserId": null,
       "createdByUserId": null,
@@ -315,14 +315,14 @@
         "supersedeOnUserComment": false,
         "questions": [
           {
-            "id": "example id",
+            "id": "id-48",
             "prompt": "example prompt",
             "selectionMode": "single",
             "required": true,
             "allowOther": true,
             "options": [
               {
-                "id": "example id",
+                "id": "id-49",
                 "label": "example label",
                 "freeText": true
               }
@@ -333,7 +333,7 @@
           "schema": "paperclip.question_set.v1",
           "questions": [
             {
-              "id": "example id",
+              "id": "id-48",
               "prompt": "example prompt",
               "required": true,
               "answerMode": "text"
@@ -354,12 +354,12 @@
       }
     }
   ],
-  "00000000-0000-4000-8000-000000000039": [],
-  "00000000-0000-4000-8000-00000000003b": [
+  "00000000-0000-4000-8000-00000000003d": [],
+  "00000000-0000-4000-8000-00000000003f": [
     {
-      "id": "00000000-0000-4000-8000-00000000003a",
-      "companyId": "00000000-0000-4000-8000-000000000001",
-      "issueId": "00000000-0000-4000-8000-00000000003b",
+      "id": "00000000-0000-4000-8000-00000000003e",
+      "companyId": "00000000-0000-4000-8000-000000000003",
+      "issueId": "00000000-0000-4000-8000-00000000003f",
       "kind": "ask_user_questions",
       "status": "expired",
       "continuationPolicy": "wake_assignee",
@@ -367,14 +367,14 @@
       "effectiveResolverPolicy": "human_only",
       "resolverPolicyProvenance": "explicit",
       "effectiveResolverPolicySource": "requested",
-      "idempotencyKey": "example idempotencyKey",
+      "idempotencyKey": "idempotencyKey-50",
       "originCommentIds": [],
       "sourceCommentId": null,
-      "sourceIdentityContextId": "00000000-0000-4000-8000-00000000004a",
-      "sourceRunId": "00000000-0000-4000-8000-00000000004b",
+      "sourceIdentityContextId": "00000000-0000-4000-8000-00000000004e",
+      "sourceRunId": "00000000-0000-4000-8000-00000000004f",
       "title": "example title",
       "summary": null,
-      "createdByAgentId": "00000000-0000-4000-8000-000000000003",
+      "createdByAgentId": "00000000-0000-4000-8000-000000000007",
       "addresseeAgentId": null,
       "addresseeUserId": null,
       "createdByUserId": null,
@@ -386,67 +386,67 @@
         "supersedeOnUserComment": false,
         "questions": [
           {
-            "id": "example id",
+            "id": "id-51",
             "prompt": "example prompt",
             "selectionMode": "single",
             "required": true,
             "allowOther": true,
             "options": [
               {
-                "id": "example id",
+                "id": "id-52",
                 "label": "example label",
                 "description": "example description"
               },
               {
-                "id": "example id",
+                "id": "id-53",
                 "label": "example label",
                 "description": "example description"
               },
               {
-                "id": "example id",
+                "id": "id-54",
                 "label": "example label",
                 "freeText": true
               }
             ]
           },
           {
-            "id": "example id",
+            "id": "id-55",
             "prompt": "example prompt",
             "selectionMode": "multi",
             "required": false,
             "allowOther": false,
             "options": [
               {
-                "id": "example id",
+                "id": "id-56",
                 "label": "example label"
               },
               {
-                "id": "example id",
+                "id": "id-57",
                 "label": "example label"
               },
               {
-                "id": "example id",
+                "id": "id-58",
                 "label": "example label"
               }
             ]
           },
           {
-            "id": "example id",
+            "id": "id-59",
             "prompt": "example prompt",
             "selectionMode": "single",
             "required": true,
             "allowOther": true,
             "options": [
               {
-                "id": "example id",
+                "id": "id-60",
                 "label": "example label"
               },
               {
-                "id": "example id",
+                "id": "id-61",
                 "label": "example label"
               },
               {
-                "id": "example id",
+                "id": "id-54",
                 "label": "example label",
                 "freeText": true
               }
@@ -457,18 +457,18 @@
           "schema": "paperclip.question_set.v1",
           "questions": [
             {
-              "id": "example id",
+              "id": "id-51",
               "prompt": "example prompt",
               "required": true,
               "answerMode": "single_select",
               "options": [
                 {
-                  "id": "example id",
+                  "id": "id-52",
                   "label": "example label",
                   "description": "example description"
                 },
                 {
-                  "id": "example id",
+                  "id": "id-53",
                   "label": "example label",
                   "description": "example description"
                 }
@@ -478,37 +478,37 @@
               }
             },
             {
-              "id": "example id",
+              "id": "id-55",
               "prompt": "example prompt",
               "required": false,
               "answerMode": "multi_select",
               "options": [
                 {
-                  "id": "example id",
+                  "id": "id-56",
                   "label": "example label"
                 },
                 {
-                  "id": "example id",
+                  "id": "id-57",
                   "label": "example label"
                 },
                 {
-                  "id": "example id",
+                  "id": "id-58",
                   "label": "example label"
                 }
               ]
             },
             {
-              "id": "example id",
+              "id": "id-59",
               "prompt": "example prompt",
               "required": true,
               "answerMode": "single_select",
               "options": [
                 {
-                  "id": "example id",
+                  "id": "id-60",
                   "label": "example label"
                 },
                 {
-                  "id": "example id",
+                  "id": "id-61",
                   "label": "example label"
                 }
               ],
@@ -538,11 +538,11 @@
       }
     }
   ],
-  "00000000-0000-4000-8000-00000000003d": [
+  "00000000-0000-4000-8000-000000000041": [
     {
-      "id": "00000000-0000-4000-8000-00000000003c",
-      "companyId": "00000000-0000-4000-8000-000000000001",
-      "issueId": "00000000-0000-4000-8000-00000000003d",
+      "id": "00000000-0000-4000-8000-000000000040",
+      "companyId": "00000000-0000-4000-8000-000000000003",
+      "issueId": "00000000-0000-4000-8000-000000000041",
       "kind": "ask_user_questions",
       "status": "expired",
       "continuationPolicy": "wake_assignee",
@@ -550,14 +550,14 @@
       "effectiveResolverPolicy": "human_only",
       "resolverPolicyProvenance": "explicit",
       "effectiveResolverPolicySource": "requested",
-      "idempotencyKey": "example idempotencyKey",
+      "idempotencyKey": "idempotencyKey-62",
       "originCommentIds": [],
       "sourceCommentId": null,
-      "sourceIdentityContextId": "00000000-0000-4000-8000-00000000004c",
-      "sourceRunId": "00000000-0000-4000-8000-00000000004d",
+      "sourceIdentityContextId": "00000000-0000-4000-8000-000000000050",
+      "sourceRunId": "00000000-0000-4000-8000-000000000051",
       "title": null,
       "summary": null,
-      "createdByAgentId": "00000000-0000-4000-8000-000000000005",
+      "createdByAgentId": "00000000-0000-4000-8000-000000000009",
       "addresseeAgentId": null,
       "addresseeUserId": null,
       "createdByUserId": null,
@@ -569,42 +569,42 @@
         "supersedeOnUserComment": false,
         "questions": [
           {
-            "id": "example id",
+            "id": "id-63",
             "prompt": "example prompt",
             "selectionMode": "single",
             "required": true,
             "allowOther": true,
             "options": [
               {
-                "id": "example id",
+                "id": "id-49",
                 "label": "example label",
                 "freeText": true
               }
             ]
           },
           {
-            "id": "example id",
+            "id": "id-64",
             "prompt": "example prompt",
             "selectionMode": "single",
             "required": false,
             "allowOther": true,
             "options": [
               {
-                "id": "example id",
+                "id": "id-49",
                 "label": "example label",
                 "freeText": true
               }
             ]
           },
           {
-            "id": "example id",
+            "id": "id-65",
             "prompt": "example prompt",
             "selectionMode": "single",
             "required": true,
             "allowOther": true,
             "options": [
               {
-                "id": "example id",
+                "id": "id-49",
                 "label": "example label",
                 "freeText": true
               }
@@ -615,19 +615,19 @@
           "schema": "paperclip.question_set.v1",
           "questions": [
             {
-              "id": "example id",
+              "id": "id-63",
               "prompt": "example prompt",
               "required": true,
               "answerMode": "text"
             },
             {
-              "id": "example id",
+              "id": "id-64",
               "prompt": "example prompt",
               "required": false,
               "answerMode": "text"
             },
             {
-              "id": "example id",
+              "id": "id-65",
               "prompt": "example prompt",
               "required": true,
               "answerMode": "text"
@@ -644,7 +644,7 @@
       },
       "resolvedAt": "2026-11-09T12:45:20.671Z",
       "dismissedAt": "2026-11-09T12:45:20.671Z",
-      "dismissedByUserId": "example dismissedByUserId",
+      "dismissedByUserId": "defaultResponsibleUserId-1",
       "createdAt": "2026-11-09T12:43:56.765Z",
       "updatedAt": "2026-11-09T12:45:20.671Z",
       "resolverPolicy": "human_only",

@@ -264,6 +264,9 @@ Where the mockup shows something the API does not provide, the data wins:
 | "Holds up 2 sub-tasks" on a question | Only blocked-task items carry a count (`detail.blockedTaskCount`) | Shown on blocked-task items only. |
 | Sidebar groups for agents, tasks in flight and live runs on the inbox | Not in the attention feed | Filled from the agents, tasks and runs stores, which the inbox loads after the feed. |
 | Shelves: Decide now, New today, Earlier | Not a server concept | A client rule, defined below. |
+| Mine / Unassigned / Company tabs above the list | Only two sort orders | Built as a `Latest` / `Decide by` switch in the same place; `tab` toggles it. |
+| Agents group: Running, Waiting on you, Blocked | Agent statuses are active, idle, running, paused, error, pending approval and terminated; none is "blocked" | Running (status `running`), Waiting on you (distinct agents behind open inbox items), Error (status `error`). |
+| A question body with a proposal, table and code block | The question's prompt and options only | Each prompt is rendered as Markdown, followed by its options as inactive `( )` or `[ ]` choices. |
 
 Shelf rule for phase 1: an item is in Decide now when its `decideBy` is today or past, its `expiresAt` falls within 24 hours, or its `severity` is `high`; otherwise in New today when it was created today; otherwise in Earlier. Items with an active dismissal go to Snoozed.
 
@@ -339,7 +342,7 @@ The build order puts the riskiest unknowns first: talking to the real instance, 
 5. **Tasks and thread.** List, filters, thread with comments and run activity, sidebar sections.
 6. **Runs.** Transcript parsers and the transcript screen, with fixtures per adapter.
 7. **Live updates.** WebSocket, reconnect, resync, polling fallback, connection indicator.
-8. **Agents, tabs, company switch, settings dialog.**
+8. **Agents, tabs, company switch, settings dialog.** The company switch (`leader c`) and the company picker after sign-in were built early, in step 4, because the inbox needs a company.
 9. **Plugin host.** Loader, context, slots, one example plugin, plugin documentation.
 10. **Release.** Compile targets, install script, self-update, GitHub Actions workflow.
 

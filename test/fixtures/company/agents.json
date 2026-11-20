@@ -1,7 +1,7 @@
 [
   {
-    "id": "00000000-0000-4000-8000-000000000003",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+    "id": "00000000-0000-4000-8000-000000000007",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "name": "example name",
     "role": "devops",
     "title": "example title",
@@ -9,15 +9,15 @@
     "appearance": {
       "schemaVersion": 1,
       "characterVersion": "example characterVersion",
-      "paletteId": "example paletteId",
-      "customAvatarAssetId": "00000000-0000-4000-8000-000000000004"
+      "paletteId": "paletteId-2",
+      "customAvatarAssetId": "00000000-0000-4000-8000-000000000008"
     },
     "status": "idle",
     "lifecycleState": "example lifecycleState",
     "lifecycleHolds": [],
     "lifecycleVersion": 8,
     "lifecycleError": null,
-    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "reportsTo": "00000000-0000-4000-8000-000000000009",
     "capabilities": null,
     "adapterType": "claude_local",
     "adapterConfig": {
@@ -72,27 +72,27 @@
     },
     "lastHeartbeatAt": "2026-11-18T13:35:27.981Z",
     "metadata": null,
-    "createdByUserId": "example createdByUserId",
+    "createdByUserId": "defaultResponsibleUserId-1",
     "createdAt": "2026-11-08T20:25:55.016Z",
     "updatedAt": "2026-11-18T13:35:27.981Z",
-    "urlKey": "example urlKey",
+    "urlKey": "urlKey-3",
     "avatarUrl": "/demo/path",
     "orgChainHealth": {
       "status": "healthy",
       "reason": "healthy",
       "fullChain": [
         {
-          "id": "00000000-0000-4000-8000-000000000003",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-000000000007",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
-          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "reportsTo": "00000000-0000-4000-8000-000000000009",
           "depth": 0,
           "relation": "example relation"
         },
         {
-          "id": "00000000-0000-4000-8000-000000000005",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-000000000009",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
           "reportsTo": null,
@@ -108,8 +108,8 @@
     }
   },
   {
-    "id": "00000000-0000-4000-8000-000000000006",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+    "id": "00000000-0000-4000-8000-00000000000a",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "name": "example name",
     "role": "devops",
     "title": "example title",
@@ -117,15 +117,15 @@
     "appearance": {
       "schemaVersion": 1,
       "characterVersion": "example characterVersion",
-      "paletteId": "example paletteId",
-      "customAvatarAssetId": "00000000-0000-4000-8000-000000000007"
+      "paletteId": "paletteId-4",
+      "customAvatarAssetId": "00000000-0000-4000-8000-00000000000b"
     },
     "status": "idle",
     "lifecycleState": "example lifecycleState",
     "lifecycleHolds": [],
     "lifecycleVersion": 4,
     "lifecycleError": null,
-    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "reportsTo": "00000000-0000-4000-8000-000000000009",
     "capabilities": null,
     "adapterType": "claude_local",
     "adapterConfig": {
@@ -143,21 +143,21 @@
       "env": {
         "example_key_2": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000008",
+          "secretId": "00000000-0000-4000-8000-00000000000c",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_3": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000009",
+          "secretId": "00000000-0000-4000-8000-00000000000d",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_4": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-00000000000a",
+          "secretId": "00000000-0000-4000-8000-00000000000e",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
@@ -196,27 +196,27 @@
     },
     "lastHeartbeatAt": "2026-11-18T09:52:20.798Z",
     "metadata": null,
-    "createdByUserId": "example createdByUserId",
+    "createdByUserId": "defaultResponsibleUserId-1",
     "createdAt": "2026-11-08T20:25:54.058Z",
     "updatedAt": "2026-11-18T09:52:20.798Z",
-    "urlKey": "example urlKey",
+    "urlKey": "urlKey-5",
     "avatarUrl": "/demo/path",
     "orgChainHealth": {
       "status": "healthy",
       "reason": "healthy",
       "fullChain": [
         {
-          "id": "00000000-0000-4000-8000-000000000006",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-00000000000a",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
-          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "reportsTo": "00000000-0000-4000-8000-000000000009",
           "depth": 0,
           "relation": "example relation"
         },
         {
-          "id": "00000000-0000-4000-8000-000000000005",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-000000000009",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
           "reportsTo": null,
@@ -232,8 +232,8 @@
     }
   },
   {
-    "id": "00000000-0000-4000-8000-00000000000b",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+    "id": "00000000-0000-4000-8000-00000000000f",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "name": "example name",
     "role": "general",
     "title": "example title",
@@ -241,15 +241,15 @@
     "appearance": {
       "schemaVersion": 1,
       "characterVersion": "example characterVersion",
-      "paletteId": "example paletteId",
-      "customAvatarAssetId": "00000000-0000-4000-8000-00000000000c"
+      "paletteId": "paletteId-6",
+      "customAvatarAssetId": "00000000-0000-4000-8000-000000000010"
     },
     "status": "idle",
     "lifecycleState": "example lifecycleState",
     "lifecycleHolds": [],
     "lifecycleVersion": 4,
     "lifecycleError": null,
-    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "reportsTo": "00000000-0000-4000-8000-000000000009",
     "capabilities": "example capabilities",
     "adapterType": "claude_local",
     "adapterConfig": {
@@ -266,126 +266,126 @@
       "env": {
         "example_key_5": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-00000000000d",
+          "secretId": "00000000-0000-4000-8000-000000000011",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_6": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-00000000000e",
+          "secretId": "00000000-0000-4000-8000-000000000012",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_7": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-00000000000f",
+          "secretId": "00000000-0000-4000-8000-000000000013",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_8": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000010",
+          "secretId": "00000000-0000-4000-8000-000000000014",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_9": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000011",
+          "secretId": "00000000-0000-4000-8000-000000000015",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_10": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000012",
+          "secretId": "00000000-0000-4000-8000-000000000016",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_11": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000013",
+          "secretId": "00000000-0000-4000-8000-000000000017",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_12": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000014",
+          "secretId": "00000000-0000-4000-8000-000000000018",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_13": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000015",
+          "secretId": "00000000-0000-4000-8000-000000000019",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_14": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000016",
+          "secretId": "00000000-0000-4000-8000-00000000001a",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_15": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000017",
+          "secretId": "00000000-0000-4000-8000-00000000001b",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_16": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000018",
+          "secretId": "00000000-0000-4000-8000-00000000001c",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_17": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000019",
+          "secretId": "00000000-0000-4000-8000-00000000001d",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_18": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-00000000001a",
+          "secretId": "00000000-0000-4000-8000-00000000001e",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_19": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-00000000001b",
+          "secretId": "00000000-0000-4000-8000-00000000001f",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_20": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-00000000001c",
+          "secretId": "00000000-0000-4000-8000-000000000020",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_21": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-00000000001d",
+          "secretId": "00000000-0000-4000-8000-000000000021",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_22": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-00000000001e",
+          "secretId": "00000000-0000-4000-8000-000000000022",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
@@ -420,24 +420,24 @@
     "createdByUserId": null,
     "createdAt": "2026-11-16T10:29:58.957Z",
     "updatedAt": "2026-11-20T13:31:32.312Z",
-    "urlKey": "example urlKey",
+    "urlKey": "urlKey-7",
     "avatarUrl": "/demo/path",
     "orgChainHealth": {
       "status": "healthy",
       "reason": "healthy",
       "fullChain": [
         {
-          "id": "00000000-0000-4000-8000-00000000000b",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-00000000000f",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
-          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "reportsTo": "00000000-0000-4000-8000-000000000009",
           "depth": 0,
           "relation": "example relation"
         },
         {
-          "id": "00000000-0000-4000-8000-000000000005",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-000000000009",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
           "reportsTo": null,
@@ -453,8 +453,8 @@
     }
   },
   {
-    "id": "00000000-0000-4000-8000-00000000001f",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+    "id": "00000000-0000-4000-8000-000000000023",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "name": "example name",
     "role": "general",
     "title": "example title",
@@ -462,15 +462,15 @@
     "appearance": {
       "schemaVersion": 1,
       "characterVersion": "example characterVersion",
-      "paletteId": "example paletteId",
-      "customAvatarAssetId": "00000000-0000-4000-8000-000000000020"
+      "paletteId": "paletteId-8",
+      "customAvatarAssetId": "00000000-0000-4000-8000-000000000024"
     },
     "status": "idle",
     "lifecycleState": "example lifecycleState",
     "lifecycleHolds": [],
     "lifecycleVersion": 4,
     "lifecycleError": null,
-    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "reportsTo": "00000000-0000-4000-8000-000000000009",
     "capabilities": "example capabilities",
     "adapterType": "claude_local",
     "adapterConfig": {
@@ -513,24 +513,24 @@
     "createdByUserId": null,
     "createdAt": "2026-11-18T13:02:23.889Z",
     "updatedAt": "2026-11-18T13:19:27.195Z",
-    "urlKey": "example urlKey",
+    "urlKey": "urlKey-9",
     "avatarUrl": "/demo/path",
     "orgChainHealth": {
       "status": "healthy",
       "reason": "healthy",
       "fullChain": [
         {
-          "id": "00000000-0000-4000-8000-00000000001f",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-000000000023",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
-          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "reportsTo": "00000000-0000-4000-8000-000000000009",
           "depth": 0,
           "relation": "example relation"
         },
         {
-          "id": "00000000-0000-4000-8000-000000000005",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-000000000009",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
           "reportsTo": null,
@@ -546,8 +546,8 @@
     }
   },
   {
-    "id": "00000000-0000-4000-8000-000000000021",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+    "id": "00000000-0000-4000-8000-000000000025",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "name": "example name",
     "role": "general",
     "title": "example title",
@@ -555,15 +555,15 @@
     "appearance": {
       "schemaVersion": 1,
       "characterVersion": "example characterVersion",
-      "paletteId": "example paletteId",
-      "customAvatarAssetId": "00000000-0000-4000-8000-000000000022"
+      "paletteId": "paletteId-10",
+      "customAvatarAssetId": "00000000-0000-4000-8000-000000000026"
     },
     "status": "idle",
     "lifecycleState": "example lifecycleState",
     "lifecycleHolds": [],
     "lifecycleVersion": 4,
     "lifecycleError": null,
-    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "reportsTo": "00000000-0000-4000-8000-000000000009",
     "capabilities": "example capabilities",
     "adapterType": "claude_local",
     "adapterConfig": {
@@ -606,24 +606,24 @@
     "createdByUserId": null,
     "createdAt": "2026-11-17T07:46:20.021Z",
     "updatedAt": "2026-11-17T08:27:41.911Z",
-    "urlKey": "example urlKey",
+    "urlKey": "urlKey-11",
     "avatarUrl": "/demo/path",
     "orgChainHealth": {
       "status": "healthy",
       "reason": "healthy",
       "fullChain": [
         {
-          "id": "00000000-0000-4000-8000-000000000021",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-000000000025",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
-          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "reportsTo": "00000000-0000-4000-8000-000000000009",
           "depth": 0,
           "relation": "example relation"
         },
         {
-          "id": "00000000-0000-4000-8000-000000000005",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-000000000009",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
           "reportsTo": null,
@@ -639,8 +639,8 @@
     }
   },
   {
-    "id": "00000000-0000-4000-8000-000000000023",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+    "id": "00000000-0000-4000-8000-000000000027",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "name": "example name",
     "role": "researcher",
     "title": "example title",
@@ -648,15 +648,15 @@
     "appearance": {
       "schemaVersion": 1,
       "characterVersion": "example characterVersion",
-      "paletteId": "example paletteId",
-      "customAvatarAssetId": "00000000-0000-4000-8000-000000000024"
+      "paletteId": "paletteId-12",
+      "customAvatarAssetId": "00000000-0000-4000-8000-000000000028"
     },
     "status": "idle",
     "lifecycleState": "example lifecycleState",
     "lifecycleHolds": [],
     "lifecycleVersion": 4,
     "lifecycleError": null,
-    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "reportsTo": "00000000-0000-4000-8000-000000000009",
     "capabilities": "example capabilities",
     "adapterType": "claude_local",
     "adapterConfig": {
@@ -706,24 +706,24 @@
     "createdByUserId": null,
     "createdAt": "2026-11-09T13:28:53.446Z",
     "updatedAt": "2026-11-17T08:05:15.345Z",
-    "urlKey": "example urlKey",
+    "urlKey": "urlKey-13",
     "avatarUrl": "/demo/path",
     "orgChainHealth": {
       "status": "healthy",
       "reason": "healthy",
       "fullChain": [
         {
-          "id": "00000000-0000-4000-8000-000000000023",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-000000000027",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
-          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "reportsTo": "00000000-0000-4000-8000-000000000009",
           "depth": 0,
           "relation": "example relation"
         },
         {
-          "id": "00000000-0000-4000-8000-000000000005",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-000000000009",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
           "reportsTo": null,
@@ -739,8 +739,8 @@
     }
   },
   {
-    "id": "00000000-0000-4000-8000-000000000005",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+    "id": "00000000-0000-4000-8000-000000000009",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "name": "example name",
     "role": "ceo",
     "title": "example title",
@@ -748,8 +748,8 @@
     "appearance": {
       "schemaVersion": 1,
       "characterVersion": "example characterVersion",
-      "paletteId": "example paletteId",
-      "customAvatarAssetId": "00000000-0000-4000-8000-000000000025"
+      "paletteId": "paletteId-6",
+      "customAvatarAssetId": "00000000-0000-4000-8000-000000000029"
     },
     "status": "idle",
     "lifecycleState": "example lifecycleState",
@@ -786,28 +786,28 @@
         },
         "example_key_24": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000026",
+          "secretId": "00000000-0000-4000-8000-00000000002a",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_2": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000008",
+          "secretId": "00000000-0000-4000-8000-00000000000c",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_3": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000027",
+          "secretId": "00000000-0000-4000-8000-00000000002b",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_4": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-000000000028",
+          "secretId": "00000000-0000-4000-8000-00000000002c",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
@@ -833,7 +833,7 @@
         "provider": "anthropic"
       }
     },
-    "defaultEnvironmentId": "00000000-0000-4000-8000-000000000029",
+    "defaultEnvironmentId": "00000000-0000-4000-8000-00000000002d",
     "budgetMonthlyCents": 0,
     "spendMonthUtc": "example spendMonthUtc",
     "spentMonthlyCents": 0,
@@ -848,18 +848,18 @@
     "metadata": {
       "setupAdapterPending": false
     },
-    "createdByUserId": "example createdByUserId",
+    "createdByUserId": "defaultResponsibleUserId-1",
     "createdAt": "2026-11-08T19:50:17.710Z",
     "updatedAt": "2026-11-20T14:19:16.466Z",
-    "urlKey": "example urlKey",
+    "urlKey": "urlKey-14",
     "avatarUrl": "/demo/path",
     "orgChainHealth": {
       "status": "healthy",
       "reason": "healthy",
       "fullChain": [
         {
-          "id": "00000000-0000-4000-8000-000000000005",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-000000000009",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
           "reportsTo": null,
@@ -875,8 +875,8 @@
     }
   },
   {
-    "id": "00000000-0000-4000-8000-00000000002a",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+    "id": "00000000-0000-4000-8000-00000000002e",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "name": "example name",
     "role": "general",
     "title": "example title",
@@ -884,15 +884,15 @@
     "appearance": {
       "schemaVersion": 1,
       "characterVersion": "example characterVersion",
-      "paletteId": "example paletteId",
-      "customAvatarAssetId": "00000000-0000-4000-8000-00000000002b"
+      "paletteId": "paletteId-15",
+      "customAvatarAssetId": "00000000-0000-4000-8000-00000000002f"
     },
     "status": "idle",
     "lifecycleState": "example lifecycleState",
     "lifecycleHolds": [],
     "lifecycleVersion": 4,
     "lifecycleError": null,
-    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "reportsTo": "00000000-0000-4000-8000-000000000009",
     "capabilities": null,
     "adapterType": "claude_local",
     "adapterConfig": {
@@ -904,7 +904,7 @@
       ],
       "example_key_25": {
         "type": "secret_ref",
-        "secretId": "00000000-0000-4000-8000-00000000002c",
+        "secretId": "00000000-0000-4000-8000-000000000030",
         "version": "latest"
       },
       "paperclipSkillSync": {
@@ -924,21 +924,21 @@
         },
         "example_key_24": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-00000000002d",
+          "secretId": "00000000-0000-4000-8000-000000000031",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_26": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-00000000002e",
+          "secretId": "00000000-0000-4000-8000-000000000032",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
         },
         "example_key_27": {
           "type": "secret_ref",
-          "secretId": "00000000-0000-4000-8000-00000000002f",
+          "secretId": "00000000-0000-4000-8000-000000000033",
           "version": "latest",
           "projectionClass": "example projectionClass",
           "projectionAllowlistKey": null
@@ -977,27 +977,27 @@
     },
     "lastHeartbeatAt": "2026-11-18T13:39:50.141Z",
     "metadata": null,
-    "createdByUserId": "example createdByUserId",
+    "createdByUserId": "defaultResponsibleUserId-1",
     "createdAt": "2026-11-08T20:25:55.926Z",
     "updatedAt": "2026-11-18T13:39:50.141Z",
-    "urlKey": "example urlKey",
+    "urlKey": "urlKey-16",
     "avatarUrl": "/demo/path",
     "orgChainHealth": {
       "status": "healthy",
       "reason": "healthy",
       "fullChain": [
         {
-          "id": "00000000-0000-4000-8000-00000000002a",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-00000000002e",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
-          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "reportsTo": "00000000-0000-4000-8000-000000000009",
           "depth": 0,
           "relation": "example relation"
         },
         {
-          "id": "00000000-0000-4000-8000-000000000005",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-000000000009",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
           "reportsTo": null,
@@ -1013,8 +1013,8 @@
     }
   },
   {
-    "id": "00000000-0000-4000-8000-000000000030",
-    "companyId": "00000000-0000-4000-8000-000000000001",
+    "id": "00000000-0000-4000-8000-000000000034",
+    "companyId": "00000000-0000-4000-8000-000000000003",
     "name": "example name",
     "role": "security",
     "title": "example title",
@@ -1022,15 +1022,15 @@
     "appearance": {
       "schemaVersion": 1,
       "characterVersion": "example characterVersion",
-      "paletteId": "example paletteId",
-      "customAvatarAssetId": "00000000-0000-4000-8000-000000000031"
+      "paletteId": "paletteId-4",
+      "customAvatarAssetId": "00000000-0000-4000-8000-000000000035"
     },
     "status": "idle",
     "lifecycleState": "example lifecycleState",
     "lifecycleHolds": [],
     "lifecycleVersion": 4,
     "lifecycleError": null,
-    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "reportsTo": "00000000-0000-4000-8000-000000000009",
     "capabilities": "example capabilities",
     "adapterType": "claude_local",
     "adapterConfig": {
@@ -1075,24 +1075,24 @@
     "createdByUserId": null,
     "createdAt": "2026-11-08T22:42:44.931Z",
     "updatedAt": "2026-11-16T14:16:48.359Z",
-    "urlKey": "example urlKey",
+    "urlKey": "urlKey-17",
     "avatarUrl": "/demo/path",
     "orgChainHealth": {
       "status": "healthy",
       "reason": "healthy",
       "fullChain": [
         {
-          "id": "00000000-0000-4000-8000-000000000030",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-000000000034",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
-          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "reportsTo": "00000000-0000-4000-8000-000000000009",
           "depth": 0,
           "relation": "example relation"
         },
         {
-          "id": "00000000-0000-4000-8000-000000000005",
-          "companyId": "00000000-0000-4000-8000-000000000001",
+          "id": "00000000-0000-4000-8000-000000000009",
+          "companyId": "00000000-0000-4000-8000-000000000003",
           "name": "example name",
           "status": "idle",
           "reportsTo": null,

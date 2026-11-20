@@ -1,6 +1,6 @@
 {
-  "companyId": "00000000-0000-4000-8000-000000000001",
-  "generatedAt": "2026-11-20T15:07:55.202Z",
+  "companyId": "00000000-0000-4000-8000-000000000003",
+  "generatedAt": "2026-11-20T15:26:46.256Z",
   "totalCount": 6,
   "deskBadgeCount": 0,
   "countsBySourceKind": {
@@ -19,19 +19,19 @@
   "nextCursor": null,
   "items": [
     {
-      "companyId": "00000000-0000-4000-8000-000000000001",
+      "companyId": "00000000-0000-4000-8000-000000000003",
       "sourceKind": "blocker_attention",
       "subject": {
         "kind": "issue",
-        "id": "00000000-0000-4000-8000-000000000032",
-        "companyId": "00000000-0000-4000-8000-000000000001",
+        "id": "00000000-0000-4000-8000-000000000036",
+        "companyId": "00000000-0000-4000-8000-000000000003",
         "title": "example title",
         "identifier": "DEMO-1",
         "status": "in_review",
         "href": "/demo/path",
         "metadata": {
           "priority": "medium",
-          "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+          "assigneeAgentId": "00000000-0000-4000-8000-00000000000f",
           "assigneeUserId": null,
           "reviewPolicy": null
         }
@@ -57,22 +57,22 @@
       "inlineResolvable": false,
       "entryRule": "example entryRule",
       "exitRule": "example exitRule",
-      "dedupKey": "example dedupKey",
+      "dedupKey": "dedupKey-18",
       "severity": "high",
       "activityAt": "2026-11-20T13:31:32.187Z",
       "createdAt": "2026-11-18T08:28:10.889Z",
       "updatedAt": "2026-11-20T13:31:32.187Z",
       "relatedIssue": {
         "kind": "issue",
-        "id": "00000000-0000-4000-8000-000000000033",
-        "companyId": "00000000-0000-4000-8000-000000000001",
+        "id": "00000000-0000-4000-8000-000000000037",
+        "companyId": "00000000-0000-4000-8000-000000000003",
         "title": "example title",
         "identifier": "DEMO-2",
         "status": "blocked",
         "href": "/demo/path",
         "metadata": {
           "priority": "medium",
-          "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+          "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
           "assigneeUserId": null,
           "reviewPolicy": null
         }
@@ -85,8 +85,8 @@
         "blockedTaskCount": 1,
         "images": []
       },
-      "id": "example id",
-      "dismissalKey": "example dismissalKey",
+      "id": "id-19",
+      "dismissalKey": "dismissalKey-20",
       "dismissal": null,
       "expiresAt": null,
       "ruleKey": null,
@@ -105,20 +105,20 @@
       "rank": 1
     },
     {
-      "companyId": "00000000-0000-4000-8000-000000000001",
+      "companyId": "00000000-0000-4000-8000-000000000003",
       "sourceKind": "issue_thread_interaction",
       "subject": {
         "kind": "interaction",
-        "id": "00000000-0000-4000-8000-000000000034",
-        "companyId": "00000000-0000-4000-8000-000000000001",
+        "id": "00000000-0000-4000-8000-000000000038",
+        "companyId": "00000000-0000-4000-8000-000000000003",
         "title": "example title",
         "identifier": null,
         "status": "pending",
         "href": "/demo/path",
         "metadata": {
           "kind": "request_confirmation",
-          "issueId": "00000000-0000-4000-8000-000000000035",
-          "createdByAgentId": "00000000-0000-4000-8000-000000000003",
+          "issueId": "00000000-0000-4000-8000-000000000039",
+          "createdByAgentId": "00000000-0000-4000-8000-000000000007",
           "isPlanTarget": false,
           "targetDocumentKey": null
         }
@@ -139,30 +139,30 @@
       "inlineResolvable": true,
       "entryRule": "example entryRule",
       "exitRule": "example exitRule",
-      "dedupKey": "example dedupKey",
+      "dedupKey": "dedupKey-21",
       "severity": "medium",
       "activityAt": "2026-11-18T13:35:14.126Z",
       "createdAt": "2026-11-18T13:35:14.126Z",
       "updatedAt": "2026-11-18T13:35:14.126Z",
       "relatedIssue": {
         "kind": "issue",
-        "id": "00000000-0000-4000-8000-000000000035",
-        "companyId": "00000000-0000-4000-8000-000000000001",
+        "id": "00000000-0000-4000-8000-000000000039",
+        "companyId": "00000000-0000-4000-8000-000000000003",
         "title": "example title",
         "identifier": "DEMO-3",
         "status": "in_review",
         "href": "/demo/path",
         "metadata": {
           "priority": "medium",
-          "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+          "assigneeAgentId": "00000000-0000-4000-8000-000000000007",
           "assigneeUserId": null,
           "reviewPolicy": null
         }
       },
       "project": {
-        "id": "00000000-0000-4000-8000-000000000036",
+        "id": "00000000-0000-4000-8000-00000000003a",
         "name": "example name",
-        "urlKey": "example urlKey",
+        "urlKey": "urlKey-22",
         "color": "example color",
         "icon": null
       },
@@ -181,11 +181,11 @@
         "addresseeAgentId": null,
         "addresseeUserId": null,
         "addresseeName": null,
-        "createdByAgentId": "00000000-0000-4000-8000-000000000003",
+        "createdByAgentId": "00000000-0000-4000-8000-000000000007",
         "createdByAgentName": null
       },
-      "id": "example id",
-      "dismissalKey": "example dismissalKey",
+      "id": "id-23",
+      "dismissalKey": "dismissalKey-24",
       "dismissal": null,
       "expiresAt": null,
       "ruleKey": null,
@@ -203,20 +203,20 @@
       "rank": 2
     },
     {
-      "companyId": "00000000-0000-4000-8000-000000000001",
+      "companyId": "00000000-0000-4000-8000-000000000003",
       "sourceKind": "issue_thread_interaction",
       "subject": {
         "kind": "interaction",
-        "id": "00000000-0000-4000-8000-000000000037",
-        "companyId": "00000000-0000-4000-8000-000000000001",
+        "id": "00000000-0000-4000-8000-00000000003b",
+        "companyId": "00000000-0000-4000-8000-000000000003",
         "title": "example title",
         "identifier": null,
         "status": "pending",
         "href": "/demo/path",
         "metadata": {
           "kind": "ask_user_questions",
-          "issueId": "00000000-0000-4000-8000-000000000038",
-          "createdByAgentId": "00000000-0000-4000-8000-00000000001f",
+          "issueId": "00000000-0000-4000-8000-00000000003c",
+          "createdByAgentId": "00000000-0000-4000-8000-000000000023",
           "isPlanTarget": false,
           "targetDocumentKey": null
         }
@@ -232,30 +232,30 @@
       "inlineResolvable": true,
       "entryRule": "example entryRule",
       "exitRule": "example exitRule",
-      "dedupKey": "example dedupKey",
+      "dedupKey": "dedupKey-25",
       "severity": "medium",
       "activityAt": "2026-11-18T13:16:03.838Z",
       "createdAt": "2026-11-18T13:16:03.838Z",
       "updatedAt": "2026-11-18T13:16:03.838Z",
       "relatedIssue": {
         "kind": "issue",
-        "id": "00000000-0000-4000-8000-000000000038",
-        "companyId": "00000000-0000-4000-8000-000000000001",
+        "id": "00000000-0000-4000-8000-00000000003c",
+        "companyId": "00000000-0000-4000-8000-000000000003",
         "title": "example title",
         "identifier": "DEMO-4",
         "status": "in_review",
         "href": "/demo/path",
         "metadata": {
           "priority": "medium",
-          "assigneeAgentId": "00000000-0000-4000-8000-00000000001f",
+          "assigneeAgentId": "00000000-0000-4000-8000-000000000023",
           "assigneeUserId": null,
           "reviewPolicy": null
         }
       },
       "project": {
-        "id": "00000000-0000-4000-8000-000000000036",
+        "id": "00000000-0000-4000-8000-00000000003a",
         "name": "example name",
-        "urlKey": "example urlKey",
+        "urlKey": "urlKey-22",
         "color": "example color",
         "icon": null
       },
@@ -274,11 +274,11 @@
         "addresseeAgentId": null,
         "addresseeUserId": null,
         "addresseeName": null,
-        "createdByAgentId": "00000000-0000-4000-8000-00000000001f",
+        "createdByAgentId": "00000000-0000-4000-8000-000000000023",
         "createdByAgentName": null
       },
-      "id": "example id",
-      "dismissalKey": "example dismissalKey",
+      "id": "id-26",
+      "dismissalKey": "dismissalKey-27",
       "dismissal": null,
       "expiresAt": null,
       "ruleKey": null,
@@ -301,19 +301,19 @@
       "rank": 3
     },
     {
-      "companyId": "00000000-0000-4000-8000-000000000001",
+      "companyId": "00000000-0000-4000-8000-000000000003",
       "sourceKind": "blocker_attention",
       "subject": {
         "kind": "issue",
-        "id": "00000000-0000-4000-8000-000000000039",
-        "companyId": "00000000-0000-4000-8000-000000000001",
+        "id": "00000000-0000-4000-8000-00000000003d",
+        "companyId": "00000000-0000-4000-8000-000000000003",
         "title": "example title",
         "identifier": "DEMO-5",
         "status": "blocked",
         "href": "/demo/path",
         "metadata": {
           "priority": "medium",
-          "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+          "assigneeAgentId": "00000000-0000-4000-8000-000000000007",
           "assigneeUserId": null,
           "reviewPolicy": null
         }
@@ -339,22 +339,22 @@
       "inlineResolvable": false,
       "entryRule": "example entryRule",
       "exitRule": "example exitRule",
-      "dedupKey": "example dedupKey",
+      "dedupKey": "dedupKey-28",
       "severity": "high",
       "activityAt": "2026-11-17T08:58:12.154Z",
       "createdAt": "2026-11-17T08:56:56.658Z",
       "updatedAt": "2026-11-17T08:58:12.154Z",
       "relatedIssue": {
         "kind": "issue",
-        "id": "00000000-0000-4000-8000-000000000039",
-        "companyId": "00000000-0000-4000-8000-000000000001",
+        "id": "00000000-0000-4000-8000-00000000003d",
+        "companyId": "00000000-0000-4000-8000-000000000003",
         "title": "example title",
         "identifier": "DEMO-5",
         "status": "blocked",
         "href": "/demo/path",
         "metadata": {
           "priority": "medium",
-          "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+          "assigneeAgentId": "00000000-0000-4000-8000-000000000007",
           "assigneeUserId": null,
           "reviewPolicy": null
         }
@@ -367,8 +367,8 @@
         "blockedTaskCount": 0,
         "images": []
       },
-      "id": "example id",
-      "dismissalKey": "example dismissalKey",
+      "id": "id-29",
+      "dismissalKey": "dismissalKey-30",
       "dismissal": null,
       "expiresAt": null,
       "ruleKey": null,
@@ -387,20 +387,20 @@
       "rank": 4
     },
     {
-      "companyId": "00000000-0000-4000-8000-000000000001",
+      "companyId": "00000000-0000-4000-8000-000000000003",
       "sourceKind": "issue_thread_interaction",
       "subject": {
         "kind": "interaction",
-        "id": "00000000-0000-4000-8000-00000000003a",
-        "companyId": "00000000-0000-4000-8000-000000000001",
+        "id": "00000000-0000-4000-8000-00000000003e",
+        "companyId": "00000000-0000-4000-8000-000000000003",
         "title": "example title",
         "identifier": null,
         "status": "pending",
         "href": "/demo/path",
         "metadata": {
           "kind": "ask_user_questions",
-          "issueId": "00000000-0000-4000-8000-00000000003b",
-          "createdByAgentId": "00000000-0000-4000-8000-000000000003",
+          "issueId": "00000000-0000-4000-8000-00000000003f",
+          "createdByAgentId": "00000000-0000-4000-8000-000000000007",
           "isPlanTarget": false,
           "targetDocumentKey": null
         }
@@ -416,22 +416,22 @@
       "inlineResolvable": true,
       "entryRule": "example entryRule",
       "exitRule": "example exitRule",
-      "dedupKey": "example dedupKey",
+      "dedupKey": "dedupKey-31",
       "severity": "medium",
       "activityAt": "2026-11-16T20:09:23.132Z",
       "createdAt": "2026-11-16T20:09:23.132Z",
       "updatedAt": "2026-11-16T20:09:23.132Z",
       "relatedIssue": {
         "kind": "issue",
-        "id": "00000000-0000-4000-8000-00000000003b",
-        "companyId": "00000000-0000-4000-8000-000000000001",
+        "id": "00000000-0000-4000-8000-00000000003f",
+        "companyId": "00000000-0000-4000-8000-000000000003",
         "title": "example title",
         "identifier": "DEMO-6",
         "status": "done",
         "href": "/demo/path",
         "metadata": {
           "priority": "medium",
-          "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+          "assigneeAgentId": "00000000-0000-4000-8000-000000000007",
           "assigneeUserId": null,
           "reviewPolicy": null
         }
@@ -452,11 +452,11 @@
         "addresseeAgentId": null,
         "addresseeUserId": null,
         "addresseeName": null,
-        "createdByAgentId": "00000000-0000-4000-8000-000000000003",
+        "createdByAgentId": "00000000-0000-4000-8000-000000000007",
         "createdByAgentName": null
       },
-      "id": "example id",
-      "dismissalKey": "example dismissalKey",
+      "id": "id-32",
+      "dismissalKey": "dismissalKey-33",
       "dismissal": null,
       "expiresAt": null,
       "ruleKey": null,
@@ -479,20 +479,20 @@
       "rank": 5
     },
     {
-      "companyId": "00000000-0000-4000-8000-000000000001",
+      "companyId": "00000000-0000-4000-8000-000000000003",
       "sourceKind": "issue_thread_interaction",
       "subject": {
         "kind": "interaction",
-        "id": "00000000-0000-4000-8000-00000000003c",
-        "companyId": "00000000-0000-4000-8000-000000000001",
+        "id": "00000000-0000-4000-8000-000000000040",
+        "companyId": "00000000-0000-4000-8000-000000000003",
         "title": "example title",
         "identifier": null,
         "status": "pending",
         "href": "/demo/path",
         "metadata": {
           "kind": "ask_user_questions",
-          "issueId": "00000000-0000-4000-8000-00000000003d",
-          "createdByAgentId": "00000000-0000-4000-8000-000000000005",
+          "issueId": "00000000-0000-4000-8000-000000000041",
+          "createdByAgentId": "00000000-0000-4000-8000-000000000009",
           "isPlanTarget": false,
           "targetDocumentKey": null
         }
@@ -508,30 +508,30 @@
       "inlineResolvable": true,
       "entryRule": "example entryRule",
       "exitRule": "example exitRule",
-      "dedupKey": "example dedupKey",
+      "dedupKey": "dedupKey-34",
       "severity": "medium",
       "activityAt": "2026-11-09T12:45:20.671Z",
       "createdAt": "2026-11-09T12:43:56.765Z",
       "updatedAt": "2026-11-09T12:45:20.671Z",
       "relatedIssue": {
         "kind": "issue",
-        "id": "00000000-0000-4000-8000-00000000003d",
-        "companyId": "00000000-0000-4000-8000-000000000001",
+        "id": "00000000-0000-4000-8000-000000000041",
+        "companyId": "00000000-0000-4000-8000-000000000003",
         "title": "example title",
         "identifier": "DEMO-7",
         "status": "done",
         "href": "/demo/path",
         "metadata": {
           "priority": "medium",
-          "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+          "assigneeAgentId": "00000000-0000-4000-8000-000000000009",
           "assigneeUserId": null,
           "reviewPolicy": null
         }
       },
       "project": {
-        "id": "00000000-0000-4000-8000-000000000036",
+        "id": "00000000-0000-4000-8000-00000000003a",
         "name": "example name",
-        "urlKey": "example urlKey",
+        "urlKey": "urlKey-22",
         "color": "example color",
         "icon": null
       },
@@ -550,11 +550,11 @@
         "addresseeAgentId": null,
         "addresseeUserId": null,
         "addresseeName": null,
-        "createdByAgentId": "00000000-0000-4000-8000-000000000005",
+        "createdByAgentId": "00000000-0000-4000-8000-000000000009",
         "createdByAgentName": null
       },
-      "id": "example id",
-      "dismissalKey": "example dismissalKey",
+      "id": "id-35",
+      "dismissalKey": "dismissalKey-36",
       "dismissal": null,
       "expiresAt": null,
       "ruleKey": null,

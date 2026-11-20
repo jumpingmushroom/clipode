@@ -25,6 +25,7 @@ try {
   const cid = company.id
   console.log(`recording company ${company.issuePrefix}`)
 
+  await save("companies.json", scrub(companies))
   await save("company.json", scrub(company))
   await save("agents.json", scrub(await client.get<Agent[]>(`/api/companies/${cid}/agents`)))
 
@@ -56,6 +57,12 @@ try {
     if (!issues[threadId]) await save("thread-issue.json", scrub(await client.get(`/api/issues/${threadId}`)))
     await save("thread-comments.json", scrub(await client.get(`/api/issues/${threadId}/comments`)))
   }
+
+  await save("live-runs.json", scrub(await client.get(`/api/companies/${cid}/live-runs`)))
+  await save(
+    "issues-in-flight.json",
+    scrub(await client.get(`/api/companies/${cid}/issues`, { status: "in_progress,in_review,blocked", view: "index" })),
+  )
 
   // Runs: the recent list, then one finished run with its events and the start of its log.
   const runs = await client.get<HeartbeatRun[]>(`/api/companies/${cid}/heartbeat-runs`, { limit: 20 })

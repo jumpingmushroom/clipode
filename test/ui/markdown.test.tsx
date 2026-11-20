@@ -1,13 +1,14 @@
 import { expect, test } from "bun:test"
 import { testRender } from "@opentui/solid"
 import { Providers } from "../../src/app.tsx"
+import { createSession } from "../../src/store/session.ts"
 import { Markdown } from "../../src/ui/markdown.tsx"
 
 test("Markdown renders headings, tables and code with the theme", async () => {
   const content = "# Choose a queue\n\n| Option | Cost |\n| --- | --- |\n| Redis | low |\n\n```ts\nconst q = 1\n```\n"
   const setup = await testRender(
     () => (
-      <Providers version="0" mode="dark">
+      <Providers session={createSession()} mode="dark">
         <Markdown content={content} />
       </Providers>
     ),
