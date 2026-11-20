@@ -1,16 +1,16 @@
 {
   "id": "00000000-0000-4000-8000-0000000002cd",
   "companyId": "00000000-0000-4000-8000-000000000003",
-  "agentId": "00000000-0000-4000-8000-000000000009",
+  "agentId": "00000000-0000-4000-8000-00000000000f",
   "scopeKind": "issue",
-  "issueId": "00000000-0000-4000-8000-00000000005b",
-  "invocationSource": "on_demand",
-  "triggerDetail": "manual",
+  "issueId": "00000000-0000-4000-8000-000000000036",
+  "invocationSource": "automation",
+  "triggerDetail": "system",
   "status": "succeeded",
   "responsibleUserId": "defaultResponsibleUserId-1",
   "activeIdentityContextId": "00000000-0000-4000-8000-000000000346",
-  "startedAt": "2026-11-20T14:18:50.989Z",
-  "finishedAt": "2026-11-20T14:19:15.027Z",
+  "startedAt": "2026-11-20T15:31:00.944Z",
+  "finishedAt": "2026-11-20T15:33:07.234Z",
   "executionControlDeadlineAt": null,
   "executionStatusDeliveryId": null,
   "error": null,
@@ -18,42 +18,42 @@
   "exitCode": 0,
   "signal": null,
   "costAccountingPending": false,
-  "costAccountedAt": "2026-11-20T14:19:15.534Z",
+  "costAccountedAt": "2026-11-20T15:33:07.877Z",
   "accountingProjectionVersion": "example accountingProjectionVersion",
-  "accountingLastAttemptAt": "2026-11-20T14:19:15.534Z",
+  "accountingLastAttemptAt": "2026-11-20T15:33:07.877Z",
   "accountingLastError": null,
   "accountingAttemptCount": 0,
   "usageJson": {
     "model": "opus",
     "biller": "anthropic",
-    "costUsd": 0.2447218,
+    "costUsd": 1.0151748,
     "provider": "anthropic",
     "costStatus": "example costStatus",
     "billingType": "subscription_included",
-    "inputTokens": 24026,
+    "inputTokens": 78478,
     "ledgerScope": {
-      "issueId": "00000000-0000-4000-8000-00000000005b",
-      "projectId": "00000000-0000-4000-8000-00000000009c",
+      "issueId": "00000000-0000-4000-8000-000000000036",
+      "projectId": null,
       "billingCode": null
     },
     "usageSource": "example usageSource",
     "costUsdExact": null,
     "freshSession": true,
-    "outputTokens": 1262,
+    "outputTokens": 7908,
     "usageByModel": null,
     "sessionReused": false,
     "budgetDispatch": {
-      "admittedAt": "2026-11-20T14:18:54.114Z",
-      "handedOffAt": "2026-11-20T14:18:54.150Z",
+      "admittedAt": "2026-11-20T15:31:03.924Z",
+      "handedOffAt": "2026-11-20T15:31:03.988Z",
       "reservationId": "00000000-0000-4000-8000-0000000002cf",
       "recoveryLeaseOwner": null
     },
     "budgetExposure": {
-      "sequence": 9,
+      "sequence": 34,
       "sourceId": "00000000-0000-4000-8000-0000000002d0",
       "costCents": "example costCents"
     },
-    "rawInputTokens": 24026,
+    "rawInputTokens": 78478,
     "sessionRotated": false,
     "configFreshness": {
       "session": {
@@ -71,7 +71,6 @@
           "example categories"
         ],
         "resetReasons": [
-          "example resetReasons",
           "example resetReasons"
         ],
         "nextFingerprint": "example nextFingerprint",
@@ -87,7 +86,7 @@
       },
       "version": 1,
       "workspace": {
-        "action": "create",
+        "action": "reuse",
         "reasons": [],
         "categories": [
           "example categories",
@@ -99,21 +98,21 @@
           "example categories",
           "example categories"
         ],
-        "reuseRequested": false,
+        "reuseRequested": true,
         "nextFingerprint": "example nextFingerprint",
-        "workspaceReused": false,
-        "activeWorkspaceId": "00000000-0000-4000-8000-00000000009f",
+        "workspaceReused": true,
+        "activeWorkspaceId": "00000000-0000-4000-8000-00000000009c",
         "changedCategories": [],
-        "storedFingerprint": null,
+        "storedFingerprint": "example storedFingerprint",
         "fingerprintVersion": 1,
         "inferredFingerprint": null,
-        "previousWorkspaceId": null,
+        "previousWorkspaceId": "00000000-0000-4000-8000-00000000009c",
         "configSnapshotRefreshed": false,
-        "storedFingerprintPresent": false
+        "storedFingerprintPresent": true
       }
     },
-    "rawOutputTokens": 1262,
-    "cachedInputTokens": 76774,
+    "rawOutputTokens": 7908,
+    "cachedInputTokens": 972519,
     "pricingProvenance": {
       "source": "provider_reported",
       "version": "example version"
@@ -122,24 +121,24 @@
     "taskSessionReused": false,
     "persistedSessionId": "00000000-0000-4000-8000-0000000002d1",
     "accountingReceiptId": "00000000-0000-4000-8000-0000000002d2",
-    "cacheAdjustedCostUsd": 0.2447218,
-    "rawCachedInputTokens": 76774,
+    "cacheAdjustedCostUsd": 1.0151748,
+    "rawCachedInputTokens": 972519,
     "sessionRotationReason": null,
     "accountingReceiptReady": true,
     "rawInputIncludesCached": false,
-    "accountingReceiptSequence": 9,
+    "accountingReceiptSequence": 34,
     "accountingReceiptSourceId": "00000000-0000-4000-8000-0000000002d0",
-    "accountingReceiptReceivedAt": "2026-11-20T14:19:14.740Z",
+    "accountingReceiptReceivedAt": "2026-11-20T15:33:06.979Z",
     "accountingReceiptSourceFences": {}
   },
   "resultJson": {
     "mode": "example mode",
     "usage": {
-      "inputTokens": 6,
-      "totalTokens": 102062,
-      "outputTokens": 1262,
-      "cachedReadTokens": 76774,
-      "cachedWriteTokens": 24020
+      "inputTokens": 28,
+      "totalTokens": 1058905,
+      "outputTokens": 7908,
+      "cachedReadTokens": 972519,
+      "cachedWriteTokens": 78450
     },
     "status": "completed",
     "summary": "example summary",
@@ -165,7 +164,6 @@
           "example categories"
         ],
         "resetReasons": [
-          "example resetReasons",
           "example resetReasons"
         ],
         "nextFingerprint": "example nextFingerprint",
@@ -181,7 +179,7 @@
       },
       "version": 1,
       "workspace": {
-        "action": "create",
+        "action": "reuse",
         "reasons": [],
         "categories": [
           "example categories",
@@ -193,17 +191,17 @@
           "example categories",
           "example categories"
         ],
-        "reuseRequested": false,
+        "reuseRequested": true,
         "nextFingerprint": "example nextFingerprint",
-        "workspaceReused": false,
-        "activeWorkspaceId": "00000000-0000-4000-8000-00000000009f",
+        "workspaceReused": true,
+        "activeWorkspaceId": "00000000-0000-4000-8000-00000000009c",
         "changedCategories": [],
-        "storedFingerprint": null,
+        "storedFingerprint": "example storedFingerprint",
         "fingerprintVersion": 1,
         "inferredFingerprint": null,
-        "previousWorkspaceId": null,
+        "previousWorkspaceId": "00000000-0000-4000-8000-00000000009c",
         "configSnapshotRefreshed": false,
-        "storedFingerprintPresent": false
+        "storedFingerprintPresent": true
       }
     },
     "instructionSave": {
@@ -215,8 +213,8 @@
       "storageWarning": null,
       "appliedCandidateHash": null
     },
-    "acpLastEventAgeMs": 894,
-    "cumulativeCostUsd": 0.2447218,
+    "acpLastEventAgeMs": 700,
+    "cumulativeCostUsd": 1.0151748,
     "timeoutConfigured": false,
     "acpPendingToolCount": 0,
     "effectiveTimeoutSec": 0,
@@ -232,7 +230,7 @@
       "resolverVersion": "example resolverVersion",
       "activityDisposition": "example activityDisposition"
     },
-    "acpObservedEventCount": 81,
+    "acpObservedEventCount": 221,
     "adapterExecutionTimeout": {
       "source": "unlimited",
       "timeoutSec": 0
@@ -243,10 +241,19 @@
   "runtimeMode": "example runtimeMode",
   "runtimeModeResolverVersion": "example runtimeModeResolverVersion",
   "runtimeModeReason": "example runtimeModeReason",
-  "runtimeModeResolvedAt": "2026-11-20T14:18:53.789Z",
+  "runtimeModeResolvedAt": "2026-11-20T15:31:03.424Z",
   "runnerProfileJson": {
     "adapterDispatch": {
       "adapterType": "claude_local"
+    },
+    "chatControlRecoveryAdmission": {
+      "phase": "example phase",
+      "runId": "00000000-0000-4000-8000-0000000002cd",
+      "agentId": "00000000-0000-4000-8000-00000000000f",
+      "issueId": "00000000-0000-4000-8000-000000000036",
+      "version": 1,
+      "companyId": "00000000-0000-4000-8000-000000000003",
+      "wakeupRequestId": "00000000-0000-4000-8000-0000000002ce"
     }
   },
   "runnerInstanceId": null,
@@ -263,7 +270,7 @@
   "sessionIdAfter": "00000000-0000-4000-8000-0000000002d1",
   "logStore": "local_file",
   "logRef": "example logRef",
-  "logBytes": 28680,
+  "logBytes": 123253,
   "logSha256": "example logSha256",
   "logCompressed": false,
   "stdoutExcerpt": "example stdoutExcerpt",
@@ -279,14 +286,14 @@
     "processStartedAt": "2026-11-20T14:16:21.940Z"
   },
   "executionStage": "example executionStage",
-  "processPid": 946,
+  "processPid": 15700,
   "processGroupId": null,
-  "processStartedAt": "2026-11-20T14:18:54.040Z",
+  "processStartedAt": "2026-11-20T15:31:03.690Z",
   "processHostHash": "example processHostHash",
-  "lastOutputAt": "2026-11-20T14:19:14.327Z",
-  "lastOutputSeq": 85,
+  "lastOutputAt": "2026-11-20T15:33:06.795Z",
+  "lastOutputSeq": 225,
   "lastOutputStream": "stdout",
-  "lastOutputBytes": 28680,
+  "lastOutputBytes": 123253,
   "retryOfRunId": null,
   "processLossRetryCount": 0,
   "scheduledRetryAt": null,
@@ -295,20 +302,22 @@
   "issueCommentStatus": "example issueCommentStatus",
   "issueCommentSatisfiedByCommentId": "00000000-0000-4000-8000-000000000347",
   "issueCommentRetryQueuedAt": null,
-  "livenessState": "completed",
+  "livenessState": "advanced",
   "livenessReason": "example livenessReason",
   "continuationAttempt": 0,
-  "lastUsefulActionAt": "2026-11-20T14:19:14.841Z",
+  "lastUsefulActionAt": "2026-11-20T15:33:07.054Z",
   "nextAction": null,
   "contextSnapshot": {
-    "taskId": "00000000-0000-4000-8000-00000000005b",
-    "actorId": "defaultResponsibleUserId-1",
-    "issueId": "00000000-0000-4000-8000-00000000005b",
-    "taskKey": "00000000-0000-4000-8000-00000000005b",
-    "projectId": "00000000-0000-4000-8000-00000000009c",
-    "wakeReason": "task_retry",
+    "source": "issue.monitor",
+    "taskId": "00000000-0000-4000-8000-000000000036",
+    "issueId": "00000000-0000-4000-8000-000000000036",
+    "taskKey": "00000000-0000-4000-8000-000000000036",
+    "timeoutAt": "2026-11-27T12:00:00Z",
+    "wakeReason": "issue_monitor_due",
     "wakeSource": "example wakeSource",
-    "triggeredBy": "example triggeredBy",
+    "maxAttempts": 40,
+    "nextCheckAt": "2026-11-20T15:31:00.000Z",
+    "serviceName": "example serviceName",
     "aiConnection": {
       "mode": "example mode",
       "method": "example method",
@@ -321,18 +330,20 @@
       "sessionIdentity": "example sessionIdentity",
       "responsibleUserId": "defaultResponsibleUserId-1"
     },
+    "monitorNotes": "example monitorNotes",
+    "manualTrigger": false,
     "paperclipWake": {
       "issue": {
-        "id": "00000000-0000-4000-8000-00000000005b",
+        "id": "00000000-0000-4000-8000-000000000036",
         "title": "example title",
-        "status": "in_progress",
+        "status": "in_review",
         "priority": "medium",
         "workMode": "standard",
-        "identifier": "DEMO-11",
+        "identifier": "DEMO-1",
         "description": "example description",
         "descriptionTruncated": false
       },
-      "reason": "task_retry",
+      "reason": "issue_monitor_due",
       "comments": [],
       "recovery": null,
       "skillTest": null,
@@ -358,13 +369,13 @@
       "interactionStatus": null,
       "planReviewContext": null,
       "attachmentOmissions": [],
-      "checkedOutByHarness": true,
+      "checkedOutByHarness": false,
       "childIssueSummaries": [],
       "continuationSummary": {
         "key": "example key",
         "body": "example body",
         "title": "example title",
-        "updatedAt": "2026-11-20T14:03:05.434Z",
+        "updatedAt": "2026-11-20T13:31:32.074Z",
         "sourceTrust": null,
         "bodyTruncated": false
       },
@@ -375,46 +386,847 @@
       "chatCompletionUpdates": null,
       "documentReviewContext": null,
       "executionContinuation": {
-        "issueId": "00000000-0000-4000-8000-00000000005b",
+        "issueId": "00000000-0000-4000-8000-000000000036",
         "trigger": {
-          "reason": "task_retry",
-          "sourceRunId": "00000000-0000-4000-8000-0000000000a0",
+          "reason": "issue_monitor_due",
+          "sourceRunId": null,
           "interactionId": null
         },
         "version": 1,
         "coverage": {
           "kind": "full_task_history",
-          "throughCommentId": "00000000-0000-4000-8000-00000000005c",
+          "throughCommentId": "00000000-0000-4000-8000-00000000034c",
           "summaryThroughCommentId": null
         },
         "messages": [
           {
-            "id": "00000000-0000-4000-8000-00000000005c",
+            "id": "00000000-0000-4000-8000-00000000034d",
             "body": "example body",
             "deleted": false,
-            "authorId": "00000000-0000-4000-8000-000000000009",
-            "createdAt": "2026-11-20T14:03:00.769Z",
-            "updatedAt": "2026-11-20T14:03:00.769Z",
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T09:21:34.625Z",
+            "updatedAt": "2026-11-18T09:21:34.625Z",
             "authorType": "agent",
             "sourceTrust": null,
-            "createdByRunId": "00000000-0000-4000-8000-0000000000a0"
+            "createdByRunId": "00000000-0000-4000-8000-00000000034e"
+          },
+          {
+            "id": "00000000-0000-4000-8000-00000000034f",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T09:26:30.049Z",
+            "updatedAt": "2026-11-18T09:26:30.049Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000350"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000351",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T09:30:52.177Z",
+            "updatedAt": "2026-11-18T09:30:52.177Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000352"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000353",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T11:32:22.841Z",
+            "updatedAt": "2026-11-18T11:32:22.841Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000354"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000355",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T12:41:20.431Z",
+            "updatedAt": "2026-11-18T12:41:20.431Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000356"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000357",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T14:42:19.571Z",
+            "updatedAt": "2026-11-18T14:42:19.571Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000358"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000359",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T14:43:33.719Z",
+            "updatedAt": "2026-11-18T14:43:33.719Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-00000000035a"
+          },
+          {
+            "id": "00000000-0000-4000-8000-00000000035b",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T15:10:35.343Z",
+            "updatedAt": "2026-11-18T15:10:35.343Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-00000000035c"
+          },
+          {
+            "id": "00000000-0000-4000-8000-00000000035d",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T15:24:46.395Z",
+            "updatedAt": "2026-11-18T15:24:46.395Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-00000000035e"
+          },
+          {
+            "id": "00000000-0000-4000-8000-00000000035f",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T15:45:37.132Z",
+            "updatedAt": "2026-11-18T15:45:37.132Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000360"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000361",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T17:01:07.488Z",
+            "updatedAt": "2026-11-18T17:01:07.488Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000362"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000363",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T18:31:25.694Z",
+            "updatedAt": "2026-11-18T18:31:25.694Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000364"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000365",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T19:47:41.592Z",
+            "updatedAt": "2026-11-18T19:47:41.592Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000366"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000367",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T21:30:58.837Z",
+            "updatedAt": "2026-11-18T21:30:58.837Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000368"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000369",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-18T23:01:10.851Z",
+            "updatedAt": "2026-11-18T23:01:10.851Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-00000000036a"
+          },
+          {
+            "id": "00000000-0000-4000-8000-00000000036b",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-19T02:01:30.081Z",
+            "updatedAt": "2026-11-19T02:01:30.081Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-00000000036c"
+          },
+          {
+            "id": "00000000-0000-4000-8000-00000000036d",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-19T05:00:46.095Z",
+            "updatedAt": "2026-11-19T05:00:46.095Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-00000000036e"
+          },
+          {
+            "id": "00000000-0000-4000-8000-00000000036f",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-19T06:47:13.714Z",
+            "updatedAt": "2026-11-19T06:47:13.714Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000370"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000371",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-19T08:04:03.988Z",
+            "updatedAt": "2026-11-19T08:04:03.988Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000372"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000373",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-19T10:46:13.874Z",
+            "updatedAt": "2026-11-19T10:46:13.874Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000374"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000375",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-19T11:21:12.065Z",
+            "updatedAt": "2026-11-19T11:21:12.065Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000340"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000376",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-19T14:31:26.287Z",
+            "updatedAt": "2026-11-19T14:31:26.287Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000331"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000377",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-19T21:24:32.982Z",
+            "updatedAt": "2026-11-19T21:24:32.982Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000317"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000378",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-19T21:25:52.512Z",
+            "updatedAt": "2026-11-19T21:25:52.512Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-00000000030a"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000379",
+            "body": "example body",
+            "deleted": false,
+            "authorId": null,
+            "createdAt": "2026-11-19T21:25:52.698Z",
+            "updatedAt": "2026-11-19T21:25:52.698Z",
+            "authorType": "system",
+            "sourceTrust": null,
+            "createdByRunId": null
+          },
+          {
+            "id": "00000000-0000-4000-8000-00000000037a",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-19T21:27:15.570Z",
+            "updatedAt": "2026-11-19T21:27:15.570Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-000000000304"
+          },
+          {
+            "id": "00000000-0000-4000-8000-00000000037b",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-19T21:30:16.296Z",
+            "updatedAt": "2026-11-19T21:30:16.296Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-0000000002fe"
+          },
+          {
+            "id": "00000000-0000-4000-8000-00000000037c",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-20T07:28:53.867Z",
+            "updatedAt": "2026-11-20T07:28:53.867Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-0000000002f8"
+          },
+          {
+            "id": "00000000-0000-4000-8000-00000000037d",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-20T09:31:11.427Z",
+            "updatedAt": "2026-11-20T09:31:11.427Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-0000000002f2"
+          },
+          {
+            "id": "00000000-0000-4000-8000-00000000037e",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-20T11:32:26.897Z",
+            "updatedAt": "2026-11-20T11:32:26.897Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-0000000002ec"
+          },
+          {
+            "id": "00000000-0000-4000-8000-00000000037f",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-20T11:50:28.470Z",
+            "updatedAt": "2026-11-20T11:50:28.470Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-0000000002e6"
+          },
+          {
+            "id": "00000000-0000-4000-8000-00000000034c",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-00000000000f",
+            "createdAt": "2026-11-20T13:31:24.690Z",
+            "updatedAt": "2026-11-20T13:31:24.690Z",
+            "authorType": "agent",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-0000000002df"
           }
         ],
         "companyId": "00000000-0000-4000-8000-000000000003",
         "objective": "example objective",
+        "resumeDelta": {
+          "messages": [
+            {
+              "id": "00000000-0000-4000-8000-00000000034c",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-20T13:31:24.690Z",
+              "updatedAt": "2026-11-20T13:31:24.690Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-0000000002df"
+            }
+          ],
+          "baseRunId": "00000000-0000-4000-8000-0000000002df"
+        },
         "completedWork": "example completedWork",
-        "humanResponses": [],
-        "recoveredFiles": [],
+        "humanResponses": [
+          {
+            "id": "00000000-0000-4000-8000-000000000380",
+            "kind": "request_checkbox_confirmation",
+            "result": {
+              "outcome": "accepted",
+              "selectedOptionIds": [
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds"
+              ]
+            },
+            "status": "accepted",
+            "resolvedAt": "2026-11-18T09:24:30.571Z",
+            "resolvedByUserId": "defaultResponsibleUserId-1"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000381",
+            "kind": "ask_user_questions",
+            "result": {
+              "answers": [
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-69"
+                },
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-70"
+                }
+              ]
+            },
+            "status": "answered",
+            "resolvedAt": "2026-11-18T15:07:40.138Z",
+            "resolvedByUserId": "defaultResponsibleUserId-1"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000382",
+            "kind": "ask_user_questions",
+            "result": {
+              "answers": [
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-71"
+                },
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-72"
+                }
+              ]
+            },
+            "status": "answered",
+            "resolvedAt": "2026-11-18T15:22:59.253Z",
+            "resolvedByUserId": "defaultResponsibleUserId-1"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000383",
+            "kind": "ask_user_questions",
+            "result": {
+              "answers": [
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-73"
+                },
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-74"
+                }
+              ]
+            },
+            "status": "answered",
+            "resolvedAt": "2026-11-19T06:45:52.732Z",
+            "resolvedByUserId": "defaultResponsibleUserId-1"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000384",
+            "kind": "ask_user_questions",
+            "result": {
+              "answers": [
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-75"
+                }
+              ]
+            },
+            "status": "answered",
+            "resolvedAt": "2026-11-19T11:19:56.137Z",
+            "resolvedByUserId": "defaultResponsibleUserId-1"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000385",
+            "kind": "ask_user_questions",
+            "result": {
+              "answers": [
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-76"
+                }
+              ]
+            },
+            "status": "answered",
+            "resolvedAt": "2026-11-19T21:23:03.227Z",
+            "resolvedByUserId": "defaultResponsibleUserId-1"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000386",
+            "kind": "request_checkbox_confirmation",
+            "result": {
+              "outcome": "accepted",
+              "selectedOptionIds": [
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds"
+              ]
+            },
+            "status": "accepted",
+            "resolvedAt": "2026-11-20T07:26:23.797Z",
+            "resolvedByUserId": "defaultResponsibleUserId-1"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000387",
+            "kind": "ask_user_questions",
+            "result": {
+              "answers": [
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-77"
+                }
+              ]
+            },
+            "status": "answered",
+            "resolvedAt": "2026-11-20T11:50:03.610Z",
+            "resolvedByUserId": "defaultResponsibleUserId-1"
+          }
+        ],
         "objectiveSource": {
-          "id": "00000000-0000-4000-8000-00000000005b",
+          "id": "00000000-0000-4000-8000-000000000036",
           "kind": "description",
           "revision": "example revision"
         },
         "completedActions": [],
-        "interruptedRunId": "00000000-0000-4000-8000-0000000000a0",
         "originCommentIds": [],
         "recoveryOutcomes": [],
-        "interactionOutcomes": [],
+        "interactionOutcomes": [
+          {
+            "id": "00000000-0000-4000-8000-000000000380",
+            "kind": "request_checkbox_confirmation",
+            "result": {
+              "outcome": "accepted",
+              "version": 1,
+              "selectedOptionIds": [
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds"
+              ]
+            },
+            "status": "accepted"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000381",
+            "kind": "ask_user_questions",
+            "result": {
+              "answers": [
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-69"
+                },
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-70"
+                }
+              ],
+              "version": 1,
+              "summaryMarkdown": null
+            },
+            "status": "answered"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000382",
+            "kind": "ask_user_questions",
+            "result": {
+              "answers": [
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-71"
+                },
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-72"
+                }
+              ],
+              "version": 1,
+              "summaryMarkdown": null
+            },
+            "status": "answered"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000383",
+            "kind": "ask_user_questions",
+            "result": {
+              "answers": [
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-73"
+                },
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-74"
+                }
+              ],
+              "version": 1,
+              "summaryMarkdown": null
+            },
+            "status": "answered"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000384",
+            "kind": "ask_user_questions",
+            "result": {
+              "answers": [
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-75"
+                }
+              ],
+              "version": 1,
+              "summaryMarkdown": null
+            },
+            "status": "answered"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000385",
+            "kind": "ask_user_questions",
+            "result": {
+              "answers": [
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-76"
+                }
+              ],
+              "version": 1,
+              "summaryMarkdown": null
+            },
+            "status": "answered"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000386",
+            "kind": "request_checkbox_confirmation",
+            "result": {
+              "outcome": "accepted",
+              "version": 1,
+              "selectedOptionIds": [
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds",
+                "example selectedOptionIds"
+              ]
+            },
+            "status": "accepted"
+          },
+          {
+            "id": "00000000-0000-4000-8000-000000000387",
+            "kind": "ask_user_questions",
+            "result": {
+              "answers": [
+                {
+                  "optionIds": [
+                    "example optionIds"
+                  ],
+                  "questionId": "questionId-77"
+                }
+              ],
+              "version": 1,
+              "summaryMarkdown": null
+            },
+            "status": "answered"
+          }
+        ],
         "unresolvedInteractionIds": []
       },
       "connectionInstructions": null,
@@ -429,24 +1241,20 @@
       "simplifiedEnglishInteractions": false,
       "externalInteractionContinuation": false
     },
-    "previousRunId": "00000000-0000-4000-8000-0000000000a0",
     "skillVersions": {
-      "example_key_28": "00000000-0000-4000-8000-00000000034c",
-      "example_key_29": "00000000-0000-4000-8000-00000000034d",
-      "example_key_30": "00000000-0000-4000-8000-00000000034e",
-      "example_key_31": "00000000-0000-4000-8000-00000000034f",
-      "example_key_32": "00000000-0000-4000-8000-000000000350",
-      "example_key_33": "00000000-0000-4000-8000-000000000351",
-      "example_key_34": "00000000-0000-4000-8000-000000000352",
-      "example_key_35": "00000000-0000-4000-8000-000000000353"
+      "example_key_28": "00000000-0000-4000-8000-000000000388",
+      "example_key_29": "00000000-0000-4000-8000-000000000389",
+      "example_key_30": "00000000-0000-4000-8000-00000000038a",
+      "example_key_31": "00000000-0000-4000-8000-00000000038b"
     },
     "paperclipIssue": {
-      "id": "00000000-0000-4000-8000-00000000005b",
+      "id": "00000000-0000-4000-8000-000000000036",
       "title": "example title",
       "workMode": "standard",
-      "identifier": "DEMO-11",
+      "identifier": "DEMO-1",
       "description": "example description"
     },
+    "recoveryPolicy": null,
     "paperclipScratch": {
       "dir": "example dir",
       "type": "heartbeat_run",
@@ -461,53 +1269,205 @@
     "paperclipSecrets": {
       "manifest": [
         {
-          "envKey": "envKey-69",
+          "envKey": "envKey-78",
           "outcome": "success",
           "version": 1,
           "provider": "local_encrypted",
-          "secretId": "00000000-0000-4000-8000-00000000002a",
-          "bindingId": "00000000-0000-4000-8000-000000000354",
-          "secretKey": "secretKey-70",
+          "secretId": "00000000-0000-4000-8000-000000000011",
+          "bindingId": "00000000-0000-4000-8000-00000000038c",
+          "secretKey": "secretKey-79",
           "configPath": "example configPath",
           "providerVersionRef": null
         },
         {
-          "envKey": "envKey-71",
+          "envKey": "envKey-80",
           "outcome": "success",
           "version": 1,
           "provider": "local_encrypted",
-          "secretId": "00000000-0000-4000-8000-00000000000c",
-          "bindingId": "00000000-0000-4000-8000-000000000355",
-          "secretKey": "secretKey-72",
+          "secretId": "00000000-0000-4000-8000-000000000012",
+          "bindingId": "00000000-0000-4000-8000-00000000038d",
+          "secretKey": "secretKey-81",
           "configPath": "example configPath",
           "providerVersionRef": null
         },
         {
-          "envKey": "envKey-73",
+          "envKey": "envKey-82",
           "outcome": "success",
           "version": 1,
           "provider": "local_encrypted",
-          "secretId": "00000000-0000-4000-8000-00000000002b",
-          "bindingId": "00000000-0000-4000-8000-000000000356",
-          "secretKey": "secretKey-74",
+          "secretId": "00000000-0000-4000-8000-000000000013",
+          "bindingId": "00000000-0000-4000-8000-00000000038e",
+          "secretKey": "secretKey-83",
           "configPath": "example configPath",
           "providerVersionRef": null
         },
         {
-          "envKey": "envKey-75",
+          "envKey": "envKey-84",
           "outcome": "success",
           "version": 1,
           "provider": "local_encrypted",
-          "secretId": "00000000-0000-4000-8000-00000000002c",
-          "bindingId": "00000000-0000-4000-8000-000000000357",
-          "secretKey": "secretKey-76",
+          "secretId": "00000000-0000-4000-8000-000000000014",
+          "bindingId": "00000000-0000-4000-8000-00000000038f",
+          "secretKey": "secretKey-85",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "envKey-86",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-000000000015",
+          "bindingId": "00000000-0000-4000-8000-000000000390",
+          "secretKey": "secretKey-87",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "envKey-88",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-000000000016",
+          "bindingId": "00000000-0000-4000-8000-000000000391",
+          "secretKey": "secretKey-89",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "envKey-90",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-000000000017",
+          "bindingId": "00000000-0000-4000-8000-000000000392",
+          "secretKey": "secretKey-91",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "envKey-92",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-000000000018",
+          "bindingId": "00000000-0000-4000-8000-000000000393",
+          "secretKey": "secretKey-93",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "envKey-94",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-000000000019",
+          "bindingId": "00000000-0000-4000-8000-000000000394",
+          "secretKey": "secretKey-95",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "envKey-96",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-00000000001a",
+          "bindingId": "00000000-0000-4000-8000-000000000395",
+          "secretKey": "secretKey-97",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "envKey-98",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-00000000001b",
+          "bindingId": "00000000-0000-4000-8000-000000000396",
+          "secretKey": "secretKey-99",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "envKey-100",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-00000000001c",
+          "bindingId": "00000000-0000-4000-8000-000000000397",
+          "secretKey": "secretKey-101",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "envKey-102",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-00000000001d",
+          "bindingId": "00000000-0000-4000-8000-000000000398",
+          "secretKey": "secretKey-103",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "envKey-104",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-00000000001e",
+          "bindingId": "00000000-0000-4000-8000-000000000399",
+          "secretKey": "secretKey-105",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "envKey-106",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-00000000001f",
+          "bindingId": "00000000-0000-4000-8000-00000000039a",
+          "secretKey": "secretKey-107",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "envKey-108",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-000000000020",
+          "bindingId": "00000000-0000-4000-8000-00000000039b",
+          "secretKey": "secretKey-109",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "envKey-110",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-000000000021",
+          "bindingId": "00000000-0000-4000-8000-00000000039c",
+          "secretKey": "secretKey-111",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "envKey-112",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-000000000022",
+          "bindingId": "00000000-0000-4000-8000-00000000039d",
+          "secretKey": "secretKey-113",
           "configPath": "example configPath",
           "providerVersionRef": null
         }
       ]
     },
-    "forceFreshSession": true,
-    "responsibleUserId": "defaultResponsibleUserId-1",
     "wakeTriggerDetail": "example wakeTriggerDetail",
     "paperclipWorkspace": {
       "cwd": "example cwd",
@@ -535,7 +1495,7 @@
         "remote": {
           "path": null
         },
-        "leaseId": "00000000-0000-4000-8000-000000000358",
+        "leaseId": "00000000-0000-4000-8000-00000000039e",
         "rebuild": {
           "mode": "example mode",
           "repoRef": null,
@@ -566,7 +1526,7 @@
           "localPath": "example localPath",
           "remotePath": null,
           "providerLeaseId": null,
-          "executionWorkspaceId": "00000000-0000-4000-8000-00000000009f"
+          "executionWorkspaceId": "00000000-0000-4000-8000-00000000009c"
         },
         "summary": "example summary",
         "version": 1,
@@ -584,14 +1544,14 @@
       "workspaceId": null,
       "worktreePath": null
     },
-    "taskRetryRequestId": "00000000-0000-4000-8000-000000000359",
+    "monitorAttemptCount": 18,
     "paperclipWorkspaces": [],
-    "executionWorkspaceId": "00000000-0000-4000-8000-00000000009f",
+    "executionWorkspaceId": "00000000-0000-4000-8000-00000000009c",
     "paperclipEnvironment": {
       "id": "00000000-0000-4000-8000-00000000002d",
       "name": "example name",
       "driver": "example driver",
-      "leaseId": "00000000-0000-4000-8000-000000000358",
+      "leaseId": "00000000-0000-4000-8000-00000000039e",
       "workspaceRealization": {
         "mode": "example mode",
         "local": {
@@ -608,7 +1568,7 @@
         "remote": {
           "path": null
         },
-        "leaseId": "00000000-0000-4000-8000-000000000358",
+        "leaseId": "00000000-0000-4000-8000-00000000039e",
         "rebuild": {
           "mode": "example mode",
           "repoRef": null,
@@ -639,7 +1599,7 @@
           "localPath": "example localPath",
           "remotePath": null,
           "providerLeaseId": null,
-          "executionWorkspaceId": "00000000-0000-4000-8000-00000000009f"
+          "executionWorkspaceId": "00000000-0000-4000-8000-00000000009c"
         },
         "summary": "example summary",
         "version": 1,
@@ -665,52 +1625,837 @@
       "assignment": {
         "owner": "example owner",
         "description": {
-          "id": "00000000-0000-4000-8000-00000000005b",
+          "id": "00000000-0000-4000-8000-000000000036",
           "revision": "example revision"
         }
       }
     },
     "executionContinuation": {
-      "issueId": "00000000-0000-4000-8000-00000000005b",
+      "issueId": "00000000-0000-4000-8000-000000000036",
       "trigger": {
-        "reason": "task_retry",
-        "sourceRunId": "00000000-0000-4000-8000-0000000000a0",
+        "reason": "issue_monitor_due",
+        "sourceRunId": null,
         "interactionId": null
       },
       "version": 1,
       "coverage": {
         "kind": "full_task_history",
-        "throughCommentId": "00000000-0000-4000-8000-00000000005c",
+        "throughCommentId": "00000000-0000-4000-8000-00000000034c",
         "summaryThroughCommentId": null
       },
       "messages": [
         {
-          "id": "00000000-0000-4000-8000-00000000005c",
+          "id": "00000000-0000-4000-8000-00000000034d",
           "body": "example body",
           "deleted": false,
-          "authorId": "00000000-0000-4000-8000-000000000009",
-          "createdAt": "2026-11-20T14:03:00.769Z",
-          "updatedAt": "2026-11-20T14:03:00.769Z",
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T09:21:34.625Z",
+          "updatedAt": "2026-11-18T09:21:34.625Z",
           "authorType": "agent",
           "sourceTrust": null,
-          "createdByRunId": "00000000-0000-4000-8000-0000000000a0"
+          "createdByRunId": "00000000-0000-4000-8000-00000000034e"
+        },
+        {
+          "id": "00000000-0000-4000-8000-00000000034f",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T09:26:30.049Z",
+          "updatedAt": "2026-11-18T09:26:30.049Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000350"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000351",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T09:30:52.177Z",
+          "updatedAt": "2026-11-18T09:30:52.177Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000352"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000353",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T11:32:22.841Z",
+          "updatedAt": "2026-11-18T11:32:22.841Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000354"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000355",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T12:41:20.431Z",
+          "updatedAt": "2026-11-18T12:41:20.431Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000356"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000357",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T14:42:19.571Z",
+          "updatedAt": "2026-11-18T14:42:19.571Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000358"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000359",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T14:43:33.719Z",
+          "updatedAt": "2026-11-18T14:43:33.719Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-00000000035a"
+        },
+        {
+          "id": "00000000-0000-4000-8000-00000000035b",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T15:10:35.343Z",
+          "updatedAt": "2026-11-18T15:10:35.343Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-00000000035c"
+        },
+        {
+          "id": "00000000-0000-4000-8000-00000000035d",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T15:24:46.395Z",
+          "updatedAt": "2026-11-18T15:24:46.395Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-00000000035e"
+        },
+        {
+          "id": "00000000-0000-4000-8000-00000000035f",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T15:45:37.132Z",
+          "updatedAt": "2026-11-18T15:45:37.132Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000360"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000361",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T17:01:07.488Z",
+          "updatedAt": "2026-11-18T17:01:07.488Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000362"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000363",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T18:31:25.694Z",
+          "updatedAt": "2026-11-18T18:31:25.694Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000364"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000365",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T19:47:41.592Z",
+          "updatedAt": "2026-11-18T19:47:41.592Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000366"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000367",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T21:30:58.837Z",
+          "updatedAt": "2026-11-18T21:30:58.837Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000368"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000369",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-18T23:01:10.851Z",
+          "updatedAt": "2026-11-18T23:01:10.851Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-00000000036a"
+        },
+        {
+          "id": "00000000-0000-4000-8000-00000000036b",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-19T02:01:30.081Z",
+          "updatedAt": "2026-11-19T02:01:30.081Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-00000000036c"
+        },
+        {
+          "id": "00000000-0000-4000-8000-00000000036d",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-19T05:00:46.095Z",
+          "updatedAt": "2026-11-19T05:00:46.095Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-00000000036e"
+        },
+        {
+          "id": "00000000-0000-4000-8000-00000000036f",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-19T06:47:13.714Z",
+          "updatedAt": "2026-11-19T06:47:13.714Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000370"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000371",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-19T08:04:03.988Z",
+          "updatedAt": "2026-11-19T08:04:03.988Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000372"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000373",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-19T10:46:13.874Z",
+          "updatedAt": "2026-11-19T10:46:13.874Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000374"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000375",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-19T11:21:12.065Z",
+          "updatedAt": "2026-11-19T11:21:12.065Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000340"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000376",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-19T14:31:26.287Z",
+          "updatedAt": "2026-11-19T14:31:26.287Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000331"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000377",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-19T21:24:32.982Z",
+          "updatedAt": "2026-11-19T21:24:32.982Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000317"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000378",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-19T21:25:52.512Z",
+          "updatedAt": "2026-11-19T21:25:52.512Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-00000000030a"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000379",
+          "body": "example body",
+          "deleted": false,
+          "authorId": null,
+          "createdAt": "2026-11-19T21:25:52.698Z",
+          "updatedAt": "2026-11-19T21:25:52.698Z",
+          "authorType": "system",
+          "sourceTrust": null,
+          "createdByRunId": null
+        },
+        {
+          "id": "00000000-0000-4000-8000-00000000037a",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-19T21:27:15.570Z",
+          "updatedAt": "2026-11-19T21:27:15.570Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-000000000304"
+        },
+        {
+          "id": "00000000-0000-4000-8000-00000000037b",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-19T21:30:16.296Z",
+          "updatedAt": "2026-11-19T21:30:16.296Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-0000000002fe"
+        },
+        {
+          "id": "00000000-0000-4000-8000-00000000037c",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-20T07:28:53.867Z",
+          "updatedAt": "2026-11-20T07:28:53.867Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-0000000002f8"
+        },
+        {
+          "id": "00000000-0000-4000-8000-00000000037d",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-20T09:31:11.427Z",
+          "updatedAt": "2026-11-20T09:31:11.427Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-0000000002f2"
+        },
+        {
+          "id": "00000000-0000-4000-8000-00000000037e",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-20T11:32:26.897Z",
+          "updatedAt": "2026-11-20T11:32:26.897Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-0000000002ec"
+        },
+        {
+          "id": "00000000-0000-4000-8000-00000000037f",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-20T11:50:28.470Z",
+          "updatedAt": "2026-11-20T11:50:28.470Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-0000000002e6"
+        },
+        {
+          "id": "00000000-0000-4000-8000-00000000034c",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-00000000000f",
+          "createdAt": "2026-11-20T13:31:24.690Z",
+          "updatedAt": "2026-11-20T13:31:24.690Z",
+          "authorType": "agent",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-0000000002df"
         }
       ],
       "companyId": "00000000-0000-4000-8000-000000000003",
       "objective": "example objective",
       "completedWork": "example completedWork",
-      "humanResponses": [],
-      "recoveredFiles": [],
+      "humanResponses": [
+        {
+          "id": "00000000-0000-4000-8000-000000000380",
+          "kind": "request_checkbox_confirmation",
+          "result": {
+            "outcome": "accepted",
+            "selectedOptionIds": [
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds"
+            ]
+          },
+          "status": "accepted",
+          "resolvedAt": "2026-11-18T09:24:30.571Z",
+          "resolvedByUserId": "defaultResponsibleUserId-1"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000381",
+          "kind": "ask_user_questions",
+          "result": {
+            "answers": [
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-69"
+              },
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-70"
+              }
+            ]
+          },
+          "status": "answered",
+          "resolvedAt": "2026-11-18T15:07:40.138Z",
+          "resolvedByUserId": "defaultResponsibleUserId-1"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000382",
+          "kind": "ask_user_questions",
+          "result": {
+            "answers": [
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-71"
+              },
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-72"
+              }
+            ]
+          },
+          "status": "answered",
+          "resolvedAt": "2026-11-18T15:22:59.253Z",
+          "resolvedByUserId": "defaultResponsibleUserId-1"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000383",
+          "kind": "ask_user_questions",
+          "result": {
+            "answers": [
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-73"
+              },
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-74"
+              }
+            ]
+          },
+          "status": "answered",
+          "resolvedAt": "2026-11-19T06:45:52.732Z",
+          "resolvedByUserId": "defaultResponsibleUserId-1"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000384",
+          "kind": "ask_user_questions",
+          "result": {
+            "answers": [
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-75"
+              }
+            ]
+          },
+          "status": "answered",
+          "resolvedAt": "2026-11-19T11:19:56.137Z",
+          "resolvedByUserId": "defaultResponsibleUserId-1"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000385",
+          "kind": "ask_user_questions",
+          "result": {
+            "answers": [
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-76"
+              }
+            ]
+          },
+          "status": "answered",
+          "resolvedAt": "2026-11-19T21:23:03.227Z",
+          "resolvedByUserId": "defaultResponsibleUserId-1"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000386",
+          "kind": "request_checkbox_confirmation",
+          "result": {
+            "outcome": "accepted",
+            "selectedOptionIds": [
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds"
+            ]
+          },
+          "status": "accepted",
+          "resolvedAt": "2026-11-20T07:26:23.797Z",
+          "resolvedByUserId": "defaultResponsibleUserId-1"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000387",
+          "kind": "ask_user_questions",
+          "result": {
+            "answers": [
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-77"
+              }
+            ]
+          },
+          "status": "answered",
+          "resolvedAt": "2026-11-20T11:50:03.610Z",
+          "resolvedByUserId": "defaultResponsibleUserId-1"
+        }
+      ],
       "objectiveSource": {
-        "id": "00000000-0000-4000-8000-00000000005b",
+        "id": "00000000-0000-4000-8000-000000000036",
         "kind": "description",
         "revision": "example revision"
       },
       "completedActions": [],
-      "interruptedRunId": "00000000-0000-4000-8000-0000000000a0",
       "originCommentIds": [],
       "recoveryOutcomes": [],
-      "interactionOutcomes": [],
+      "interactionOutcomes": [
+        {
+          "id": "00000000-0000-4000-8000-000000000380",
+          "kind": "request_checkbox_confirmation",
+          "result": {
+            "outcome": "accepted",
+            "version": 1,
+            "selectedOptionIds": [
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds"
+            ]
+          },
+          "status": "accepted"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000381",
+          "kind": "ask_user_questions",
+          "result": {
+            "answers": [
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-69"
+              },
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-70"
+              }
+            ],
+            "version": 1,
+            "summaryMarkdown": null
+          },
+          "status": "answered"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000382",
+          "kind": "ask_user_questions",
+          "result": {
+            "answers": [
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-71"
+              },
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-72"
+              }
+            ],
+            "version": 1,
+            "summaryMarkdown": null
+          },
+          "status": "answered"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000383",
+          "kind": "ask_user_questions",
+          "result": {
+            "answers": [
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-73"
+              },
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-74"
+              }
+            ],
+            "version": 1,
+            "summaryMarkdown": null
+          },
+          "status": "answered"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000384",
+          "kind": "ask_user_questions",
+          "result": {
+            "answers": [
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-75"
+              }
+            ],
+            "version": 1,
+            "summaryMarkdown": null
+          },
+          "status": "answered"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000385",
+          "kind": "ask_user_questions",
+          "result": {
+            "answers": [
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-76"
+              }
+            ],
+            "version": 1,
+            "summaryMarkdown": null
+          },
+          "status": "answered"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000386",
+          "kind": "request_checkbox_confirmation",
+          "result": {
+            "outcome": "accepted",
+            "version": 1,
+            "selectedOptionIds": [
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds",
+              "example selectedOptionIds"
+            ]
+          },
+          "status": "accepted"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000387",
+          "kind": "ask_user_questions",
+          "result": {
+            "answers": [
+              {
+                "optionIds": [
+                  "example optionIds"
+                ],
+                "questionId": "questionId-77"
+              }
+            ],
+            "version": 1,
+            "summaryMarkdown": null
+          },
+          "status": "answered"
+        }
+      ],
       "unresolvedInteractionIds": []
     },
     "paperclipCasesEnabled": false,
@@ -721,17 +2466,12 @@
       "kind": "standard"
     },
     "skillSelectionSnapshot": true,
-    "recoveredWorkspaceFiles": [],
     "githubAuthenticationMode": "example githubAuthenticationMode",
-    "paperclipHarnessCheckedOut": true,
-    "queuedCommentSourceWakeIds": [
-      "00000000-0000-4000-8000-000000000359"
-    ],
     "paperclipContinuationSummary": {
       "key": "example key",
       "body": "example body",
       "title": "example title",
-      "updatedAt": "2026-11-20T14:03:05.434Z",
+      "updatedAt": "2026-11-20T13:31:32.074Z",
       "sourceTrust": null
     },
     "paperclipTaskMarkdownCompact": "example paperclipTaskMarkdownCompact",
@@ -741,8 +2481,8 @@
     "paperclipFreshSessionHandoffMarkdown": "example paperclipFreshSessionHandoffMarkdown",
     "paperclipTaskMarkdownAssignmentCompact": "example paperclipTaskMarkdownAssignmentCompact"
   },
-  "createdAt": "2026-11-20T14:18:50.564Z",
-  "updatedAt": "2026-11-20T14:19:16.698Z",
+  "createdAt": "2026-11-20T15:31:00.169Z",
+  "updatedAt": "2026-11-20T15:33:08.831Z",
   "currentStatusMessage": null,
   "currentStatusUpdatedAt": null,
   "currentToolName": null,
@@ -753,7 +2493,7 @@
     "phase": "example phase",
     "label": "example label",
     "cause": null,
-    "lastConfirmedActivityAt": "2026-11-20T14:19:14.841Z",
+    "lastConfirmedActivityAt": "2026-11-20T15:33:07.054Z",
     "retryAt": null,
     "attempt": 1,
     "maxAttempts": 3,
@@ -773,21 +2513,21 @@
       "revision": 1,
       "responsibleUserId": "defaultResponsibleUserId-1",
       "messageId": null,
-      "parentContextId": null,
+      "parentContextId": "00000000-0000-4000-8000-00000000039f",
       "cause": "example cause",
-      "correlationId": "correlationId-77",
+      "correlationId": "correlationId-114",
       "status": "accepted",
-      "acceptedAt": "2026-11-20T14:18:51.605Z",
+      "acceptedAt": "2026-11-20T15:31:01.434Z",
       "github": null,
-      "createdAt": "2026-11-20T14:18:51.560Z"
+      "createdAt": "2026-11-20T15:31:01.394Z"
     }
   ],
   "retryExhaustedReason": null,
   "outputSilence": {
-    "lastOutputAt": "2026-11-20T14:19:14.327Z",
-    "lastOutputSeq": 85,
+    "lastOutputAt": "2026-11-20T15:33:06.795Z",
+    "lastOutputSeq": 225,
     "lastOutputStream": "stdout",
-    "silenceStartedAt": "2026-11-20T14:19:14.327Z",
+    "silenceStartedAt": "2026-11-20T15:33:06.795Z",
     "silenceAgeMs": null,
     "level": "not_applicable",
     "suspicionThresholdMs": 300000,

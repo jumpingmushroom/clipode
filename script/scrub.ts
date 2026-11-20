@@ -94,7 +94,8 @@ export function createScrubber() {
       return Object.fromEntries(
         Object.entries(value).map(([k, v]) => [
           scrubKey(k),
-          typeof v === "string" && v.trimStart().startsWith("{") ? scrubJsonLines(v, k) : walk(v, k, "", true),
+          // A chunk is scrubbed line by line, keeping its newlines: chunks join into lines when the log is read.
+          typeof v === "string" && (k === "chunk" || v.trimStart().startsWith("{")) ? scrubJsonLines(v, k) : walk(v, k, "", true),
         ]),
       )
     }

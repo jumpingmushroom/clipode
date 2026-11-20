@@ -1,6 +1,6 @@
 {
   "companyId": "00000000-0000-4000-8000-000000000003",
-  "generatedAt": "2026-11-20T15:29:20.745Z",
+  "generatedAt": "2026-11-20T15:37:49.576Z",
   "totalCount": 6,
   "deskBadgeCount": 0,
   "countsBySourceKind": {
@@ -59,9 +59,9 @@
       "exitRule": "example exitRule",
       "dedupKey": "dedupKey-18",
       "severity": "high",
-      "activityAt": "2026-11-20T13:31:32.187Z",
+      "activityAt": "2026-11-20T15:32:59.732Z",
       "createdAt": "2026-11-18T08:28:10.889Z",
-      "updatedAt": "2026-11-20T13:31:32.187Z",
+      "updatedAt": "2026-11-20T15:32:59.732Z",
       "relatedIssue": {
         "kind": "issue",
         "id": "00000000-0000-4000-8000-000000000037",
@@ -96,7 +96,7 @@
       "retentionDays": 30,
       "keep": false,
       "archivedAt": null,
-      "retentionVersion": 7,
+      "retentionVersion": 8,
       "decideBy": null,
       "decideByAttribution": null,
       "snoozedUntil": null,

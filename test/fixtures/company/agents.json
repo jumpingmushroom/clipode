@@ -415,11 +415,11 @@
       "canCreateAgents": true,
       "canCreateSkills": true
     },
-    "lastHeartbeatAt": "2026-11-20T13:31:32.312Z",
+    "lastHeartbeatAt": "2026-11-20T15:33:08.572Z",
     "metadata": null,
     "createdByUserId": null,
     "createdAt": "2026-11-16T10:29:58.957Z",
-    "updatedAt": "2026-11-20T13:31:32.312Z",
+    "updatedAt": "2026-11-20T15:33:08.572Z",
     "urlKey": "urlKey-7",
     "avatarUrl": "/demo/path",
     "orgChainHealth": {

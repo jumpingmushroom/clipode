@@ -3,6 +3,8 @@ import { TextAttributes, type ScrollBoxRenderable } from "@opentui/core"
 import { useBindings } from "@opentui/keymap/solid"
 import { createSignal, For, Match, onCleanup, onMount, Show, Switch } from "solid-js"
 import { useRoute } from "../route.tsx"
+import { useDialog } from "../ui/dialog.tsx"
+import { DialogSelect } from "../ui/dialog-select.tsx"
 import { useCompany } from "../store/context.tsx"
 import type { TaskDetail, ThreadEntry } from "../store/issues.ts"
 import { useTheme } from "../theme/context.tsx"
@@ -26,6 +28,7 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
   const company = useCompany()
   const route = useRoute()
   const thread = company.issues.thread(props.id)
+  const dialog = useDialog()
   const [now, setNow] = createSignal(Date.now())
   let scroll: ScrollBoxRenderable | undefined
 
@@ -49,9 +52,28 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
       { key: "pageup", cmd: () => scroll?.scrollBy(-10) },
       { key: "G,end", cmd: () => scroll?.scrollTo(scroll.scrollHeight) },
       { key: "r", cmd: () => void Promise.all([thread.detail.refresh(), thread.entries.refresh(), thread.cost.refresh()]) },
+      { key: "o", cmd: () => openRuns() },
     ],
   }))
 
+  const openRuns = () => {
+    const runs = thread.entries.data.filter((e): e is Extract<ThreadEntry, { kind: "run" }> => e.kind === "run").reverse()
+    if (!runs.length) return
+    dialog.replace(() => (
+      <DialogSelect
+        title="Runs"
+        options={runs.map((r) => ({
+          title: `${agentName(r.agentId) ?? "agent"}  ${r.status.replace(/_/g, " ")}  ${runDuration(r, now())}`,
+          value: r.id,
+          footer: dateTime(r.at),
+        }))}
+        onSelect={(o) => {
+          dialog.clear()
+          route.navigate({ name: "run", id: o.value })
+        }}
+      />
+    ))
+  }
   const detail = () => thread.detail.data
   const agentName = (id: string | null) => company.agents.byId(id)?.name
   const agentRole = (id: string | null) => {
@@ -65,7 +87,7 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
       badge={company.attention.feed.loadedAt ? company.attention.feed.data.totalCount : null}
       showSidebar={props.sidebar}
       sidebar={<Show when={detail()}>{(d: () => TaskDetail) => <ThreadSidebar task={d()} now={now()} />}</Show>}
-      hints={[["esc", "back"], ["j/k", "scroll"], ["G", "end"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
+      hints={[["esc", "back"], ["o", "open run"], ["j/k", "scroll"], ["G", "end"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
       narrowHints={[["esc", "back"], ["j/k", "scroll"], ["^p", "cmds"]]}
       version={props.version}
     >

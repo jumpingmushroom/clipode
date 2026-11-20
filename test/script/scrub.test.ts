@@ -62,6 +62,6 @@ test("log scrubbing keeps record and chunk structure and drops text", () => {
   expect(first.seq).toBe(1)
   expect(first.stream).toBe("stdout")
   expect(JSON.parse(first.chunk.trim())).toEqual({ type: "acpx.tool_call", name: "Read", toolCallId: "toolCallId-1", text: "example text", tag: "tool_call" })
-  expect(second.chunk).toBe("example chunk")
+  expect(second.chunk).toBe("example chunk\n")
   expect(JSON.parse(third.chunk).name).toBe("example name")
 })

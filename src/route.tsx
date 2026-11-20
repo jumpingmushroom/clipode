@@ -1,7 +1,7 @@
 // Where the app is: a screen name and its parameter. `back` returns to the previous route.
 import { createContext, createSignal, useContext, type ParentProps } from "solid-js"
 
-export type Route = { name: "inbox" } | { name: "item"; id: string } | { name: "tasks" } | { name: "thread"; id: string }
+export type Route = { name: "inbox" } | { name: "item"; id: string } | { name: "tasks" } | { name: "thread"; id: string } | { name: "run"; id: string }
 
 function init(initial: Route) {
   const [stack, setStack] = createSignal<Route[]>([initial])

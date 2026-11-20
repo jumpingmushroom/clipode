@@ -12,18 +12,24 @@ import threadComments from "./fixtures/company/thread-comments.json"
 import threadRuns from "./fixtures/company/thread-runs.json"
 import threadCost from "./fixtures/company/thread-cost.json"
 import liveRuns from "./fixtures/company/live-runs.json"
+import run from "./fixtures/company/run.json"
+import runLog from "./fixtures/company/run-log.json"
 
 export const COMPANY_ID = company.id
+/** The finished run whose log was recorded. */
+export const RUN_ID = run.id
 /** The task whose comments, runs and cost were recorded. */
 export const THREAD_ID = threadCost.issueId
 export const PASSWORD = "correct horse battery staple"
 const SESSION = "paperclip-default.session_token"
 
-export type FakeServer = { url: string; requests: string[]; stop(): void; set(path: string, body: unknown, status?: number): void }
+/** A fixed body, or a function of the request URL for routes whose answer changes (a growing log). */
+type Body = unknown | ((url: URL) => unknown)
+export type FakeServer = { url: string; requests: string[]; stop(): void; set(path: string, body: Body, status?: number): void }
 
 export function startFakeServer(): FakeServer {
   const requests: string[] = []
-  const overrides = new Map<string, { body: unknown; status: number }>()
+  const overrides = new Map<string, { body: Body; status: number }>()
   const routes: Record<string, unknown> = {
     "/api/companies": companies,
     [`/api/companies/${COMPANY_ID}/agents`]: agents,
@@ -35,6 +41,9 @@ export function startFakeServer(): FakeServer {
     [`/api/issues/${threadCost.issueId}/runs`]: threadRuns,
     [`/api/issues/${threadCost.issueId}/cost-summary`]: threadCost,
     [`/api/companies/${COMPANY_ID}/live-runs`]: liveRuns,
+    [`/api/heartbeat-runs/${run.id}`]: run,
+    // The recorded log is complete, so a read from offset 0 returns all of it and no nextOffset.
+    [`/api/heartbeat-runs/${run.id}/log`]: (url: URL) => ({ ...runLog, content: Number(url.searchParams.get("offset") ?? 0) > 0 ? "" : runLog.content, nextOffset: undefined }),
   }
   for (const [id, list] of Object.entries(interactions)) routes[`/api/issues/${id}/interactions`] = list
   for (const [id, issue] of Object.entries(details)) routes[`/api/issues/${id}`] = issue
@@ -53,11 +62,14 @@ export function startFakeServer(): FakeServer {
       if (url.pathname === "/api/auth/sign-out") return Response.json({}, { headers: { "Set-Cookie": `${SESSION}=; Max-Age=0` } })
       if (!signedIn) return Response.json({ error: "Board authentication required" }, { status: 401 })
       const override = overrides.get(url.pathname)
-      if (override) return Response.json(override.body, { status: override.status })
+      if (override) return Response.json(typeof override.body === "function" ? override.body(url) : override.body, { status: override.status })
       if (url.pathname === "/api/auth/get-session") {
         return Response.json({ session: { id: "s", userId: "u" }, user: { id: "u", email: "user@example.com", name: "Operator" } })
       }
-      if (url.pathname in routes) return Response.json(routes[url.pathname])
+      if (url.pathname in routes) {
+        const route = routes[url.pathname]
+        return Response.json(typeof route === "function" ? route(url) : route)
+      }
       return Response.json({ error: "not found" }, { status: 404 })
     },
   })

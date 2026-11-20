@@ -1,9 +1,9 @@
 [
   {
-    "id": 38181,
+    "id": 38445,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 1,
     "eventType": "example eventType",
     "stream": "system",
@@ -13,22 +13,22 @@
     "payload": {
       "host": "example host",
       "schema": "paperclip.legacy-case-handoff-cleanup-intent.v1",
-      "issueId": "00000000-0000-4000-8000-00000000005b",
+      "issueId": "00000000-0000-4000-8000-000000000036",
       "scratch": {
         "dir": "example dir",
         "metadata": {
           "runId": "00000000-0000-4000-8000-0000000002cd",
-          "agentId": "00000000-0000-4000-8000-000000000009",
-          "issueId": "00000000-0000-4000-8000-00000000005b",
+          "agentId": "00000000-0000-4000-8000-00000000000f",
+          "issueId": "00000000-0000-4000-8000-000000000036",
           "version": 1,
           "companyId": "00000000-0000-4000-8000-000000000003",
-          "createdAt": "2026-11-20T14:18:53.334Z",
-          "issueIdentifier": "DEMO-11"
+          "createdAt": "2026-11-20T15:31:02.879Z",
+          "issueIdentifier": "DEMO-1"
         },
         "markerPath": "example markerPath"
       },
       "processPid": null,
-      "runStartedAt": "2026-11-20T14:18:50.989Z",
+      "runStartedAt": "2026-11-20T15:31:00.944Z",
       "processGroupId": null,
       "controllerBootId": "00000000-0000-4000-8000-000000000348",
       "processStartedAt": null
@@ -38,13 +38,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:53.335Z"
+    "createdAt": "2026-11-20T15:31:02.880Z"
   },
   {
-    "id": 38182,
+    "id": 38446,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 2,
     "eventType": "example eventType",
     "stream": "system",
@@ -57,13 +57,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:53.500Z"
+    "createdAt": "2026-11-20T15:31:03.081Z"
   },
   {
-    "id": 38183,
+    "id": 38447,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 3,
     "eventType": "example eventType",
     "stream": "system",
@@ -81,13 +81,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:54.426Z"
+    "createdAt": "2026-11-20T15:31:04.030Z"
   },
   {
-    "id": 38184,
+    "id": 38448,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 4,
     "eventType": "example eventType",
     "stream": "system",
@@ -105,13 +105,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:54.452Z"
+    "createdAt": "2026-11-20T15:31:04.062Z"
   },
   {
-    "id": 38185,
+    "id": 38449,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 5,
     "eventType": "example eventType",
     "stream": "system",
@@ -129,13 +129,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:54.461Z"
+    "createdAt": "2026-11-20T15:31:04.091Z"
   },
   {
-    "id": 38186,
+    "id": 38450,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 6,
     "eventType": "example eventType",
     "stream": "system",
@@ -145,20 +145,20 @@
     "payload": {
       "step": "example step",
       "outcome": "ok",
-      "durationMs": 20
+      "durationMs": 0
     },
     "sourceInstanceId": null,
     "sourceEventId": null,
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:54.494Z"
+    "createdAt": "2026-11-20T15:31:04.123Z"
   },
   {
-    "id": 38187,
+    "id": 38451,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 7,
     "eventType": "example eventType",
     "stream": "system",
@@ -175,13 +175,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:54.689Z"
+    "createdAt": "2026-11-20T15:31:04.322Z"
   },
   {
-    "id": 38188,
+    "id": 38452,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 8,
     "eventType": "example eventType",
     "stream": "system",
@@ -190,23 +190,23 @@
     "message": "example message",
     "payload": {
       "hostname": "example hostname",
-      "processPid": 946,
+      "processPid": 15700,
       "targetKind": "example targetKind",
       "processGroupId": null,
-      "processStartedAt": "2026-11-20T14:18:54.040Z"
+      "processStartedAt": "2026-11-20T15:31:03.690Z"
     },
     "sourceInstanceId": null,
     "sourceEventId": null,
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:54.723Z"
+    "createdAt": "2026-11-20T15:31:04.368Z"
   },
   {
-    "id": 38189,
+    "id": 38453,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 9,
     "eventType": "example eventType",
     "stream": "system",
@@ -216,38 +216,38 @@
     "payload": {
       "host": "example host",
       "schema": "paperclip.legacy-case-handoff-cleanup-intent.v1",
-      "issueId": "00000000-0000-4000-8000-00000000005b",
+      "issueId": "00000000-0000-4000-8000-000000000036",
       "scratch": {
         "dir": "example dir",
         "metadata": {
           "runId": "00000000-0000-4000-8000-0000000002cd",
-          "agentId": "00000000-0000-4000-8000-000000000009",
-          "issueId": "00000000-0000-4000-8000-00000000005b",
+          "agentId": "00000000-0000-4000-8000-00000000000f",
+          "issueId": "00000000-0000-4000-8000-000000000036",
           "version": 1,
           "companyId": "00000000-0000-4000-8000-000000000003",
-          "createdAt": "2026-11-20T14:18:53.334Z",
-          "issueIdentifier": "DEMO-11"
+          "createdAt": "2026-11-20T15:31:02.879Z",
+          "issueIdentifier": "DEMO-1"
         },
         "markerPath": "example markerPath"
       },
-      "processPid": 946,
-      "runStartedAt": "2026-11-20T14:18:50.989Z",
+      "processPid": 15700,
+      "runStartedAt": "2026-11-20T15:31:00.944Z",
       "processGroupId": null,
       "controllerBootId": "00000000-0000-4000-8000-000000000348",
-      "processStartedAt": "2026-11-20T14:18:54.040Z"
+      "processStartedAt": "2026-11-20T15:31:03.690Z"
     },
     "sourceInstanceId": null,
     "sourceEventId": null,
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:54.723Z"
+    "createdAt": "2026-11-20T15:31:04.368Z"
   },
   {
-    "id": 38190,
+    "id": 38454,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 10,
     "eventType": "example eventType",
     "stream": "system",
@@ -257,20 +257,20 @@
     "payload": {
       "step": "example step",
       "outcome": "ok",
-      "durationMs": 2774
+      "durationMs": 2126
     },
     "sourceInstanceId": null,
     "sourceEventId": null,
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:57.474Z"
+    "createdAt": "2026-11-20T15:31:06.478Z"
   },
   {
-    "id": 38191,
+    "id": 38455,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 11,
     "eventType": "example eventType",
     "stream": "system",
@@ -288,13 +288,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:57.482Z"
+    "createdAt": "2026-11-20T15:31:06.490Z"
   },
   {
-    "id": 38192,
+    "id": 38456,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 12,
     "eventType": "example eventType",
     "stream": "system",
@@ -313,13 +313,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:57.491Z"
+    "createdAt": "2026-11-20T15:31:06.511Z"
   },
   {
-    "id": 38193,
+    "id": 38457,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 13,
     "eventType": "example eventType",
     "stream": "system",
@@ -329,20 +329,20 @@
     "payload": {
       "phase": "example phase",
       "outcome": "ok",
-      "durationMs": 2807
+      "durationMs": 2172
     },
     "sourceInstanceId": null,
     "sourceEventId": null,
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:57.508Z"
+    "createdAt": "2026-11-20T15:31:06.522Z"
   },
   {
-    "id": 38194,
+    "id": 38458,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 14,
     "eventType": "example eventType",
     "stream": "system",
@@ -359,13 +359,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:57.520Z"
+    "createdAt": "2026-11-20T15:31:06.539Z"
   },
   {
-    "id": 38195,
+    "id": 38459,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 15,
     "eventType": "example eventType",
     "stream": "system",
@@ -375,120 +375,122 @@
     "payload": {
       "cwd": "example cwd",
       "env": {
-        "example_key_36": "example TMP",
-        "example_key_37": "example HOME",
-        "example_key_38": "example TEMP",
-        "example_key_23": "example HA_URL",
-        "example_key_39": "example TMPDIR",
-        "example_key_24": "example HA_TOKEN",
-        "example_key_40": "example GROK_HOME",
-        "example_key_41": "example AGENT_HOME",
-        "example_key_42": "example CODEX_HOME",
-        "example_key_2": "example UNIFI_HOST",
-        "example_key_3": "example UNIFI_PASS",
-        "example_key_4": "example UNIFI_USER",
+        "example_key_32": "example TMP",
+        "example_key_33": "example HOME",
+        "example_key_34": "example TEMP",
+        "example_key_35": "example TMPDIR",
+        "example_key_36": "example GROK_HOME",
+        "example_key_5": "example KOMGA_URL",
+        "example_key_37": "example AGENT_HOME",
+        "example_key_38": "example CODEX_HOME",
+        "example_key_6": "example SEERR_USER",
         "_truncated": true,
-        "example_key_43": "example AWS_PROFILE",
-        "example_key_44": "example GEMINI_HOME",
-        "example_key_45": "example HERMES_HOME",
-        "example_key_46": "example XAI_API_KEY",
-        "example_key_47": "example AWS_ROLE_ARN",
-        "example_key_48": "example GROK_API_KEY",
-        "example_key_49": "example XAI_BASE_URL",
-        "_omittedKeys": 6,
-        "example_key_50": "example CODEX_API_KEY",
-        "example_key_51": "example GH_CONFIG_DIR",
-        "example_key_52": "example XDG_DATA_HOME",
-        "example_key_53": "example GEMINI_API_KEY",
-        "example_key_54": "example GOOGLE_API_KEY",
-        "example_key_55": "example OPENAI_API_KEY",
-        "example_key_56": "example ANTHROPIC_MODEL",
-        "example_key_57": "example AWS_CONFIG_FILE",
-        "example_key_58": "example OPENAI_BASE_URL",
-        "example_key_59": "example OPENCODE_CONFIG",
-        "example_key_60": "example XDG_CONFIG_HOME",
-        "example_key_1": "example XDG_RUNTIME_DIR",
-        "example_key_61": "00000000-0000-4000-8000-0000000002cd",
-        "example_key_62": "example PAPERCLIP_TMPDIR",
-        "example_key_63": "example ANTHROPIC_API_KEY",
-        "example_key_64": "example AWS_ACCESS_KEY_ID",
-        "example_key_65": "example AWS_SESSION_TOKEN",
-        "example_key_66": "example CLAUDE_CONFIG_DIR",
-        "example_key_67": "example PAPERCLIP_API_KEY",
-        "example_key_68": "example PAPERCLIP_API_URL",
-        "example_key_69": "00000000-0000-4000-8000-00000000005b",
-        "example_key_70": "example ANTHROPIC_BASE_URL",
-        "example_key_71": "example OPENCODE_AUTH_JSON",
-        "example_key_72": "example OPENROUTER_API_KEY",
-        "example_key_73": "example OTEL_LOGS_EXPORTER",
-        "example_key_74": "00000000-0000-4000-8000-000000000009",
-        "example_key_75": "example AWS_DEFAULT_PROFILE",
-        "example_key_76": "example OPENCODE_CONFIG_DIR",
-        "example_key_77": "example ANTHROPIC_AUTH_TOKEN",
-        "example_key_78": "example COPILOT_GITHUB_TOKEN",
-        "example_key_79": "example OTEL_TRACES_EXPORTER",
-        "example_key_80": "00000000-0000-4000-8000-000000000003",
-        "example_key_81": "example AWS_SECRET_ACCESS_KEY",
-        "example_key_82": "example OTEL_LOG_USER_PROMPTS",
-        "example_key_83": "example OTEL_METRICS_EXPORTER",
-        "example_key_84": "example PAPERCLIP_SCRATCH_DIR",
-        "example_key_85": "example PAPERCLIP_WAKE_REASON",
-        "example_key_86": "example CLAUDE_CODE_USE_VERTEX",
-        "example_key_87": "example GOOGLE_GEMINI_BASE_URL",
-        "example_key_88": "example PAPERCLIP_AGENT_KEY_ID",
-        "example_key_89": "example PAPERCLIP_PI_PROVIDERS",
-        "example_key_90": "example CLAUDE_CODE_OAUTH_TOKEN",
-        "example_key_91": "example CLAUDE_CODE_USE_BEDROCK",
-        "example_key_92": "example CLAUDE_CODE_USE_FOUNDRY",
-        "example_key_93": "example OPENCODE_CONFIG_CONTENT",
-        "example_key_94": "example PAPERCLIP_WORKSPACE_CWD",
-        "example_key_95": "example ANTHROPIC_CUSTOM_HEADERS",
-        "example_key_96": "example AWS_BEARER_TOKEN_BEDROCK",
-        "example_key_97": "example GOOGLE_CLOUD_ACCESS_TOKEN",
-        "example_key_98": "example GOOGLE_GENAI_USE_VERTEXAI",
-        "example_key_99": "example PAPERCLIP_AI_PROVIDER_KEY",
-        "example_key_100": "example PAPERCLIP_AI_PROVIDER_URL",
-        "example_key_101": "example PAPERCLIP_CODEX_PROVIDERS",
-        "example_key_102": "example PAPERCLIP_ISSUE_WORK_MODE",
-        "example_key_103": "example PAPERCLIP_RUN_SCRATCH_DIR",
-        "example_key_104": "example ANTHROPIC_BEDROCK_BASE_URL",
-        "example_key_105": "example CLAUDE_CODE_SUBAGENT_MODEL",
-        "example_key_106": "example PAPERCLIP_AGENT_PUBLIC_KEY",
-        "example_key_107": "example PAPERCLIP_GITHUB_AUTH_MODE",
-        "example_key_108": "example PAPERCLIP_GITHUB_HOST_HOME",
-        "example_key_109": "example PAPERCLIP_TASK_SCRATCH_DIR",
-        "example_key_110": "example PAPERCLIP_WORKSPACE_SOURCE",
-        "example_key_111": "example AWS_SHARED_CREDENTIALS_FILE",
-        "example_key_112": "example AWS_WEB_IDENTITY_TOKEN_FILE",
-        "example_key_113": "example PAPERCLIP_AGENT_PRIVATE_KEY",
-        "example_key_114": "example ANTHROPIC_DEFAULT_OPUS_MODEL",
-        "example_key_115": "example CLAUDE_CODE_ENABLE_TELEMETRY",
-        "example_key_116": "example PAPERCLIP_GIT_METADATA_ROOTS",
-        "example_key_117": "example PAPERCLIP_OPENCODE_PROVIDERS",
-        "example_key_118": "example PAPERCLIP_WORKSPACE_STRATEGY",
-        "example_key_119": "example ANTHROPIC_DEFAULT_HAIKU_MODEL",
-        "example_key_120": "example ANTHROPIC_DEFAULT_SONNET_MODEL",
-        "example_key_121": "example GOOGLE_APPLICATION_CREDENTIALS",
-        "example_key_122": "example PAPERCLIP_RUNNER_NETWORK_ROOTS",
-        "example_key_123": "example OTEL_EXPORTER_OTLP_LOGS_TIMEOUT",
-        "example_key_124": "example PAPERCLIP_RUNNER_NETWORK_ACCESS",
-        "example_key_125": "example OTEL_EXPORTER_OTLP_TRACES_TIMEOUT",
-        "example_key_126": "example AWS_CONTAINER_CREDENTIALS_FULL_URI",
-        "example_key_127": "example CLAUDE_CODE_ENHANCED_TELEMETRY_BETA",
-        "example_key_128": "example AWS_CONTAINER_CREDENTIALS_RELATIVE_URI",
-        "example_key_129": "example PAPERCLIP_ACPX_ANTIGRAVITY_AUTH_JSON_SECRET"
+        "example_key_7": "example ABS_API_KEY",
+        "example_key_39": "example AWS_PROFILE",
+        "example_key_40": "example GEMINI_HOME",
+        "example_key_41": "example HERMES_HOME",
+        "example_key_42": "example XAI_API_KEY",
+        "example_key_43": "example AWS_ROLE_ARN",
+        "example_key_44": "example GROK_API_KEY",
+        "example_key_45": "example XAI_BASE_URL",
+        "_omittedKeys": 18,
+        "example_key_46": "example CODEX_API_KEY",
+        "example_key_8": "example EMBY_PASSWORD",
+        "example_key_47": "example GH_CONFIG_DIR",
+        "example_key_9": "example KOMGA_API_KEY",
+        "example_key_10": "example ROMM_PASSWORD",
+        "example_key_11": "example SLSKD_API_KEY",
+        "example_key_48": "example XDG_DATA_HOME",
+        "example_key_12": "example BAZARR_API_KEY",
+        "example_key_13": "example CODEX_PASSWORD",
+        "example_key_49": "example GEMINI_API_KEY",
+        "example_key_50": "example GOOGLE_API_KEY",
+        "example_key_14": "example LIDARR_API_KEY",
+        "example_key_51": "example OPENAI_API_KEY",
+        "example_key_15": "example RADARR_API_KEY",
+        "example_key_16": "example SEERR_PASSWORD",
+        "example_key_17": "example SONARR_API_KEY",
+        "example_key_52": "example ANTHROPIC_MODEL",
+        "example_key_53": "example AWS_CONFIG_FILE",
+        "example_key_54": "example OPENAI_BASE_URL",
+        "example_key_55": "example OPENCODE_CONFIG",
+        "example_key_56": "example XDG_CONFIG_HOME",
+        "example_key_18": "example KAPOWARR_API_KEY",
+        "example_key_57": "00000000-0000-4000-8000-0000000002cd",
+        "example_key_58": "example PAPERCLIP_TMPDIR",
+        "example_key_19": "example PROWLARR_API_KEY",
+        "example_key_20": "example WHISPARR_API_KEY",
+        "example_key_59": "example ANTHROPIC_API_KEY",
+        "example_key_60": "example AWS_ACCESS_KEY_ID",
+        "example_key_61": "example AWS_SESSION_TOKEN",
+        "example_key_62": "example CLAUDE_CONFIG_DIR",
+        "example_key_63": "example PAPERCLIP_API_URL",
+        "example_key_64": "00000000-0000-4000-8000-000000000036",
+        "example_key_65": "example ANTHROPIC_BASE_URL",
+        "example_key_66": "example OPENCODE_AUTH_JSON",
+        "example_key_67": "example OPENROUTER_API_KEY",
+        "example_key_68": "00000000-0000-4000-8000-00000000000f",
+        "example_key_69": "example AWS_DEFAULT_PROFILE",
+        "example_key_70": "example OPENCODE_CONFIG_DIR",
+        "example_key_71": "example ANTHROPIC_AUTH_TOKEN",
+        "example_key_72": "example COPILOT_GITHUB_TOKEN",
+        "example_key_73": "00000000-0000-4000-8000-000000000003",
+        "example_key_74": "example AWS_SECRET_ACCESS_KEY",
+        "example_key_21": "example LAZYLIBRARIAN_API_KEY",
+        "example_key_22": "example MEDIA_DELUGE_PASSWORD",
+        "example_key_75": "example PAPERCLIP_SCRATCH_DIR",
+        "example_key_76": "example PAPERCLIP_WAKE_REASON",
+        "example_key_77": "example CLAUDE_CODE_USE_VERTEX",
+        "example_key_78": "example GOOGLE_GEMINI_BASE_URL",
+        "example_key_79": "example PAPERCLIP_AGENT_KEY_ID",
+        "example_key_80": "example PAPERCLIP_PI_PROVIDERS",
+        "example_key_81": "example CLAUDE_CODE_OAUTH_TOKEN",
+        "example_key_82": "example CLAUDE_CODE_USE_BEDROCK",
+        "example_key_83": "example CLAUDE_CODE_USE_FOUNDRY",
+        "example_key_84": "example OPENCODE_CONFIG_CONTENT",
+        "example_key_85": "example PAPERCLIP_WORKSPACE_CWD",
+        "example_key_86": "example AWS_BEARER_TOKEN_BEDROCK",
+        "example_key_87": "example GOOGLE_CLOUD_ACCESS_TOKEN",
+        "example_key_88": "example GOOGLE_GENAI_USE_VERTEXAI",
+        "example_key_89": "example PAPERCLIP_AI_PROVIDER_KEY",
+        "example_key_90": "example PAPERCLIP_AI_PROVIDER_URL",
+        "example_key_91": "example PAPERCLIP_CODEX_PROVIDERS",
+        "example_key_92": "example PAPERCLIP_ISSUE_WORK_MODE",
+        "example_key_93": "example PAPERCLIP_RUN_SCRATCH_DIR",
+        "example_key_94": "example ANTHROPIC_BEDROCK_BASE_URL",
+        "example_key_95": "example CLAUDE_CODE_SUBAGENT_MODEL",
+        "example_key_96": "example PAPERCLIP_AGENT_PUBLIC_KEY",
+        "example_key_97": "example PAPERCLIP_GITHUB_HOST_HOME",
+        "example_key_98": "example PAPERCLIP_TASK_SCRATCH_DIR",
+        "example_key_99": "example PAPERCLIP_WORKSPACE_SOURCE",
+        "example_key_100": "example AWS_SHARED_CREDENTIALS_FILE",
+        "example_key_101": "example AWS_WEB_IDENTITY_TOKEN_FILE",
+        "example_key_102": "example PAPERCLIP_AGENT_PRIVATE_KEY",
+        "example_key_103": "example ANTHROPIC_DEFAULT_OPUS_MODEL",
+        "example_key_104": "example PAPERCLIP_GIT_METADATA_ROOTS",
+        "example_key_105": "example PAPERCLIP_OPENCODE_PROVIDERS",
+        "example_key_106": "example PAPERCLIP_WORKSPACE_STRATEGY",
+        "example_key_107": "example ANTHROPIC_DEFAULT_HAIKU_MODEL",
+        "example_key_108": "example ANTHROPIC_DEFAULT_SONNET_MODEL",
+        "example_key_109": "example GOOGLE_APPLICATION_CREDENTIALS",
+        "example_key_110": "example PAPERCLIP_RUNNER_NETWORK_ROOTS",
+        "example_key_111": "example AWS_CONTAINER_CREDENTIALS_FULL_URI",
+        "example_key_112": "example AWS_CONTAINER_CREDENTIALS_RELATIVE_URI",
+        "example_key_113": "example PAPERCLIP_ACPX_ANTIGRAVITY_AUTH_JSON_SECRET"
       },
       "prompt": "example prompt",
       "command": "example command",
       "context": {
-        "taskId": "00000000-0000-4000-8000-00000000005b",
-        "actorId": "defaultResponsibleUserId-1",
-        "issueId": "00000000-0000-4000-8000-00000000005b",
-        "taskKey": "00000000-0000-4000-8000-00000000005b",
-        "projectId": "00000000-0000-4000-8000-00000000009c",
-        "wakeReason": "task_retry",
+        "source": "issue.monitor",
+        "taskId": "00000000-0000-4000-8000-000000000036",
+        "issueId": "00000000-0000-4000-8000-000000000036",
+        "taskKey": "00000000-0000-4000-8000-000000000036",
+        "timeoutAt": "2026-11-27T12:00:00Z",
+        "wakeReason": "issue_monitor_due",
         "wakeSource": "example wakeSource",
-        "triggeredBy": "example triggeredBy",
+        "maxAttempts": 40,
+        "nextCheckAt": "2026-11-20T15:31:00.000Z",
+        "serviceName": "example serviceName",
         "aiConnection": {
           "mode": "example mode",
           "method": "example method",
@@ -501,18 +503,20 @@
           "sessionIdentity": "example sessionIdentity",
           "responsibleUserId": "defaultResponsibleUserId-1"
         },
+        "monitorNotes": "example monitorNotes",
+        "manualTrigger": false,
         "paperclipWake": {
           "issue": {
-            "id": "00000000-0000-4000-8000-00000000005b",
+            "id": "00000000-0000-4000-8000-000000000036",
             "title": "example title",
-            "status": "in_progress",
+            "status": "in_review",
             "priority": "medium",
             "workMode": "standard",
-            "identifier": "DEMO-11",
+            "identifier": "DEMO-1",
             "description": "example description",
             "descriptionTruncated": false
           },
-          "reason": "task_retry",
+          "reason": "issue_monitor_due",
           "comments": [],
           "recovery": null,
           "skillTest": null,
@@ -538,13 +542,13 @@
           "interactionStatus": null,
           "planReviewContext": null,
           "attachmentOmissions": [],
-          "checkedOutByHarness": true,
+          "checkedOutByHarness": false,
           "childIssueSummaries": [],
           "continuationSummary": {
             "key": "example key",
             "body": "example body",
             "title": "example title",
-            "updatedAt": "2026-11-20T14:03:05.434Z",
+            "updatedAt": "2026-11-20T13:31:32.074Z",
             "sourceTrust": null,
             "bodyTruncated": false
           },
@@ -555,46 +559,635 @@
           "chatCompletionUpdates": null,
           "documentReviewContext": null,
           "executionContinuation": {
-            "issueId": "00000000-0000-4000-8000-00000000005b",
+            "issueId": "00000000-0000-4000-8000-000000000036",
             "trigger": {
-              "reason": "task_retry",
-              "sourceRunId": "00000000-0000-4000-8000-0000000000a0",
+              "reason": "issue_monitor_due",
+              "sourceRunId": null,
               "interactionId": null
             },
             "version": 1,
             "coverage": {
               "kind": "full_task_history",
-              "throughCommentId": "00000000-0000-4000-8000-00000000005c",
+              "throughCommentId": "00000000-0000-4000-8000-00000000034c",
               "summaryThroughCommentId": null
             },
             "messages": [
               {
-                "id": "00000000-0000-4000-8000-00000000005c",
+                "id": "00000000-0000-4000-8000-00000000034d",
                 "body": "example body",
                 "deleted": false,
-                "authorId": "00000000-0000-4000-8000-000000000009",
-                "createdAt": "2026-11-20T14:03:00.769Z",
-                "updatedAt": "2026-11-20T14:03:00.769Z",
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T09:21:34.625Z",
+                "updatedAt": "2026-11-18T09:21:34.625Z",
                 "authorType": "agent",
                 "sourceTrust": null,
-                "createdByRunId": "00000000-0000-4000-8000-0000000000a0"
+                "createdByRunId": "00000000-0000-4000-8000-00000000034e"
+              },
+              {
+                "id": "00000000-0000-4000-8000-00000000034f",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T09:26:30.049Z",
+                "updatedAt": "2026-11-18T09:26:30.049Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000350"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000351",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T09:30:52.177Z",
+                "updatedAt": "2026-11-18T09:30:52.177Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000352"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000353",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T11:32:22.841Z",
+                "updatedAt": "2026-11-18T11:32:22.841Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000354"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000355",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T12:41:20.431Z",
+                "updatedAt": "2026-11-18T12:41:20.431Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000356"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000357",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T14:42:19.571Z",
+                "updatedAt": "2026-11-18T14:42:19.571Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000358"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000359",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T14:43:33.719Z",
+                "updatedAt": "2026-11-18T14:43:33.719Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-00000000035a"
+              },
+              {
+                "id": "00000000-0000-4000-8000-00000000035b",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T15:10:35.343Z",
+                "updatedAt": "2026-11-18T15:10:35.343Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-00000000035c"
+              },
+              {
+                "id": "00000000-0000-4000-8000-00000000035d",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T15:24:46.395Z",
+                "updatedAt": "2026-11-18T15:24:46.395Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-00000000035e"
+              },
+              {
+                "id": "00000000-0000-4000-8000-00000000035f",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T15:45:37.132Z",
+                "updatedAt": "2026-11-18T15:45:37.132Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000360"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000361",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T17:01:07.488Z",
+                "updatedAt": "2026-11-18T17:01:07.488Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000362"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000363",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T18:31:25.694Z",
+                "updatedAt": "2026-11-18T18:31:25.694Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000364"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000365",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T19:47:41.592Z",
+                "updatedAt": "2026-11-18T19:47:41.592Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000366"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000367",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T21:30:58.837Z",
+                "updatedAt": "2026-11-18T21:30:58.837Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000368"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000369",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-18T23:01:10.851Z",
+                "updatedAt": "2026-11-18T23:01:10.851Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-00000000036a"
+              },
+              {
+                "id": "00000000-0000-4000-8000-00000000036b",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-19T02:01:30.081Z",
+                "updatedAt": "2026-11-19T02:01:30.081Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-00000000036c"
+              },
+              {
+                "id": "00000000-0000-4000-8000-00000000036d",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-19T05:00:46.095Z",
+                "updatedAt": "2026-11-19T05:00:46.095Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-00000000036e"
+              },
+              {
+                "id": "00000000-0000-4000-8000-00000000036f",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-19T06:47:13.714Z",
+                "updatedAt": "2026-11-19T06:47:13.714Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000370"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000371",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-19T08:04:03.988Z",
+                "updatedAt": "2026-11-19T08:04:03.988Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000372"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000373",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-19T10:46:13.874Z",
+                "updatedAt": "2026-11-19T10:46:13.874Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000374"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000375",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-19T11:21:12.065Z",
+                "updatedAt": "2026-11-19T11:21:12.065Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000340"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000376",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-19T14:31:26.287Z",
+                "updatedAt": "2026-11-19T14:31:26.287Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000331"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000377",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-19T21:24:32.982Z",
+                "updatedAt": "2026-11-19T21:24:32.982Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000317"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000378",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-19T21:25:52.512Z",
+                "updatedAt": "2026-11-19T21:25:52.512Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-00000000030a"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000379",
+                "body": "example body",
+                "deleted": false,
+                "authorId": null,
+                "createdAt": "2026-11-19T21:25:52.698Z",
+                "updatedAt": "2026-11-19T21:25:52.698Z",
+                "authorType": "system",
+                "sourceTrust": null,
+                "createdByRunId": null
+              },
+              {
+                "id": "00000000-0000-4000-8000-00000000037a",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-19T21:27:15.570Z",
+                "updatedAt": "2026-11-19T21:27:15.570Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-000000000304"
+              },
+              {
+                "id": "00000000-0000-4000-8000-00000000037b",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-19T21:30:16.296Z",
+                "updatedAt": "2026-11-19T21:30:16.296Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-0000000002fe"
+              },
+              {
+                "id": "00000000-0000-4000-8000-00000000037c",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-20T07:28:53.867Z",
+                "updatedAt": "2026-11-20T07:28:53.867Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-0000000002f8"
+              },
+              {
+                "id": "00000000-0000-4000-8000-00000000037d",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-20T09:31:11.427Z",
+                "updatedAt": "2026-11-20T09:31:11.427Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-0000000002f2"
+              },
+              {
+                "id": "00000000-0000-4000-8000-00000000037e",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-20T11:32:26.897Z",
+                "updatedAt": "2026-11-20T11:32:26.897Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-0000000002ec"
+              },
+              {
+                "id": "00000000-0000-4000-8000-00000000037f",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-20T11:50:28.470Z",
+                "updatedAt": "2026-11-20T11:50:28.470Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-0000000002e6"
+              },
+              {
+                "id": "00000000-0000-4000-8000-00000000034c",
+                "body": "example body",
+                "deleted": false,
+                "authorId": "00000000-0000-4000-8000-00000000000f",
+                "createdAt": "2026-11-20T13:31:24.690Z",
+                "updatedAt": "2026-11-20T13:31:24.690Z",
+                "authorType": "agent",
+                "sourceTrust": null,
+                "createdByRunId": "00000000-0000-4000-8000-0000000002df"
               }
             ],
             "companyId": "00000000-0000-4000-8000-000000000003",
             "objective": "example objective",
+            "resumeDelta": {
+              "messages": [
+                {
+                  "keys": [
+                    "example keys",
+                    "example keys",
+                    "example keys",
+                    "example keys",
+                    "example keys",
+                    "example keys",
+                    "example keys",
+                    "example keys",
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                }
+              ],
+              "baseRunId": "00000000-0000-4000-8000-0000000002df"
+            },
             "completedWork": "example completedWork",
-            "humanResponses": [],
-            "recoveredFiles": [],
+            "humanResponses": [
+              {
+                "id": "00000000-0000-4000-8000-000000000380",
+                "kind": "request_checkbox_confirmation",
+                "result": {
+                  "keys": [
+                    "example keys",
+                    "example keys",
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "accepted",
+                "resolvedAt": "2026-11-18T09:24:30.571Z",
+                "resolvedByUserId": "defaultResponsibleUserId-1"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000381",
+                "kind": "ask_user_questions",
+                "result": {
+                  "keys": [
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "answered",
+                "resolvedAt": "2026-11-18T15:07:40.138Z",
+                "resolvedByUserId": "defaultResponsibleUserId-1"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000382",
+                "kind": "ask_user_questions",
+                "result": {
+                  "keys": [
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "answered",
+                "resolvedAt": "2026-11-18T15:22:59.253Z",
+                "resolvedByUserId": "defaultResponsibleUserId-1"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000383",
+                "kind": "ask_user_questions",
+                "result": {
+                  "keys": [
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "answered",
+                "resolvedAt": "2026-11-19T06:45:52.732Z",
+                "resolvedByUserId": "defaultResponsibleUserId-1"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000384",
+                "kind": "ask_user_questions",
+                "result": {
+                  "keys": [
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "answered",
+                "resolvedAt": "2026-11-19T11:19:56.137Z",
+                "resolvedByUserId": "defaultResponsibleUserId-1"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000385",
+                "kind": "ask_user_questions",
+                "result": {
+                  "keys": [
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "answered",
+                "resolvedAt": "2026-11-19T21:23:03.227Z",
+                "resolvedByUserId": "defaultResponsibleUserId-1"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000386",
+                "kind": "request_checkbox_confirmation",
+                "result": {
+                  "keys": [
+                    "example keys",
+                    "example keys",
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "accepted",
+                "resolvedAt": "2026-11-20T07:26:23.797Z",
+                "resolvedByUserId": "defaultResponsibleUserId-1"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000387",
+                "kind": "ask_user_questions",
+                "result": {
+                  "keys": [
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "answered",
+                "resolvedAt": "2026-11-20T11:50:03.610Z",
+                "resolvedByUserId": "defaultResponsibleUserId-1"
+              }
+            ],
             "objectiveSource": {
-              "id": "00000000-0000-4000-8000-00000000005b",
+              "id": "00000000-0000-4000-8000-000000000036",
               "kind": "description",
               "revision": "example revision"
             },
             "completedActions": [],
-            "interruptedRunId": "00000000-0000-4000-8000-0000000000a0",
             "originCommentIds": [],
             "recoveryOutcomes": [],
-            "interactionOutcomes": [],
+            "interactionOutcomes": [
+              {
+                "id": "00000000-0000-4000-8000-000000000380",
+                "kind": "request_checkbox_confirmation",
+                "result": {
+                  "keys": [
+                    "example keys",
+                    "example keys",
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "accepted"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000381",
+                "kind": "ask_user_questions",
+                "result": {
+                  "keys": [
+                    "example keys",
+                    "example keys",
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "answered"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000382",
+                "kind": "ask_user_questions",
+                "result": {
+                  "keys": [
+                    "example keys",
+                    "example keys",
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "answered"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000383",
+                "kind": "ask_user_questions",
+                "result": {
+                  "keys": [
+                    "example keys",
+                    "example keys",
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "answered"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000384",
+                "kind": "ask_user_questions",
+                "result": {
+                  "keys": [
+                    "example keys",
+                    "example keys",
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "answered"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000385",
+                "kind": "ask_user_questions",
+                "result": {
+                  "keys": [
+                    "example keys",
+                    "example keys",
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "answered"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000386",
+                "kind": "request_checkbox_confirmation",
+                "result": {
+                  "keys": [
+                    "example keys",
+                    "example keys",
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "accepted"
+              },
+              {
+                "id": "00000000-0000-4000-8000-000000000387",
+                "kind": "ask_user_questions",
+                "result": {
+                  "keys": [
+                    "example keys",
+                    "example keys",
+                    "example keys"
+                  ],
+                  "type": "object",
+                  "_truncated": true
+                },
+                "status": "answered"
+              }
+            ],
             "unresolvedInteractionIds": []
           },
           "connectionInstructions": null,
@@ -609,24 +1202,20 @@
           "simplifiedEnglishInteractions": false,
           "externalInteractionContinuation": false
         },
-        "previousRunId": "00000000-0000-4000-8000-0000000000a0",
         "skillVersions": {
-          "example_key_28": "00000000-0000-4000-8000-00000000034c",
-          "example_key_29": "00000000-0000-4000-8000-00000000034d",
-          "example_key_30": "00000000-0000-4000-8000-00000000034e",
-          "example_key_31": "00000000-0000-4000-8000-00000000034f",
-          "example_key_32": "00000000-0000-4000-8000-000000000350",
-          "example_key_33": "00000000-0000-4000-8000-000000000351",
-          "example_key_34": "00000000-0000-4000-8000-000000000352",
-          "example_key_35": "00000000-0000-4000-8000-000000000353"
+          "example_key_28": "00000000-0000-4000-8000-000000000388",
+          "example_key_29": "00000000-0000-4000-8000-000000000389",
+          "example_key_30": "00000000-0000-4000-8000-00000000038a",
+          "example_key_31": "00000000-0000-4000-8000-00000000038b"
         },
         "paperclipIssue": {
-          "id": "00000000-0000-4000-8000-00000000005b",
+          "id": "00000000-0000-4000-8000-000000000036",
           "title": "example title",
           "workMode": "standard",
-          "identifier": "DEMO-11",
+          "identifier": "DEMO-1",
           "description": "example description"
         },
+        "recoveryPolicy": null,
         "paperclipScratch": {
           "dir": "example dir",
           "type": "heartbeat_run",
@@ -639,8 +1228,6 @@
           ]
         },
         "paperclipSecrets": "example paperclipSecrets",
-        "forceFreshSession": true,
-        "responsibleUserId": "defaultResponsibleUserId-1",
         "wakeTriggerDetail": "example wakeTriggerDetail",
         "paperclipWorkspace": {
           "cwd": "example cwd",
@@ -668,7 +1255,7 @@
             "remote": {
               "path": null
             },
-            "leaseId": "00000000-0000-4000-8000-000000000358",
+            "leaseId": "00000000-0000-4000-8000-00000000039e",
             "rebuild": {
               "mode": "example mode",
               "repoRef": null,
@@ -711,7 +1298,7 @@
               "localPath": "example localPath",
               "remotePath": null,
               "providerLeaseId": null,
-              "executionWorkspaceId": "00000000-0000-4000-8000-00000000009f"
+              "executionWorkspaceId": "00000000-0000-4000-8000-00000000009c"
             },
             "summary": "example summary",
             "version": 1,
@@ -730,14 +1317,14 @@
           "worktreePath": null,
           "agentHomeForPermissions": "example agentHomeForPermissions"
         },
-        "taskRetryRequestId": "00000000-0000-4000-8000-000000000359",
+        "monitorAttemptCount": 18,
         "paperclipWorkspaces": [],
-        "executionWorkspaceId": "00000000-0000-4000-8000-00000000009f",
+        "executionWorkspaceId": "00000000-0000-4000-8000-00000000009c",
         "paperclipEnvironment": {
           "id": "00000000-0000-4000-8000-00000000002d",
           "name": "example name",
           "driver": "example driver",
-          "leaseId": "00000000-0000-4000-8000-000000000358",
+          "leaseId": "00000000-0000-4000-8000-00000000039e",
           "workspaceRealization": {
             "mode": "example mode",
             "local": {
@@ -754,7 +1341,7 @@
             "remote": {
               "path": null
             },
-            "leaseId": "00000000-0000-4000-8000-000000000358",
+            "leaseId": "00000000-0000-4000-8000-00000000039e",
             "rebuild": {
               "mode": "example mode",
               "repoRef": null,
@@ -797,7 +1384,7 @@
               "localPath": "example localPath",
               "remotePath": null,
               "providerLeaseId": null,
-              "executionWorkspaceId": "00000000-0000-4000-8000-00000000009f"
+              "executionWorkspaceId": "00000000-0000-4000-8000-00000000009c"
             },
             "summary": "example summary",
             "version": 1,
@@ -823,52 +1410,621 @@
           "assignment": {
             "owner": "example owner",
             "description": {
-              "id": "00000000-0000-4000-8000-00000000005b",
+              "id": "00000000-0000-4000-8000-000000000036",
               "revision": "example revision"
             }
           }
         },
         "executionContinuation": {
-          "issueId": "00000000-0000-4000-8000-00000000005b",
+          "issueId": "00000000-0000-4000-8000-000000000036",
           "trigger": {
-            "reason": "task_retry",
-            "sourceRunId": "00000000-0000-4000-8000-0000000000a0",
+            "reason": "issue_monitor_due",
+            "sourceRunId": null,
             "interactionId": null
           },
           "version": 1,
           "coverage": {
             "kind": "full_task_history",
-            "throughCommentId": "00000000-0000-4000-8000-00000000005c",
+            "throughCommentId": "00000000-0000-4000-8000-00000000034c",
             "summaryThroughCommentId": null
           },
           "messages": [
             {
-              "id": "00000000-0000-4000-8000-00000000005c",
+              "id": "00000000-0000-4000-8000-00000000034d",
               "body": "example body",
               "deleted": false,
-              "authorId": "00000000-0000-4000-8000-000000000009",
-              "createdAt": "2026-11-20T14:03:00.769Z",
-              "updatedAt": "2026-11-20T14:03:00.769Z",
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T09:21:34.625Z",
+              "updatedAt": "2026-11-18T09:21:34.625Z",
               "authorType": "agent",
               "sourceTrust": null,
-              "createdByRunId": "00000000-0000-4000-8000-0000000000a0"
+              "createdByRunId": "00000000-0000-4000-8000-00000000034e"
+            },
+            {
+              "id": "00000000-0000-4000-8000-00000000034f",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T09:26:30.049Z",
+              "updatedAt": "2026-11-18T09:26:30.049Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000350"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000351",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T09:30:52.177Z",
+              "updatedAt": "2026-11-18T09:30:52.177Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000352"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000353",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T11:32:22.841Z",
+              "updatedAt": "2026-11-18T11:32:22.841Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000354"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000355",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T12:41:20.431Z",
+              "updatedAt": "2026-11-18T12:41:20.431Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000356"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000357",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T14:42:19.571Z",
+              "updatedAt": "2026-11-18T14:42:19.571Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000358"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000359",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T14:43:33.719Z",
+              "updatedAt": "2026-11-18T14:43:33.719Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-00000000035a"
+            },
+            {
+              "id": "00000000-0000-4000-8000-00000000035b",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T15:10:35.343Z",
+              "updatedAt": "2026-11-18T15:10:35.343Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-00000000035c"
+            },
+            {
+              "id": "00000000-0000-4000-8000-00000000035d",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T15:24:46.395Z",
+              "updatedAt": "2026-11-18T15:24:46.395Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-00000000035e"
+            },
+            {
+              "id": "00000000-0000-4000-8000-00000000035f",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T15:45:37.132Z",
+              "updatedAt": "2026-11-18T15:45:37.132Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000360"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000361",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T17:01:07.488Z",
+              "updatedAt": "2026-11-18T17:01:07.488Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000362"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000363",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T18:31:25.694Z",
+              "updatedAt": "2026-11-18T18:31:25.694Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000364"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000365",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T19:47:41.592Z",
+              "updatedAt": "2026-11-18T19:47:41.592Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000366"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000367",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T21:30:58.837Z",
+              "updatedAt": "2026-11-18T21:30:58.837Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000368"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000369",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-18T23:01:10.851Z",
+              "updatedAt": "2026-11-18T23:01:10.851Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-00000000036a"
+            },
+            {
+              "id": "00000000-0000-4000-8000-00000000036b",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-19T02:01:30.081Z",
+              "updatedAt": "2026-11-19T02:01:30.081Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-00000000036c"
+            },
+            {
+              "id": "00000000-0000-4000-8000-00000000036d",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-19T05:00:46.095Z",
+              "updatedAt": "2026-11-19T05:00:46.095Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-00000000036e"
+            },
+            {
+              "id": "00000000-0000-4000-8000-00000000036f",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-19T06:47:13.714Z",
+              "updatedAt": "2026-11-19T06:47:13.714Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000370"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000371",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-19T08:04:03.988Z",
+              "updatedAt": "2026-11-19T08:04:03.988Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000372"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000373",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-19T10:46:13.874Z",
+              "updatedAt": "2026-11-19T10:46:13.874Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000374"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000375",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-19T11:21:12.065Z",
+              "updatedAt": "2026-11-19T11:21:12.065Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000340"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000376",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-19T14:31:26.287Z",
+              "updatedAt": "2026-11-19T14:31:26.287Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000331"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000377",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-19T21:24:32.982Z",
+              "updatedAt": "2026-11-19T21:24:32.982Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000317"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000378",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-19T21:25:52.512Z",
+              "updatedAt": "2026-11-19T21:25:52.512Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-00000000030a"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000379",
+              "body": "example body",
+              "deleted": false,
+              "authorId": null,
+              "createdAt": "2026-11-19T21:25:52.698Z",
+              "updatedAt": "2026-11-19T21:25:52.698Z",
+              "authorType": "system",
+              "sourceTrust": null,
+              "createdByRunId": null
+            },
+            {
+              "id": "00000000-0000-4000-8000-00000000037a",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-19T21:27:15.570Z",
+              "updatedAt": "2026-11-19T21:27:15.570Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-000000000304"
+            },
+            {
+              "id": "00000000-0000-4000-8000-00000000037b",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-19T21:30:16.296Z",
+              "updatedAt": "2026-11-19T21:30:16.296Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-0000000002fe"
+            },
+            {
+              "id": "00000000-0000-4000-8000-00000000037c",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-20T07:28:53.867Z",
+              "updatedAt": "2026-11-20T07:28:53.867Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-0000000002f8"
+            },
+            {
+              "id": "00000000-0000-4000-8000-00000000037d",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-20T09:31:11.427Z",
+              "updatedAt": "2026-11-20T09:31:11.427Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-0000000002f2"
+            },
+            {
+              "id": "00000000-0000-4000-8000-00000000037e",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-20T11:32:26.897Z",
+              "updatedAt": "2026-11-20T11:32:26.897Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-0000000002ec"
+            },
+            {
+              "id": "00000000-0000-4000-8000-00000000037f",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-20T11:50:28.470Z",
+              "updatedAt": "2026-11-20T11:50:28.470Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-0000000002e6"
+            },
+            {
+              "id": "00000000-0000-4000-8000-00000000034c",
+              "body": "example body",
+              "deleted": false,
+              "authorId": "00000000-0000-4000-8000-00000000000f",
+              "createdAt": "2026-11-20T13:31:24.690Z",
+              "updatedAt": "2026-11-20T13:31:24.690Z",
+              "authorType": "agent",
+              "sourceTrust": null,
+              "createdByRunId": "00000000-0000-4000-8000-0000000002df"
             }
           ],
           "companyId": "00000000-0000-4000-8000-000000000003",
           "objective": "example objective",
           "completedWork": "example completedWork",
-          "humanResponses": [],
-          "recoveredFiles": [],
+          "humanResponses": [
+            {
+              "id": "00000000-0000-4000-8000-000000000380",
+              "kind": "request_checkbox_confirmation",
+              "result": {
+                "reason": null,
+                "outcome": "accepted",
+                "selectedOptionIds": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 35
+                }
+              },
+              "status": "accepted",
+              "resolvedAt": "2026-11-18T09:24:30.571Z",
+              "resolvedByUserId": "defaultResponsibleUserId-1"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000381",
+              "kind": "ask_user_questions",
+              "result": {
+                "answers": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 2
+                }
+              },
+              "status": "answered",
+              "resolvedAt": "2026-11-18T15:07:40.138Z",
+              "resolvedByUserId": "defaultResponsibleUserId-1"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000382",
+              "kind": "ask_user_questions",
+              "result": {
+                "answers": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 2
+                }
+              },
+              "status": "answered",
+              "resolvedAt": "2026-11-18T15:22:59.253Z",
+              "resolvedByUserId": "defaultResponsibleUserId-1"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000383",
+              "kind": "ask_user_questions",
+              "result": {
+                "answers": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 2
+                }
+              },
+              "status": "answered",
+              "resolvedAt": "2026-11-19T06:45:52.732Z",
+              "resolvedByUserId": "defaultResponsibleUserId-1"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000384",
+              "kind": "ask_user_questions",
+              "result": {
+                "answers": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 1
+                }
+              },
+              "status": "answered",
+              "resolvedAt": "2026-11-19T11:19:56.137Z",
+              "resolvedByUserId": "defaultResponsibleUserId-1"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000385",
+              "kind": "ask_user_questions",
+              "result": {
+                "answers": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 1
+                }
+              },
+              "status": "answered",
+              "resolvedAt": "2026-11-19T21:23:03.227Z",
+              "resolvedByUserId": "defaultResponsibleUserId-1"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000386",
+              "kind": "request_checkbox_confirmation",
+              "result": {
+                "reason": null,
+                "outcome": "accepted",
+                "selectedOptionIds": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 44
+                }
+              },
+              "status": "accepted",
+              "resolvedAt": "2026-11-20T07:26:23.797Z",
+              "resolvedByUserId": "defaultResponsibleUserId-1"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000387",
+              "kind": "ask_user_questions",
+              "result": {
+                "answers": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 1
+                }
+              },
+              "status": "answered",
+              "resolvedAt": "2026-11-20T11:50:03.610Z",
+              "resolvedByUserId": "defaultResponsibleUserId-1"
+            }
+          ],
           "objectiveSource": {
-            "id": "00000000-0000-4000-8000-00000000005b",
+            "id": "00000000-0000-4000-8000-000000000036",
             "kind": "description",
             "revision": "example revision"
           },
           "completedActions": [],
-          "interruptedRunId": "00000000-0000-4000-8000-0000000000a0",
           "originCommentIds": [],
           "recoveryOutcomes": [],
-          "interactionOutcomes": [],
+          "interactionOutcomes": [
+            {
+              "id": "00000000-0000-4000-8000-000000000380",
+              "kind": "request_checkbox_confirmation",
+              "result": {
+                "outcome": "accepted",
+                "version": 1,
+                "selectedOptionIds": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 35
+                }
+              },
+              "status": "accepted"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000381",
+              "kind": "ask_user_questions",
+              "result": {
+                "answers": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 2
+                },
+                "version": 1,
+                "summaryMarkdown": null
+              },
+              "status": "answered"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000382",
+              "kind": "ask_user_questions",
+              "result": {
+                "answers": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 2
+                },
+                "version": 1,
+                "summaryMarkdown": null
+              },
+              "status": "answered"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000383",
+              "kind": "ask_user_questions",
+              "result": {
+                "answers": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 2
+                },
+                "version": 1,
+                "summaryMarkdown": null
+              },
+              "status": "answered"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000384",
+              "kind": "ask_user_questions",
+              "result": {
+                "answers": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 1
+                },
+                "version": 1,
+                "summaryMarkdown": null
+              },
+              "status": "answered"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000385",
+              "kind": "ask_user_questions",
+              "result": {
+                "answers": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 1
+                },
+                "version": 1,
+                "summaryMarkdown": null
+              },
+              "status": "answered"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000386",
+              "kind": "request_checkbox_confirmation",
+              "result": {
+                "outcome": "accepted",
+                "version": 1,
+                "selectedOptionIds": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 44
+                }
+              },
+              "status": "accepted"
+            },
+            {
+              "id": "00000000-0000-4000-8000-000000000387",
+              "kind": "ask_user_questions",
+              "result": {
+                "answers": {
+                  "type": "array",
+                  "_truncated": true,
+                  "originalLength": 1
+                },
+                "version": 1,
+                "summaryMarkdown": null
+              },
+              "status": "answered"
+            }
+          ],
           "unresolvedInteractionIds": []
         },
         "paperclipCasesEnabled": false,
@@ -879,17 +2035,12 @@
           "kind": "standard"
         },
         "skillSelectionSnapshot": true,
-        "recoveredWorkspaceFiles": [],
         "githubAuthenticationMode": "example githubAuthenticationMode",
-        "paperclipHarnessCheckedOut": true,
-        "queuedCommentSourceWakeIds": [
-          "00000000-0000-4000-8000-000000000359"
-        ],
         "paperclipContinuationSummary": {
           "key": "example key",
           "body": "example body",
           "title": "example title",
-          "updatedAt": "2026-11-20T14:03:05.434Z",
+          "updatedAt": "2026-11-20T13:31:32.074Z",
           "sourceTrust": null
         },
         "paperclipTaskMarkdownCompact": "example paperclipTaskMarkdownCompact",
@@ -910,14 +2061,14 @@
         "example commandNotes"
       ],
       "promptMetrics": {
-        "promptChars": 30153,
-        "wakePromptChars": 11047,
+        "promptChars": 92417,
+        "wakePromptChars": 52086,
         "runtimeNoteChars": 1552,
-        "taskContextChars": 3206,
-        "instructionsChars": 4509,
+        "taskContextChars": 11531,
+        "instructionsChars": 1997,
         "sessionHandoffChars": 0,
         "bootstrapPromptChars": 0,
-        "heartbeatPromptChars": 2251
+        "heartbeatPromptChars": 2252
       }
     },
     "sourceInstanceId": null,
@@ -925,13 +2076,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:57.570Z"
+    "createdAt": "2026-11-20T15:31:06.614Z"
   },
   {
-    "id": 38196,
+    "id": 38460,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 16,
     "eventType": "example eventType",
     "stream": "system",
@@ -941,20 +2092,20 @@
     "payload": {
       "phase": "example phase",
       "outcome": "ok",
-      "durationMs": 63
+      "durationMs": 120
     },
     "sourceInstanceId": null,
     "sourceEventId": null,
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:18:57.598Z"
+    "createdAt": "2026-11-20T15:31:06.672Z"
   },
   {
-    "id": 38197,
+    "id": 38461,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 17,
     "eventType": "example eventType",
     "stream": "system",
@@ -964,20 +2115,20 @@
     "payload": {
       "phase": "example phase",
       "outcome": "ok",
-      "durationMs": 16724
+      "durationMs": 120116
     },
     "sourceInstanceId": null,
     "sourceEventId": null,
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:19:14.331Z"
+    "createdAt": "2026-11-20T15:33:06.798Z"
   },
   {
-    "id": 38198,
+    "id": 38462,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 18,
     "eventType": "example eventType",
     "stream": "system",
@@ -987,20 +2138,20 @@
     "payload": {
       "phase": "example phase",
       "outcome": "ok",
-      "durationMs": 70
+      "durationMs": 48
     },
     "sourceInstanceId": null,
     "sourceEventId": null,
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:19:14.412Z"
+    "createdAt": "2026-11-20T15:33:06.857Z"
   },
   {
-    "id": 38199,
+    "id": 38463,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 19,
     "eventType": "example eventType",
     "stream": "system",
@@ -1010,20 +2161,20 @@
     "payload": {
       "phase": "example phase",
       "outcome": "ok",
-      "durationMs": 1
+      "durationMs": 0
     },
     "sourceInstanceId": null,
     "sourceEventId": null,
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:19:14.448Z"
+    "createdAt": "2026-11-20T15:33:06.868Z"
   },
   {
-    "id": 38200,
+    "id": 38464,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 20,
     "eventType": "example eventType",
     "stream": "system",
@@ -1040,13 +2191,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:19:14.459Z"
+    "createdAt": "2026-11-20T15:33:06.878Z"
   },
   {
-    "id": 38201,
+    "id": 38465,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 21,
     "eventType": "example eventType",
     "stream": "system",
@@ -1068,13 +2219,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:19:14.696Z"
+    "createdAt": "2026-11-20T15:33:06.958Z"
   },
   {
-    "id": 38202,
+    "id": 38466,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 22,
     "eventType": "example eventType",
     "stream": "system",
@@ -1084,20 +2235,20 @@
     "payload": {
       "phase": "example phase",
       "outcome": "ok",
-      "durationMs": 211
+      "durationMs": 81
     },
     "sourceInstanceId": null,
     "sourceEventId": null,
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:19:14.703Z"
+    "createdAt": "2026-11-20T15:33:06.970Z"
   },
   {
-    "id": 38203,
+    "id": 38467,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 23,
     "eventType": "example eventType",
     "stream": "system",
@@ -1116,13 +2267,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:19:14.745Z"
+    "createdAt": "2026-11-20T15:33:06.981Z"
   },
   {
-    "id": 38204,
+    "id": 38468,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 24,
     "eventType": "example eventType",
     "stream": "system",
@@ -1138,13 +2289,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:19:15.881Z"
+    "createdAt": "2026-11-20T15:33:08.039Z"
   },
   {
-    "id": 38205,
+    "id": 38469,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 25,
     "eventType": "example eventType",
     "stream": "system",
@@ -1170,13 +2321,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:19:16.115Z"
+    "createdAt": "2026-11-20T15:33:08.156Z"
   },
   {
-    "id": 38206,
+    "id": 38470,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 26,
     "eventType": "example eventType",
     "stream": "system",
@@ -1192,13 +2343,13 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:19:16.656Z"
+    "createdAt": "2026-11-20T15:33:08.789Z"
   },
   {
-    "id": 38207,
+    "id": 38471,
     "companyId": "00000000-0000-4000-8000-000000000003",
     "runId": "00000000-0000-4000-8000-0000000002cd",
-    "agentId": "00000000-0000-4000-8000-000000000009",
+    "agentId": "00000000-0000-4000-8000-00000000000f",
     "seq": 27,
     "eventType": "example eventType",
     "stream": "system",
@@ -1208,7 +2359,7 @@
     "payload": {
       "phase": "example phase",
       "outcome": "succeeded",
-      "durationMs": 25708,
+      "durationMs": 127886,
       "durableSettlement": true
     },
     "sourceInstanceId": null,
@@ -1216,6 +2367,6 @@
     "sourceSeq": null,
     "sourcePayloadSha256": null,
     "protocolSchemaVersion": null,
-    "createdAt": "2026-11-20T14:19:16.699Z"
+    "createdAt": "2026-11-20T15:33:08.832Z"
   }
 ]

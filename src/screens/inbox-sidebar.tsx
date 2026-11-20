@@ -23,11 +23,14 @@ export function SidebarHeader(props: { title: string; count?: number | string })
 export function SidebarLine(props: { marker?: JSX.Element; label: string; value?: string | number; labelColor?: RGBA }) {
   const { theme } = useTheme()
   const width = () => (props.marker ? INNER - 2 : INNER)
+  const value = () => (props.value === undefined ? "" : String(props.value))
+  // The value column widens for long values such as a model name, leaving the label at least 6 columns.
+  const valueWidth = () => Math.min(width() - 6, Math.max(8, value().length + 1))
   return (
     <text fg={theme().muted} wrapMode="none">
       <Show when={props.marker}>{props.marker} </Show>
-      <span style={{ fg: props.labelColor ?? theme().muted }}>{fit(props.label, width() - 8)}</span>
-      {fit(props.value === undefined ? "" : String(props.value), 8, "right")}
+      <span style={{ fg: props.labelColor ?? theme().muted }}>{fit(props.label, width() - valueWidth())}</span>
+      {fit(value(), valueWidth(), "right")}
     </text>
   )
 }

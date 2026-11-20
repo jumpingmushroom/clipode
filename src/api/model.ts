@@ -91,3 +91,17 @@ export type TaskCost = { costUsd: number; runCount: number; inputTokens: number;
 export type ProjectSummary = { id: string; name: string }
 
 export type CompanySummary = { id: string; name: string; prefix: string | null }
+
+export type RunDetail = {
+  id: string
+  status: string
+  agentId: string
+  issueId: string | null
+  createdAt: string
+  startedAt: string | null
+  finishedAt: string | null
+  error: string | null
+  costUsd: number | null
+  inputTokens: number | null
+  outputTokens: number | null
+}

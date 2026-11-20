@@ -68,7 +68,7 @@ SOFTWARE.
 
 https://github.com/paperclipai/paperclip
 
-API types generated from the server's OpenAPI document, and type declarations from the `@paperclipai/shared` package.
+API types generated from the server's OpenAPI document, and type declarations from the `@paperclipai/shared` package. The run-log parsers in `src/transcript` (`acp.ts`, `claude.ts`, `codex.ts`) are ported from `packages/adapter-utils/src/acpx-engine/ui.ts` and `packages/adapters/{claude,codex}-local/src/ui/parse-stdout.ts`.
 
 ```text
 MIT License

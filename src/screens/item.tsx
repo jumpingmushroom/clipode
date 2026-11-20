@@ -35,7 +35,8 @@ export function ItemScreen(props: { id: string; version: string; sidebar: boolea
         key: "return",
         cmd: () => {
           const it = item()
-          if (it?.issueId) route.navigate({ name: "thread", id: it.issueId })
+          if (it?.kind === "failed_run") route.navigate({ name: "run", id: it.subjectId })
+          else if (it?.issueId) route.navigate({ name: "thread", id: it.issueId })
         },
       },
       { key: "down,j", cmd: () => scroll?.scrollBy(1) },

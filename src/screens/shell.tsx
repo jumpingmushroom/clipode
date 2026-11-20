@@ -21,6 +21,7 @@ import { ItemScreen } from "./item.tsx"
 import { SignInScreen } from "./sign-in.tsx"
 import { TasksScreen } from "./tasks.tsx"
 import { ThreadScreen } from "./thread.tsx"
+import { RunScreen } from "./run.tsx"
 
 export function Shell(props: { version: string; config?: Config }) {
   const { session } = useStores()
@@ -98,7 +99,7 @@ function Main(props: { version: string; config?: Config }) {
   ]
   useCommands(() => commands, { overrides: props.config?.keybinds })
 
-  const param = (name: "item" | "thread") => {
+  const param = (name: "item" | "thread" | "run") => {
     const r = route.current()
     return r.name === name ? r.id : undefined
   }
@@ -113,6 +114,9 @@ function Main(props: { version: string; config?: Config }) {
         </Match>
         <Match when={param("thread")} keyed>
           {(id: string) => <ThreadScreen id={id} version={props.version} sidebar={showSidebar()} />}
+        </Match>
+        <Match when={param("run")} keyed>
+          {(id: string) => <RunScreen id={id} version={props.version} sidebar={showSidebar()} />}
         </Match>
         <Match when={route.current().name === "tasks"}>
           <TasksScreen version={props.version} sidebar={showSidebar()} />

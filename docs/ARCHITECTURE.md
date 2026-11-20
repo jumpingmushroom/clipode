@@ -181,7 +181,13 @@ Each store is a Solid store with the same small surface: `load()`, `refresh()`, 
 
 A run's log is adapter output, and its format differs per adapter. `src/transcript` turns log records into a common list of entries: assistant text, thinking, user text, tool call with result, session init, final result with tokens and cost, and raw lines.
 
-Phase 1 parses the Claude, Codex and ACP families, which is the set paperclip-android handles. The Claude parser is built and tested first, because the agents on the target instance run mostly on Claude; Codex and ACP follow. Any other adapter falls back to raw lines, so every run is at least readable.
+Phase 1 parses the Claude, Codex and ACP families, which is the set paperclip-android handles. The parsers are ported from Paperclip's own UI parsers (`packages/adapter-utils/src/acpx-engine/ui.ts` and `packages/adapters/*/src/ui/parse-stdout.ts`).
+
+Found on `2026.1117.0`: `claude_local` agents write ACP records (`acpx.session`, `acpx.text_delta`, `acpx.tool_call`, `acpx.status`, `acpx.result`), not Claude Code's stream-json. So the format is detected per line from the record's `type`, not from the agent's adapter type, and the ACP parser is the one tested against a recorded log. Claude stream-json and Codex are tested with invented logs. Any other line falls back to a raw line, so every run is at least readable.
+
+The log is read by byte offset: `nextOffset` is present only when a read stopped at `limitBytes`, so a finished run is read in ranges until it is absent, and a live run is polled from the last offset every 2 seconds. Records split lines at arbitrary points, so lines are rebuilt per stream and a partial line is carried into the next read.
+
+In the transcript, `t` expands reasoning, `e` expands tool output beyond 3 lines, and `s` shows ACP status lines (usage updates and similar), hidden by default. In a task thread, `o` lists the task's runs.
 
 ## Screens and navigation
 
