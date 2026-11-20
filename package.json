@@ -16,7 +16,8 @@
     "live-probe": "bun run script/live-probe.ts",
     "record": "bun run script/record.ts",
     "audit-fixtures": "bun run script/audit-fixtures.ts",
-    "gen-types": "bun run script/gen-types.ts"
+    "gen-types": "bun run script/gen-types.ts",
+    "build": "bun run script/build.ts"
   },
   "dependencies": {
     "@opentui/core": "0.9.7",

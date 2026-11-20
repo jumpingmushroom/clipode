@@ -30,6 +30,8 @@ export type AppProps = {
   onTabs?: (companyId: string, ids: string[]) => void
   plugins?: LoadedPlugin[]
   pluginErrors?: PluginError[]
+  /** Quits so the launcher can start the updated binary. */
+  onRestart?: () => void
 }
 
 /** Every provider the screens need, in dependency order. */
@@ -62,12 +64,15 @@ export function App(props: AppProps) {
         onTabs={props.onTabs}
         plugins={props.plugins}
         pluginErrors={props.pluginErrors}
+        onRestart={props.onRestart}
       />
     </Providers>
   )
 }
 
-export async function run(version: string) {
+/** Runs the app until it quits. Returns true when an in-app update asks for a restart. */
+export async function run(version: string): Promise<boolean> {
+  let restart = false
   const { config, error } = await loadConfig()
   const state = createStateWriter(await loadState())
   const { plugins, errors: pluginErrors } = await loadPlugins(config.plugins ?? [], configDir())
@@ -94,6 +99,10 @@ export async function run(version: string) {
         onTabs={(companyId, ids) => void state.update({ tabs: { ...state.get().tabs, [companyId]: ids } })}
         plugins={plugins}
         pluginErrors={pluginErrors}
+        onRestart={() => {
+          restart = true
+          renderer.destroy()
+        }}
       />
     ),
     renderer,
@@ -101,4 +110,5 @@ export async function run(version: string) {
   await destroyed
   await renderer.closed.catch(() => {})
   if (error) console.error(`clipode: ${error}`)
+  return restart
 }

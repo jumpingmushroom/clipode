@@ -374,6 +374,7 @@ The build order puts the riskiest unknowns first: talking to the real instance, 
 - Targets: Linux and macOS, x64 and arm64. Linux binaries build on Linux and macOS binaries on a Mac runner so they carry a valid signature.
 - A version tag triggers the workflow: typecheck, tests, build, start each binary once, then publish gzipped binaries with a `SHA256SUMS` file.
 - `install.sh` downloads the right binary and verifies its checksum. `clipode update` and an in-app command do the same and restart.
+- Built as of step 10: `script/build.ts` compiles with OpenTUI's Solid transform plugin and installs every platform's native OpenTUI package first, because the core package's loader names all of them. A binary is about 135 MB, of which the Bun runtime is 107 MB; gzipped, about 59 MB. The workflow builds each target on a runner of that platform (`ubuntu-latest`, `ubuntu-24.04-arm`, `macos-13`, `macos-latest`). Releases are expected at `github.com/jumpingmushroom/clipode`; the address is set in `src/update.ts` and `install.sh`.
 
 ## Risks and open questions
 

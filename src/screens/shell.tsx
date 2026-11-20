@@ -15,6 +15,7 @@ import { openThemeDialog } from "../ui/dialog-theme.tsx"
 import { Spinner } from "../ui/spinner.tsx"
 import { useToast } from "../ui/toast.tsx"
 import { Wordmark } from "../ui/wordmark.tsx"
+import { isCompiled, update } from "../update.ts"
 import { CompanyPickerScreen, useCompanyDialog } from "./company-picker.tsx"
 import { SIDEBAR_MIN_COLUMNS } from "./frame.tsx"
 import { InboxScreen } from "./inbox.tsx"
@@ -39,6 +40,7 @@ export type ShellProps = {
   onTabs?: (companyId: string, ids: string[]) => void
   plugins?: LoadedPlugin[]
   pluginErrors?: PluginError[]
+  onRestart?: () => void
 }
 
 export function Shell(props: ShellProps) {
@@ -64,7 +66,7 @@ export function Shell(props: ShellProps) {
             plugins={[{ plugin: sidebarFooter(props.version), options: {}, source: "built-in" }, ...(props.plugins ?? [])]}
             errors={props.pluginErrors}
           >
-            <Main version={props.version} config={props.config} />
+            <Main version={props.version} config={props.config} onRestart={props.onRestart} />
           </PluginHostProvider>
         </TabsProvider>
       </Match>
@@ -85,7 +87,7 @@ function Starting() {
   )
 }
 
-function Main(props: { version: string; config?: Config }) {
+function Main(props: { version: string; config?: Config; onRestart?: () => void }) {
   const renderer = useRenderer()
   const theme = useTheme()
   const dialog = useDialog()
@@ -134,6 +136,23 @@ function Main(props: { version: string; config?: Config }) {
     { name: "session.reconnect", title: "Reconnect", category: "Session", keys: "ctrl+r", run: () => live.reconnect() },
     { name: "session.company", title: "Switch company", category: "Session", keys: "<leader>c", run: openCompanies },
     { name: "session.signout", title: "Sign out", category: "Session", run: () => void session.signOut() },
+    {
+      name: "app.update",
+      title: "Update clipode",
+      category: "App",
+      run: async () => {
+        if (!isCompiled()) return toast.show("Updates apply to an installed binary; use git pull in a source checkout.", "info")
+        toast.show("Checking for updates…", "info", 2000)
+        try {
+          const result = await update({ current: props.version, target: process.execPath })
+          if (result.status === "current") return toast.show(`clipode ${result.version} is the latest release.`, "success")
+          toast.show(`Updated to ${result.version}. Restarting…`, "success")
+          setTimeout(() => props.onRestart?.(), 1200)
+        } catch (err) {
+          toast.error(err)
+        }
+      },
+    },
     { name: "app.quit", title: "Quit", category: "Session", keys: "<leader>q", run: () => renderer.destroy() },
     {
       name: "app.interrupt",

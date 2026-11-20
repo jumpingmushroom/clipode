@@ -18,6 +18,7 @@ Bun is installed in `~/.bun/bin`. Add it to `PATH` if `bun` is not found.
 | `bun run live-probe` | Open the live-events WebSocket with the session cookie and print the exchange |
 | `bun run record` | Record scrubbed fixtures for one company (`SMOKE_COMPANY=<issue prefix>`) into `test/fixtures/company/` |
 | `bun run audit-fixtures` | Search all fixtures for real names from the instance and for keys that are not field names; run before committing fixtures |
+| `bun run build` | Compile a binary for this machine into `dist/` (`--target=linux-arm64,darwin-arm64` or `--all` for others), with gzipped copies and `SHA256SUMS` |
 | `bun run gen-types` | Regenerate `src/api/types.ts` from the instance's `/api/openapi.json` |
 
 The last five need `PAPERCLIP_URL`, `PAPERCLIP_EMAIL` and `PAPERCLIP_PASSWORD`. They are in `smoke.env` at the repository root (mode 600, ignored by git): run them as `bun --env-file=smoke.env run <script>`, and never print the file.
