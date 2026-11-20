@@ -23,8 +23,20 @@ import { SignInScreen } from "./sign-in.tsx"
 import { TasksScreen } from "./tasks.tsx"
 import { ThreadScreen } from "./thread.tsx"
 import { RunScreen } from "./run.tsx"
+import { AgentsScreen } from "./agents.tsx"
+import { AgentScreen } from "./agent.tsx"
+import { SettingsDialog } from "./settings.tsx"
+import { TabsProvider, useTabs } from "./tabs.tsx"
 
-export function Shell(props: { version: string; config?: Config }) {
+export type ShellProps = {
+  version: string
+  config?: Config
+  /** Open tabs per company, from kv.json. */
+  tabs?: Record<string, string[]>
+  onTabs?: (companyId: string, ids: string[]) => void
+}
+
+export function Shell(props: ShellProps) {
   const { session } = useStores()
   onMount(() => {
     if (session.state.status === "starting") void session.start()
@@ -42,7 +54,9 @@ export function Shell(props: { version: string; config?: Config }) {
       </Match>
       <Match when={session.state.companyId} keyed>
         {/* Keyed on the company, so a switch rebuilds the screens with the new company's stores. */}
-        <Main version={props.version} config={props.config} />
+        <TabsProvider initial={props.tabs?.[session.state.companyId!]} onChange={(ids) => props.onTabs?.(session.state.companyId!, ids)}>
+          <Main version={props.version} config={props.config} />
+        </TabsProvider>
       </Match>
     </Switch>
   )
@@ -70,6 +84,7 @@ function Main(props: { version: string; config?: Config }) {
   const { session } = useStores()
   const dimensions = useTerminalDimensions()
   const openCompanies = useCompanyDialog()
+  const tabs = useTabs()!
   const pending = useKeymapSelector((k) => k.getPendingSequence())
   const [quitArmed, setQuitArmed] = createSignal(false)
   const [sidebar, setSidebar] = createSignal(props.config?.sidebar !== "hide")
@@ -91,6 +106,18 @@ function Main(props: { version: string; config?: Config }) {
     { name: "app.help", title: "Help", category: "App", keys: "<leader>h,?", run: () => dialog.replace(() => <HelpDialog />, undefined, "large") },
     { name: "go.inbox", title: "Inbox", category: "Go to", keys: "<leader>i,g i", run: () => route.reset({ name: "inbox" }) },
     { name: "go.tasks", title: "Tasks", category: "Go to", keys: "<leader>t,g t", run: () => route.reset({ name: "tasks" }) },
+    { name: "go.agents", title: "Agents", category: "Go to", keys: "<leader>a,g a", run: () => route.reset({ name: "agents" }) },
+    ...Array.from({ length: 9 }, (_, i): AppCommand => ({ name: `tabs.${i + 1}`, title: `Tab ${i + 1}`, category: "Tabs", keys: `<leader>${i + 1}`, hidden: true, run: () => tabs.jump(i) })),
+    { name: "tabs.next", title: "Next tab", category: "Tabs", keys: "<leader>.", run: () => tabs.cycle(1) },
+    { name: "tabs.previous", title: "Previous tab", category: "Tabs", keys: "<leader>comma", run: () => tabs.cycle(-1) },
+    { name: "tabs.close", title: "Close tab", category: "Tabs", keys: "<leader>w", run: () => tabs.close() },
+    {
+      name: "app.settings",
+      title: "Settings",
+      category: "App",
+      keys: "<leader>s",
+      run: () => dialog.replace(() => <SettingsDialog sidebar={sidebar()} toggleSidebar={() => setSidebar((v) => !v)} openCompanies={openCompanies} version={props.version} />),
+    },
     { name: "view.sidebar", title: "Toggle sidebar", category: "View", keys: "ctrl+b", run: () => setSidebar((v) => !v) },
     { name: "app.theme", title: "Switch theme", category: "View", keys: "<leader>shift+t,ctrl+t", run: () => openThemeDialog(dialog, theme) },
     { name: "session.reconnect", title: "Reconnect", category: "Session", keys: "ctrl+r", run: () => live.reconnect() },
@@ -113,7 +140,7 @@ function Main(props: { version: string; config?: Config }) {
   ]
   useCommands(() => commands, { overrides: props.config?.keybinds })
 
-  const param = (name: "item" | "thread" | "run") => {
+  const param = (name: "item" | "thread" | "run" | "agent") => {
     const r = route.current()
     return r.name === name ? r.id : undefined
   }
@@ -131,6 +158,12 @@ function Main(props: { version: string; config?: Config }) {
         </Match>
         <Match when={param("run")} keyed>
           {(id: string) => <RunScreen id={id} version={props.version} sidebar={showSidebar()} />}
+        </Match>
+        <Match when={param("agent")} keyed>
+          {(id: string) => <AgentScreen id={id} version={props.version} sidebar={showSidebar()} />}
+        </Match>
+        <Match when={route.current().name === "agents"}>
+          <AgentsScreen version={props.version} sidebar={showSidebar()} />
         </Match>
         <Match when={route.current().name === "tasks"}>
           <TasksScreen version={props.version} sidebar={showSidebar()} />

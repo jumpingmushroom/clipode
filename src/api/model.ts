@@ -48,6 +48,9 @@ export type AgentSummary = {
   title: string | null
   status: string
   adapterType: string
+  /** The configured model, when the adapter config names one. */
+  model: string | null
+  reportsTo: string | null
 }
 
 export type LiveRunSummary = {

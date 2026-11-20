@@ -4,6 +4,7 @@ import { useTerminalDimensions } from "@opentui/solid"
 import { createSignal, For, onCleanup, Show, type JSX, type ParentProps } from "solid-js"
 import { useStores } from "../store/context.tsx"
 import { useTheme } from "../theme/context.tsx"
+import { TabBar } from "./tabs.tsx"
 
 export const SIDEBAR_WIDTH = 32
 /** Below this width the sidebar is hidden, as in the 80-column mockup frames. */
@@ -57,6 +58,7 @@ export function Frame(
           </text>
         </box>
       </box>
+      <TabBar />
       <box flexDirection="row" flexGrow={1} paddingTop={1}>
         <box flexGrow={1} flexDirection="column">
           {props.children}

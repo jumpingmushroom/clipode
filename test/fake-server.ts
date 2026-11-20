@@ -13,6 +13,7 @@ import threadRuns from "./fixtures/company/thread-runs.json"
 import threadCost from "./fixtures/company/thread-cost.json"
 import liveRuns from "./fixtures/company/live-runs.json"
 import run from "./fixtures/company/run.json"
+import heartbeatRuns from "./fixtures/company/heartbeat-runs.json"
 import runLog from "./fixtures/company/run-log.json"
 
 export const COMPANY_ID = company.id
@@ -51,6 +52,10 @@ export function startFakeServer(): FakeServer {
     [`/api/issues/${threadCost.issueId}/runs`]: threadRuns,
     [`/api/issues/${threadCost.issueId}/cost-summary`]: threadCost,
     [`/api/companies/${COMPANY_ID}/live-runs`]: liveRuns,
+    [`/api/companies/${COMPANY_ID}/heartbeat-runs`]: (url: URL) => {
+      const agentId = url.searchParams.get("agentId")
+      return heartbeatRuns.filter((r) => !agentId || r.agentId === agentId)
+    },
     [`/api/heartbeat-runs/${run.id}`]: run,
     // The recorded log is complete, so a read from offset 0 returns all of it and no nextOffset.
     [`/api/heartbeat-runs/${run.id}/log`]: (url: URL) => ({ ...runLog, content: Number(url.searchParams.get("offset") ?? 0) > 0 ? "" : runLog.content, nextOffset: undefined }),

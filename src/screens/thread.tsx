@@ -14,6 +14,7 @@ import { Spinner } from "../ui/spinner.tsx"
 import { Frame } from "./frame.tsx"
 import { SidebarHeader } from "./inbox-sidebar.tsx"
 import { PRIORITY, priorityColor, StatusMark } from "./tasks.tsx"
+import { useTabs } from "./tabs.tsx"
 
 const LIVE = ["queued", "running"]
 
@@ -32,7 +33,9 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
   const [now, setNow] = createSignal(Date.now())
   let scroll: ScrollBoxRenderable | undefined
 
+  const tabs = useTabs()
   onMount(() => {
+    tabs?.open(props.id)
     void thread.detail.load()
     void thread.entries.load()
     void thread.cost.load()

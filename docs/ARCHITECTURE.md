@@ -233,7 +233,9 @@ Defaults follow opencode and pasode, and every binding can be changed in the con
 | `tab` | Switch view inside a screen (inbox: sort by activity or by decide-by) |
 | `/` | Filter or search the current list |
 | `ctrl+b` | Toggle sidebar |
-| `leader 1`..`9`, `leader .` `,` | Jump to and cycle tabs |
+| `leader 1`..`9`, `leader .` `,`, `leader w` | Jump to, cycle and close tabs (in a binding string, `,` is written `comma`) |
+| `leader s` | Settings: instance, user, company, theme, sidebar, config file, sign out |
+| `ctrl+r` | Reconnect the live connection |
 | `leader c` | Switch company |
 | `leader shift+t`, `ctrl+t` | Theme switcher with live preview (`ctrl+t` is from the mockup's palette) |
 | `leader h` | Help with every binding |
@@ -271,6 +273,8 @@ Where the mockup shows something the API does not provide, the data wins:
 | "Holds up 2 sub-tasks" on a question | Only blocked-task items carry a count (`detail.blockedTaskCount`) | Shown on blocked-task items only. |
 | Sidebar groups for agents, tasks in flight and live runs on the inbox | Not in the attention feed | Filled from the agents, tasks and runs stores, which the inbox loads after the feed. |
 | Shelves: Decide now, New today, Earlier | Not a server concept | A client rule, defined below. |
+| A model per agent in the Agents list ("claude-sonnet-5-5") | `adapterConfig.model` is empty for `claude_local` agents on the default model | The Model column shows the configured model, else the adapter type; a run's transcript shows the model the session reported. |
+| Agents "Today" group with runs and cost | No per-day summary endpoint | Left out; agent detail lists recent runs with duration and cost. |
 | Sub-task progress "2/5" on task rows | List rows carry `parentId` but no counts | Counted from the full task list, which the Tasks screen loads anyway. |
 | Run entries in the thread with a one-line summary ("Scoped into 5 sub-tasks") | `/issues/{id}/runs` has status, times and `usageJson.costUsd`, no summary | Run entries show agent, status, duration and cost. |
 | Filter chips `project:any  assignee:any  priority:any` | No server filter needed for one company's tasks | One filter line: free text plus `project:`, `assignee:`, `priority:` and `status:` tokens, applied in the client. |

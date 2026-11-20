@@ -26,8 +26,19 @@ export async function listLiveRuns(client: Client, companyId: string): Promise<L
   }))
 }
 
+type RunRow = HeartbeatRun & { issueId?: string | null }
+
+/** Recent runs of the company, newest first, optionally for one agent. */
+export async function listRuns(client: Client, companyId: string, agentId?: string, limit = 20): Promise<RunDetail[]> {
+  const rows = await client.get<RunRow[]>(`/api/companies/${encodeURIComponent(companyId)}/heartbeat-runs`, { agentId, limit })
+  return rows.map(toRunDetail)
+}
+
 export async function getRun(client: Client, runId: string): Promise<RunDetail> {
-  const r = await client.get<HeartbeatRun & { issueId?: string | null }>(`/api/heartbeat-runs/${encodeURIComponent(runId)}`)
+  return toRunDetail(await client.get<RunRow>(`/api/heartbeat-runs/${encodeURIComponent(runId)}`))
+}
+
+function toRunDetail(r: RunRow): RunDetail {
   const usage = (r.usageJson ?? {}) as Record<string, unknown>
   const num = (v: unknown) => (typeof v === "number" ? v : null)
   return {

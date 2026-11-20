@@ -25,6 +25,8 @@ export type AppProps = {
   themeName?: string
   onThemeChange?: (name: string | undefined) => void
   route?: Route
+  tabs?: Record<string, string[]>
+  onTabs?: (companyId: string, ids: string[]) => void
 }
 
 /** Every provider the screens need, in dependency order. */
@@ -50,7 +52,7 @@ export function Providers(props: ParentProps<Omit<AppProps, "version">>) {
 export function App(props: AppProps) {
   return (
     <Providers {...props}>
-      <Shell version={props.version} config={props.config} />
+      <Shell version={props.version} config={props.config} tabs={props.tabs} onTabs={props.onTabs} />
     </Providers>
   )
 }
@@ -77,6 +79,8 @@ export async function run(version: string) {
         mode={mode}
         themeName={state.get().theme ?? config.theme}
         onThemeChange={(theme) => void state.update({ theme })}
+        tabs={state.get().tabs}
+        onTabs={(companyId, ids) => void state.update({ tabs: { ...state.get().tabs, [companyId]: ids } })}
       />
     ),
     renderer,
