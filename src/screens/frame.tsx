@@ -5,6 +5,7 @@ import { createSignal, For, onCleanup, Show, type JSX, type ParentProps } from "
 import { useStores } from "../store/context.tsx"
 import { useTheme } from "../theme/context.tsx"
 import { TabBar } from "./tabs.tsx"
+import { Slot } from "../plugin/host.tsx"
 
 export const SIDEBAR_WIDTH = 32
 /** Below this width the sidebar is hidden, as in the 80-column mockup frames. */
@@ -65,7 +66,11 @@ export function Frame(
         </box>
         <Show when={sidebarShown()}>
           <box width={SIDEBAR_WIDTH} flexShrink={0} paddingLeft={2} paddingRight={2} flexDirection="column">
+            <Slot name="sidebar_title" />
             {props.sidebar}
+            <Slot name="sidebar_content" />
+            <box flexGrow={1} />
+            <Slot name="sidebar_footer" />
           </box>
         </Show>
       </box>

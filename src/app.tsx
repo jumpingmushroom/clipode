@@ -13,6 +13,7 @@ import { createSession, type Session } from "./store/session.ts"
 import { ThemeProvider } from "./theme/context.tsx"
 import type { ThemeJson } from "./theme/format.ts"
 import { discoverThemes, type Mode } from "./theme/registry.ts"
+import { loadPlugins, type LoadedPlugin, type PluginError } from "./plugin/loader.ts"
 import { DialogProvider } from "./ui/dialog.tsx"
 import { Toast, ToastProvider } from "./ui/toast.tsx"
 
@@ -27,6 +28,8 @@ export type AppProps = {
   route?: Route
   tabs?: Record<string, string[]>
   onTabs?: (companyId: string, ids: string[]) => void
+  plugins?: LoadedPlugin[]
+  pluginErrors?: PluginError[]
 }
 
 /** Every provider the screens need, in dependency order. */
@@ -52,7 +55,14 @@ export function Providers(props: ParentProps<Omit<AppProps, "version">>) {
 export function App(props: AppProps) {
   return (
     <Providers {...props}>
-      <Shell version={props.version} config={props.config} tabs={props.tabs} onTabs={props.onTabs} />
+      <Shell
+        version={props.version}
+        config={props.config}
+        tabs={props.tabs}
+        onTabs={props.onTabs}
+        plugins={props.plugins}
+        pluginErrors={props.pluginErrors}
+      />
     </Providers>
   )
 }
@@ -60,6 +70,7 @@ export function App(props: AppProps) {
 export async function run(version: string) {
   const { config, error } = await loadConfig()
   const state = createStateWriter(await loadState())
+  const { plugins, errors: pluginErrors } = await loadPlugins(config.plugins ?? [], configDir())
   const themes = await discoverThemes([join(configDir(), "themes"), join(homedir(), ".config", "opencode", "themes")])
   const session = createSession({
     url: config.url,
@@ -81,6 +92,8 @@ export async function run(version: string) {
         onThemeChange={(theme) => void state.update({ theme })}
         tabs={state.get().tabs}
         onTabs={(companyId, ids) => void state.update({ tabs: { ...state.get().tabs, [companyId]: ids } })}
+        plugins={plugins}
+        pluginErrors={pluginErrors}
       />
     ),
     renderer,

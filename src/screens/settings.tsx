@@ -7,6 +7,7 @@ import { defaultThemeName } from "../theme/registry.ts"
 import { useDialog } from "../ui/dialog.tsx"
 import { DialogSelect } from "../ui/dialog-select.tsx"
 import { openThemeDialog } from "../ui/dialog-theme.tsx"
+import { usePluginHost } from "../plugin/host.tsx"
 
 type Action = "company" | "theme" | "sidebar" | "signout" | "none"
 
@@ -14,6 +15,7 @@ export function SettingsDialog(props: { sidebar: boolean; toggleSidebar: () => v
   const { session, company } = useStores()
   const theme = useTheme()
   const dialog = useDialog()
+  const host = usePluginHost()
   const companyName = () => session.state.companies.find((c) => c.id === company()?.companyId)?.name ?? "—"
   const options: { title: string; value: Action; category: string; footer: string }[] = [
     { title: "Instance", value: "none", category: "Session", footer: session.host() },
@@ -24,6 +26,8 @@ export function SettingsDialog(props: { sidebar: boolean; toggleSidebar: () => v
     { title: "Sidebar", value: "sidebar", category: "View", footer: props.sidebar ? "shown" : "hidden" },
     { title: "Config file", value: "none", category: "About", footer: join(configDir(), "cli.json") },
     { title: "Version", value: "none", category: "About", footer: props.version },
+    ...(host?.plugins() ?? []).map((id) => ({ title: id, value: "none" as Action, category: "Plugins", footer: "loaded" })),
+    ...(host?.errors() ?? []).map((e) => ({ title: e.source, value: "none" as Action, category: "Plugins", footer: `failed: ${e.message}` })),
   ]
   return (
     <DialogSelect

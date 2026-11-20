@@ -15,6 +15,7 @@ import { Frame } from "./frame.tsx"
 import { SidebarHeader } from "./inbox-sidebar.tsx"
 import { PRIORITY, priorityColor, StatusMark } from "./tasks.tsx"
 import { useTabs } from "./tabs.tsx"
+import { Slot } from "../plugin/host.tsx"
 
 const LIVE = ["queued", "running"]
 
@@ -108,6 +109,7 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
         </Match>
         <Match when={detail()}>
           <scrollbox ref={(r: ScrollBoxRenderable) => (scroll = r)} flexGrow={1} paddingLeft={2} paddingRight={2} scrollbarOptions={{ visible: false }}>
+            <Slot name="thread_header" />
             <text fg={theme().text} attributes={TextAttributes.BOLD}>
               <span style={{ fg: theme().muted }}>{detail()!.identifier ?? ""}</span>
               {"  " + detail()!.title}

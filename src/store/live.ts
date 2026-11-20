@@ -31,7 +31,13 @@ export function eventIds(event: LiveEvent): { issueId: string | null; runId: str
 export function startLiveSync(
   session: Session,
   company: CompanyStores,
-  opts: { poll?: Partial<PollIntervals>; focused?: () => boolean; WebSocketImpl?: Parameters<typeof connectLive>[0]["WebSocketImpl"] } = {},
+  opts: {
+    poll?: Partial<PollIntervals>
+    focused?: () => boolean
+    /** Every live event, after the stores have been told; for plugins. */
+    onEvent?: (event: LiveEvent) => void
+    WebSocketImpl?: Parameters<typeof connectLive>[0]["WebSocketImpl"]
+  } = {},
 ) {
   const poll = { ...DEFAULT_POLL, ...opts.poll }
   const refreshInbox = debounce(() => void company.attention.refresh())
@@ -68,6 +74,7 @@ export function startLiveSync(
         refreshAgents()
         break
     }
+    opts.onEvent?.(event)
   }
 
   const url = `${session.client().origin.replace(/^http/, "ws")}/api/companies/${encodeURIComponent(company.companyId)}/events/ws`

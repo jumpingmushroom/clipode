@@ -326,6 +326,8 @@ export type Context = {
 | `sidebar_footer` | Bottom of the sidebar, single winner | Instance, version, connection |
 | `thread_header` | Above a task thread | none |
 
+Built as of step 9: the sidebar footer is a built-in plugin registered through this API. The other built-in sidebar sections (inbox counts, task properties, run usage) are still screen components and move behind the slots when they need to be replaceable. A slot render runs inside Solid's reactive scope, so it renders again when the store values it reads change. `ctx.theme` is a function, because the theme can change while the app runs. The contract is documented in `docs/PLUGINS.md`.
+
 Plugins are listed under `plugins` in the config file, as a path or a `[path, options]` pair. The launcher maps a plugin's `solid-js` and `@opentui/*` imports onto the host's copies, so a plugin needs no install or build step. A plugin that throws is reported in a toast and in the status dialog, and does not stop the app.
 
 ### Themes

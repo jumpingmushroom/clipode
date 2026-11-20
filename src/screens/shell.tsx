@@ -27,6 +27,9 @@ import { AgentsScreen } from "./agents.tsx"
 import { AgentScreen } from "./agent.tsx"
 import { SettingsDialog } from "./settings.tsx"
 import { TabsProvider, useTabs } from "./tabs.tsx"
+import { PluginHostProvider, usePluginHost } from "../plugin/host.tsx"
+import type { LoadedPlugin, PluginError } from "../plugin/loader.ts"
+import { sidebarFooter } from "../sidebar/footer.tsx"
 
 export type ShellProps = {
   version: string
@@ -34,6 +37,8 @@ export type ShellProps = {
   /** Open tabs per company, from kv.json. */
   tabs?: Record<string, string[]>
   onTabs?: (companyId: string, ids: string[]) => void
+  plugins?: LoadedPlugin[]
+  pluginErrors?: PluginError[]
 }
 
 export function Shell(props: ShellProps) {
@@ -55,7 +60,12 @@ export function Shell(props: ShellProps) {
       <Match when={session.state.companyId} keyed>
         {/* Keyed on the company, so a switch rebuilds the screens with the new company's stores. */}
         <TabsProvider initial={props.tabs?.[session.state.companyId!]} onChange={(ids) => props.onTabs?.(session.state.companyId!, ids)}>
-          <Main version={props.version} config={props.config} />
+          <PluginHostProvider
+            plugins={[{ plugin: sidebarFooter(props.version), options: {}, source: "built-in" }, ...(props.plugins ?? [])]}
+            errors={props.pluginErrors}
+          >
+            <Main version={props.version} config={props.config} />
+          </PluginHostProvider>
         </TabsProvider>
       </Match>
     </Switch>
@@ -90,7 +100,8 @@ function Main(props: { version: string; config?: Config }) {
   const [sidebar, setSidebar] = createSignal(props.config?.sidebar !== "hide")
   const [focused, setFocused] = createSignal(true)
   const company = useCompany()
-  const live = startLiveSync(session, company, { poll: props.config?.polling, focused })
+  const host = usePluginHost()
+  const live = startLiveSync(session, company, { poll: props.config?.polling, focused, onEvent: (e) => host?.emit(e) })
   const onFocus = () => setFocused(true)
   const onBlur = () => setFocused(false)
   renderer.on("focus", onFocus)

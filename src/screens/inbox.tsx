@@ -13,6 +13,7 @@ import { Spinner } from "../ui/spinner.tsx"
 import { Frame, SIDEBAR_MIN_COLUMNS, SIDEBAR_WIDTH } from "./frame.tsx"
 import { columns, InboxRow } from "./inbox-row.tsx"
 import { InboxSidebar } from "./inbox-sidebar.tsx"
+import { Slot } from "../plugin/host.tsx"
 
 type Row = { type: "item"; item: InboxItem } | { type: "snoozed"; count: number }
 
@@ -187,6 +188,9 @@ export function InboxScreen(props: { version: string; sidebar: boolean }) {
           </scrollbox>
         </Match>
       </Switch>
+      <box paddingLeft={2} paddingRight={2}>
+        <Slot name="home_bottom" />
+      </box>
     </Frame>
   )
 }
