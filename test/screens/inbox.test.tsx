@@ -21,7 +21,7 @@ test("the inbox shows shelves, rows with markers and identifiers, and the sideba
   expect(text).toMatch(/Agents\s+9/)
   expect(text).toMatch(/Tasks in flight\s+7/)
   expect(text).toContain("inbox 6")
-  expect(text).toContain("● connecting")
+  expect(text).toContain("● live")
 })
 
 test("enter opens an item with its answer options; esc goes back", async () => {

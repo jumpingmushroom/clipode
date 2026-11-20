@@ -2,12 +2,13 @@
 import { useKeymapSelector } from "@opentui/keymap/solid"
 import { formatKeySequence } from "@opentui/keymap/extras"
 import { useRenderer, useTerminalDimensions } from "@opentui/solid"
-import { createSignal, Match, onMount, Show, Switch } from "solid-js"
+import { createSignal, Match, onCleanup, onMount, Show, Switch } from "solid-js"
 import type { Config } from "../config.ts"
 import { useCommands, type AppCommand } from "../keymap/commands.tsx"
 import { CommandPalette, HelpDialog } from "../keymap/palette.tsx"
 import { useRoute } from "../route.tsx"
-import { useStores } from "../store/context.tsx"
+import { useCompany, useStores } from "../store/context.tsx"
+import { startLiveSync } from "../store/live.ts"
 import { useTheme } from "../theme/context.tsx"
 import { useDialog } from "../ui/dialog.tsx"
 import { openThemeDialog } from "../ui/dialog-theme.tsx"
@@ -72,6 +73,18 @@ function Main(props: { version: string; config?: Config }) {
   const pending = useKeymapSelector((k) => k.getPendingSequence())
   const [quitArmed, setQuitArmed] = createSignal(false)
   const [sidebar, setSidebar] = createSignal(props.config?.sidebar !== "hide")
+  const [focused, setFocused] = createSignal(true)
+  const company = useCompany()
+  const live = startLiveSync(session, company, { poll: props.config?.polling, focused })
+  const onFocus = () => setFocused(true)
+  const onBlur = () => setFocused(false)
+  renderer.on("focus", onFocus)
+  renderer.on("blur", onBlur)
+  onCleanup(() => {
+    live.stop()
+    renderer.off("focus", onFocus)
+    renderer.off("blur", onBlur)
+  })
 
   const commands: AppCommand[] = [
     { name: "app.palette", title: "Command palette", category: "App", keys: "ctrl+p", hidden: true, run: () => dialog.replace(() => <CommandPalette />) },
@@ -80,6 +93,7 @@ function Main(props: { version: string; config?: Config }) {
     { name: "go.tasks", title: "Tasks", category: "Go to", keys: "<leader>t,g t", run: () => route.reset({ name: "tasks" }) },
     { name: "view.sidebar", title: "Toggle sidebar", category: "View", keys: "ctrl+b", run: () => setSidebar((v) => !v) },
     { name: "app.theme", title: "Switch theme", category: "View", keys: "<leader>shift+t,ctrl+t", run: () => openThemeDialog(dialog, theme) },
+    { name: "session.reconnect", title: "Reconnect", category: "Session", keys: "ctrl+r", run: () => live.reconnect() },
     { name: "session.company", title: "Switch company", category: "Session", keys: "<leader>c", run: openCompanies },
     { name: "session.signout", title: "Sign out", category: "Session", run: () => void session.signOut() },
     { name: "app.quit", title: "Quit", category: "Session", keys: "<leader>q", run: () => renderer.destroy() },

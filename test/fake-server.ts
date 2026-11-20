@@ -25,7 +25,17 @@ const SESSION = "paperclip-default.session_token"
 
 /** A fixed body, or a function of the request URL for routes whose answer changes (a growing log). */
 type Body = unknown | ((url: URL) => unknown)
-export type FakeServer = { url: string; requests: string[]; stop(): void; set(path: string, body: Body, status?: number): void }
+export type FakeServer = {
+  url: string
+  requests: string[]
+  stop(): void
+  set(path: string, body: Body, status?: number): void
+  /** Sends a live event to every connected WebSocket. */
+  emit(type: string, payload: Record<string, unknown>): void
+  /** Messages clients sent over the WebSocket. */
+  received: Record<string, unknown>[]
+  sockets: () => number
+}
 
 export function startFakeServer(): FakeServer {
   const requests: string[] = []
@@ -48,9 +58,22 @@ export function startFakeServer(): FakeServer {
   for (const [id, list] of Object.entries(interactions)) routes[`/api/issues/${id}/interactions`] = list
   for (const [id, issue] of Object.entries(details)) routes[`/api/issues/${id}`] = issue
 
+  const sockets = new Set<{ send(d: string): void }>()
+  const received: Record<string, unknown>[] = []
+  let eventId = 0
   const server = Bun.serve({
     port: 0,
-    async fetch(req) {
+    websocket: {
+      open: (ws) => void sockets.add(ws),
+      close: (ws) => void sockets.delete(ws),
+      message(ws, m) {
+        const msg = JSON.parse(String(m)) as Record<string, unknown>
+        received.push(msg)
+        if (msg.type === "live.hello") ws.send(JSON.stringify({ type: "live.capabilities", version: 1, capabilities: ["run-interests"] }))
+        if (msg.type === "live.interests") ws.send(JSON.stringify({ type: "live.subscribed", version: 1, revision: msg.revision }))
+      },
+    },
+    async fetch(req, srv) {
       const url = new URL(req.url)
       requests.push(`${req.method} ${url.pathname}`)
       const signedIn = req.headers.get("cookie")?.includes(`${SESSION}=tok`) ?? false
@@ -60,6 +83,10 @@ export function startFakeServer(): FakeServer {
         return Response.json({}, { headers: { "Set-Cookie": `${SESSION}=tok; Path=/` } })
       }
       if (url.pathname === "/api/auth/sign-out") return Response.json({}, { headers: { "Set-Cookie": `${SESSION}=; Max-Age=0` } })
+      if (url.pathname === `/api/companies/${COMPANY_ID}/events/ws`) {
+        if (!signedIn || overrides.has("ws-refuse")) return new Response("forbidden", { status: 403 })
+        return srv.upgrade(req) ? undefined : new Response("upgrade failed", { status: 400 })
+      }
       if (!signedIn) return Response.json({ error: "Board authentication required" }, { status: 401 })
       const override = overrides.get(url.pathname)
       if (override) return Response.json(typeof override.body === "function" ? override.body(url) : override.body, { status: override.status })
@@ -78,5 +105,11 @@ export function startFakeServer(): FakeServer {
     requests,
     stop: () => server.stop(true),
     set: (path, body, status = 200) => overrides.set(path, { body, status }),
+    emit(type, payload) {
+      const event = JSON.stringify({ id: ++eventId, companyId: COMPANY_ID, type, createdAt: new Date().toISOString(), payload })
+      for (const ws of sockets) ws.send(event)
+    },
+    received,
+    sockets: () => sockets.size,
   }
 }

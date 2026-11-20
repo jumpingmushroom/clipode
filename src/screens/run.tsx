@@ -42,6 +42,7 @@ export function RunScreen(props: { id: string; version: string; sidebar: boolean
   const [following, setFollowing] = createSignal(true)
   let scroll: ScrollBoxRenderable | undefined
 
+  onCleanup(company.runs.watch(props.id))
   onMount(() => {
     void transcript.load()
     void company.agents.list.load()

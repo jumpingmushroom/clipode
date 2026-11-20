@@ -28,6 +28,9 @@ export function createSession(opts: SessionOptions = {}) {
     companies: [] as CompanySummary[],
     companyId: null as string | null,
     connection: "connecting" as ConnectionState,
+    /** While offline or polling: when the next WebSocket attempt is due, and how many have failed. */
+    retryAt: null as number | null,
+    attempt: 0,
   })
   let client = new Client(opts.url || "http://localhost")
 
@@ -80,8 +83,16 @@ export function createSession(opts: SessionOptions = {}) {
       set("companyId", id)
       opts.onCompany?.(client.baseUrl, id)
     },
-    setConnection(connection: ConnectionState) {
-      set("connection", connection)
+    setConnection(connection: ConnectionState, retryAt: number | null = null, attempt = 0) {
+      set({ connection, retryAt, attempt })
+    },
+    /** For the live connection after a failed connect: is the session still good, and is the server reachable? */
+    async check(): Promise<"ok" | "unauthorized" | "unreachable"> {
+      try {
+        return (await getSession(client)) ? "ok" : "unauthorized"
+      } catch {
+        return "unreachable"
+      }
     },
     /** Error handler for stores: a 401 expires the session. */
     handleError(err: unknown) {

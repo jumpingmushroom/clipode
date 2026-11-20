@@ -1,7 +1,7 @@
 // The frame every screen shares: header, main column, optional sidebar, read-only composer row, footer.
 import { TextAttributes } from "@opentui/core"
 import { useTerminalDimensions } from "@opentui/solid"
-import { For, Show, type JSX, type ParentProps } from "solid-js"
+import { createSignal, For, onCleanup, Show, type JSX, type ParentProps } from "solid-js"
 import { useStores } from "../store/context.tsx"
 import { useTheme } from "../theme/context.tsx"
 
@@ -32,6 +32,15 @@ export function Frame(
   const connection = () => session.state.connection
   const dot = () => ({ live: theme().success, polling: theme().warning, offline: theme().error, connecting: theme().muted })[connection()]
   const hints = () => (wide() ? props.hints : (props.narrowHints ?? props.hints))
+  const [now, setNow] = createSignal(Date.now())
+  const clock = setInterval(() => setNow(Date.now()), 1000)
+  onCleanup(() => clearInterval(clock))
+  /** "reconnecting in 8s (attempt 3)" while the WebSocket is down. */
+  const retry = () => {
+    const at = session.state.retryAt
+    if (!at || connection() === "live") return ""
+    return `reconnecting in ${Math.max(0, Math.ceil((at - now()) / 1000))}s (attempt ${session.state.attempt})`
+  }
 
   return (
     <box width="100%" height="100%" flexDirection="column" backgroundColor={theme().background}>
@@ -67,7 +76,12 @@ export function Frame(
         <text fg={theme().text} flexShrink={0}>
           <span style={{ fg: dot() }}>●</span> {connection()}
         </text>
-        <Show when={wide()}>
+        <Show when={retry()}>
+          <text fg={theme().muted} flexShrink={0}>
+            {retry()}  <span style={{ fg: theme().text }}>ctrl+r</span> retry
+          </text>
+        </Show>
+        <Show when={wide() && !retry()}>
           <text fg={theme().muted} flexShrink={0}>
             {session.host()}
           </text>

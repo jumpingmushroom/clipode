@@ -61,7 +61,19 @@ export type Transcript = ReturnType<typeof createTranscript>
 
 export function createRunsStore(session: Session, companyId: string) {
   const transcripts = new Map<string, Transcript>()
+  const [watching, setWatching] = createSignal<string[]>([])
   return {
+    /** Runs whose transcript is on screen; the live connection asks the server for their log lines. */
+    watching,
+    watch(runId: string) {
+      setWatching((w) => [...w, runId])
+      return () => setWatching((w) => w.filter((id) => id !== runId))
+    },
+    /** Reads new log lines of an open transcript; does nothing for a run that is not open. */
+    refreshTranscript(runId: string) {
+      const t = transcripts.get(runId)
+      if (t && watching().includes(runId)) void t.poll()
+    },
     live: createResource<LiveRunSummary[]>(() => listLiveRuns(session.client(), companyId), [], session.handleError),
     transcript(runId: string): Transcript {
       if (!transcripts.has(runId)) transcripts.set(runId, createTranscript(session, runId))

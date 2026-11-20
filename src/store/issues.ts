@@ -30,6 +30,14 @@ export function createIssuesStore(session: Session, companyId: string) {
       return kids.length ? [kids.filter((k) => k.status === "done").length, kids.length] : null
     },
     projectName: (id: string | null) => (id ? projects.data.find((p) => p.id === id)?.name : undefined),
+    /** Refetches a thread that has been opened; other tasks are left alone. */
+    refreshThread(id: string) {
+      const t = threads[id]
+      if (!t) return
+      void t.detail.refresh()
+      void t.entries.refresh()
+      void t.cost.refresh()
+    },
     /** The thread of one task, created on first use and kept for the session. */
     thread(id: string): Thread {
       if (!threads[id]) {
