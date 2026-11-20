@@ -10,7 +10,7 @@ const ENUM_KEYS = new Set([
   "decideBy", "reason", "sort", "authKind", "stream", "level", "originKind", "workMode", "selectionMode",
   "continuationPolicy", "answerMode", "schema", "resolverPolicy", "requested", "effective", "displayStatus",
   "visibility", "reviewPolicy", "approvalStatus", "triggerDetail", "model", "provider", "billingType", "source",
-  "capabilities", "pauseReason", "wakeReason", "contextKind", "biller",
+  "capabilities", "pauseReason", "wakeReason", "contextKind", "biller", "authorType", "origin", "derivedAuthorSource",
 ])
 const TOKEN = /^[a-z0-9][a-z0-9_.:+-]{0,63}$/i
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i

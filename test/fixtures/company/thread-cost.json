@@ -1,0 +1,12 @@
+{
+  "issueId": "00000000-0000-4000-8000-000000000037",
+  "issueCount": 1,
+  "includeDescendants": true,
+  "costCents": 0,
+  "costCentsExact": "example costCentsExact",
+  "inputTokens": 96660,
+  "cachedInputTokens": 641645,
+  "outputTokens": 13381,
+  "runCount": 4,
+  "runtimeMs": 444004
+}

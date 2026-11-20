@@ -31,6 +31,13 @@ export function ItemScreen(props: { id: string; version: string; sidebar: boolea
     mode: "base",
     bindings: [
       { key: "escape,backspace,h", cmd: () => route.back() },
+      {
+        key: "return",
+        cmd: () => {
+          const it = item()
+          if (it?.issueId) route.navigate({ name: "thread", id: it.issueId })
+        },
+      },
       { key: "down,j", cmd: () => scroll?.scrollBy(1) },
       { key: "up,k", cmd: () => scroll?.scrollBy(-1) },
       { key: "pagedown,space", cmd: () => scroll?.scrollBy(10) },
@@ -45,7 +52,7 @@ export function ItemScreen(props: { id: string; version: string; sidebar: boolea
       badge={company.attention.feed.data.totalCount}
       showSidebar={props.sidebar}
       sidebar={<Show when={item()}>{(it: Accessor<InboxItem>) => <ItemSidebar item={it()} now={now()} />}</Show>}
-      hints={[["esc", "back"], ["j/k", "scroll"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
+      hints={[["esc", "back"], ["enter", "open task"], ["j/k", "scroll"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
       narrowHints={[["esc", "back"], ["j/k", "scroll"], ["^p", "cmds"]]}
       version={props.version}
     >

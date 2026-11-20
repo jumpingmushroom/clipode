@@ -11,17 +11,24 @@ import { KeymapProvider } from "@opentui/keymap/solid"
 import { useRenderer } from "@opentui/solid"
 import { onCleanup, type ParentProps } from "solid-js"
 
-export type Mode = "base" | "modal"
+export type Mode = "base" | "modal" | "input"
 const MODE_KEY = "clipode.mode"
 
 export function KeysProvider(props: ParentProps<{ leader?: string }>) {
   const keymap = createDefaultOpenTuiKeymap(useRenderer())
   const dispose = [
     registerCommaBindings(keymap),
+    // "g t": a sequence of single characters separated by spaces. Written without the space, "gt" is the named key ">".
+    keymap.prependBindingParser(({ input, index, parseObjectKey }) => {
+      const strokes = input.trim().split(/\s+/)
+      if (index !== 0 || strokes.length < 2 || strokes.some((s) => s.length !== 1)) return
+      return { parts: strokes.map((s) => parseObjectKey({ name: s }, { display: s })), nextIndex: input.length }
+    }),
     registerEscapeClearsPendingSequence(keymap),
     registerBackspacePopsPendingSequence(keymap),
     registerTimedLeader(keymap, { trigger: props.leader ?? "ctrl+x", name: "leader", timeoutMs: 2000 }),
-    // A layer with `mode: "base"` is active only while no dialog is open; `mode: "modal"` only while one is.
+    // A layer with `mode: "base"` is active only while no dialog is open; `mode: "modal"` only while one is;
+    // `mode: "input"` only while a screen text field (such as a list filter) has the keys.
     keymap.registerLayerFields({
       mode(value, context) {
         context.require(MODE_KEY, value)

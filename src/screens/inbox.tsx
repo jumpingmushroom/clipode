@@ -30,7 +30,7 @@ export function InboxScreen(props: { version: string; sidebar: boolean }) {
   onMount(() => {
     void attention.feed.load()
     void company.agents.list.load()
-    void company.issues.inFlight.load()
+    void company.issues.list.load()
     void company.runs.live.load()
   })
   const tick = setInterval(() => setNow(Date.now()), 1000)
@@ -139,7 +139,7 @@ export function InboxScreen(props: { version: string; sidebar: boolean }) {
               Agents ask here when they need a decision.
             </text>
             <text fg={theme().muted}>
-              {company.runs.live.data.length} live runs · {company.issues.inFlight.data.length} tasks in flight
+              {company.runs.live.data.length} live runs · {company.issues.inFlight().length} tasks in flight
             </text>
           </box>
         </Match>

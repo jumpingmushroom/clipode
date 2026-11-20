@@ -411,7 +411,7 @@
         "localFolder": null,
         "managedFolder": "example managedFolder",
         "effectiveLocalFolder": "example effectiveLocalFolder",
-        "origin": "example origin"
+        "origin": "managed_checkout"
       },
       "workspaces": [],
       "primaryWorkspace": null,
@@ -756,7 +756,7 @@
         "localFolder": null,
         "managedFolder": "example managedFolder",
         "effectiveLocalFolder": "example effectiveLocalFolder",
-        "origin": "example origin"
+        "origin": "managed_checkout"
       },
       "workspaces": [],
       "primaryWorkspace": null,
@@ -1168,7 +1168,7 @@
         "localFolder": null,
         "managedFolder": "example managedFolder",
         "effectiveLocalFolder": "example effectiveLocalFolder",
-        "origin": "example origin"
+        "origin": "managed_checkout"
       },
       "workspaces": [],
       "primaryWorkspace": null,
@@ -2056,7 +2056,7 @@
         "localFolder": null,
         "managedFolder": "example managedFolder",
         "effectiveLocalFolder": "example effectiveLocalFolder",
-        "origin": "example origin"
+        "origin": "managed_checkout"
       },
       "workspaces": [],
       "primaryWorkspace": null,

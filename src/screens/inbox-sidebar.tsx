@@ -43,7 +43,7 @@ export function InboxSidebar(props: { items: InboxItem[]; now: number }) {
   }
   const agents = () => company.agents.list.data
   const waiting = () => new Set(active().map((i) => i.agentId ?? i.agentName).filter(Boolean)).size
-  const tasks = () => company.issues.inFlight.data
+  const tasks = () => company.issues.inFlight()
   const runs = () => company.runs.live.data
 
   return (

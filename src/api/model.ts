@@ -67,6 +67,27 @@ export type TaskSummary = {
   status: string
   priority: string
   assigneeAgentId: string | null
+  assigneeUserId: string | null
+  parentId: string | null
+  projectId: string | null
+  updatedAt: string
 }
+
+export type TaskDetail = TaskSummary & {
+  description: string | null
+  projectName: string | null
+  goalTitle: string | null
+  parent: { identifier: string | null; title: string } | null
+  blockers: { identifier: string | null; title: string; status: string }[]
+  createdAt: string
+}
+
+export type ThreadEntry =
+  | { kind: "comment"; id: string; at: string; agentId: string | null; userId: string | null; body: string }
+  | { kind: "run"; id: string; at: string; agentId: string; status: string; startedAt: string | null; finishedAt: string | null; costUsd: number | null }
+
+export type TaskCost = { costUsd: number; runCount: number; inputTokens: number; outputTokens: number }
+
+export type ProjectSummary = { id: string; name: string }
 
 export type CompanySummary = { id: string; name: string; prefix: string | null }

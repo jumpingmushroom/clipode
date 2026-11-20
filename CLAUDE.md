@@ -47,7 +47,7 @@ Clone them under `../ref/` and never vendor them.
 - `@opentui/core` and `@opentui/solid` are pinned at `0.9.7`, and `solid-js` at `1.9.20`. OpenTUI 0.9 requires Solid 1.9, so do not take Solid 2. Check the OpenTUI docs or the installed `.d.ts` files before using an API from memory or from pasode, which is on 0.5.
 - In 0.9, a `<span>` takes colours through `style={{ fg }}`. A `<text>` takes `fg` directly.
 - Screen tests use `testRender` from `@opentui/solid` with `captureCharFrame()` and `mockInput`. `pressEscape()` is handled asynchronously; wait about 40 ms before asserting.
-- Keys go through `@opentui/keymap`. Write sequences without spaces (`<leader>i`, `gi`); `"g i"` silently never fires. Screen commands use `useCommands` with `mode: "base"`, dialog keys `mode: "modal"`. Never add or remove layers inside a key handler: wrap dialog changes made from a handler in `afterDispatch`. A dialog with a text field must not bind `j`/`k`.
+- Keys go through `@opentui/keymap`. Write leader bindings as `<leader>i` and plain-key sequences with spaces: `g t` (clipode adds a parser for that; `gt` alone is the named key `>`). Screen commands use `useCommands` with `mode: "base"`, dialog keys `mode: "modal"`. Never add or remove layers inside a key handler: wrap dialog changes made from a handler in `afterDispatch`. A dialog with a text field must not bind `j`/`k`.
 - Keep files small, with one job each. Say why before adding a dependency.
 
 ## Workflow

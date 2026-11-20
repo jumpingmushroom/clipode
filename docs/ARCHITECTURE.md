@@ -213,7 +213,7 @@ The three inbox shelves and the kinds of request come from paperclip-android's D
 
 ### Keys
 
-Defaults follow opencode and pasode, and every binding can be changed in the config file. Bindings run on OpenTUI's own `@opentui/keymap` (the engine opencode uses): a timed leader, comma-separated alternatives, and a `mode` layer field that switches screen bindings off while a dialog is open. In binding strings a sequence is written without spaces: `<leader>i`, `gi`.
+Defaults follow opencode and pasode, and every binding can be changed in the config file. Bindings run on OpenTUI's own `@opentui/keymap` (the engine opencode uses): a timed leader, comma-separated alternatives, and a `mode` layer field that switches screen bindings off while a dialog is open. In binding strings, leader sequences are written `<leader>i` and plain-key sequences with spaces, `g t`.
 
 | Key | Action |
 | --- | --- |
@@ -264,6 +264,9 @@ Where the mockup shows something the API does not provide, the data wins:
 | "Holds up 2 sub-tasks" on a question | Only blocked-task items carry a count (`detail.blockedTaskCount`) | Shown on blocked-task items only. |
 | Sidebar groups for agents, tasks in flight and live runs on the inbox | Not in the attention feed | Filled from the agents, tasks and runs stores, which the inbox loads after the feed. |
 | Shelves: Decide now, New today, Earlier | Not a server concept | A client rule, defined below. |
+| Sub-task progress "2/5" on task rows | List rows carry `parentId` but no counts | Counted from the full task list, which the Tasks screen loads anyway. |
+| Run entries in the thread with a one-line summary ("Scoped into 5 sub-tasks") | `/issues/{id}/runs` has status, times and `usageJson.costUsd`, no summary | Run entries show agent, status, duration and cost. |
+| Filter chips `project:any  assignee:any  priority:any` | No server filter needed for one company's tasks | One filter line: free text plus `project:`, `assignee:`, `priority:` and `status:` tokens, applied in the client. |
 | Mine / Unassigned / Company tabs above the list | Only two sort orders | Built as a `Latest` / `Decide by` switch in the same place; `tab` toggles it. |
 | Agents group: Running, Waiting on you, Blocked | Agent statuses are active, idle, running, paused, error, pending approval and terminated; none is "blocked" | Running (status `running`), Waiting on you (distinct agents behind open inbox items), Error (status `error`). |
 | A question body with a proposal, table and code block | The question's prompt and options only | Each prompt is rendered as Markdown, followed by its options as inactive `( )` or `[ ]` choices. |

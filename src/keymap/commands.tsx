@@ -22,7 +22,7 @@ const DISPLAY = { tokenDisplay: { leader: "ctrl+x" } }
 /** Registers commands for as long as the calling component lives. `mode` decides when they are active. */
 export function useCommands(
   list: Accessor<AppCommand[]>,
-  options: { mode?: "base" | "modal"; overrides?: Record<string, string>; leader?: string } = {},
+  options: { mode?: "base" | "modal" | "input"; overrides?: Record<string, string>; leader?: string } = {},
 ) {
   useBindings(() => {
     const commands = list()

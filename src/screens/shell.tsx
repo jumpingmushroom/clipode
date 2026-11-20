@@ -19,6 +19,8 @@ import { SIDEBAR_MIN_COLUMNS } from "./frame.tsx"
 import { InboxScreen } from "./inbox.tsx"
 import { ItemScreen } from "./item.tsx"
 import { SignInScreen } from "./sign-in.tsx"
+import { TasksScreen } from "./tasks.tsx"
+import { ThreadScreen } from "./thread.tsx"
 
 export function Shell(props: { version: string; config?: Config }) {
   const { session } = useStores()
@@ -73,7 +75,8 @@ function Main(props: { version: string; config?: Config }) {
   const commands: AppCommand[] = [
     { name: "app.palette", title: "Command palette", category: "App", keys: "ctrl+p", hidden: true, run: () => dialog.replace(() => <CommandPalette />) },
     { name: "app.help", title: "Help", category: "App", keys: "<leader>h,?", run: () => dialog.replace(() => <HelpDialog />, undefined, "large") },
-    { name: "go.inbox", title: "Inbox", category: "Go to", keys: "<leader>i,gi", run: () => route.reset({ name: "inbox" }) },
+    { name: "go.inbox", title: "Inbox", category: "Go to", keys: "<leader>i,g i", run: () => route.reset({ name: "inbox" }) },
+    { name: "go.tasks", title: "Tasks", category: "Go to", keys: "<leader>t,g t", run: () => route.reset({ name: "tasks" }) },
     { name: "view.sidebar", title: "Toggle sidebar", category: "View", keys: "ctrl+b", run: () => setSidebar((v) => !v) },
     { name: "app.theme", title: "Switch theme", category: "View", keys: "<leader>shift+t,ctrl+t", run: () => openThemeDialog(dialog, theme) },
     { name: "session.company", title: "Switch company", category: "Session", keys: "<leader>c", run: openCompanies },
@@ -95,9 +98,9 @@ function Main(props: { version: string; config?: Config }) {
   ]
   useCommands(() => commands, { overrides: props.config?.keybinds })
 
-  const itemId = () => {
+  const param = (name: "item" | "thread") => {
     const r = route.current()
-    return r.name === "item" ? r.id : undefined
+    return r.name === name ? r.id : undefined
   }
   // With the sidebar set to "auto", it follows the terminal width; ctrl+b overrides either way.
   const showSidebar = () => sidebar() && (props.config?.sidebar === "show" || dimensions().width >= SIDEBAR_MIN_COLUMNS)
@@ -105,8 +108,14 @@ function Main(props: { version: string; config?: Config }) {
   return (
     <box width="100%" height="100%">
       <Switch>
-        <Match when={itemId()} keyed>
+        <Match when={param("item")} keyed>
           {(id: string) => <ItemScreen id={id} version={props.version} sidebar={showSidebar()} />}
+        </Match>
+        <Match when={param("thread")} keyed>
+          {(id: string) => <ThreadScreen id={id} version={props.version} sidebar={showSidebar()} />}
+        </Match>
+        <Match when={route.current().name === "tasks"}>
+          <TasksScreen version={props.version} sidebar={showSidebar()} />
         </Match>
         <Match when={true}>
           <InboxScreen version={props.version} sidebar={showSidebar()} />

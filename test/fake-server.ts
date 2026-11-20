@@ -6,10 +6,16 @@ import feed from "./fixtures/company/attention-feed.json"
 import summary from "./fixtures/company/attention-summary.json"
 import interactions from "./fixtures/company/issue-interactions.json"
 import details from "./fixtures/company/issue-details.json"
-import inFlight from "./fixtures/company/issues-in-flight.json"
+import issues from "./fixtures/company/issues.json"
+import projects from "./fixtures/company/projects.json"
+import threadComments from "./fixtures/company/thread-comments.json"
+import threadRuns from "./fixtures/company/thread-runs.json"
+import threadCost from "./fixtures/company/thread-cost.json"
 import liveRuns from "./fixtures/company/live-runs.json"
 
 export const COMPANY_ID = company.id
+/** The task whose comments, runs and cost were recorded. */
+export const THREAD_ID = threadCost.issueId
 export const PASSWORD = "correct horse battery staple"
 const SESSION = "paperclip-default.session_token"
 
@@ -23,7 +29,11 @@ export function startFakeServer(): FakeServer {
     [`/api/companies/${COMPANY_ID}/agents`]: agents,
     [`/api/companies/${COMPANY_ID}/attention`]: feed,
     [`/api/companies/${COMPANY_ID}/attention/summary`]: summary,
-    [`/api/companies/${COMPANY_ID}/issues`]: inFlight,
+    [`/api/companies/${COMPANY_ID}/issues`]: issues,
+    [`/api/companies/${COMPANY_ID}/projects`]: projects,
+    [`/api/issues/${threadCost.issueId}/comments`]: threadComments,
+    [`/api/issues/${threadCost.issueId}/runs`]: threadRuns,
+    [`/api/issues/${threadCost.issueId}/cost-summary`]: threadCost,
     [`/api/companies/${COMPANY_ID}/live-runs`]: liveRuns,
   }
   for (const [id, list] of Object.entries(interactions)) routes[`/api/issues/${id}/interactions`] = list

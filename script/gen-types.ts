@@ -1,7 +1,6 @@
 // Generates src/api/types.ts (GET paths and query parameters) from the instance's /api/openapi.json,
 // and records the Paperclip version it came from. Response bodies are typed from @paperclipai/shared.
 import openapiTS, { astToString, type OpenAPI3 } from "openapi-typescript"
-import { signOut } from "../src/api/auth.ts"
 import { signedInClient } from "./env.ts"
 
 const out = new URL("../src/api/types.ts", import.meta.url).pathname
@@ -25,5 +24,5 @@ try {
   const paths = Object.keys((doc.paths ?? {}) as object).length
   console.log(`wrote ${out}: ${paths} paths from Paperclip ${health.version ?? "unknown"}`)
 } finally {
-  await signOut(client)
+  // The cached session stays valid for the next script.
 }

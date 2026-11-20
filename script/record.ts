@@ -3,7 +3,6 @@
 // Writes test/fixtures/company/*.json. One scrubber covers every file, so ids stay consistent across them.
 import { mkdir, rm, writeFile } from "node:fs/promises"
 import type { Agent, AttentionFeed, Company, HeartbeatRun } from "@paperclipai/shared"
-import { signOut } from "../src/api/auth.ts"
 import { signedInClient } from "./env.ts"
 import { createScrubber } from "./scrub.ts"
 
@@ -50,19 +49,19 @@ try {
   await save("issue-details.json", scrub(issues))
 
   // Task list (capped so the fixture stays small) and one thread with comments.
-  const list = await client.get<{ id: string }[]>(`/api/companies/${cid}/issues`)
-  await save("issues.json", scrub(list.slice(0, 40)))
+  const list = await client.get<{ id: string }[]>(`/api/companies/${cid}/issues`, { view: "index" })
+  // The whole list keeps parents and their sub-tasks together; it is the largest fixture.
+  await save("issues.json", scrub(list))
   const threadId = [...issueIds][0] ?? list[0]?.id
   if (threadId) {
     if (!issues[threadId]) await save("thread-issue.json", scrub(await client.get(`/api/issues/${threadId}`)))
     await save("thread-comments.json", scrub(await client.get(`/api/issues/${threadId}/comments`)))
+    await save("thread-runs.json", scrub(await client.get(`/api/issues/${threadId}/runs`)))
+    await save("thread-cost.json", scrub(await client.get(`/api/issues/${threadId}/cost-summary`)))
   }
 
+  await save("projects.json", scrub(await client.get(`/api/companies/${cid}/projects`)))
   await save("live-runs.json", scrub(await client.get(`/api/companies/${cid}/live-runs`)))
-  await save(
-    "issues-in-flight.json",
-    scrub(await client.get(`/api/companies/${cid}/issues`, { status: "in_progress,in_review,blocked", view: "index" })),
-  )
 
   // Runs: the recent list, then one finished run with its events and the start of its log.
   const runs = await client.get<HeartbeatRun[]>(`/api/companies/${cid}/heartbeat-runs`, { limit: 20 })
@@ -78,6 +77,6 @@ try {
     await save("run-log.json", { ...(scrub({ ...log, content: "" }) as object), content: scrubLog(log.content) })
   }
 } finally {
-  await signOut(client)
+  // The cached session stays valid for the next script.
 }
 console.log(`written to ${outDir}; review before committing`)

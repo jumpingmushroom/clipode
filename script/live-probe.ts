@@ -1,6 +1,5 @@
 // Opens the live-events WebSocket from Bun with the session cookie and reports what the server answers.
 // Sends only the read-only protocol messages live.hello and live.interests. LIVE_HOLD_SECONDS sets the hold (default 65).
-import { signOut } from "../src/api/auth.ts"
 import { signedInClient } from "./env.ts"
 
 const holdMs = Number(process.env.LIVE_HOLD_SECONDS ?? 65) * 1000
@@ -55,6 +54,5 @@ try {
   await connect("cookie and Origin", url, { Cookie: client.cookieHeader(), Origin: client.origin }, null, 3000)
   await connect("no cookie (control)", url, {}, null, 3000)
 } finally {
-  await signOut(client)
-  console.log("\nsigned out")
+  // The cached session stays valid for the next script.
 }

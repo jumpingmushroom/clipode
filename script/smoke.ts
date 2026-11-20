@@ -8,7 +8,7 @@ type Company = { id: string; name: string; issuePrefix?: string; status?: string
 type Feed = { totalCount: number; deskBadgeCount: number; nextCursor: string | null; items: { sourceKind: string; detail?: { kind?: string } }[] }
 type Run = { id: string; status: string; agentId: string; invocationSource?: string; createdAt: string; finishedAt?: string | null }
 
-const client = await signedInClient()
+const client = await signedInClient({ fresh: true })
 console.log(`signed in to ${client.origin}`)
 try {
   const health = await client.get<{ status: string; version?: string; commit?: string; deploymentMode?: string }>("/api/health")

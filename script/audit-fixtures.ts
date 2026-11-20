@@ -4,7 +4,7 @@
 import { readdir, readFile } from "node:fs/promises"
 import { join } from "node:path"
 import type { Agent, Company } from "@paperclipai/shared"
-import { getSession, signOut } from "../src/api/auth.ts"
+import { getSession } from "../src/api/auth.ts"
 import { signedInClient } from "./env.ts"
 import { FIELD_KEY } from "./scrub.ts"
 
@@ -22,7 +22,7 @@ try {
     for (const i of await client.get<{ title: string }[]>(`/api/companies/${c.id}/issues`)) secrets.add(i.title)
   }
 } finally {
-  await signOut(client)
+  // The cached session stays valid for the next script.
 }
 const needles = [...secrets].filter((s) => s.length >= 3).map((s) => s.toLowerCase())
 
