@@ -3,8 +3,12 @@ dist/
 *.log
 .env
 .env.*
+*.env
 # Syncthing temporaries
 .syncthing.*
 ~syncthing~*
 # Raw responses from a real instance; only scrubbed copies go in test/fixtures
 .smoke/
+# Editor swap files
+*.swp
+*.swo

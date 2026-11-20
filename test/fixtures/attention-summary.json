@@ -1,0 +1,19 @@
+{
+  "companyId": "00000000-0000-4000-8000-000000000001",
+  "generatedAt": "2026-11-20T14:28:26.785Z",
+  "totalCount": 6,
+  "deskBadgeCount": 0,
+  "countsBySourceKind": {
+    "approval": 0,
+    "decision": 0,
+    "issue_thread_interaction": 4,
+    "join_request": 0,
+    "recovery_action": 0,
+    "productivity_review": 0,
+    "blocker_attention": 2,
+    "review": 0,
+    "failed_run": 0,
+    "budget_alert": 0,
+    "agent_error_alert": 0
+  }
+}

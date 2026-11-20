@@ -163,7 +163,7 @@ The feed is enough for every list row. Opening an item needs one more request, m
 - **Reconnect.** Exponential backoff with a cap, a full refetch of visible data after every reconnect or resync, and a connection indicator in the footer.
 - **Polling fallback.** With no WebSocket: inbox every 30 seconds, the visible list every 60 seconds, an open run's log every 2 seconds by byte offset. Polling slows down while the terminal is unfocused.
 
-Confirmed on `2026.1117.0`: the WebSocket upgrade succeeds with only the session cookie, with any `Origin` header or none, and is refused with 403 without the cookie. The server stays silent until the client sends `live.hello`, then answers `live.capabilities` with `run-interests` within milliseconds. The client then sends `live.interests` with the ids of the runs it has open and expects `live.subscribed`; that last exchange is from source and not yet observed. The server pings every 30 seconds and drops a socket that misses a pong. No event type announces an attention change, so the inbox refetches when `activity.logged` arrives. Bun's WebSocket does not expose the HTTP status of a refused upgrade, so after a failed connect the client checks the session with a `GET` to tell an expired session from a network fault.
+Confirmed on `2026.1117.0`: the WebSocket upgrade succeeds with only the session cookie, with any `Origin` header or none, and is refused with 403 without the cookie. The server stays silent until the client sends `live.hello`, then answers `live.capabilities` with `run-interests` within milliseconds. The client then sends `live.interests` with the ids of the runs it has open and receives `live.subscribed` with the same revision about 1 ms later; the revision must increase with every `live.interests`. The server pings every 30 seconds and drops a socket that misses a pong; Bun's WebSocket client answers pings itself and held a connection for 65 seconds. No event type announces an attention change, so the inbox refetches when `activity.logged` arrives. Bun reports a refused upgrade only as an error message (`Expected 101 status code: 403`) followed by close code 1006, with no status field, so after a failed connect the client checks the session with a `GET` to tell an expired session from a network fault rather than parse the message. All of this was confirmed from Bun 1.4.5 by `script/live-probe.ts` on 2026-11-20.
 
 ### Stores
 
@@ -379,7 +379,7 @@ Open after the mockup review:
 
 - [ ] Whether the shelf rule above matches how you triage, in particular treating every high-severity item as Decide now.
 - [ ] Whether a question's detail should also pull in the comment the agent wrote alongside it (`originCommentIds`), to get closer to the mockup.
-- [ ] The `live.interests` and `live.subscribed` exchange, to be observed while a run is active.
+- [x] Observed: `live.interests` is answered by `live.subscribed` with the same revision.
 
 ## Prompt for Claude Design
 

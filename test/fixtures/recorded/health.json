@@ -1,0 +1,50 @@
+{
+  "status": "ok",
+  "version": "2026.1117.0",
+  "serverVersion": "example serverVersion",
+  "commit": "example commit",
+  "deploymentMode": "authenticated",
+  "deploymentExposure": "private",
+  "localAiLoginSupported": true,
+  "authReady": true,
+  "bootstrapStatus": "ready",
+  "bootstrapInviteActive": false,
+  "features": {
+    "companyDeletionEnabled": false
+  },
+  "serverInfo": {
+    "processStartedAt": "2026-11-20T14:16:30.224Z",
+    "git": {
+      "available": true,
+      "fullSha": "example fullSha",
+      "shortSha": "example shortSha",
+      "branchName": null,
+      "subject": "example subject",
+      "committedAt": null,
+      "localChanges": {
+        "available": false,
+        "unavailableReason": "example unavailableReason"
+      }
+    }
+  },
+  "startupRecovery": {
+    "phase": "example phase",
+    "updatedAt": "2026-11-20T14:16:42.127Z"
+  },
+  "nativeRecovery": {},
+  "databaseBackup": {
+    "enabled": true,
+    "status": "ok",
+    "backupDir": "example backupDir",
+    "maxAgeHours": 26,
+    "latestBackup": {
+      "name": "example name",
+      "path": "example path",
+      "mtime": "2026-11-20T13:46:16.859Z",
+      "ageHours": 1.1,
+      "sizeBytes": 137567650
+    },
+    "lastFailure": null,
+    "warnings": []
+  }
+}
