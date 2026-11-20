@@ -1,0 +1,580 @@
+{
+  "companyId": "00000000-0000-4000-8000-000000000001",
+  "generatedAt": "2026-11-20T15:07:55.202Z",
+  "totalCount": 6,
+  "deskBadgeCount": 0,
+  "countsBySourceKind": {
+    "approval": 0,
+    "decision": 0,
+    "issue_thread_interaction": 4,
+    "join_request": 0,
+    "recovery_action": 0,
+    "productivity_review": 0,
+    "blocker_attention": 2,
+    "review": 0,
+    "failed_run": 0,
+    "budget_alert": 0,
+    "agent_error_alert": 0
+  },
+  "nextCursor": null,
+  "items": [
+    {
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "sourceKind": "blocker_attention",
+      "subject": {
+        "kind": "issue",
+        "id": "00000000-0000-4000-8000-000000000032",
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "title": "example title",
+        "identifier": "DEMO-1",
+        "status": "in_review",
+        "href": "/demo/path",
+        "metadata": {
+          "priority": "medium",
+          "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+          "assigneeUserId": null,
+          "reviewPolicy": null
+        }
+      },
+      "whyNow": "example whyNow",
+      "decisionVerbs": [
+        {
+          "id": "unblock",
+          "label": "example label",
+          "description": "example description"
+        },
+        {
+          "id": "reassign",
+          "label": "example label",
+          "description": "example description"
+        },
+        {
+          "id": "nudge",
+          "label": "example label",
+          "description": "example description"
+        }
+      ],
+      "inlineResolvable": false,
+      "entryRule": "example entryRule",
+      "exitRule": "example exitRule",
+      "dedupKey": "example dedupKey",
+      "severity": "high",
+      "activityAt": "2026-11-20T13:31:32.187Z",
+      "createdAt": "2026-11-18T08:28:10.889Z",
+      "updatedAt": "2026-11-20T13:31:32.187Z",
+      "relatedIssue": {
+        "kind": "issue",
+        "id": "00000000-0000-4000-8000-000000000033",
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "title": "example title",
+        "identifier": "DEMO-2",
+        "status": "blocked",
+        "href": "/demo/path",
+        "metadata": {
+          "priority": "medium",
+          "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+          "assigneeUserId": null,
+          "reviewPolicy": null
+        }
+      },
+      "project": null,
+      "workspace": null,
+      "detail": {
+        "kind": "blocker",
+        "blockingIssue": null,
+        "blockedTaskCount": 1,
+        "images": []
+      },
+      "id": "example id",
+      "dismissalKey": "example dismissalKey",
+      "dismissal": null,
+      "expiresAt": null,
+      "ruleKey": null,
+      "originAgentName": null,
+      "queues": [],
+      "shelf": false,
+      "retentionDays": 30,
+      "keep": false,
+      "archivedAt": null,
+      "retentionVersion": 7,
+      "decideBy": null,
+      "decideByAttribution": null,
+      "snoozedUntil": null,
+      "trainingExampleId": null,
+      "resolverAudience": null,
+      "rank": 1
+    },
+    {
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "sourceKind": "issue_thread_interaction",
+      "subject": {
+        "kind": "interaction",
+        "id": "00000000-0000-4000-8000-000000000034",
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "title": "example title",
+        "identifier": null,
+        "status": "pending",
+        "href": "/demo/path",
+        "metadata": {
+          "kind": "request_confirmation",
+          "issueId": "00000000-0000-4000-8000-000000000035",
+          "createdByAgentId": "00000000-0000-4000-8000-000000000003",
+          "isPlanTarget": false,
+          "targetDocumentKey": null
+        }
+      },
+      "whyNow": "example whyNow",
+      "decisionVerbs": [
+        {
+          "id": "accept",
+          "label": "example label",
+          "description": "example description"
+        },
+        {
+          "id": "reject",
+          "label": "example label",
+          "description": "example description"
+        }
+      ],
+      "inlineResolvable": true,
+      "entryRule": "example entryRule",
+      "exitRule": "example exitRule",
+      "dedupKey": "example dedupKey",
+      "severity": "medium",
+      "activityAt": "2026-11-18T13:35:14.126Z",
+      "createdAt": "2026-11-18T13:35:14.126Z",
+      "updatedAt": "2026-11-18T13:35:14.126Z",
+      "relatedIssue": {
+        "kind": "issue",
+        "id": "00000000-0000-4000-8000-000000000035",
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "title": "example title",
+        "identifier": "DEMO-3",
+        "status": "in_review",
+        "href": "/demo/path",
+        "metadata": {
+          "priority": "medium",
+          "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+          "assigneeUserId": null,
+          "reviewPolicy": null
+        }
+      },
+      "project": {
+        "id": "00000000-0000-4000-8000-000000000036",
+        "name": "example name",
+        "urlKey": "example urlKey",
+        "color": "example color",
+        "icon": null
+      },
+      "workspace": null,
+      "detail": {
+        "kind": "confirmation",
+        "promptExcerpt": "example promptExcerpt",
+        "isPlanTarget": false,
+        "images": []
+      },
+      "resolverAudience": {
+        "requestedResolverPolicy": "human_only",
+        "effectiveResolverPolicy": "human_only",
+        "effectiveResolverPolicySource": "requested",
+        "resolverPolicyProvenance": "explicit",
+        "addresseeAgentId": null,
+        "addresseeUserId": null,
+        "addresseeName": null,
+        "createdByAgentId": "00000000-0000-4000-8000-000000000003",
+        "createdByAgentName": null
+      },
+      "id": "example id",
+      "dismissalKey": "example dismissalKey",
+      "dismissal": null,
+      "expiresAt": null,
+      "ruleKey": null,
+      "originAgentName": "example originAgentName",
+      "queues": [],
+      "shelf": false,
+      "retentionDays": 30,
+      "keep": false,
+      "archivedAt": null,
+      "retentionVersion": 1,
+      "decideBy": null,
+      "decideByAttribution": null,
+      "snoozedUntil": null,
+      "trainingExampleId": null,
+      "rank": 2
+    },
+    {
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "sourceKind": "issue_thread_interaction",
+      "subject": {
+        "kind": "interaction",
+        "id": "00000000-0000-4000-8000-000000000037",
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "title": "example title",
+        "identifier": null,
+        "status": "pending",
+        "href": "/demo/path",
+        "metadata": {
+          "kind": "ask_user_questions",
+          "issueId": "00000000-0000-4000-8000-000000000038",
+          "createdByAgentId": "00000000-0000-4000-8000-00000000001f",
+          "isPlanTarget": false,
+          "targetDocumentKey": null
+        }
+      },
+      "whyNow": "example whyNow",
+      "decisionVerbs": [
+        {
+          "id": "respond",
+          "label": "example label",
+          "description": "example description"
+        }
+      ],
+      "inlineResolvable": true,
+      "entryRule": "example entryRule",
+      "exitRule": "example exitRule",
+      "dedupKey": "example dedupKey",
+      "severity": "medium",
+      "activityAt": "2026-11-18T13:16:03.838Z",
+      "createdAt": "2026-11-18T13:16:03.838Z",
+      "updatedAt": "2026-11-18T13:16:03.838Z",
+      "relatedIssue": {
+        "kind": "issue",
+        "id": "00000000-0000-4000-8000-000000000038",
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "title": "example title",
+        "identifier": "DEMO-4",
+        "status": "in_review",
+        "href": "/demo/path",
+        "metadata": {
+          "priority": "medium",
+          "assigneeAgentId": "00000000-0000-4000-8000-00000000001f",
+          "assigneeUserId": null,
+          "reviewPolicy": null
+        }
+      },
+      "project": {
+        "id": "00000000-0000-4000-8000-000000000036",
+        "name": "example name",
+        "urlKey": "example urlKey",
+        "color": "example color",
+        "icon": null
+      },
+      "workspace": null,
+      "detail": {
+        "kind": "questions",
+        "questionCount": 1,
+        "firstQuestionText": "example firstQuestionText",
+        "images": []
+      },
+      "resolverAudience": {
+        "requestedResolverPolicy": "human_only",
+        "effectiveResolverPolicy": "human_only",
+        "effectiveResolverPolicySource": "requested",
+        "resolverPolicyProvenance": "explicit",
+        "addresseeAgentId": null,
+        "addresseeUserId": null,
+        "addresseeName": null,
+        "createdByAgentId": "00000000-0000-4000-8000-00000000001f",
+        "createdByAgentName": null
+      },
+      "id": "example id",
+      "dismissalKey": "example dismissalKey",
+      "dismissal": null,
+      "expiresAt": null,
+      "ruleKey": null,
+      "originAgentName": "example originAgentName",
+      "queues": [
+        {
+          "key": "example key",
+          "title": "example title"
+        }
+      ],
+      "shelf": false,
+      "retentionDays": 30,
+      "keep": false,
+      "archivedAt": null,
+      "retentionVersion": 1,
+      "decideBy": null,
+      "decideByAttribution": null,
+      "snoozedUntil": null,
+      "trainingExampleId": null,
+      "rank": 3
+    },
+    {
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "sourceKind": "blocker_attention",
+      "subject": {
+        "kind": "issue",
+        "id": "00000000-0000-4000-8000-000000000039",
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "title": "example title",
+        "identifier": "DEMO-5",
+        "status": "blocked",
+        "href": "/demo/path",
+        "metadata": {
+          "priority": "medium",
+          "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+          "assigneeUserId": null,
+          "reviewPolicy": null
+        }
+      },
+      "whyNow": "example whyNow",
+      "decisionVerbs": [
+        {
+          "id": "unblock",
+          "label": "example label",
+          "description": "example description"
+        },
+        {
+          "id": "reassign",
+          "label": "example label",
+          "description": "example description"
+        },
+        {
+          "id": "nudge",
+          "label": "example label",
+          "description": "example description"
+        }
+      ],
+      "inlineResolvable": false,
+      "entryRule": "example entryRule",
+      "exitRule": "example exitRule",
+      "dedupKey": "example dedupKey",
+      "severity": "high",
+      "activityAt": "2026-11-17T08:58:12.154Z",
+      "createdAt": "2026-11-17T08:56:56.658Z",
+      "updatedAt": "2026-11-17T08:58:12.154Z",
+      "relatedIssue": {
+        "kind": "issue",
+        "id": "00000000-0000-4000-8000-000000000039",
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "title": "example title",
+        "identifier": "DEMO-5",
+        "status": "blocked",
+        "href": "/demo/path",
+        "metadata": {
+          "priority": "medium",
+          "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+          "assigneeUserId": null,
+          "reviewPolicy": null
+        }
+      },
+      "project": null,
+      "workspace": null,
+      "detail": {
+        "kind": "blocker",
+        "blockingIssue": null,
+        "blockedTaskCount": 0,
+        "images": []
+      },
+      "id": "example id",
+      "dismissalKey": "example dismissalKey",
+      "dismissal": null,
+      "expiresAt": null,
+      "ruleKey": null,
+      "originAgentName": null,
+      "queues": [],
+      "shelf": false,
+      "retentionDays": 30,
+      "keep": false,
+      "archivedAt": null,
+      "retentionVersion": 1,
+      "decideBy": null,
+      "decideByAttribution": null,
+      "snoozedUntil": null,
+      "trainingExampleId": null,
+      "resolverAudience": null,
+      "rank": 4
+    },
+    {
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "sourceKind": "issue_thread_interaction",
+      "subject": {
+        "kind": "interaction",
+        "id": "00000000-0000-4000-8000-00000000003a",
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "title": "example title",
+        "identifier": null,
+        "status": "pending",
+        "href": "/demo/path",
+        "metadata": {
+          "kind": "ask_user_questions",
+          "issueId": "00000000-0000-4000-8000-00000000003b",
+          "createdByAgentId": "00000000-0000-4000-8000-000000000003",
+          "isPlanTarget": false,
+          "targetDocumentKey": null
+        }
+      },
+      "whyNow": "example whyNow",
+      "decisionVerbs": [
+        {
+          "id": "respond",
+          "label": "example label",
+          "description": "example description"
+        }
+      ],
+      "inlineResolvable": true,
+      "entryRule": "example entryRule",
+      "exitRule": "example exitRule",
+      "dedupKey": "example dedupKey",
+      "severity": "medium",
+      "activityAt": "2026-11-16T20:09:23.132Z",
+      "createdAt": "2026-11-16T20:09:23.132Z",
+      "updatedAt": "2026-11-16T20:09:23.132Z",
+      "relatedIssue": {
+        "kind": "issue",
+        "id": "00000000-0000-4000-8000-00000000003b",
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "title": "example title",
+        "identifier": "DEMO-6",
+        "status": "done",
+        "href": "/demo/path",
+        "metadata": {
+          "priority": "medium",
+          "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+          "assigneeUserId": null,
+          "reviewPolicy": null
+        }
+      },
+      "project": null,
+      "workspace": null,
+      "detail": {
+        "kind": "questions",
+        "questionCount": 3,
+        "firstQuestionText": "example firstQuestionText",
+        "images": []
+      },
+      "resolverAudience": {
+        "requestedResolverPolicy": "human_only",
+        "effectiveResolverPolicy": "human_only",
+        "effectiveResolverPolicySource": "requested",
+        "resolverPolicyProvenance": "explicit",
+        "addresseeAgentId": null,
+        "addresseeUserId": null,
+        "addresseeName": null,
+        "createdByAgentId": "00000000-0000-4000-8000-000000000003",
+        "createdByAgentName": null
+      },
+      "id": "example id",
+      "dismissalKey": "example dismissalKey",
+      "dismissal": null,
+      "expiresAt": null,
+      "ruleKey": null,
+      "originAgentName": "example originAgentName",
+      "queues": [
+        {
+          "key": "example key",
+          "title": "example title"
+        }
+      ],
+      "shelf": false,
+      "retentionDays": 30,
+      "keep": false,
+      "archivedAt": null,
+      "retentionVersion": 1,
+      "decideBy": null,
+      "decideByAttribution": null,
+      "snoozedUntil": null,
+      "trainingExampleId": null,
+      "rank": 5
+    },
+    {
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "sourceKind": "issue_thread_interaction",
+      "subject": {
+        "kind": "interaction",
+        "id": "00000000-0000-4000-8000-00000000003c",
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "title": "example title",
+        "identifier": null,
+        "status": "pending",
+        "href": "/demo/path",
+        "metadata": {
+          "kind": "ask_user_questions",
+          "issueId": "00000000-0000-4000-8000-00000000003d",
+          "createdByAgentId": "00000000-0000-4000-8000-000000000005",
+          "isPlanTarget": false,
+          "targetDocumentKey": null
+        }
+      },
+      "whyNow": "example whyNow",
+      "decisionVerbs": [
+        {
+          "id": "respond",
+          "label": "example label",
+          "description": "example description"
+        }
+      ],
+      "inlineResolvable": true,
+      "entryRule": "example entryRule",
+      "exitRule": "example exitRule",
+      "dedupKey": "example dedupKey",
+      "severity": "medium",
+      "activityAt": "2026-11-09T12:45:20.671Z",
+      "createdAt": "2026-11-09T12:43:56.765Z",
+      "updatedAt": "2026-11-09T12:45:20.671Z",
+      "relatedIssue": {
+        "kind": "issue",
+        "id": "00000000-0000-4000-8000-00000000003d",
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "title": "example title",
+        "identifier": "DEMO-7",
+        "status": "done",
+        "href": "/demo/path",
+        "metadata": {
+          "priority": "medium",
+          "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+          "assigneeUserId": null,
+          "reviewPolicy": null
+        }
+      },
+      "project": {
+        "id": "00000000-0000-4000-8000-000000000036",
+        "name": "example name",
+        "urlKey": "example urlKey",
+        "color": "example color",
+        "icon": null
+      },
+      "workspace": null,
+      "detail": {
+        "kind": "questions",
+        "questionCount": 3,
+        "firstQuestionText": "example firstQuestionText",
+        "images": []
+      },
+      "resolverAudience": {
+        "requestedResolverPolicy": "human_only",
+        "effectiveResolverPolicy": "human_only",
+        "effectiveResolverPolicySource": "requested",
+        "resolverPolicyProvenance": "explicit",
+        "addresseeAgentId": null,
+        "addresseeUserId": null,
+        "addresseeName": null,
+        "createdByAgentId": "00000000-0000-4000-8000-000000000005",
+        "createdByAgentName": null
+      },
+      "id": "example id",
+      "dismissalKey": "example dismissalKey",
+      "dismissal": null,
+      "expiresAt": null,
+      "ruleKey": null,
+      "originAgentName": "example originAgentName",
+      "queues": [
+        {
+          "key": "example key",
+          "title": "example title"
+        }
+      ],
+      "shelf": false,
+      "retentionDays": 30,
+      "keep": false,
+      "archivedAt": null,
+      "retentionVersion": 2,
+      "decideBy": null,
+      "decideByAttribution": null,
+      "snoozedUntil": null,
+      "trainingExampleId": null,
+      "rank": 6
+    }
+  ]
+}

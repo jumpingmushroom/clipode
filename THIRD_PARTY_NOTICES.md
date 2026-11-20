@@ -68,7 +68,7 @@ SOFTWARE.
 
 https://github.com/paperclipai/paperclip
 
-API types generated from the server's OpenAPI document.
+API types generated from the server's OpenAPI document, and type declarations from the `@paperclipai/shared` package.
 
 ```text
 MIT License

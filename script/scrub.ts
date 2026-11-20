@@ -17,10 +17,16 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 const ISO = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const IDENTIFIER = /^[A-Z][A-Z0-9]{1,9}-\d+$/
+// Field names look like this. Other keys (env var names, skill paths, map keys) describe the instance, so they are replaced.
+export const FIELD_KEY = /^[a-z_][A-Za-z0-9_]*$/
+
+// Inside run-log chunks these are tool names and tags, kept when they look like tokens.
+const LOG_KEYS = new Set(["name", "tag", "subtype", "role", "event", "method", "tool", "stop_reason"])
 
 export function createScrubber() {
   const ids = new Map<string, string>()
   const identifiers = new Map<string, string>()
+  const keys = new Map<string, string>()
 
   const fakeUuid = (real: string) => {
     if (!ids.has(real)) ids.set(real, `00000000-0000-4000-8000-${(ids.size + 1).toString(16).padStart(12, "0")}`)
@@ -31,27 +37,65 @@ export function createScrubber() {
     return identifiers.get(real)!
   }
 
-  const scrubString = (key: string, value: string, parentKey: string): string => {
+  const scrubKey = (k: string) => {
+    if (UUID.test(k)) return fakeUuid(k)
+    if (FIELD_KEY.test(k)) return k
+    if (!keys.has(k)) keys.set(k, `example_key_${keys.size + 1}`)
+    return keys.get(k)!
+  }
+
+  const scrubString = (key: string, value: string, parentKey: string, log: boolean): string => {
     if (value === "") return value
     if (UUID.test(value)) return fakeUuid(value)
     if (ISO.test(value)) return value
-    if ((ENUM_KEYS.has(key) || (parentKey === "decisionVerbs" && key === "id")) && TOKEN.test(value)) return value
+    if ((ENUM_KEYS.has(key) || (log && LOG_KEYS.has(key)) || (parentKey === "decisionVerbs" && key === "id")) && TOKEN.test(value)) return value
     if (EMAIL.test(value)) return "user@example.com"
     if (IDENTIFIER.test(value)) return fakeIdentifier(value)
     if (key === "href" || key === "url" || key.endsWith("Url")) return "/demo/path"
     return `example ${key || parentKey || "text"}`
   }
 
-  const scrub = (value: unknown, key = "", parentKey = ""): unknown => {
-    if (Array.isArray(value)) return value.map((v) => scrub(v, key, parentKey))
+  const walk = (value: unknown, key: string, parentKey: string, log: boolean): unknown => {
+    if (Array.isArray(value)) return value.map((v) => walk(v, key, parentKey, log))
     if (value && typeof value === "object") {
       return Object.fromEntries(
-        Object.entries(value).map(([k, v]) => [UUID.test(k) ? fakeUuid(k) : k, scrub(v, k, key)]),
+        Object.entries(value).map(([k, v]) => [scrubKey(k), walk(v, k, key, log)]),
       )
     }
-    if (typeof value === "string") return scrubString(key, value, parentKey)
+    if (typeof value === "string") return scrubString(key, value, parentKey, log)
     return value
   }
+  const scrub = (value: unknown): unknown => walk(value, "", "", false)
 
-  return { scrub, fakeUuid }
+  // A JSON-lines string: each line is parsed and scrubbed, non-JSON lines become invented text.
+  const scrubJsonLines = (text: string, key: string): string =>
+    text
+      .split("\n")
+      .map((line) => {
+        if (!line.trim()) return line
+        try {
+          return JSON.stringify(scrubLogValue(JSON.parse(line)))
+        } catch {
+          return `example ${key}`
+        }
+      })
+      .join("\n")
+
+  // Run-log records keep their structure: a chunk that holds JSON lines is scrubbed inside.
+  const scrubLogValue = (value: unknown): unknown => {
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      return Object.fromEntries(
+        Object.entries(value).map(([k, v]) => [
+          scrubKey(k),
+          typeof v === "string" && v.trimStart().startsWith("{") ? scrubJsonLines(v, k) : walk(v, k, "", true),
+        ]),
+      )
+    }
+    return walk(value, "", "", true)
+  }
+
+  /** Scrubs the `content` of a run log: newline-separated JSON records whose chunks may hold JSON. */
+  const scrubLog = (content: string): string => scrubJsonLines(content, "chunk")
+
+  return { scrub, scrubLog, fakeUuid }
 }

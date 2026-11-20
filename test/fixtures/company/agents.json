@@ -1,0 +1,1110 @@
+[
+  {
+    "id": "00000000-0000-4000-8000-000000000003",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "name": "example name",
+    "role": "devops",
+    "title": "example title",
+    "icon": null,
+    "appearance": {
+      "schemaVersion": 1,
+      "characterVersion": "example characterVersion",
+      "paletteId": "example paletteId",
+      "customAvatarAssetId": "00000000-0000-4000-8000-000000000004"
+    },
+    "status": "idle",
+    "lifecycleState": "example lifecycleState",
+    "lifecycleHolds": [],
+    "lifecycleVersion": 8,
+    "lifecycleError": null,
+    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "capabilities": null,
+    "adapterType": "claude_local",
+    "adapterConfig": {
+      "cwd": "example cwd",
+      "engine": "example engine",
+      "extraArgs": [
+        "example extraArgs",
+        "example extraArgs"
+      ],
+      "paperclipSkillSync": {
+        "desiredSkills": [
+          "example desiredSkills",
+          "example desiredSkills"
+        ]
+      },
+      "instructionsFilePath": "example instructionsFilePath",
+      "instructionsRootPath": "example instructionsRootPath",
+      "instructionsEntryFile": "example instructionsEntryFile",
+      "instructionsBundleMode": "example instructionsBundleMode",
+      "env": {
+        "example_key_1": {
+          "type": "plain",
+          "value": "example value"
+        }
+      }
+    },
+    "runtimeConfig": {
+      "heartbeat": {
+        "enabled": false,
+        "cooldownSec": 10,
+        "intervalSec": 300,
+        "wakeOnDemand": true,
+        "maxConcurrentRuns": 1,
+        "skipTimerWhenNoActionableWork": true
+      },
+      "aiConnection": {
+        "mode": "example mode",
+        "method": "example method",
+        "provider": "anthropic"
+      }
+    },
+    "defaultEnvironmentId": null,
+    "budgetMonthlyCents": 0,
+    "spendMonthUtc": "example spendMonthUtc",
+    "spentMonthlyCents": 0,
+    "pauseReason": null,
+    "pausedAt": null,
+    "errorReason": null,
+    "permissions": {
+      "canCreateAgents": false,
+      "canCreateSkills": true
+    },
+    "lastHeartbeatAt": "2026-11-18T13:35:27.981Z",
+    "metadata": null,
+    "createdByUserId": "example createdByUserId",
+    "createdAt": "2026-11-08T20:25:55.016Z",
+    "updatedAt": "2026-11-18T13:35:27.981Z",
+    "urlKey": "example urlKey",
+    "avatarUrl": "/demo/path",
+    "orgChainHealth": {
+      "status": "healthy",
+      "reason": "healthy",
+      "fullChain": [
+        {
+          "id": "00000000-0000-4000-8000-000000000003",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "depth": 0,
+          "relation": "example relation"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000005",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": null,
+          "depth": 1,
+          "relation": "example relation"
+        }
+      ],
+      "firstInvalidAncestor": null,
+      "invalidAncestors": [],
+      "repairGuidance": null,
+      "pausedAncestors": [],
+      "escalationWarning": null
+    }
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000006",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "name": "example name",
+    "role": "devops",
+    "title": "example title",
+    "icon": null,
+    "appearance": {
+      "schemaVersion": 1,
+      "characterVersion": "example characterVersion",
+      "paletteId": "example paletteId",
+      "customAvatarAssetId": "00000000-0000-4000-8000-000000000007"
+    },
+    "status": "idle",
+    "lifecycleState": "example lifecycleState",
+    "lifecycleHolds": [],
+    "lifecycleVersion": 4,
+    "lifecycleError": null,
+    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "capabilities": null,
+    "adapterType": "claude_local",
+    "adapterConfig": {
+      "cwd": "example cwd",
+      "paperclipSkillSync": {
+        "desiredSkills": [
+          "example desiredSkills",
+          "example desiredSkills"
+        ]
+      },
+      "instructionsFilePath": "example instructionsFilePath",
+      "instructionsRootPath": "example instructionsRootPath",
+      "instructionsEntryFile": "example instructionsEntryFile",
+      "instructionsBundleMode": "example instructionsBundleMode",
+      "env": {
+        "example_key_2": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000008",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_3": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000009",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_4": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-00000000000a",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_1": {
+          "type": "plain",
+          "value": "example value"
+        }
+      }
+    },
+    "runtimeConfig": {
+      "heartbeat": {
+        "enabled": false,
+        "cooldownSec": 10,
+        "intervalSec": 300,
+        "wakeOnDemand": true,
+        "maxConcurrentRuns": 1,
+        "skipTimerWhenNoActionableWork": true
+      },
+      "aiConnection": {
+        "mode": "example mode",
+        "method": "example method",
+        "provider": "anthropic"
+      }
+    },
+    "defaultEnvironmentId": null,
+    "budgetMonthlyCents": 0,
+    "spendMonthUtc": "example spendMonthUtc",
+    "spentMonthlyCents": 0,
+    "pauseReason": null,
+    "pausedAt": null,
+    "errorReason": null,
+    "permissions": {
+      "canCreateAgents": false,
+      "canCreateSkills": true
+    },
+    "lastHeartbeatAt": "2026-11-18T09:52:20.798Z",
+    "metadata": null,
+    "createdByUserId": "example createdByUserId",
+    "createdAt": "2026-11-08T20:25:54.058Z",
+    "updatedAt": "2026-11-18T09:52:20.798Z",
+    "urlKey": "example urlKey",
+    "avatarUrl": "/demo/path",
+    "orgChainHealth": {
+      "status": "healthy",
+      "reason": "healthy",
+      "fullChain": [
+        {
+          "id": "00000000-0000-4000-8000-000000000006",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "depth": 0,
+          "relation": "example relation"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000005",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": null,
+          "depth": 1,
+          "relation": "example relation"
+        }
+      ],
+      "firstInvalidAncestor": null,
+      "invalidAncestors": [],
+      "repairGuidance": null,
+      "pausedAncestors": [],
+      "escalationWarning": null
+    }
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000000000b",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "name": "example name",
+    "role": "general",
+    "title": "example title",
+    "icon": "example icon",
+    "appearance": {
+      "schemaVersion": 1,
+      "characterVersion": "example characterVersion",
+      "paletteId": "example paletteId",
+      "customAvatarAssetId": "00000000-0000-4000-8000-00000000000c"
+    },
+    "status": "idle",
+    "lifecycleState": "example lifecycleState",
+    "lifecycleHolds": [],
+    "lifecycleVersion": 4,
+    "lifecycleError": null,
+    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "capabilities": "example capabilities",
+    "adapterType": "claude_local",
+    "adapterConfig": {
+      "paperclipSkillSync": {
+        "desiredSkills": [
+          "example desiredSkills",
+          "example desiredSkills"
+        ]
+      },
+      "instructionsFilePath": "example instructionsFilePath",
+      "instructionsRootPath": "example instructionsRootPath",
+      "instructionsEntryFile": "example instructionsEntryFile",
+      "instructionsBundleMode": "example instructionsBundleMode",
+      "env": {
+        "example_key_5": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-00000000000d",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_6": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-00000000000e",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_7": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-00000000000f",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_8": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000010",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_9": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000011",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_10": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000012",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_11": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000013",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_12": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000014",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_13": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000015",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_14": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000016",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_15": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000017",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_16": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000018",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_17": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000019",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_18": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-00000000001a",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_19": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-00000000001b",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_20": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-00000000001c",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_21": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-00000000001d",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_22": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-00000000001e",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        }
+      }
+    },
+    "runtimeConfig": {
+      "heartbeat": {
+        "enabled": false,
+        "wakeOnDemand": true,
+        "maxConcurrentRuns": 20
+      },
+      "aiConnection": {
+        "mode": "example mode",
+        "method": "example method",
+        "provider": "anthropic"
+      }
+    },
+    "defaultEnvironmentId": null,
+    "budgetMonthlyCents": 0,
+    "spendMonthUtc": "example spendMonthUtc",
+    "spentMonthlyCents": 0,
+    "pauseReason": null,
+    "pausedAt": null,
+    "errorReason": null,
+    "permissions": {
+      "canCreateAgents": true,
+      "canCreateSkills": true
+    },
+    "lastHeartbeatAt": "2026-11-20T13:31:32.312Z",
+    "metadata": null,
+    "createdByUserId": null,
+    "createdAt": "2026-11-16T10:29:58.957Z",
+    "updatedAt": "2026-11-20T13:31:32.312Z",
+    "urlKey": "example urlKey",
+    "avatarUrl": "/demo/path",
+    "orgChainHealth": {
+      "status": "healthy",
+      "reason": "healthy",
+      "fullChain": [
+        {
+          "id": "00000000-0000-4000-8000-00000000000b",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "depth": 0,
+          "relation": "example relation"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000005",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": null,
+          "depth": 1,
+          "relation": "example relation"
+        }
+      ],
+      "firstInvalidAncestor": null,
+      "invalidAncestors": [],
+      "repairGuidance": null,
+      "pausedAncestors": [],
+      "escalationWarning": null
+    }
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000000001f",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "name": "example name",
+    "role": "general",
+    "title": "example title",
+    "icon": "example icon",
+    "appearance": {
+      "schemaVersion": 1,
+      "characterVersion": "example characterVersion",
+      "paletteId": "example paletteId",
+      "customAvatarAssetId": "00000000-0000-4000-8000-000000000020"
+    },
+    "status": "idle",
+    "lifecycleState": "example lifecycleState",
+    "lifecycleHolds": [],
+    "lifecycleVersion": 4,
+    "lifecycleError": null,
+    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "capabilities": "example capabilities",
+    "adapterType": "claude_local",
+    "adapterConfig": {
+      "paperclipSkillSync": {
+        "desiredSkills": [
+          "example desiredSkills",
+          "example desiredSkills"
+        ]
+      },
+      "instructionsFilePath": "example instructionsFilePath",
+      "instructionsRootPath": "example instructionsRootPath",
+      "instructionsEntryFile": "example instructionsEntryFile",
+      "instructionsBundleMode": "example instructionsBundleMode"
+    },
+    "runtimeConfig": {
+      "heartbeat": {
+        "enabled": false,
+        "wakeOnDemand": true,
+        "maxConcurrentRuns": 1
+      },
+      "aiConnection": {
+        "mode": "example mode",
+        "method": "example method",
+        "provider": "anthropic"
+      }
+    },
+    "defaultEnvironmentId": null,
+    "budgetMonthlyCents": 0,
+    "spendMonthUtc": "example spendMonthUtc",
+    "spentMonthlyCents": 0,
+    "pauseReason": null,
+    "pausedAt": null,
+    "errorReason": null,
+    "permissions": {
+      "canCreateAgents": true,
+      "canCreateSkills": true
+    },
+    "lastHeartbeatAt": "2026-11-18T13:19:27.195Z",
+    "metadata": null,
+    "createdByUserId": null,
+    "createdAt": "2026-11-18T13:02:23.889Z",
+    "updatedAt": "2026-11-18T13:19:27.195Z",
+    "urlKey": "example urlKey",
+    "avatarUrl": "/demo/path",
+    "orgChainHealth": {
+      "status": "healthy",
+      "reason": "healthy",
+      "fullChain": [
+        {
+          "id": "00000000-0000-4000-8000-00000000001f",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "depth": 0,
+          "relation": "example relation"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000005",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": null,
+          "depth": 1,
+          "relation": "example relation"
+        }
+      ],
+      "firstInvalidAncestor": null,
+      "invalidAncestors": [],
+      "repairGuidance": null,
+      "pausedAncestors": [],
+      "escalationWarning": null
+    }
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000021",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "name": "example name",
+    "role": "general",
+    "title": "example title",
+    "icon": "example icon",
+    "appearance": {
+      "schemaVersion": 1,
+      "characterVersion": "example characterVersion",
+      "paletteId": "example paletteId",
+      "customAvatarAssetId": "00000000-0000-4000-8000-000000000022"
+    },
+    "status": "idle",
+    "lifecycleState": "example lifecycleState",
+    "lifecycleHolds": [],
+    "lifecycleVersion": 4,
+    "lifecycleError": null,
+    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "capabilities": "example capabilities",
+    "adapterType": "claude_local",
+    "adapterConfig": {
+      "paperclipSkillSync": {
+        "desiredSkills": [
+          "example desiredSkills",
+          "example desiredSkills"
+        ]
+      },
+      "instructionsFilePath": "example instructionsFilePath",
+      "instructionsRootPath": "example instructionsRootPath",
+      "instructionsEntryFile": "example instructionsEntryFile",
+      "instructionsBundleMode": "example instructionsBundleMode"
+    },
+    "runtimeConfig": {
+      "heartbeat": {
+        "enabled": false,
+        "wakeOnDemand": true,
+        "maxConcurrentRuns": 1
+      },
+      "aiConnection": {
+        "mode": "example mode",
+        "method": "example method",
+        "provider": "anthropic"
+      }
+    },
+    "defaultEnvironmentId": null,
+    "budgetMonthlyCents": 0,
+    "spendMonthUtc": "example spendMonthUtc",
+    "spentMonthlyCents": 0,
+    "pauseReason": null,
+    "pausedAt": null,
+    "errorReason": null,
+    "permissions": {
+      "canCreateAgents": true,
+      "canCreateSkills": true
+    },
+    "lastHeartbeatAt": "2026-11-17T08:27:41.911Z",
+    "metadata": null,
+    "createdByUserId": null,
+    "createdAt": "2026-11-17T07:46:20.021Z",
+    "updatedAt": "2026-11-17T08:27:41.911Z",
+    "urlKey": "example urlKey",
+    "avatarUrl": "/demo/path",
+    "orgChainHealth": {
+      "status": "healthy",
+      "reason": "healthy",
+      "fullChain": [
+        {
+          "id": "00000000-0000-4000-8000-000000000021",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "depth": 0,
+          "relation": "example relation"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000005",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": null,
+          "depth": 1,
+          "relation": "example relation"
+        }
+      ],
+      "firstInvalidAncestor": null,
+      "invalidAncestors": [],
+      "repairGuidance": null,
+      "pausedAncestors": [],
+      "escalationWarning": null
+    }
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000023",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "name": "example name",
+    "role": "researcher",
+    "title": "example title",
+    "icon": "example icon",
+    "appearance": {
+      "schemaVersion": 1,
+      "characterVersion": "example characterVersion",
+      "paletteId": "example paletteId",
+      "customAvatarAssetId": "00000000-0000-4000-8000-000000000024"
+    },
+    "status": "idle",
+    "lifecycleState": "example lifecycleState",
+    "lifecycleHolds": [],
+    "lifecycleVersion": 4,
+    "lifecycleError": null,
+    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "capabilities": "example capabilities",
+    "adapterType": "claude_local",
+    "adapterConfig": {
+      "model": "claude-opus-5-5",
+      "effort": "example effort",
+      "graceSec": 15,
+      "timeoutSec": 0,
+      "maxTurnsPerRun": 1000,
+      "paperclipSkillSync": {
+        "desiredSkills": [
+          "example desiredSkills",
+          "example desiredSkills"
+        ]
+      },
+      "instructionsFilePath": "example instructionsFilePath",
+      "instructionsRootPath": "example instructionsRootPath",
+      "instructionsEntryFile": "example instructionsEntryFile",
+      "instructionsBundleMode": "example instructionsBundleMode"
+    },
+    "runtimeConfig": {
+      "heartbeat": {
+        "enabled": false,
+        "cooldownSec": 10,
+        "wakeOnDemand": true,
+        "maxConcurrentRuns": 1,
+        "skipTimerWhenNoActionableWork": true
+      },
+      "aiConnection": {
+        "mode": "example mode",
+        "method": "example method",
+        "provider": "anthropic"
+      }
+    },
+    "defaultEnvironmentId": null,
+    "budgetMonthlyCents": 0,
+    "spendMonthUtc": "example spendMonthUtc",
+    "spentMonthlyCents": 0,
+    "pauseReason": null,
+    "pausedAt": null,
+    "errorReason": null,
+    "permissions": {
+      "canCreateAgents": true,
+      "canCreateSkills": true
+    },
+    "lastHeartbeatAt": "2026-11-17T08:05:15.345Z",
+    "metadata": null,
+    "createdByUserId": null,
+    "createdAt": "2026-11-09T13:28:53.446Z",
+    "updatedAt": "2026-11-17T08:05:15.345Z",
+    "urlKey": "example urlKey",
+    "avatarUrl": "/demo/path",
+    "orgChainHealth": {
+      "status": "healthy",
+      "reason": "healthy",
+      "fullChain": [
+        {
+          "id": "00000000-0000-4000-8000-000000000023",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "depth": 0,
+          "relation": "example relation"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000005",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": null,
+          "depth": 1,
+          "relation": "example relation"
+        }
+      ],
+      "firstInvalidAncestor": null,
+      "invalidAncestors": [],
+      "repairGuidance": null,
+      "pausedAncestors": [],
+      "escalationWarning": null
+    }
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "name": "example name",
+    "role": "ceo",
+    "title": "example title",
+    "icon": null,
+    "appearance": {
+      "schemaVersion": 1,
+      "characterVersion": "example characterVersion",
+      "paletteId": "example paletteId",
+      "customAvatarAssetId": "00000000-0000-4000-8000-000000000025"
+    },
+    "status": "idle",
+    "lifecycleState": "example lifecycleState",
+    "lifecycleHolds": [],
+    "lifecycleVersion": 9,
+    "lifecycleError": null,
+    "reportsTo": null,
+    "capabilities": null,
+    "adapterType": "claude_local",
+    "adapterConfig": {
+      "cwd": "example cwd",
+      "graceSec": 15,
+      "timeoutSec": 0,
+      "maxTurnsPerRun": 1000,
+      "paperclipSkillSync": {
+        "desiredSkills": [
+          "example desiredSkills",
+          "example desiredSkills",
+          "example desiredSkills",
+          "example desiredSkills",
+          "example desiredSkills",
+          "example desiredSkills"
+        ]
+      },
+      "instructionsFilePath": "example instructionsFilePath",
+      "instructionsRootPath": "example instructionsRootPath",
+      "instructionsEntryFile": "example instructionsEntryFile",
+      "instructionsBundleMode": "example instructionsBundleMode",
+      "dangerouslySkipPermissions": true,
+      "env": {
+        "example_key_23": {
+          "type": "plain",
+          "value": "example value"
+        },
+        "example_key_24": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000026",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_2": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000008",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_3": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000027",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_4": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-000000000028",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_1": {
+          "type": "plain",
+          "value": "example value"
+        }
+      }
+    },
+    "runtimeConfig": {
+      "heartbeat": {
+        "enabled": false,
+        "cooldownSec": 10,
+        "intervalSec": 300,
+        "wakeOnDemand": true,
+        "maxConcurrentRuns": 1,
+        "skipTimerWhenNoActionableWork": true
+      },
+      "aiConnection": {
+        "mode": "example mode",
+        "method": "example method",
+        "provider": "anthropic"
+      }
+    },
+    "defaultEnvironmentId": "00000000-0000-4000-8000-000000000029",
+    "budgetMonthlyCents": 0,
+    "spendMonthUtc": "example spendMonthUtc",
+    "spentMonthlyCents": 0,
+    "pauseReason": null,
+    "pausedAt": null,
+    "errorReason": null,
+    "permissions": {
+      "canCreateAgents": true,
+      "canCreateSkills": true
+    },
+    "lastHeartbeatAt": "2026-11-20T14:19:16.466Z",
+    "metadata": {
+      "setupAdapterPending": false
+    },
+    "createdByUserId": "example createdByUserId",
+    "createdAt": "2026-11-08T19:50:17.710Z",
+    "updatedAt": "2026-11-20T14:19:16.466Z",
+    "urlKey": "example urlKey",
+    "avatarUrl": "/demo/path",
+    "orgChainHealth": {
+      "status": "healthy",
+      "reason": "healthy",
+      "fullChain": [
+        {
+          "id": "00000000-0000-4000-8000-000000000005",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": null,
+          "depth": 0,
+          "relation": "example relation"
+        }
+      ],
+      "firstInvalidAncestor": null,
+      "invalidAncestors": [],
+      "repairGuidance": null,
+      "pausedAncestors": [],
+      "escalationWarning": null
+    }
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000000002a",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "name": "example name",
+    "role": "general",
+    "title": "example title",
+    "icon": null,
+    "appearance": {
+      "schemaVersion": 1,
+      "characterVersion": "example characterVersion",
+      "paletteId": "example paletteId",
+      "customAvatarAssetId": "00000000-0000-4000-8000-00000000002b"
+    },
+    "status": "idle",
+    "lifecycleState": "example lifecycleState",
+    "lifecycleHolds": [],
+    "lifecycleVersion": 4,
+    "lifecycleError": null,
+    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "capabilities": null,
+    "adapterType": "claude_local",
+    "adapterConfig": {
+      "cwd": "example cwd",
+      "engine": "example engine",
+      "extraArgs": [
+        "example extraArgs",
+        "example extraArgs"
+      ],
+      "example_key_25": {
+        "type": "secret_ref",
+        "secretId": "00000000-0000-4000-8000-00000000002c",
+        "version": "latest"
+      },
+      "paperclipSkillSync": {
+        "desiredSkills": [
+          "example desiredSkills",
+          "example desiredSkills"
+        ]
+      },
+      "instructionsFilePath": "example instructionsFilePath",
+      "instructionsRootPath": "example instructionsRootPath",
+      "instructionsEntryFile": "example instructionsEntryFile",
+      "instructionsBundleMode": "example instructionsBundleMode",
+      "env": {
+        "example_key_23": {
+          "type": "plain",
+          "value": "example value"
+        },
+        "example_key_24": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-00000000002d",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_26": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-00000000002e",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_27": {
+          "type": "secret_ref",
+          "secretId": "00000000-0000-4000-8000-00000000002f",
+          "version": "latest",
+          "projectionClass": "example projectionClass",
+          "projectionAllowlistKey": null
+        },
+        "example_key_1": {
+          "type": "plain",
+          "value": "example value"
+        }
+      }
+    },
+    "runtimeConfig": {
+      "heartbeat": {
+        "enabled": false,
+        "cooldownSec": 10,
+        "intervalSec": 300,
+        "wakeOnDemand": true,
+        "maxConcurrentRuns": 1,
+        "skipTimerWhenNoActionableWork": true
+      },
+      "aiConnection": {
+        "mode": "example mode",
+        "method": "example method",
+        "provider": "anthropic"
+      }
+    },
+    "defaultEnvironmentId": null,
+    "budgetMonthlyCents": 0,
+    "spendMonthUtc": "example spendMonthUtc",
+    "spentMonthlyCents": 0,
+    "pauseReason": null,
+    "pausedAt": null,
+    "errorReason": null,
+    "permissions": {
+      "canCreateAgents": false,
+      "canCreateSkills": true
+    },
+    "lastHeartbeatAt": "2026-11-18T13:39:50.141Z",
+    "metadata": null,
+    "createdByUserId": "example createdByUserId",
+    "createdAt": "2026-11-08T20:25:55.926Z",
+    "updatedAt": "2026-11-18T13:39:50.141Z",
+    "urlKey": "example urlKey",
+    "avatarUrl": "/demo/path",
+    "orgChainHealth": {
+      "status": "healthy",
+      "reason": "healthy",
+      "fullChain": [
+        {
+          "id": "00000000-0000-4000-8000-00000000002a",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "depth": 0,
+          "relation": "example relation"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000005",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": null,
+          "depth": 1,
+          "relation": "example relation"
+        }
+      ],
+      "firstInvalidAncestor": null,
+      "invalidAncestors": [],
+      "repairGuidance": null,
+      "pausedAncestors": [],
+      "escalationWarning": null
+    }
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000030",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "name": "example name",
+    "role": "security",
+    "title": "example title",
+    "icon": "example icon",
+    "appearance": {
+      "schemaVersion": 1,
+      "characterVersion": "example characterVersion",
+      "paletteId": "example paletteId",
+      "customAvatarAssetId": "00000000-0000-4000-8000-000000000031"
+    },
+    "status": "idle",
+    "lifecycleState": "example lifecycleState",
+    "lifecycleHolds": [],
+    "lifecycleVersion": 4,
+    "lifecycleError": null,
+    "reportsTo": "00000000-0000-4000-8000-000000000005",
+    "capabilities": "example capabilities",
+    "adapterType": "claude_local",
+    "adapterConfig": {
+      "paperclipSkillSync": {
+        "desiredSkills": [
+          "example desiredSkills",
+          "example desiredSkills"
+        ]
+      },
+      "instructionsFilePath": "example instructionsFilePath",
+      "instructionsRootPath": "example instructionsRootPath",
+      "instructionsEntryFile": "example instructionsEntryFile",
+      "instructionsBundleMode": "example instructionsBundleMode"
+    },
+    "runtimeConfig": {
+      "heartbeat": {
+        "enabled": false,
+        "cooldownSec": 10,
+        "wakeOnDemand": true,
+        "maxConcurrentRuns": 1,
+        "skipTimerWhenNoActionableWork": true
+      },
+      "aiConnection": {
+        "mode": "example mode",
+        "method": "example method",
+        "provider": "anthropic"
+      }
+    },
+    "defaultEnvironmentId": null,
+    "budgetMonthlyCents": 0,
+    "spendMonthUtc": "example spendMonthUtc",
+    "spentMonthlyCents": 0,
+    "pauseReason": null,
+    "pausedAt": null,
+    "errorReason": null,
+    "permissions": {
+      "canCreateAgents": true,
+      "canCreateSkills": true
+    },
+    "lastHeartbeatAt": "2026-11-16T14:16:48.359Z",
+    "metadata": null,
+    "createdByUserId": null,
+    "createdAt": "2026-11-08T22:42:44.931Z",
+    "updatedAt": "2026-11-16T14:16:48.359Z",
+    "urlKey": "example urlKey",
+    "avatarUrl": "/demo/path",
+    "orgChainHealth": {
+      "status": "healthy",
+      "reason": "healthy",
+      "fullChain": [
+        {
+          "id": "00000000-0000-4000-8000-000000000030",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": "00000000-0000-4000-8000-000000000005",
+          "depth": 0,
+          "relation": "example relation"
+        },
+        {
+          "id": "00000000-0000-4000-8000-000000000005",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "name": "example name",
+          "status": "idle",
+          "reportsTo": null,
+          "depth": 1,
+          "relation": "example relation"
+        }
+      ],
+      "firstInvalidAncestor": null,
+      "invalidAncestors": [],
+      "repairGuidance": null,
+      "pausedAncestors": [],
+      "escalationWarning": null
+    }
+  }
+]

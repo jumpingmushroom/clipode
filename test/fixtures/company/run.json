@@ -1,59 +1,59 @@
 {
-  "id": "00000000-0000-4000-8000-000000000007",
+  "id": "00000000-0000-4000-8000-0000000000b6",
   "companyId": "00000000-0000-4000-8000-000000000001",
-  "agentId": "00000000-0000-4000-8000-000000000008",
+  "agentId": "00000000-0000-4000-8000-000000000005",
   "scopeKind": "issue",
-  "issueId": "00000000-0000-4000-8000-000000000009",
-  "invocationSource": "assignment",
-  "triggerDetail": "system",
+  "issueId": "00000000-0000-4000-8000-000000000057",
+  "invocationSource": "on_demand",
+  "triggerDetail": "manual",
   "status": "succeeded",
   "responsibleUserId": "example responsibleUserId",
-  "activeIdentityContextId": "00000000-0000-4000-8000-000000000011",
-  "startedAt": "2026-11-20T14:00:55.581Z",
-  "finishedAt": "2026-11-20T14:02:06.558Z",
+  "activeIdentityContextId": "00000000-0000-4000-8000-0000000000b4",
+  "startedAt": "2026-11-20T14:18:50.989Z",
+  "finishedAt": "2026-11-20T14:19:15.027Z",
   "executionControlDeadlineAt": null,
   "executionStatusDeliveryId": null,
   "error": null,
-  "wakeupRequestId": "00000000-0000-4000-8000-00000000000a",
+  "wakeupRequestId": "00000000-0000-4000-8000-000000000120",
   "exitCode": 0,
   "signal": null,
   "costAccountingPending": false,
-  "costAccountedAt": "2026-11-20T14:02:06.637Z",
+  "costAccountedAt": "2026-11-20T14:19:15.534Z",
   "accountingProjectionVersion": "example accountingProjectionVersion",
-  "accountingLastAttemptAt": "2026-11-20T14:02:06.637Z",
+  "accountingLastAttemptAt": "2026-11-20T14:19:15.534Z",
   "accountingLastError": null,
   "accountingAttemptCount": 0,
   "usageJson": {
     "model": "opus",
     "biller": "anthropic",
-    "costUsd": 0.47127479999999994,
+    "costUsd": 0.2447218,
     "provider": "anthropic",
     "costStatus": "example costStatus",
     "billingType": "subscription_included",
-    "inputTokens": 34940,
+    "inputTokens": 24026,
     "ledgerScope": {
-      "issueId": "00000000-0000-4000-8000-000000000009",
-      "projectId": "00000000-0000-4000-8000-00000000000b",
+      "issueId": "00000000-0000-4000-8000-000000000057",
+      "projectId": "00000000-0000-4000-8000-0000000000b1",
       "billingCode": null
     },
     "usageSource": "example usageSource",
     "costUsdExact": null,
     "freshSession": true,
-    "outputTokens": 5727,
+    "outputTokens": 1262,
     "usageByModel": null,
     "sessionReused": false,
     "budgetDispatch": {
-      "admittedAt": "2026-11-20T14:01:01.210Z",
-      "handedOffAt": "2026-11-20T14:01:01.260Z",
-      "reservationId": "00000000-0000-4000-8000-00000000000c",
+      "admittedAt": "2026-11-20T14:18:54.114Z",
+      "handedOffAt": "2026-11-20T14:18:54.150Z",
+      "reservationId": "00000000-0000-4000-8000-000000000121",
       "recoveryLeaseOwner": null
     },
     "budgetExposure": {
-      "sequence": 27,
-      "sourceId": "00000000-0000-4000-8000-00000000000d",
+      "sequence": 9,
+      "sourceId": "00000000-0000-4000-8000-000000000122",
       "costCents": "example costCents"
     },
-    "rawInputTokens": 34940,
+    "rawInputTokens": 24026,
     "sessionRotated": false,
     "configFreshness": {
       "session": {
@@ -70,13 +70,20 @@
           "example categories",
           "example categories"
         ],
-        "resetReasons": [],
+        "resetReasons": [
+          "example resetReasons",
+          "example resetReasons"
+        ],
         "nextFingerprint": "example nextFingerprint",
-        "changedCategories": [],
+        "changedCategories": [
+          "example changedCategories",
+          "example changedCategories",
+          "example changedCategories"
+        ],
         "taskSessionReused": false,
         "fingerprintVersion": 1,
-        "taskSessionAvailable": false,
-        "storedFingerprintPresent": false
+        "taskSessionAvailable": true,
+        "storedFingerprintPresent": true
       },
       "version": 1,
       "workspace": {
@@ -95,7 +102,7 @@
         "reuseRequested": false,
         "nextFingerprint": "example nextFingerprint",
         "workspaceReused": false,
-        "activeWorkspaceId": "00000000-0000-4000-8000-00000000000e",
+        "activeWorkspaceId": "00000000-0000-4000-8000-0000000000b5",
         "changedCategories": [],
         "storedFingerprint": null,
         "fingerprintVersion": 1,
@@ -105,33 +112,34 @@
         "storedFingerprintPresent": false
       }
     },
-    "rawOutputTokens": 5727,
-    "cachedInputTokens": 363569,
+    "rawOutputTokens": 1262,
+    "cachedInputTokens": 76774,
     "pricingProvenance": {
       "source": "provider_reported",
       "version": "example version"
     },
     "providerRequestId": null,
     "taskSessionReused": false,
-    "persistedSessionId": "00000000-0000-4000-8000-00000000000f",
-    "accountingReceiptId": "00000000-0000-4000-8000-000000000010",
-    "cacheAdjustedCostUsd": 0.47127479999999994,
-    "rawCachedInputTokens": 363569,
+    "persistedSessionId": "00000000-0000-4000-8000-000000000123",
+    "accountingReceiptId": "00000000-0000-4000-8000-000000000124",
+    "cacheAdjustedCostUsd": 0.2447218,
+    "rawCachedInputTokens": 76774,
     "sessionRotationReason": null,
     "accountingReceiptReady": true,
     "rawInputIncludesCached": false,
-    "accountingReceiptSequence": 27,
-    "accountingReceiptSourceId": "00000000-0000-4000-8000-00000000000d",
-    "accountingReceiptReceivedAt": "2026-11-20T14:02:06.514Z"
+    "accountingReceiptSequence": 9,
+    "accountingReceiptSourceId": "00000000-0000-4000-8000-000000000122",
+    "accountingReceiptReceivedAt": "2026-11-20T14:19:14.740Z",
+    "accountingReceiptSourceFences": {}
   },
   "resultJson": {
     "mode": "example mode",
     "usage": {
-      "inputTokens": 22,
-      "totalTokens": 404236,
-      "outputTokens": 5727,
-      "cachedReadTokens": 363569,
-      "cachedWriteTokens": 34918
+      "inputTokens": 6,
+      "totalTokens": 102062,
+      "outputTokens": 1262,
+      "cachedReadTokens": 76774,
+      "cachedWriteTokens": 24020
     },
     "status": "completed",
     "summary": "example summary",
@@ -156,13 +164,20 @@
           "example categories",
           "example categories"
         ],
-        "resetReasons": [],
+        "resetReasons": [
+          "example resetReasons",
+          "example resetReasons"
+        ],
         "nextFingerprint": "example nextFingerprint",
-        "changedCategories": [],
+        "changedCategories": [
+          "example changedCategories",
+          "example changedCategories",
+          "example changedCategories"
+        ],
         "taskSessionReused": false,
         "fingerprintVersion": 1,
-        "taskSessionAvailable": false,
-        "storedFingerprintPresent": false
+        "taskSessionAvailable": true,
+        "storedFingerprintPresent": true
       },
       "version": 1,
       "workspace": {
@@ -181,7 +196,7 @@
         "reuseRequested": false,
         "nextFingerprint": "example nextFingerprint",
         "workspaceReused": false,
-        "activeWorkspaceId": "00000000-0000-4000-8000-00000000000e",
+        "activeWorkspaceId": "00000000-0000-4000-8000-0000000000b5",
         "changedCategories": [],
         "storedFingerprint": null,
         "fingerprintVersion": 1,
@@ -200,14 +215,14 @@
       "storageWarning": null,
       "appliedCandidateHash": null
     },
-    "acpLastEventAgeMs": 975,
-    "cumulativeCostUsd": 0.47127479999999994,
+    "acpLastEventAgeMs": 894,
+    "cumulativeCostUsd": 0.2447218,
     "timeoutConfigured": false,
     "acpPendingToolCount": 0,
     "effectiveTimeoutSec": 0,
     "presentationDecision": {
       "schema": "paperclip.run_presentation_decision.v1",
-      "commentId": "00000000-0000-4000-8000-000000000012",
+      "commentId": "00000000-0000-4000-8000-000000000195",
       "reasonCodes": [
         "example reasonCodes"
       ],
@@ -217,7 +232,7 @@
       "resolverVersion": "example resolverVersion",
       "activityDisposition": "example activityDisposition"
     },
-    "acpObservedEventCount": 170,
+    "acpObservedEventCount": 81,
     "adapterExecutionTimeout": {
       "source": "unlimited",
       "timeoutSec": 0
@@ -228,7 +243,7 @@
   "runtimeMode": "example runtimeMode",
   "runtimeModeResolverVersion": "example runtimeModeResolverVersion",
   "runtimeModeReason": "example runtimeModeReason",
-  "runtimeModeResolvedAt": "2026-11-20T14:01:00.898Z",
+  "runtimeModeResolvedAt": "2026-11-20T14:18:53.789Z",
   "runnerProfileJson": {
     "adapterDispatch": {
       "adapterType": "claude_local"
@@ -245,73 +260,79 @@
   "nativePhase": null,
   "nativePhaseUpdatedAt": null,
   "sessionIdBefore": null,
-  "sessionIdAfter": "00000000-0000-4000-8000-00000000000f",
+  "sessionIdAfter": "00000000-0000-4000-8000-000000000123",
   "logStore": "local_file",
   "logRef": "example logRef",
-  "logBytes": 86948,
+  "logBytes": 28680,
   "logSha256": "example logSha256",
   "logCompressed": false,
   "stdoutExcerpt": "example stdoutExcerpt",
   "stderrExcerpt": "example stderrExcerpt",
   "errorCode": null,
   "externalRunId": null,
-  "controllerBootId": "00000000-0000-4000-8000-000000000013",
+  "controllerBootId": "00000000-0000-4000-8000-000000000196",
   "controllerLeaseExpiresAt": null,
-  "controllerProcess": null,
+  "controllerProcess": {
+    "pid": 7,
+    "bootId": "00000000-0000-4000-8000-000000000196",
+    "hostHash": "example hostHash",
+    "processStartedAt": "2026-11-20T14:16:21.940Z"
+  },
   "executionStage": "example executionStage",
-  "processPid": 438,
+  "processPid": 946,
   "processGroupId": null,
-  "processStartedAt": "2026-11-20T14:01:01.120Z",
-  "processHostHash": null,
-  "lastOutputAt": "2026-11-20T14:02:06.282Z",
-  "lastOutputSeq": 174,
+  "processStartedAt": "2026-11-20T14:18:54.040Z",
+  "processHostHash": "example processHostHash",
+  "lastOutputAt": "2026-11-20T14:19:14.327Z",
+  "lastOutputSeq": 85,
   "lastOutputStream": "stdout",
-  "lastOutputBytes": 86948,
+  "lastOutputBytes": 28680,
   "retryOfRunId": null,
   "processLossRetryCount": 0,
   "scheduledRetryAt": null,
   "scheduledRetryAttempt": 0,
   "scheduledRetryReason": null,
   "issueCommentStatus": "example issueCommentStatus",
-  "issueCommentSatisfiedByCommentId": "00000000-0000-4000-8000-000000000012",
+  "issueCommentSatisfiedByCommentId": "00000000-0000-4000-8000-000000000195",
   "issueCommentRetryQueuedAt": null,
-  "livenessState": "blocked",
+  "livenessState": "completed",
   "livenessReason": "example livenessReason",
   "continuationAttempt": 0,
-  "lastUsefulActionAt": "2026-11-20T14:02:06.535Z",
-  "nextAction": "example nextAction",
+  "lastUsefulActionAt": "2026-11-20T14:19:14.841Z",
+  "nextAction": null,
   "contextSnapshot": {
-    "source": "routine.dispatch",
-    "taskId": "00000000-0000-4000-8000-000000000009",
-    "issueId": "00000000-0000-4000-8000-000000000009",
-    "taskKey": "00000000-0000-4000-8000-000000000009",
-    "projectId": "00000000-0000-4000-8000-00000000000b",
-    "wakeReason": "issue_assigned",
+    "taskId": "00000000-0000-4000-8000-000000000057",
+    "actorId": "example actorId",
+    "issueId": "00000000-0000-4000-8000-000000000057",
+    "taskKey": "00000000-0000-4000-8000-000000000057",
+    "projectId": "00000000-0000-4000-8000-0000000000b1",
+    "wakeReason": "task_retry",
     "wakeSource": "example wakeSource",
+    "triggeredBy": "example triggeredBy",
     "aiConnection": {
       "mode": "example mode",
       "method": "example method",
-      "grantId": "00000000-0000-4000-8000-000000000014",
+      "grantId": "00000000-0000-4000-8000-000000000197",
       "identity": "example identity",
       "provider": "anthropic",
       "accountName": "example accountName",
-      "connectionId": "00000000-0000-4000-8000-000000000015",
-      "subscriptionId": "00000000-0000-4000-8000-000000000016",
+      "connectionId": "00000000-0000-4000-8000-000000000198",
+      "subscriptionId": "00000000-0000-4000-8000-000000000199",
       "sessionIdentity": "example sessionIdentity",
       "responsibleUserId": "example responsibleUserId"
     },
     "paperclipWake": {
       "issue": {
-        "id": "00000000-0000-4000-8000-000000000009",
+        "id": "00000000-0000-4000-8000-000000000057",
         "title": "example title",
         "status": "in_progress",
         "priority": "medium",
         "workMode": "standard",
-        "identifier": "DEMO-1",
+        "identifier": "DEMO-11",
         "description": "example description",
         "descriptionTruncated": false
       },
-      "reason": "issue_assigned",
+      "reason": "task_retry",
       "comments": [],
       "recovery": null,
       "skillTest": null,
@@ -319,6 +340,7 @@
       "commentIds": [],
       "sourceRunId": null,
       "agentMessage": null,
+      "blockerStall": null,
       "taskWatchdog": null,
       "commentWindow": {
         "missingCount": 0,
@@ -338,7 +360,14 @@
       "attachmentOmissions": [],
       "checkedOutByHarness": true,
       "childIssueSummaries": [],
-      "continuationSummary": null,
+      "continuationSummary": {
+        "key": "example key",
+        "body": "example body",
+        "title": "example title",
+        "updatedAt": "2026-11-20T14:03:05.434Z",
+        "sourceTrust": null,
+        "bodyTruncated": false
+      },
       "fallbackFetchNeeded": false,
       "treeHoldInteraction": false,
       "externalChatProvider": null,
@@ -346,29 +375,43 @@
       "chatCompletionUpdates": null,
       "documentReviewContext": null,
       "executionContinuation": {
-        "issueId": "00000000-0000-4000-8000-000000000009",
+        "issueId": "00000000-0000-4000-8000-000000000057",
         "trigger": {
-          "reason": "issue_assigned",
-          "sourceRunId": null,
+          "reason": "task_retry",
+          "sourceRunId": "00000000-0000-4000-8000-0000000000b7",
           "interactionId": null
         },
         "version": 1,
         "coverage": {
           "kind": "full_task_history",
-          "throughCommentId": null,
+          "throughCommentId": "00000000-0000-4000-8000-000000000058",
           "summaryThroughCommentId": null
         },
-        "messages": [],
+        "messages": [
+          {
+            "id": "00000000-0000-4000-8000-000000000058",
+            "body": "example body",
+            "deleted": false,
+            "authorId": "00000000-0000-4000-8000-000000000005",
+            "createdAt": "2026-11-20T14:03:00.769Z",
+            "updatedAt": "2026-11-20T14:03:00.769Z",
+            "authorType": "example authorType",
+            "sourceTrust": null,
+            "createdByRunId": "00000000-0000-4000-8000-0000000000b7"
+          }
+        ],
         "companyId": "00000000-0000-4000-8000-000000000001",
         "objective": "example objective",
-        "completedWork": null,
+        "completedWork": "example completedWork",
         "humanResponses": [],
+        "recoveredFiles": [],
         "objectiveSource": {
-          "id": "00000000-0000-4000-8000-000000000009",
+          "id": "00000000-0000-4000-8000-000000000057",
           "kind": "description",
           "revision": "example revision"
         },
         "completedActions": [],
+        "interruptedRunId": "00000000-0000-4000-8000-0000000000b7",
         "originCommentIds": [],
         "recoveryOutcomes": [],
         "interactionOutcomes": [],
@@ -386,17 +429,22 @@
       "simplifiedEnglishInteractions": false,
       "externalInteractionContinuation": false
     },
+    "previousRunId": "00000000-0000-4000-8000-0000000000b7",
     "skillVersions": {
-      "paperclipai/paperclip/complain": "00000000-0000-4000-8000-000000000017",
-      "paperclipai/paperclip/paperclip": "00000000-0000-4000-8000-000000000018",
-      "paperclipai/paperclip/suggestion-box": "00000000-0000-4000-8000-000000000019",
-      "paperclipai/paperclip/para-memory-files": "00000000-0000-4000-8000-00000000001a"
+      "example_key_28": "00000000-0000-4000-8000-00000000019a",
+      "example_key_29": "00000000-0000-4000-8000-00000000019b",
+      "example_key_30": "00000000-0000-4000-8000-00000000019c",
+      "example_key_31": "00000000-0000-4000-8000-00000000019d",
+      "example_key_32": "00000000-0000-4000-8000-00000000019e",
+      "example_key_33": "00000000-0000-4000-8000-00000000019f",
+      "example_key_34": "00000000-0000-4000-8000-0000000001a0",
+      "example_key_35": "00000000-0000-4000-8000-0000000001a1"
     },
     "paperclipIssue": {
-      "id": "00000000-0000-4000-8000-000000000009",
+      "id": "00000000-0000-4000-8000-000000000057",
       "title": "example title",
       "workMode": "standard",
-      "identifier": "DEMO-1",
+      "identifier": "DEMO-11",
       "description": "example description"
     },
     "paperclipScratch": {
@@ -417,14 +465,49 @@
           "outcome": "success",
           "version": 1,
           "provider": "local_encrypted",
-          "secretId": "00000000-0000-4000-8000-00000000001b",
-          "bindingId": "00000000-0000-4000-8000-00000000001c",
+          "secretId": "00000000-0000-4000-8000-000000000026",
+          "bindingId": "00000000-0000-4000-8000-0000000001a2",
+          "secretKey": "example secretKey",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "example envKey",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-000000000008",
+          "bindingId": "00000000-0000-4000-8000-0000000001a3",
+          "secretKey": "example secretKey",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "example envKey",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-000000000027",
+          "bindingId": "00000000-0000-4000-8000-0000000001a4",
+          "secretKey": "example secretKey",
+          "configPath": "example configPath",
+          "providerVersionRef": null
+        },
+        {
+          "envKey": "example envKey",
+          "outcome": "success",
+          "version": 1,
+          "provider": "local_encrypted",
+          "secretId": "00000000-0000-4000-8000-000000000028",
+          "bindingId": "00000000-0000-4000-8000-0000000001a5",
           "secretKey": "example secretKey",
           "configPath": "example configPath",
           "providerVersionRef": null
         }
       ]
     },
+    "forceFreshSession": true,
+    "responsibleUserId": "example responsibleUserId",
     "wakeTriggerDetail": "example wakeTriggerDetail",
     "paperclipWorkspace": {
       "cwd": "example cwd",
@@ -452,7 +535,7 @@
         "remote": {
           "path": null
         },
-        "leaseId": "00000000-0000-4000-8000-00000000001d",
+        "leaseId": "00000000-0000-4000-8000-0000000001a6",
         "rebuild": {
           "mode": "example mode",
           "repoRef": null,
@@ -483,7 +566,7 @@
           "localPath": "example localPath",
           "remotePath": null,
           "providerLeaseId": null,
-          "executionWorkspaceId": "00000000-0000-4000-8000-00000000000e"
+          "executionWorkspaceId": "00000000-0000-4000-8000-0000000000b5"
         },
         "summary": "example summary",
         "version": 1,
@@ -493,7 +576,7 @@
         },
         "additional": [],
         "pathAliases": [],
-        "environmentId": "00000000-0000-4000-8000-00000000001e",
+        "environmentId": "00000000-0000-4000-8000-000000000029",
         "providerLeaseId": null,
         "authoritativeRoot": "example authoritativeRoot",
         "outboundRestorePaths": []
@@ -501,13 +584,14 @@
       "workspaceId": null,
       "worktreePath": null
     },
+    "taskRetryRequestId": "00000000-0000-4000-8000-0000000001a7",
     "paperclipWorkspaces": [],
-    "executionWorkspaceId": "00000000-0000-4000-8000-00000000000e",
+    "executionWorkspaceId": "00000000-0000-4000-8000-0000000000b5",
     "paperclipEnvironment": {
-      "id": "00000000-0000-4000-8000-00000000001e",
+      "id": "00000000-0000-4000-8000-000000000029",
       "name": "example name",
       "driver": "example driver",
-      "leaseId": "00000000-0000-4000-8000-00000000001d",
+      "leaseId": "00000000-0000-4000-8000-0000000001a6",
       "workspaceRealization": {
         "mode": "example mode",
         "local": {
@@ -524,7 +608,7 @@
         "remote": {
           "path": null
         },
-        "leaseId": "00000000-0000-4000-8000-00000000001d",
+        "leaseId": "00000000-0000-4000-8000-0000000001a6",
         "rebuild": {
           "mode": "example mode",
           "repoRef": null,
@@ -555,7 +639,7 @@
           "localPath": "example localPath",
           "remotePath": null,
           "providerLeaseId": null,
-          "executionWorkspaceId": "00000000-0000-4000-8000-00000000000e"
+          "executionWorkspaceId": "00000000-0000-4000-8000-0000000000b5"
         },
         "summary": "example summary",
         "version": 1,
@@ -565,7 +649,7 @@
         },
         "additional": [],
         "pathAliases": [],
-        "environmentId": "00000000-0000-4000-8000-00000000001e",
+        "environmentId": "00000000-0000-4000-8000-000000000029",
         "providerLeaseId": null,
         "authoritativeRoot": "example authoritativeRoot",
         "outboundRestorePaths": []
@@ -581,35 +665,49 @@
       "assignment": {
         "owner": "example owner",
         "description": {
-          "id": "00000000-0000-4000-8000-000000000009",
+          "id": "00000000-0000-4000-8000-000000000057",
           "revision": "example revision"
         }
       }
     },
     "executionContinuation": {
-      "issueId": "00000000-0000-4000-8000-000000000009",
+      "issueId": "00000000-0000-4000-8000-000000000057",
       "trigger": {
-        "reason": "issue_assigned",
-        "sourceRunId": null,
+        "reason": "task_retry",
+        "sourceRunId": "00000000-0000-4000-8000-0000000000b7",
         "interactionId": null
       },
       "version": 1,
       "coverage": {
         "kind": "full_task_history",
-        "throughCommentId": null,
+        "throughCommentId": "00000000-0000-4000-8000-000000000058",
         "summaryThroughCommentId": null
       },
-      "messages": [],
+      "messages": [
+        {
+          "id": "00000000-0000-4000-8000-000000000058",
+          "body": "example body",
+          "deleted": false,
+          "authorId": "00000000-0000-4000-8000-000000000005",
+          "createdAt": "2026-11-20T14:03:00.769Z",
+          "updatedAt": "2026-11-20T14:03:00.769Z",
+          "authorType": "example authorType",
+          "sourceTrust": null,
+          "createdByRunId": "00000000-0000-4000-8000-0000000000b7"
+        }
+      ],
       "companyId": "00000000-0000-4000-8000-000000000001",
       "objective": "example objective",
-      "completedWork": null,
+      "completedWork": "example completedWork",
       "humanResponses": [],
+      "recoveredFiles": [],
       "objectiveSource": {
-        "id": "00000000-0000-4000-8000-000000000009",
+        "id": "00000000-0000-4000-8000-000000000057",
         "kind": "description",
         "revision": "example revision"
       },
       "completedActions": [],
+      "interruptedRunId": "00000000-0000-4000-8000-0000000000b7",
       "originCommentIds": [],
       "recoveryOutcomes": [],
       "interactionOutcomes": [],
@@ -618,20 +716,33 @@
     "paperclipCasesEnabled": false,
     "paperclipTaskMarkdown": "example paperclipTaskMarkdown",
     "connectionInstructions": null,
-    "executionIdentityRunId": "00000000-0000-4000-8000-000000000007",
+    "executionIdentityRunId": "00000000-0000-4000-8000-0000000000b6",
     "paperclipAgentJwtScope": {
       "kind": "standard"
     },
     "skillSelectionSnapshot": true,
+    "recoveredWorkspaceFiles": [],
     "githubAuthenticationMode": "example githubAuthenticationMode",
     "paperclipHarnessCheckedOut": true,
+    "queuedCommentSourceWakeIds": [
+      "00000000-0000-4000-8000-0000000001a7"
+    ],
+    "paperclipContinuationSummary": {
+      "key": "example key",
+      "body": "example body",
+      "title": "example title",
+      "updatedAt": "2026-11-20T14:03:05.434Z",
+      "sourceTrust": null
+    },
     "paperclipTaskMarkdownCompact": "example paperclipTaskMarkdownCompact",
     "paperclipTaskMarkdownAssignment": "example paperclipTaskMarkdownAssignment",
     "paperclipTaskCommunicationGuidance": "example paperclipTaskCommunicationGuidance",
+    "paperclipCoordinatorWorkspaceEnabled": false,
+    "paperclipFreshSessionHandoffMarkdown": "example paperclipFreshSessionHandoffMarkdown",
     "paperclipTaskMarkdownAssignmentCompact": "example paperclipTaskMarkdownAssignmentCompact"
   },
-  "createdAt": "2026-11-20T14:00:55.315Z",
-  "updatedAt": "2026-11-20T14:02:06.888Z",
+  "createdAt": "2026-11-20T14:18:50.564Z",
+  "updatedAt": "2026-11-20T14:19:16.698Z",
   "currentStatusMessage": null,
   "currentStatusUpdatedAt": null,
   "currentToolName": null,
@@ -642,12 +753,12 @@
     "phase": "example phase",
     "label": "example label",
     "cause": null,
-    "lastConfirmedActivityAt": "2026-11-20T14:02:06.535Z",
+    "lastConfirmedActivityAt": "2026-11-20T14:19:14.841Z",
     "retryAt": null,
     "attempt": 1,
     "maxAttempts": 3,
     "recoveryOwner": null,
-    "nextAction": "example nextAction",
+    "nextAction": null,
     "permittedActions": [
       "example permittedActions"
     ],
@@ -656,9 +767,9 @@
   },
   "identityHistory": [
     {
-      "id": "00000000-0000-4000-8000-000000000011",
+      "id": "00000000-0000-4000-8000-0000000000b4",
       "companyId": "00000000-0000-4000-8000-000000000001",
-      "runId": "00000000-0000-4000-8000-000000000007",
+      "runId": "00000000-0000-4000-8000-0000000000b6",
       "revision": 1,
       "responsibleUserId": "example responsibleUserId",
       "messageId": null,
@@ -666,17 +777,17 @@
       "cause": "example cause",
       "correlationId": "example correlationId",
       "status": "accepted",
-      "acceptedAt": "2026-11-20T14:00:56.218Z",
+      "acceptedAt": "2026-11-20T14:18:51.605Z",
       "github": null,
-      "createdAt": "2026-11-20T14:00:56.182Z"
+      "createdAt": "2026-11-20T14:18:51.560Z"
     }
   ],
   "retryExhaustedReason": null,
   "outputSilence": {
-    "lastOutputAt": "2026-11-20T14:02:06.282Z",
-    "lastOutputSeq": 174,
+    "lastOutputAt": "2026-11-20T14:19:14.327Z",
+    "lastOutputSeq": 85,
     "lastOutputStream": "stdout",
-    "silenceStartedAt": "2026-11-20T14:02:06.282Z",
+    "silenceStartedAt": "2026-11-20T14:19:14.327Z",
     "silenceAgeMs": null,
     "level": "not_applicable",
     "suspicionThresholdMs": 300000,

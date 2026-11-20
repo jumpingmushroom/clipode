@@ -14,17 +14,19 @@ Bun is installed in `~/.bun/bin`. Add it to `PATH` if `bun` is not found.
 | `bun run start` | Start the app (`bin/clipode.ts`) |
 | `bun run typecheck` | Type check with `bun check` |
 | `bun test` | Unit tests; never touches a real instance |
-| `bun run smoke` | Sign in to the real instance and print a summary. `-- --record` also writes scrubbed fixtures to `test/fixtures/recorded/` |
+| `bun run smoke` | Sign in to the real instance and print a summary |
 | `bun run live-probe` | Open the live-events WebSocket with the session cookie and print the exchange |
+| `bun run record` | Record scrubbed fixtures for one company (`SMOKE_COMPANY=<issue prefix>`) into `test/fixtures/company/` |
+| `bun run audit-fixtures` | Search all fixtures for real names from the instance and for keys that are not field names; run before committing fixtures |
 | `bun run gen-types` | Regenerate `src/api/types.ts` from the instance's `/api/openapi.json` |
 
-The last three need `PAPERCLIP_URL`, `PAPERCLIP_EMAIL` and `PAPERCLIP_PASSWORD` in the environment.
+The last five need `PAPERCLIP_URL`, `PAPERCLIP_EMAIL` and `PAPERCLIP_PASSWORD`. They are in `smoke.env` at the repository root (mode 600, ignored by git): run them as `bun --env-file=smoke.env run <script>`, and never print the file.
 
 ## Hard constraints
 
 - **Read-only.** `src/api/client.ts` allows `GET`, plus `POST` to `/api/auth/sign-in/email` and `/api/auth/sign-out` only. Any other method throws `ReadOnlyError` before a request is sent. A test covers this guard. Do not loosen it until a later phase says so.
 - **Credentials.** Sign in with email and password to get a session cookie. Never write the password to disk. The cookie goes in `~/.local/state/clipode/auth.json` with mode `0600`.
-- **No real data in git.** Never commit credentials, cookies, the instance URL or raw responses. Fixtures recorded from the instance must go through `script/scrub.ts`, and a person reviews them before they are committed.
+- **No real data in git.** Never commit credentials, cookies, the instance URL or raw responses. Fixtures recorded from the instance go through `script/scrub.ts`, and `bun run audit-fixtures` must pass before they are committed.
 - **Wire format stays in two folders.** Only `src/api` and `src/transcript` know Paperclip's wire format. Screens read from stores.
 - **Theme tokens only.** Components use semantic tokens (`text`, `muted`, `accent`, and so on) and never raw colour values.
 - **Tests never contact a real instance.** They use fixtures and a fake server started inside the test (`Bun.serve({ port: 0 })`).

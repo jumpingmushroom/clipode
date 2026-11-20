@@ -1,0 +1,2112 @@
+{
+  "00000000-0000-4000-8000-000000000033": {
+    "id": "00000000-0000-4000-8000-000000000033",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "conversationAgentId": null,
+    "conversationUserId": null,
+    "conversationState": null,
+    "conversationSessionGeneration": 0,
+    "conversationBoundaryCommentId": null,
+    "projectId": "00000000-0000-4000-8000-000000000036",
+    "projectWorkspaceId": null,
+    "goalId": null,
+    "parentId": null,
+    "visibility": "open",
+    "privacyRootIssueId": null,
+    "privacyParentIssueId": null,
+    "title": "example title",
+    "titleNeedsGeneration": false,
+    "description": "example description",
+    "status": "blocked",
+    "statusVersion": 7,
+    "lastStatusDecisionId": null,
+    "workMode": "standard",
+    "harnessKind": null,
+    "priority": "medium",
+    "reviewPolicy": null,
+    "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+    "assigneeUserId": null,
+    "checkoutRunId": null,
+    "executionRunId": null,
+    "executionAgentNameKey": null,
+    "executionLockedAt": null,
+    "createdByAgentId": null,
+    "createdByUserId": "example createdByUserId",
+    "responsibleUserId": "example responsibleUserId",
+    "issueNumber": 222,
+    "identifier": "DEMO-2",
+    "originKind": "manual",
+    "originId": null,
+    "originRunId": null,
+    "originIssueId": null,
+    "originIdentityContextId": null,
+    "continuationIdentityContextId": "00000000-0000-4000-8000-00000000004e",
+    "originFingerprint": "example originFingerprint",
+    "requestDepth": 0,
+    "billingCode": null,
+    "assigneeAdapterOverrides": null,
+    "executionPolicy": null,
+    "executionState": null,
+    "monitorNextCheckAt": null,
+    "monitorWakeRequestedAt": null,
+    "monitorLastTriggeredAt": null,
+    "monitorAttemptCount": 0,
+    "monitorNotes": null,
+    "monitorScheduledBy": null,
+    "executionWorkspaceId": "00000000-0000-4000-8000-00000000004f",
+    "workspaceBindingRevision": 1,
+    "workspaceSelection": null,
+    "workspacePendingSelection": null,
+    "executionWorkspacePreference": "example executionWorkspacePreference",
+    "executionWorkspaceSettings": {
+      "mode": "example mode"
+    },
+    "sourceTrust": null,
+    "unblockDescriptor": null,
+    "blockedTransitionAt": "2026-11-18T08:28:24.139Z",
+    "blockedOwnerNotifiedAt": null,
+    "startedAt": "2026-11-18T08:27:28.869Z",
+    "completedAt": null,
+    "cancelledAt": null,
+    "hiddenAt": null,
+    "createdAt": "2026-11-18T07:45:08.949Z",
+    "updatedAt": "2026-11-18T08:28:31.030Z",
+    "displayStatus": "blocked",
+    "externalConversationState": null,
+    "labels": [],
+    "labelIds": [],
+    "watchdog": null,
+    "ancestors": [],
+    "blockerAttention": {
+      "state": "stalled",
+      "reason": "stalled_review",
+      "unresolvedBlockerCount": 1,
+      "coveredBlockerCount": 0,
+      "stalledBlockerCount": 1,
+      "attentionBlockerCount": 0,
+      "pendingFinalizeBlockerIssueIds": [],
+      "sampleBlockerIdentifier": "DEMO-1",
+      "sampleStalledBlockerIdentifier": "DEMO-1",
+      "blockingTreeLive": false,
+      "directBlockerIssueId": "00000000-0000-4000-8000-000000000032",
+      "terminalBlockerIssueId": "00000000-0000-4000-8000-000000000032",
+      "terminalBlocker": {
+        "id": "00000000-0000-4000-8000-000000000032",
+        "identifier": "DEMO-1",
+        "title": "example title"
+      }
+    },
+    "reviewAttention": {
+      "state": "none",
+      "paths": [],
+      "reason": null
+    },
+    "successfulRunHandoff": null,
+    "executionBlocker": null,
+    "interruption": {
+      "intentId": null,
+      "responsibility": "example responsibility",
+      "state": "resolved",
+      "nextRetryAt": null,
+      "canRetry": false,
+      "userAction": null,
+      "sourceRunIds": [
+        "00000000-0000-4000-8000-000000000050"
+      ],
+      "observedRunId": "00000000-0000-4000-8000-000000000050"
+    },
+    "scheduledRetry": null,
+    "activeRecoveryAction": null,
+    "stalledDependencies": [],
+    "blockedBy": [
+      {
+        "id": "00000000-0000-4000-8000-000000000051",
+        "identifier": "DEMO-8",
+        "title": "example title",
+        "status": "done",
+        "displayStatus": "done",
+        "priority": "high",
+        "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+        "assigneeUserId": null,
+        "scheduledRetry": null,
+        "activeRecoveryAction": null
+      },
+      {
+        "id": "00000000-0000-4000-8000-000000000052",
+        "identifier": "DEMO-9",
+        "title": "example title",
+        "status": "done",
+        "displayStatus": "done",
+        "priority": "medium",
+        "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+        "assigneeUserId": null,
+        "scheduledRetry": null,
+        "activeRecoveryAction": null
+      },
+      {
+        "id": "00000000-0000-4000-8000-000000000032",
+        "identifier": "DEMO-1",
+        "title": "example title",
+        "status": "in_review",
+        "displayStatus": "in_review",
+        "priority": "medium",
+        "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+        "assigneeUserId": null,
+        "scheduledRetry": null,
+        "activeRecoveryAction": null
+      }
+    ],
+    "blocks": [],
+    "relatedWork": {
+      "outbound": [
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000053",
+            "identifier": "DEMO-10",
+            "title": "example title",
+            "status": "done",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeUserId": null
+          },
+          "mentionCount": 2,
+          "sources": [
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000054",
+              "label": "example label",
+              "matchedText": "DEMO-10"
+            },
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000055",
+              "label": "example label",
+              "matchedText": "DEMO-10"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000051",
+            "identifier": "DEMO-8",
+            "title": "example title",
+            "status": "done",
+            "priority": "high",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeUserId": null
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000056",
+              "label": "example label",
+              "matchedText": "DEMO-8"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000052",
+            "identifier": "DEMO-9",
+            "title": "example title",
+            "status": "done",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeUserId": null
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000056",
+              "label": "example label",
+              "matchedText": "DEMO-9"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000032",
+            "identifier": "DEMO-1",
+            "title": "example title",
+            "status": "in_review",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeUserId": null
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000056",
+              "label": "example label",
+              "matchedText": "DEMO-1"
+            }
+          ]
+        }
+      ],
+      "inbound": [
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000053",
+            "identifier": "DEMO-10",
+            "title": "example title",
+            "status": "done",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeUserId": null
+          },
+          "mentionCount": 2,
+          "sources": [
+            {
+              "kind": "title",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-2"
+            },
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-2"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000051",
+            "identifier": "DEMO-8",
+            "title": "example title",
+            "status": "done",
+            "priority": "high",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeUserId": null
+          },
+          "mentionCount": 2,
+          "sources": [
+            {
+              "kind": "title",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-2"
+            },
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-2"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000052",
+            "identifier": "DEMO-9",
+            "title": "example title",
+            "status": "done",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeUserId": null
+          },
+          "mentionCount": 2,
+          "sources": [
+            {
+              "kind": "title",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-2"
+            },
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-2"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000032",
+            "identifier": "DEMO-1",
+            "title": "example title",
+            "status": "in_review",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000000b",
+            "assigneeUserId": null
+          },
+          "mentionCount": 2,
+          "sources": [
+            {
+              "kind": "title",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-2"
+            },
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-2"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000057",
+            "identifier": "DEMO-11",
+            "title": "example title",
+            "status": "done",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeUserId": null
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000058",
+              "label": "example label",
+              "matchedText": "DEMO-2"
+            }
+          ]
+        }
+      ]
+    },
+    "referencedIssueIdentifiers": [
+      "DEMO-10",
+      "DEMO-8",
+      "DEMO-9",
+      "DEMO-1"
+    ],
+    "planDocument": null,
+    "documentSummaries": [],
+    "legacyPlanDocument": null,
+    "project": {
+      "id": "00000000-0000-4000-8000-000000000036",
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "urlKey": "example urlKey",
+      "goalId": null,
+      "goalIds": [],
+      "goals": [],
+      "name": "example name",
+      "description": null,
+      "visibility": "open",
+      "personalOwnerUserId": null,
+      "status": "planned",
+      "leadAgentId": null,
+      "targetDate": null,
+      "color": "example color",
+      "icon": null,
+      "env": null,
+      "pauseReason": null,
+      "pausedAt": null,
+      "executionWorkspacePolicy": null,
+      "codebase": {
+        "workspaceId": null,
+        "repoUrl": null,
+        "repoRef": null,
+        "defaultRef": null,
+        "repoName": null,
+        "localFolder": null,
+        "managedFolder": "example managedFolder",
+        "effectiveLocalFolder": "example effectiveLocalFolder",
+        "origin": "example origin"
+      },
+      "workspaces": [],
+      "primaryWorkspace": null,
+      "managedByPlugin": null,
+      "archivedAt": null,
+      "createdAt": "2026-11-08T22:23:27.158Z",
+      "updatedAt": "2026-11-08T22:23:27.158Z"
+    },
+    "goal": null,
+    "mentionedProjects": [],
+    "currentExecutionWorkspace": {
+      "id": "00000000-0000-4000-8000-00000000004f",
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "projectId": null,
+      "projectWorkspaceId": null,
+      "sourceIssueId": "00000000-0000-4000-8000-000000000033",
+      "mode": "example mode",
+      "strategyType": "example strategyType",
+      "name": "DEMO-2",
+      "status": "active",
+      "deliveryState": "example deliveryState",
+      "cwd": "example cwd",
+      "repoUrl": null,
+      "baseRef": null,
+      "branchName": null,
+      "providerType": "example providerType",
+      "providerRef": null,
+      "derivedFromExecutionWorkspaceId": null,
+      "lastUsedAt": "2026-11-18T08:27:29.946Z",
+      "openedAt": "2026-11-18T07:45:12.331Z",
+      "closedAt": null,
+      "cleanupEligibleAt": null,
+      "cleanupReason": null,
+      "config": {
+        "environmentId": "00000000-0000-4000-8000-000000000029",
+        "provisionCommand": null,
+        "runtimeProvisionCommand": null,
+        "teardownCommand": null,
+        "cleanupCommand": null,
+        "workspaceRuntime": null,
+        "desiredState": null,
+        "serviceStates": null
+      },
+      "metadata": null,
+      "runtimeServices": [],
+      "createdAt": "2026-11-18T07:45:12.331Z",
+      "updatedAt": "2026-11-18T08:27:30.309Z"
+    },
+    "workProducts": [],
+    "externalChannelBinding": null,
+    "createdFrom": null
+  },
+  "00000000-0000-4000-8000-000000000035": {
+    "id": "00000000-0000-4000-8000-000000000035",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "conversationAgentId": null,
+    "conversationUserId": null,
+    "conversationState": null,
+    "conversationSessionGeneration": 0,
+    "conversationBoundaryCommentId": null,
+    "projectId": "00000000-0000-4000-8000-000000000036",
+    "projectWorkspaceId": null,
+    "goalId": null,
+    "parentId": null,
+    "visibility": "open",
+    "privacyRootIssueId": null,
+    "privacyParentIssueId": "00000000-0000-4000-8000-000000000059",
+    "title": "example title",
+    "titleNeedsGeneration": false,
+    "description": "example description",
+    "status": "in_review",
+    "statusVersion": 2,
+    "lastStatusDecisionId": null,
+    "workMode": "standard",
+    "harnessKind": null,
+    "priority": "medium",
+    "reviewPolicy": null,
+    "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+    "assigneeUserId": null,
+    "checkoutRunId": null,
+    "executionRunId": null,
+    "executionAgentNameKey": null,
+    "executionLockedAt": null,
+    "createdByAgentId": "00000000-0000-4000-8000-000000000005",
+    "createdByUserId": null,
+    "responsibleUserId": "example responsibleUserId",
+    "issueNumber": 245,
+    "identifier": "DEMO-3",
+    "originKind": "manual",
+    "originId": null,
+    "originRunId": "00000000-0000-4000-8000-00000000005a",
+    "originIssueId": null,
+    "originIdentityContextId": "00000000-0000-4000-8000-00000000005b",
+    "continuationIdentityContextId": "00000000-0000-4000-8000-000000000041",
+    "originFingerprint": "example originFingerprint",
+    "requestDepth": 0,
+    "billingCode": null,
+    "assigneeAdapterOverrides": null,
+    "executionPolicy": null,
+    "executionState": null,
+    "monitorNextCheckAt": null,
+    "monitorWakeRequestedAt": null,
+    "monitorLastTriggeredAt": null,
+    "monitorAttemptCount": 0,
+    "monitorNotes": null,
+    "monitorScheduledBy": null,
+    "executionWorkspaceId": "00000000-0000-4000-8000-00000000005c",
+    "workspaceBindingRevision": 1,
+    "workspaceSelection": null,
+    "workspacePendingSelection": null,
+    "executionWorkspacePreference": "example executionWorkspacePreference",
+    "executionWorkspaceSettings": {
+      "mode": "example mode"
+    },
+    "sourceTrust": null,
+    "unblockDescriptor": null,
+    "blockedTransitionAt": null,
+    "blockedOwnerNotifiedAt": null,
+    "startedAt": "2026-11-18T13:23:46.279Z",
+    "completedAt": null,
+    "cancelledAt": null,
+    "hiddenAt": null,
+    "createdAt": "2026-11-18T13:23:45.985Z",
+    "updatedAt": "2026-11-18T13:35:21.162Z",
+    "displayStatus": "in_review",
+    "externalConversationState": null,
+    "labels": [],
+    "labelIds": [],
+    "watchdog": null,
+    "ancestors": [],
+    "blockerAttention": {
+      "state": "none",
+      "reason": null,
+      "unresolvedBlockerCount": 0,
+      "coveredBlockerCount": 0,
+      "stalledBlockerCount": 0,
+      "attentionBlockerCount": 0,
+      "pendingFinalizeBlockerIssueIds": [],
+      "sampleBlockerIdentifier": null,
+      "sampleStalledBlockerIdentifier": null,
+      "blockingTreeLive": false,
+      "directBlockerIssueId": null,
+      "terminalBlockerIssueId": null,
+      "terminalBlocker": null
+    },
+    "reviewAttention": {
+      "state": "covered",
+      "paths": [
+        {
+          "kind": "interaction",
+          "label": "example label",
+          "responder": "example responder",
+          "since": "2026-11-18T13:35:14.126Z",
+          "ref": "00000000-0000-4000-8000-000000000034"
+        }
+      ],
+      "reason": "example reason"
+    },
+    "successfulRunHandoff": null,
+    "executionBlocker": null,
+    "interruption": {
+      "intentId": null,
+      "responsibility": "example responsibility",
+      "state": "resolved",
+      "nextRetryAt": null,
+      "canRetry": false,
+      "userAction": null,
+      "sourceRunIds": [
+        "00000000-0000-4000-8000-000000000042"
+      ],
+      "observedRunId": "00000000-0000-4000-8000-000000000042"
+    },
+    "scheduledRetry": null,
+    "activeRecoveryAction": null,
+    "stalledDependencies": [],
+    "blockedBy": [],
+    "blocks": [
+      {
+        "id": "00000000-0000-4000-8000-000000000059",
+        "identifier": "DEMO-12",
+        "title": "example title",
+        "status": "blocked",
+        "displayStatus": "blocked",
+        "priority": "medium",
+        "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+        "assigneeUserId": null,
+        "scheduledRetry": null,
+        "activeRecoveryAction": null
+      }
+    ],
+    "relatedWork": {
+      "outbound": [
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000038",
+            "identifier": "DEMO-4",
+            "title": "example title",
+            "status": "in_review",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-00000000001f",
+            "assigneeUserId": null
+          },
+          "mentionCount": 2,
+          "sources": [
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-4"
+            },
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000005d",
+              "label": "example label",
+              "matchedText": "DEMO-4"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000059",
+            "identifier": "DEMO-12",
+            "title": "example title",
+            "status": "blocked",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeUserId": null
+          },
+          "mentionCount": 2,
+          "sources": [
+            {
+              "kind": "title",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-12"
+            },
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-12"
+            }
+          ]
+        }
+      ],
+      "inbound": [
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000059",
+            "identifier": "DEMO-12",
+            "title": "example title",
+            "status": "blocked",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeUserId": null
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000005e",
+              "label": "example label",
+              "matchedText": "DEMO-3"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000057",
+            "identifier": "DEMO-11",
+            "title": "example title",
+            "status": "done",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeUserId": null
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000058",
+              "label": "example label",
+              "matchedText": "DEMO-3"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-00000000005f",
+            "identifier": "DEMO-13",
+            "title": "example title",
+            "status": "todo",
+            "priority": "medium",
+            "assigneeAgentId": null,
+            "assigneeUserId": "example assigneeUserId"
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-3"
+            }
+          ]
+        }
+      ]
+    },
+    "referencedIssueIdentifiers": [
+      "DEMO-4",
+      "DEMO-12"
+    ],
+    "planDocument": null,
+    "documentSummaries": [],
+    "legacyPlanDocument": null,
+    "project": {
+      "id": "00000000-0000-4000-8000-000000000036",
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "urlKey": "example urlKey",
+      "goalId": null,
+      "goalIds": [],
+      "goals": [],
+      "name": "example name",
+      "description": null,
+      "visibility": "open",
+      "personalOwnerUserId": null,
+      "status": "planned",
+      "leadAgentId": null,
+      "targetDate": null,
+      "color": "example color",
+      "icon": null,
+      "env": null,
+      "pauseReason": null,
+      "pausedAt": null,
+      "executionWorkspacePolicy": null,
+      "codebase": {
+        "workspaceId": null,
+        "repoUrl": null,
+        "repoRef": null,
+        "defaultRef": null,
+        "repoName": null,
+        "localFolder": null,
+        "managedFolder": "example managedFolder",
+        "effectiveLocalFolder": "example effectiveLocalFolder",
+        "origin": "example origin"
+      },
+      "workspaces": [],
+      "primaryWorkspace": null,
+      "managedByPlugin": null,
+      "archivedAt": null,
+      "createdAt": "2026-11-08T22:23:27.158Z",
+      "updatedAt": "2026-11-08T22:23:27.158Z"
+    },
+    "goal": null,
+    "mentionedProjects": [],
+    "currentExecutionWorkspace": {
+      "id": "00000000-0000-4000-8000-00000000005c",
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "projectId": null,
+      "projectWorkspaceId": null,
+      "sourceIssueId": "00000000-0000-4000-8000-000000000035",
+      "mode": "example mode",
+      "strategyType": "example strategyType",
+      "name": "DEMO-3",
+      "status": "active",
+      "deliveryState": "example deliveryState",
+      "cwd": "example cwd",
+      "repoUrl": null,
+      "baseRef": null,
+      "branchName": null,
+      "providerType": "example providerType",
+      "providerRef": null,
+      "derivedFromExecutionWorkspaceId": null,
+      "lastUsedAt": "2026-11-18T13:34:27.228Z",
+      "openedAt": "2026-11-18T13:23:48.221Z",
+      "closedAt": null,
+      "cleanupEligibleAt": null,
+      "cleanupReason": null,
+      "config": {
+        "environmentId": "00000000-0000-4000-8000-000000000029",
+        "provisionCommand": null,
+        "runtimeProvisionCommand": null,
+        "teardownCommand": null,
+        "cleanupCommand": null,
+        "workspaceRuntime": null,
+        "desiredState": null,
+        "serviceStates": null
+      },
+      "metadata": null,
+      "runtimeServices": [],
+      "createdAt": "2026-11-18T13:23:48.221Z",
+      "updatedAt": "2026-11-18T13:34:27.999Z"
+    },
+    "workProducts": [],
+    "externalChannelBinding": null,
+    "createdFrom": {
+      "issue": {
+        "id": "00000000-0000-4000-8000-000000000059",
+        "identifier": "DEMO-12",
+        "title": "example title",
+        "status": "blocked"
+      },
+      "run": {
+        "id": "00000000-0000-4000-8000-00000000005a",
+        "agentId": "00000000-0000-4000-8000-000000000005"
+      },
+      "agent": {
+        "id": "00000000-0000-4000-8000-000000000005",
+        "name": "example name"
+      }
+    }
+  },
+  "00000000-0000-4000-8000-000000000038": {
+    "id": "00000000-0000-4000-8000-000000000038",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "conversationAgentId": null,
+    "conversationUserId": null,
+    "conversationState": null,
+    "conversationSessionGeneration": 0,
+    "conversationBoundaryCommentId": null,
+    "projectId": "00000000-0000-4000-8000-000000000036",
+    "projectWorkspaceId": null,
+    "goalId": null,
+    "parentId": null,
+    "visibility": "open",
+    "privacyRootIssueId": null,
+    "privacyParentIssueId": "00000000-0000-4000-8000-000000000060",
+    "title": "example title",
+    "titleNeedsGeneration": false,
+    "description": "example description",
+    "status": "in_review",
+    "statusVersion": 2,
+    "lastStatusDecisionId": null,
+    "workMode": "standard",
+    "harnessKind": null,
+    "priority": "medium",
+    "reviewPolicy": null,
+    "assigneeAgentId": "00000000-0000-4000-8000-00000000001f",
+    "assigneeUserId": null,
+    "checkoutRunId": null,
+    "executionRunId": null,
+    "executionAgentNameKey": null,
+    "executionLockedAt": null,
+    "createdByAgentId": "00000000-0000-4000-8000-000000000005",
+    "createdByUserId": null,
+    "responsibleUserId": "example responsibleUserId",
+    "issueNumber": 240,
+    "identifier": "DEMO-4",
+    "originKind": "manual",
+    "originId": null,
+    "originRunId": "00000000-0000-4000-8000-000000000061",
+    "originIssueId": null,
+    "originIdentityContextId": "00000000-0000-4000-8000-000000000062",
+    "continuationIdentityContextId": "00000000-0000-4000-8000-000000000063",
+    "originFingerprint": "example originFingerprint",
+    "requestDepth": 0,
+    "billingCode": null,
+    "assigneeAdapterOverrides": null,
+    "executionPolicy": null,
+    "executionState": null,
+    "monitorNextCheckAt": null,
+    "monitorWakeRequestedAt": null,
+    "monitorLastTriggeredAt": null,
+    "monitorAttemptCount": 0,
+    "monitorNotes": null,
+    "monitorScheduledBy": null,
+    "executionWorkspaceId": "00000000-0000-4000-8000-000000000064",
+    "workspaceBindingRevision": 1,
+    "workspaceSelection": null,
+    "workspacePendingSelection": null,
+    "executionWorkspacePreference": "example executionWorkspacePreference",
+    "executionWorkspaceSettings": {
+      "mode": "example mode"
+    },
+    "sourceTrust": null,
+    "unblockDescriptor": null,
+    "blockedTransitionAt": null,
+    "blockedOwnerNotifiedAt": null,
+    "startedAt": "2026-11-18T13:05:56.406Z",
+    "completedAt": null,
+    "cancelledAt": null,
+    "hiddenAt": null,
+    "createdAt": "2026-11-18T13:05:54.092Z",
+    "updatedAt": "2026-11-18T13:19:27.061Z",
+    "displayStatus": "in_review",
+    "externalConversationState": null,
+    "labels": [],
+    "labelIds": [],
+    "watchdog": null,
+    "ancestors": [],
+    "blockerAttention": {
+      "state": "none",
+      "reason": null,
+      "unresolvedBlockerCount": 0,
+      "coveredBlockerCount": 0,
+      "stalledBlockerCount": 0,
+      "attentionBlockerCount": 0,
+      "pendingFinalizeBlockerIssueIds": [],
+      "sampleBlockerIdentifier": null,
+      "sampleStalledBlockerIdentifier": null,
+      "blockingTreeLive": false,
+      "directBlockerIssueId": null,
+      "terminalBlockerIssueId": null,
+      "terminalBlocker": null
+    },
+    "reviewAttention": {
+      "state": "covered",
+      "paths": [
+        {
+          "kind": "interaction",
+          "label": "example label",
+          "responder": "example responder",
+          "since": "2026-11-18T13:16:03.838Z",
+          "ref": "00000000-0000-4000-8000-000000000037"
+        }
+      ],
+      "reason": "example reason"
+    },
+    "successfulRunHandoff": null,
+    "executionBlocker": null,
+    "interruption": {
+      "intentId": null,
+      "responsibility": "example responsibility",
+      "state": "resolved",
+      "nextRetryAt": null,
+      "canRetry": false,
+      "userAction": null,
+      "sourceRunIds": [
+        "00000000-0000-4000-8000-000000000065"
+      ],
+      "observedRunId": "00000000-0000-4000-8000-000000000065"
+    },
+    "scheduledRetry": null,
+    "activeRecoveryAction": null,
+    "stalledDependencies": [],
+    "blockedBy": [],
+    "blocks": [
+      {
+        "id": "00000000-0000-4000-8000-000000000060",
+        "identifier": "DEMO-14",
+        "title": "example title",
+        "status": "blocked",
+        "displayStatus": "blocked",
+        "priority": "medium",
+        "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+        "assigneeUserId": null,
+        "scheduledRetry": null,
+        "activeRecoveryAction": null
+      }
+    ],
+    "relatedWork": {
+      "outbound": [
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000060",
+            "identifier": "DEMO-14",
+            "title": "example title",
+            "status": "blocked",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeUserId": null
+          },
+          "mentionCount": 3,
+          "sources": [
+            {
+              "kind": "title",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-14"
+            },
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-14"
+            },
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000066",
+              "label": "example label",
+              "matchedText": "DEMO-14"
+            }
+          ]
+        }
+      ],
+      "inbound": [
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000059",
+            "identifier": "DEMO-12",
+            "title": "example title",
+            "status": "blocked",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeUserId": null
+          },
+          "mentionCount": 2,
+          "sources": [
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-4"
+            },
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000005e",
+              "label": "example label",
+              "matchedText": "DEMO-4"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000035",
+            "identifier": "DEMO-3",
+            "title": "example title",
+            "status": "in_review",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+            "assigneeUserId": null
+          },
+          "mentionCount": 2,
+          "sources": [
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-4"
+            },
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000005d",
+              "label": "example label",
+              "matchedText": "DEMO-4"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000060",
+            "identifier": "DEMO-14",
+            "title": "example title",
+            "status": "blocked",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeUserId": null
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000067",
+              "label": "example label",
+              "matchedText": "DEMO-4"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000057",
+            "identifier": "DEMO-11",
+            "title": "example title",
+            "status": "done",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeUserId": null
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000058",
+              "label": "example label",
+              "matchedText": "DEMO-4"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-00000000005f",
+            "identifier": "DEMO-13",
+            "title": "example title",
+            "status": "todo",
+            "priority": "medium",
+            "assigneeAgentId": null,
+            "assigneeUserId": "example assigneeUserId"
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-4"
+            }
+          ]
+        }
+      ]
+    },
+    "referencedIssueIdentifiers": [
+      "DEMO-14"
+    ],
+    "planDocument": null,
+    "documentSummaries": [
+      {
+        "id": "00000000-0000-4000-8000-000000000068",
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "issueId": "00000000-0000-4000-8000-000000000038",
+        "key": "example key",
+        "title": "example title",
+        "format": "example format",
+        "latestRevisionId": "00000000-0000-4000-8000-000000000069",
+        "latestRevisionNumber": 1,
+        "createdByAgentId": "00000000-0000-4000-8000-00000000001f",
+        "createdByUserId": null,
+        "updatedByAgentId": "00000000-0000-4000-8000-00000000001f",
+        "updatedByUserId": null,
+        "lockedAt": null,
+        "lockedByAgentId": null,
+        "lockedByUserId": null,
+        "sourceTrust": null,
+        "createdAt": "2026-11-18T13:16:03.704Z",
+        "updatedAt": "2026-11-18T13:16:03.704Z"
+      }
+    ],
+    "legacyPlanDocument": null,
+    "project": {
+      "id": "00000000-0000-4000-8000-000000000036",
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "urlKey": "example urlKey",
+      "goalId": null,
+      "goalIds": [],
+      "goals": [],
+      "name": "example name",
+      "description": null,
+      "visibility": "open",
+      "personalOwnerUserId": null,
+      "status": "planned",
+      "leadAgentId": null,
+      "targetDate": null,
+      "color": "example color",
+      "icon": null,
+      "env": null,
+      "pauseReason": null,
+      "pausedAt": null,
+      "executionWorkspacePolicy": null,
+      "codebase": {
+        "workspaceId": null,
+        "repoUrl": null,
+        "repoRef": null,
+        "defaultRef": null,
+        "repoName": null,
+        "localFolder": null,
+        "managedFolder": "example managedFolder",
+        "effectiveLocalFolder": "example effectiveLocalFolder",
+        "origin": "example origin"
+      },
+      "workspaces": [],
+      "primaryWorkspace": null,
+      "managedByPlugin": null,
+      "archivedAt": null,
+      "createdAt": "2026-11-08T22:23:27.158Z",
+      "updatedAt": "2026-11-08T22:23:27.158Z"
+    },
+    "goal": null,
+    "mentionedProjects": [],
+    "currentExecutionWorkspace": {
+      "id": "00000000-0000-4000-8000-000000000064",
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "projectId": null,
+      "projectWorkspaceId": null,
+      "sourceIssueId": "00000000-0000-4000-8000-000000000038",
+      "mode": "example mode",
+      "strategyType": "example strategyType",
+      "name": "DEMO-4",
+      "status": "active",
+      "deliveryState": "example deliveryState",
+      "cwd": "example cwd",
+      "repoUrl": null,
+      "baseRef": null,
+      "branchName": null,
+      "providerType": "example providerType",
+      "providerRef": null,
+      "derivedFromExecutionWorkspaceId": null,
+      "lastUsedAt": "2026-11-18T13:18:50.574Z",
+      "openedAt": "2026-11-18T13:05:58.286Z",
+      "closedAt": null,
+      "cleanupEligibleAt": null,
+      "cleanupReason": null,
+      "config": {
+        "environmentId": "00000000-0000-4000-8000-000000000029",
+        "provisionCommand": null,
+        "runtimeProvisionCommand": null,
+        "teardownCommand": null,
+        "cleanupCommand": null,
+        "workspaceRuntime": null,
+        "desiredState": null,
+        "serviceStates": null
+      },
+      "metadata": null,
+      "runtimeServices": [],
+      "createdAt": "2026-11-18T13:05:58.286Z",
+      "updatedAt": "2026-11-18T13:18:51.167Z"
+    },
+    "workProducts": [],
+    "externalChannelBinding": null,
+    "createdFrom": {
+      "issue": {
+        "id": "00000000-0000-4000-8000-000000000060",
+        "identifier": "DEMO-14",
+        "title": "example title",
+        "status": "blocked"
+      },
+      "run": {
+        "id": "00000000-0000-4000-8000-000000000061",
+        "agentId": "00000000-0000-4000-8000-000000000005"
+      },
+      "agent": {
+        "id": "00000000-0000-4000-8000-000000000005",
+        "name": "example name"
+      }
+    }
+  },
+  "00000000-0000-4000-8000-000000000039": {
+    "id": "00000000-0000-4000-8000-000000000039",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "conversationAgentId": null,
+    "conversationUserId": null,
+    "conversationState": null,
+    "conversationSessionGeneration": 0,
+    "conversationBoundaryCommentId": null,
+    "projectId": null,
+    "projectWorkspaceId": null,
+    "goalId": null,
+    "parentId": "00000000-0000-4000-8000-00000000006a",
+    "visibility": "open",
+    "privacyRootIssueId": null,
+    "privacyParentIssueId": "00000000-0000-4000-8000-00000000006a",
+    "title": "example title",
+    "titleNeedsGeneration": false,
+    "description": "example description",
+    "status": "blocked",
+    "statusVersion": 2,
+    "lastStatusDecisionId": null,
+    "workMode": "standard",
+    "harnessKind": null,
+    "priority": "medium",
+    "reviewPolicy": null,
+    "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+    "assigneeUserId": null,
+    "checkoutRunId": null,
+    "executionRunId": null,
+    "executionAgentNameKey": null,
+    "executionLockedAt": null,
+    "createdByAgentId": "00000000-0000-4000-8000-000000000003",
+    "createdByUserId": null,
+    "responsibleUserId": "example responsibleUserId",
+    "issueNumber": 199,
+    "identifier": "DEMO-5",
+    "originKind": "manual",
+    "originId": null,
+    "originRunId": "00000000-0000-4000-8000-00000000006b",
+    "originIssueId": null,
+    "originIdentityContextId": "00000000-0000-4000-8000-00000000006c",
+    "continuationIdentityContextId": "00000000-0000-4000-8000-00000000006d",
+    "originFingerprint": "example originFingerprint",
+    "requestDepth": 0,
+    "billingCode": null,
+    "assigneeAdapterOverrides": null,
+    "executionPolicy": null,
+    "executionState": null,
+    "monitorNextCheckAt": null,
+    "monitorWakeRequestedAt": null,
+    "monitorLastTriggeredAt": null,
+    "monitorAttemptCount": 0,
+    "monitorNotes": null,
+    "monitorScheduledBy": null,
+    "executionWorkspaceId": "00000000-0000-4000-8000-00000000006e",
+    "workspaceBindingRevision": 0,
+    "workspaceSelection": null,
+    "workspacePendingSelection": null,
+    "executionWorkspacePreference": "example executionWorkspacePreference",
+    "executionWorkspaceSettings": {
+      "mode": "example mode"
+    },
+    "sourceTrust": null,
+    "unblockDescriptor": {
+      "owner": {
+        "agentId": "00000000-0000-4000-8000-000000000003"
+      },
+      "action": "example action"
+    },
+    "blockedTransitionAt": "2026-11-17T08:58:06.156Z",
+    "blockedOwnerNotifiedAt": "2026-11-17T08:58:06.403Z",
+    "startedAt": "2026-11-17T08:57:20.678Z",
+    "completedAt": null,
+    "cancelledAt": null,
+    "hiddenAt": null,
+    "createdAt": "2026-11-17T08:56:56.658Z",
+    "updatedAt": "2026-11-17T08:58:12.154Z",
+    "displayStatus": "blocked",
+    "externalConversationState": null,
+    "labels": [],
+    "labelIds": [],
+    "watchdog": null,
+    "ancestors": [
+      {
+        "id": "00000000-0000-4000-8000-00000000006a",
+        "identifier": "DEMO-15",
+        "title": "example title",
+        "description": "example description",
+        "status": "done",
+        "priority": "medium",
+        "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+        "projectId": null,
+        "goalId": null,
+        "project": null,
+        "goal": null
+      }
+    ],
+    "blockerAttention": {
+      "state": "needs_attention",
+      "reason": "attention_required",
+      "unresolvedBlockerCount": 0,
+      "coveredBlockerCount": 0,
+      "stalledBlockerCount": 0,
+      "attentionBlockerCount": 0,
+      "pendingFinalizeBlockerIssueIds": [],
+      "sampleBlockerIdentifier": null,
+      "sampleStalledBlockerIdentifier": null,
+      "blockingTreeLive": false,
+      "directBlockerIssueId": null,
+      "terminalBlockerIssueId": "00000000-0000-4000-8000-000000000039",
+      "terminalBlocker": null
+    },
+    "reviewAttention": {
+      "state": "none",
+      "paths": [],
+      "reason": null
+    },
+    "successfulRunHandoff": null,
+    "executionBlocker": null,
+    "interruption": {
+      "intentId": null,
+      "responsibility": "example responsibility",
+      "state": "resolved",
+      "nextRetryAt": null,
+      "canRetry": false,
+      "userAction": null,
+      "sourceRunIds": [
+        "00000000-0000-4000-8000-00000000006f"
+      ],
+      "observedRunId": "00000000-0000-4000-8000-00000000006f"
+    },
+    "scheduledRetry": null,
+    "activeRecoveryAction": null,
+    "stalledDependencies": [],
+    "blockedBy": [],
+    "blocks": [],
+    "relatedWork": {
+      "outbound": [
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-00000000006a",
+            "identifier": "DEMO-15",
+            "title": "example title",
+            "status": "done",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+            "assigneeUserId": null
+          },
+          "mentionCount": 3,
+          "sources": [
+            {
+              "kind": "title",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-15"
+            },
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-15"
+            },
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000070",
+              "label": "example label",
+              "matchedText": "DEMO-15"
+            }
+          ]
+        }
+      ],
+      "inbound": [
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000071",
+            "identifier": "DEMO-16",
+            "title": "example title",
+            "status": "todo",
+            "priority": "medium",
+            "assigneeAgentId": null,
+            "assigneeUserId": "example assigneeUserId"
+          },
+          "mentionCount": 2,
+          "sources": [
+            {
+              "kind": "title",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-5"
+            },
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-5"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000072",
+            "identifier": "DEMO-17",
+            "title": "example title",
+            "status": "done",
+            "priority": "low",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeUserId": null
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000073",
+              "label": "example label",
+              "matchedText": "DEMO-5"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-00000000006a",
+            "identifier": "DEMO-15",
+            "title": "example title",
+            "status": "done",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+            "assigneeUserId": null
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000074",
+              "label": "example label",
+              "matchedText": "DEMO-5"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000057",
+            "identifier": "DEMO-11",
+            "title": "example title",
+            "status": "done",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeUserId": null
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000058",
+              "label": "example label",
+              "matchedText": "DEMO-5"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-00000000005f",
+            "identifier": "DEMO-13",
+            "title": "example title",
+            "status": "todo",
+            "priority": "medium",
+            "assigneeAgentId": null,
+            "assigneeUserId": "example assigneeUserId"
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-5"
+            }
+          ]
+        }
+      ]
+    },
+    "referencedIssueIdentifiers": [
+      "DEMO-15"
+    ],
+    "planDocument": null,
+    "documentSummaries": [],
+    "legacyPlanDocument": null,
+    "project": null,
+    "goal": null,
+    "mentionedProjects": [],
+    "currentExecutionWorkspace": {
+      "id": "00000000-0000-4000-8000-00000000006e",
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "projectId": null,
+      "projectWorkspaceId": null,
+      "sourceIssueId": "00000000-0000-4000-8000-00000000006a",
+      "mode": "example mode",
+      "strategyType": "example strategyType",
+      "name": "DEMO-15",
+      "status": "active",
+      "deliveryState": "example deliveryState",
+      "cwd": "example cwd",
+      "repoUrl": null,
+      "baseRef": null,
+      "branchName": null,
+      "providerType": "example providerType",
+      "providerRef": null,
+      "derivedFromExecutionWorkspaceId": null,
+      "lastUsedAt": "2026-11-17T08:57:22.561Z",
+      "openedAt": "2026-11-17T08:41:13.463Z",
+      "closedAt": null,
+      "cleanupEligibleAt": null,
+      "cleanupReason": null,
+      "config": {
+        "environmentId": "00000000-0000-4000-8000-000000000029",
+        "provisionCommand": null,
+        "runtimeProvisionCommand": null,
+        "teardownCommand": null,
+        "cleanupCommand": null,
+        "workspaceRuntime": null,
+        "desiredState": null,
+        "serviceStates": null
+      },
+      "metadata": null,
+      "runtimeServices": [],
+      "createdAt": "2026-11-17T08:41:13.463Z",
+      "updatedAt": "2026-11-17T08:57:23.294Z"
+    },
+    "workProducts": [],
+    "externalChannelBinding": null,
+    "createdFrom": {
+      "issue": {
+        "id": "00000000-0000-4000-8000-00000000006a",
+        "identifier": "DEMO-15",
+        "title": "example title",
+        "status": "done"
+      },
+      "run": {
+        "id": "00000000-0000-4000-8000-00000000006b",
+        "agentId": "00000000-0000-4000-8000-000000000003"
+      },
+      "agent": {
+        "id": "00000000-0000-4000-8000-000000000003",
+        "name": "example name"
+      }
+    }
+  },
+  "00000000-0000-4000-8000-00000000003b": {
+    "id": "00000000-0000-4000-8000-00000000003b",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "conversationAgentId": null,
+    "conversationUserId": null,
+    "conversationState": null,
+    "conversationSessionGeneration": 0,
+    "conversationBoundaryCommentId": null,
+    "projectId": null,
+    "projectWorkspaceId": null,
+    "goalId": null,
+    "parentId": null,
+    "visibility": "open",
+    "privacyRootIssueId": null,
+    "privacyParentIssueId": "00000000-0000-4000-8000-000000000072",
+    "title": "example title",
+    "titleNeedsGeneration": false,
+    "description": "example description",
+    "status": "done",
+    "statusVersion": 3,
+    "lastStatusDecisionId": null,
+    "workMode": "standard",
+    "harnessKind": null,
+    "priority": "medium",
+    "reviewPolicy": null,
+    "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+    "assigneeUserId": null,
+    "checkoutRunId": null,
+    "executionRunId": null,
+    "executionAgentNameKey": null,
+    "executionLockedAt": null,
+    "createdByAgentId": "00000000-0000-4000-8000-000000000005",
+    "createdByUserId": null,
+    "responsibleUserId": "example responsibleUserId",
+    "issueNumber": 174,
+    "identifier": "DEMO-6",
+    "originKind": "manual",
+    "originId": null,
+    "originRunId": "00000000-0000-4000-8000-000000000075",
+    "originIssueId": null,
+    "originIdentityContextId": "00000000-0000-4000-8000-000000000076",
+    "continuationIdentityContextId": "00000000-0000-4000-8000-000000000077",
+    "originFingerprint": "example originFingerprint",
+    "requestDepth": 0,
+    "billingCode": null,
+    "assigneeAdapterOverrides": null,
+    "executionPolicy": null,
+    "executionState": null,
+    "monitorNextCheckAt": null,
+    "monitorWakeRequestedAt": null,
+    "monitorLastTriggeredAt": null,
+    "monitorAttemptCount": 0,
+    "monitorNotes": null,
+    "monitorScheduledBy": null,
+    "executionWorkspaceId": "00000000-0000-4000-8000-000000000078",
+    "workspaceBindingRevision": 1,
+    "workspaceSelection": null,
+    "workspacePendingSelection": null,
+    "executionWorkspacePreference": "example executionWorkspacePreference",
+    "executionWorkspaceSettings": {
+      "mode": "example mode"
+    },
+    "sourceTrust": null,
+    "unblockDescriptor": null,
+    "blockedTransitionAt": null,
+    "blockedOwnerNotifiedAt": null,
+    "startedAt": "2026-11-16T19:48:53.565Z",
+    "completedAt": "2026-11-17T08:41:03.624Z",
+    "cancelledAt": null,
+    "hiddenAt": null,
+    "createdAt": "2026-11-16T18:12:21.961Z",
+    "updatedAt": "2026-11-17T08:41:04.041Z",
+    "displayStatus": "done",
+    "externalConversationState": null,
+    "labels": [],
+    "labelIds": [],
+    "watchdog": null,
+    "ancestors": [],
+    "blockerAttention": {
+      "state": "none",
+      "reason": null,
+      "unresolvedBlockerCount": 0,
+      "coveredBlockerCount": 0,
+      "stalledBlockerCount": 0,
+      "attentionBlockerCount": 0,
+      "pendingFinalizeBlockerIssueIds": [],
+      "sampleBlockerIdentifier": null,
+      "sampleStalledBlockerIdentifier": null,
+      "blockingTreeLive": false,
+      "directBlockerIssueId": null,
+      "terminalBlockerIssueId": null,
+      "terminalBlocker": null
+    },
+    "reviewAttention": {
+      "state": "none",
+      "paths": [],
+      "reason": null
+    },
+    "successfulRunHandoff": null,
+    "executionBlocker": null,
+    "interruption": {
+      "intentId": null,
+      "responsibility": "example responsibility",
+      "state": "resolved",
+      "nextRetryAt": null,
+      "canRetry": false,
+      "userAction": null,
+      "sourceRunIds": [
+        "00000000-0000-4000-8000-000000000079"
+      ],
+      "observedRunId": "00000000-0000-4000-8000-000000000079"
+    },
+    "scheduledRetry": null,
+    "activeRecoveryAction": null,
+    "stalledDependencies": [],
+    "blockedBy": [
+      {
+        "id": "00000000-0000-4000-8000-00000000007a",
+        "identifier": "DEMO-18",
+        "title": "example title",
+        "status": "done",
+        "displayStatus": "done",
+        "priority": "medium",
+        "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+        "assigneeUserId": null,
+        "scheduledRetry": null,
+        "activeRecoveryAction": null
+      }
+    ],
+    "blocks": [
+      {
+        "id": "00000000-0000-4000-8000-000000000072",
+        "identifier": "DEMO-17",
+        "title": "example title",
+        "status": "done",
+        "displayStatus": "done",
+        "priority": "low",
+        "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+        "assigneeUserId": null,
+        "scheduledRetry": null,
+        "activeRecoveryAction": null
+      },
+      {
+        "id": "00000000-0000-4000-8000-00000000006a",
+        "identifier": "DEMO-15",
+        "title": "example title",
+        "status": "done",
+        "displayStatus": "done",
+        "priority": "medium",
+        "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+        "assigneeUserId": null,
+        "scheduledRetry": null,
+        "activeRecoveryAction": null
+      }
+    ],
+    "relatedWork": {
+      "outbound": [
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000072",
+            "identifier": "DEMO-17",
+            "title": "example title",
+            "status": "done",
+            "priority": "low",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeUserId": null
+          },
+          "mentionCount": 2,
+          "sources": [
+            {
+              "kind": "title",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-17"
+            },
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-17"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-00000000007b",
+            "identifier": "DEMO-19",
+            "title": "example title",
+            "status": "done",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeUserId": null
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "description",
+              "sourceRecordId": null,
+              "label": "example label",
+              "matchedText": "DEMO-19"
+            }
+          ]
+        }
+      ],
+      "inbound": [
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-000000000072",
+            "identifier": "DEMO-17",
+            "title": "example title",
+            "status": "done",
+            "priority": "low",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+            "assigneeUserId": null
+          },
+          "mentionCount": 2,
+          "sources": [
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-000000000073",
+              "label": "example label",
+              "matchedText": "DEMO-6"
+            },
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000007c",
+              "label": "example label",
+              "matchedText": "DEMO-6"
+            }
+          ]
+        },
+        {
+          "issue": {
+            "id": "00000000-0000-4000-8000-00000000006a",
+            "identifier": "DEMO-15",
+            "title": "example title",
+            "status": "done",
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+            "assigneeUserId": null
+          },
+          "mentionCount": 1,
+          "sources": [
+            {
+              "kind": "comment",
+              "sourceRecordId": "00000000-0000-4000-8000-00000000007d",
+              "label": "example label",
+              "matchedText": "DEMO-6"
+            }
+          ]
+        }
+      ]
+    },
+    "referencedIssueIdentifiers": [
+      "DEMO-17",
+      "DEMO-19"
+    ],
+    "planDocument": null,
+    "documentSummaries": [],
+    "legacyPlanDocument": null,
+    "project": null,
+    "goal": null,
+    "mentionedProjects": [],
+    "currentExecutionWorkspace": {
+      "id": "00000000-0000-4000-8000-000000000078",
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "projectId": null,
+      "projectWorkspaceId": null,
+      "sourceIssueId": "00000000-0000-4000-8000-00000000003b",
+      "mode": "example mode",
+      "strategyType": "example strategyType",
+      "name": "DEMO-6",
+      "status": "active",
+      "deliveryState": "example deliveryState",
+      "cwd": "example cwd",
+      "repoUrl": null,
+      "baseRef": null,
+      "branchName": null,
+      "providerType": "example providerType",
+      "providerRef": null,
+      "derivedFromExecutionWorkspaceId": null,
+      "lastUsedAt": "2026-11-17T08:40:39.140Z",
+      "openedAt": "2026-11-16T19:48:54.643Z",
+      "closedAt": null,
+      "cleanupEligibleAt": null,
+      "cleanupReason": null,
+      "config": {
+        "environmentId": "00000000-0000-4000-8000-000000000029",
+        "provisionCommand": null,
+        "runtimeProvisionCommand": null,
+        "teardownCommand": null,
+        "cleanupCommand": null,
+        "workspaceRuntime": null,
+        "desiredState": null,
+        "serviceStates": null
+      },
+      "metadata": null,
+      "runtimeServices": [],
+      "createdAt": "2026-11-16T19:48:54.643Z",
+      "updatedAt": "2026-11-17T08:40:39.505Z"
+    },
+    "workProducts": [],
+    "externalChannelBinding": null,
+    "createdFrom": {
+      "issue": {
+        "id": "00000000-0000-4000-8000-000000000072",
+        "identifier": "DEMO-17",
+        "title": "example title",
+        "status": "done"
+      },
+      "run": {
+        "id": "00000000-0000-4000-8000-000000000075",
+        "agentId": "00000000-0000-4000-8000-000000000005"
+      },
+      "agent": {
+        "id": "00000000-0000-4000-8000-000000000005",
+        "name": "example name"
+      }
+    }
+  },
+  "00000000-0000-4000-8000-00000000003d": {
+    "id": "00000000-0000-4000-8000-00000000003d",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "conversationAgentId": null,
+    "conversationUserId": null,
+    "conversationState": null,
+    "conversationSessionGeneration": 0,
+    "conversationBoundaryCommentId": null,
+    "projectId": "00000000-0000-4000-8000-000000000036",
+    "projectWorkspaceId": null,
+    "goalId": null,
+    "parentId": null,
+    "visibility": "open",
+    "privacyRootIssueId": null,
+    "privacyParentIssueId": null,
+    "title": "example title",
+    "titleNeedsGeneration": false,
+    "description": "example description",
+    "status": "done",
+    "statusVersion": 3,
+    "lastStatusDecisionId": null,
+    "workMode": "standard",
+    "harnessKind": null,
+    "priority": "medium",
+    "reviewPolicy": null,
+    "assigneeAgentId": "00000000-0000-4000-8000-000000000005",
+    "assigneeUserId": null,
+    "checkoutRunId": null,
+    "executionRunId": null,
+    "executionAgentNameKey": null,
+    "executionLockedAt": null,
+    "createdByAgentId": null,
+    "createdByUserId": "example createdByUserId",
+    "responsibleUserId": "example responsibleUserId",
+    "issueNumber": 54,
+    "identifier": "DEMO-7",
+    "originKind": "manual",
+    "originId": null,
+    "originRunId": null,
+    "originIssueId": null,
+    "originIdentityContextId": null,
+    "continuationIdentityContextId": "00000000-0000-4000-8000-00000000007e",
+    "originFingerprint": "example originFingerprint",
+    "requestDepth": 0,
+    "billingCode": null,
+    "assigneeAdapterOverrides": null,
+    "executionPolicy": null,
+    "executionState": null,
+    "monitorNextCheckAt": null,
+    "monitorWakeRequestedAt": null,
+    "monitorLastTriggeredAt": null,
+    "monitorAttemptCount": 0,
+    "monitorNotes": null,
+    "monitorScheduledBy": null,
+    "executionWorkspaceId": "00000000-0000-4000-8000-00000000007f",
+    "workspaceBindingRevision": 1,
+    "workspaceSelection": null,
+    "workspacePendingSelection": null,
+    "executionWorkspacePreference": "example executionWorkspacePreference",
+    "executionWorkspaceSettings": {
+      "mode": "example mode"
+    },
+    "sourceTrust": null,
+    "unblockDescriptor": null,
+    "blockedTransitionAt": null,
+    "blockedOwnerNotifiedAt": null,
+    "startedAt": "2026-11-09T12:43:17.757Z",
+    "completedAt": "2026-11-09T12:47:09.729Z",
+    "cancelledAt": null,
+    "hiddenAt": null,
+    "createdAt": "2026-11-09T12:43:16.868Z",
+    "updatedAt": "2026-11-09T12:47:09.808Z",
+    "displayStatus": "done",
+    "externalConversationState": null,
+    "labels": [],
+    "labelIds": [],
+    "watchdog": null,
+    "ancestors": [],
+    "blockerAttention": {
+      "state": "none",
+      "reason": null,
+      "unresolvedBlockerCount": 0,
+      "coveredBlockerCount": 0,
+      "stalledBlockerCount": 0,
+      "attentionBlockerCount": 0,
+      "pendingFinalizeBlockerIssueIds": [],
+      "sampleBlockerIdentifier": null,
+      "sampleStalledBlockerIdentifier": null,
+      "blockingTreeLive": false,
+      "directBlockerIssueId": null,
+      "terminalBlockerIssueId": null,
+      "terminalBlocker": null
+    },
+    "reviewAttention": {
+      "state": "none",
+      "paths": [],
+      "reason": null
+    },
+    "successfulRunHandoff": null,
+    "executionBlocker": null,
+    "interruption": {
+      "intentId": null,
+      "responsibility": "example responsibility",
+      "state": "resolved",
+      "nextRetryAt": null,
+      "canRetry": false,
+      "userAction": null,
+      "sourceRunIds": [
+        "00000000-0000-4000-8000-000000000080"
+      ],
+      "observedRunId": "00000000-0000-4000-8000-000000000080"
+    },
+    "scheduledRetry": null,
+    "activeRecoveryAction": null,
+    "stalledDependencies": [],
+    "blockedBy": [],
+    "blocks": [],
+    "relatedWork": {
+      "outbound": [],
+      "inbound": []
+    },
+    "referencedIssueIdentifiers": [],
+    "planDocument": null,
+    "documentSummaries": [],
+    "legacyPlanDocument": null,
+    "project": {
+      "id": "00000000-0000-4000-8000-000000000036",
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "urlKey": "example urlKey",
+      "goalId": null,
+      "goalIds": [],
+      "goals": [],
+      "name": "example name",
+      "description": null,
+      "visibility": "open",
+      "personalOwnerUserId": null,
+      "status": "planned",
+      "leadAgentId": null,
+      "targetDate": null,
+      "color": "example color",
+      "icon": null,
+      "env": null,
+      "pauseReason": null,
+      "pausedAt": null,
+      "executionWorkspacePolicy": null,
+      "codebase": {
+        "workspaceId": null,
+        "repoUrl": null,
+        "repoRef": null,
+        "defaultRef": null,
+        "repoName": null,
+        "localFolder": null,
+        "managedFolder": "example managedFolder",
+        "effectiveLocalFolder": "example effectiveLocalFolder",
+        "origin": "example origin"
+      },
+      "workspaces": [],
+      "primaryWorkspace": null,
+      "managedByPlugin": null,
+      "archivedAt": null,
+      "createdAt": "2026-11-08T22:23:27.158Z",
+      "updatedAt": "2026-11-08T22:23:27.158Z"
+    },
+    "goal": null,
+    "mentionedProjects": [],
+    "currentExecutionWorkspace": {
+      "id": "00000000-0000-4000-8000-00000000007f",
+      "companyId": "00000000-0000-4000-8000-000000000001",
+      "projectId": null,
+      "projectWorkspaceId": null,
+      "sourceIssueId": "00000000-0000-4000-8000-00000000003d",
+      "mode": "example mode",
+      "strategyType": "example strategyType",
+      "name": "DEMO-7",
+      "status": "active",
+      "deliveryState": "example deliveryState",
+      "cwd": "example cwd",
+      "repoUrl": null,
+      "baseRef": null,
+      "branchName": null,
+      "providerType": "example providerType",
+      "providerRef": null,
+      "derivedFromExecutionWorkspaceId": null,
+      "lastUsedAt": "2026-11-09T12:47:01.383Z",
+      "openedAt": "2026-11-09T12:43:20.155Z",
+      "closedAt": null,
+      "cleanupEligibleAt": null,
+      "cleanupReason": null,
+      "config": {
+        "environmentId": "00000000-0000-4000-8000-000000000029",
+        "provisionCommand": null,
+        "runtimeProvisionCommand": null,
+        "teardownCommand": null,
+        "cleanupCommand": null,
+        "workspaceRuntime": null,
+        "desiredState": null,
+        "serviceStates": null
+      },
+      "metadata": null,
+      "runtimeServices": [],
+      "createdAt": "2026-11-09T12:43:20.156Z",
+      "updatedAt": "2026-11-09T12:47:01.487Z"
+    },
+    "workProducts": [],
+    "externalChannelBinding": null,
+    "createdFrom": null
+  }
+}

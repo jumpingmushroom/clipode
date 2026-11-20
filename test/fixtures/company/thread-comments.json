@@ -1,0 +1,159 @@
+[
+  {
+    "id": "00000000-0000-4000-8000-000000000056",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "issueId": "00000000-0000-4000-8000-000000000033",
+    "authorAgentId": "00000000-0000-4000-8000-000000000005",
+    "authorUserId": null,
+    "onBehalfOfUserId": "example onBehalfOfUserId",
+    "authorType": "example authorType",
+    "createdByRunId": "00000000-0000-4000-8000-000000000050",
+    "derivedAuthorAgentId": null,
+    "derivedCreatedByRunId": null,
+    "derivedAuthorSource": null,
+    "clientRequestId": null,
+    "conversationSessionGeneration": null,
+    "origin": "example origin",
+    "fastResponseRequestId": null,
+    "body": "example body",
+    "presentation": null,
+    "metadata": {
+      "version": 1,
+      "authorizationReason": "example authorizationReason",
+      "sections": [
+        {
+          "title": "example title",
+          "rows": [
+            {
+              "type": "key_value",
+              "label": "example label",
+              "value": "example value"
+            }
+          ]
+        }
+      ]
+    },
+    "deletedAt": null,
+    "deletedByType": null,
+    "deletedByAgentId": null,
+    "deletedByUserId": null,
+    "deletedByRunId": null,
+    "sourceTrust": null,
+    "createdAt": "2026-11-18T08:28:31.028Z",
+    "updatedAt": "2026-11-18T08:28:31.028Z"
+  },
+  {
+    "id": "00000000-0000-4000-8000-00000000011c",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "issueId": "00000000-0000-4000-8000-000000000033",
+    "authorAgentId": null,
+    "authorUserId": "example authorUserId",
+    "onBehalfOfUserId": null,
+    "authorType": "example authorType",
+    "createdByRunId": null,
+    "derivedAuthorAgentId": null,
+    "derivedCreatedByRunId": null,
+    "derivedAuthorSource": null,
+    "clientRequestId": "00000000-0000-4000-8000-00000000011d",
+    "conversationSessionGeneration": null,
+    "origin": "example origin",
+    "fastResponseRequestId": null,
+    "body": "example body",
+    "presentation": null,
+    "metadata": null,
+    "deletedAt": null,
+    "deletedByType": null,
+    "deletedByAgentId": null,
+    "deletedByUserId": null,
+    "deletedByRunId": null,
+    "sourceTrust": null,
+    "createdAt": "2026-11-18T08:27:27.182Z",
+    "updatedAt": "2026-11-18T08:27:27.182Z"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000055",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "issueId": "00000000-0000-4000-8000-000000000033",
+    "authorAgentId": "00000000-0000-4000-8000-000000000005",
+    "authorUserId": null,
+    "onBehalfOfUserId": "example onBehalfOfUserId",
+    "authorType": "example authorType",
+    "createdByRunId": "00000000-0000-4000-8000-00000000011e",
+    "derivedAuthorAgentId": null,
+    "derivedCreatedByRunId": null,
+    "derivedAuthorSource": null,
+    "clientRequestId": null,
+    "conversationSessionGeneration": null,
+    "origin": "example origin",
+    "fastResponseRequestId": null,
+    "body": "example body",
+    "presentation": null,
+    "metadata": {
+      "version": 1,
+      "authorizationReason": "example authorizationReason",
+      "sections": [
+        {
+          "title": "example title",
+          "rows": [
+            {
+              "type": "key_value",
+              "label": "example label",
+              "value": "example value"
+            }
+          ]
+        }
+      ]
+    },
+    "deletedAt": null,
+    "deletedByType": null,
+    "deletedByAgentId": null,
+    "deletedByUserId": null,
+    "deletedByRunId": null,
+    "sourceTrust": null,
+    "createdAt": "2026-11-18T07:50:36.357Z",
+    "updatedAt": "2026-11-18T07:50:36.357Z"
+  },
+  {
+    "id": "00000000-0000-4000-8000-000000000054",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "issueId": "00000000-0000-4000-8000-000000000033",
+    "authorAgentId": "00000000-0000-4000-8000-000000000005",
+    "authorUserId": null,
+    "onBehalfOfUserId": "example onBehalfOfUserId",
+    "authorType": "example authorType",
+    "createdByRunId": "00000000-0000-4000-8000-00000000011f",
+    "derivedAuthorAgentId": null,
+    "derivedCreatedByRunId": null,
+    "derivedAuthorSource": null,
+    "clientRequestId": null,
+    "conversationSessionGeneration": null,
+    "origin": "example origin",
+    "fastResponseRequestId": null,
+    "body": "example body",
+    "presentation": null,
+    "metadata": {
+      "version": 1,
+      "authorizationReason": "example authorizationReason",
+      "sections": [
+        {
+          "title": "example title",
+          "rows": [
+            {
+              "type": "key_value",
+              "label": "example label",
+              "value": "example value"
+            }
+          ]
+        }
+      ]
+    },
+    "deletedAt": null,
+    "deletedByType": null,
+    "deletedByAgentId": null,
+    "deletedByUserId": null,
+    "deletedByRunId": null,
+    "sourceTrust": null,
+    "createdAt": "2026-11-18T07:46:05.776Z",
+    "updatedAt": "2026-11-18T07:46:05.776Z"
+  }
+]
