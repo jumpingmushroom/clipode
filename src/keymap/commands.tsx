@@ -2,6 +2,7 @@
 import { formatCommandBindings } from "@opentui/keymap/extras"
 import { useBindings, useKeymapSelector } from "@opentui/keymap/solid"
 import type { Accessor } from "solid-js"
+import { useKeybinds } from "./provider.tsx"
 
 export type AppCommand = {
   /** Unique id without spaces, for example "app.inbox". */
@@ -22,15 +23,16 @@ const DISPLAY = { tokenDisplay: { leader: "ctrl+x" } }
 /** Registers commands for as long as the calling component lives. `mode` decides when they are active. */
 export function useCommands(
   list: Accessor<AppCommand[]>,
-  options: { mode?: "base" | "modal" | "input"; overrides?: Record<string, string>; leader?: string } = {},
+  options: { mode?: "base" | "modal" | "input" } = {},
 ) {
+  const overrides = useKeybinds()
   useBindings(() => {
     const commands = list()
     return {
       mode: options.mode ?? "base",
       commands: commands.map((c) => ({ name: c.name, title: c.title, category: c.category, hidden: c.hidden, run: () => c.run() })),
       bindings: commands.flatMap((c) => {
-        const keys = options.overrides?.[c.name] ?? c.keys
+        const keys = overrides[c.name] ?? c.keys
         return keys ? [{ key: keys, cmd: c.name }] : []
       }),
     }

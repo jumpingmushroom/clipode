@@ -9,12 +9,16 @@ import {
 import { createDefaultOpenTuiKeymap } from "@opentui/keymap/opentui"
 import { KeymapProvider } from "@opentui/keymap/solid"
 import { useRenderer } from "@opentui/solid"
-import { onCleanup, type ParentProps } from "solid-js"
+import { createContext, onCleanup, useContext, type ParentProps } from "solid-js"
 
 export type Mode = "base" | "modal" | "input"
 const MODE_KEY = "clipode.mode"
 
-export function KeysProvider(props: ParentProps<{ leader?: string }>) {
+/** Bindings from cli.json `keybinds`, command name to binding; they replace a command's default keys. */
+const Keybinds = createContext<Record<string, string>>({})
+export const useKeybinds = () => useContext(Keybinds)
+
+export function KeysProvider(props: ParentProps<{ leader?: string; keybinds?: Record<string, string> }>) {
   const keymap = createDefaultOpenTuiKeymap(useRenderer())
   const dispose = [
     registerCommaBindings(keymap),
@@ -37,7 +41,11 @@ export function KeysProvider(props: ParentProps<{ leader?: string }>) {
   ]
   keymap.setData(MODE_KEY, "base")
   onCleanup(() => dispose.reverse().forEach((d) => d()))
-  return <KeymapProvider keymap={keymap}>{props.children}</KeymapProvider>
+  return (
+    <KeymapProvider keymap={keymap}>
+      <Keybinds.Provider value={props.keybinds ?? {}}>{props.children}</Keybinds.Provider>
+    </KeymapProvider>
+  )
 }
 
 export function setMode(keymap: { setData(name: string, value: unknown): void }, mode: Mode) {

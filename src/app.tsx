@@ -38,7 +38,7 @@ export type AppProps = {
 export function Providers(props: ParentProps<Omit<AppProps, "version">>) {
   return (
     <ThemeProvider name={props.themeName ?? props.config?.theme} mode={props.config?.mode ?? props.mode} themes={props.themes} onChange={props.onThemeChange}>
-      <KeysProvider leader={props.config?.leader}>
+      <KeysProvider leader={props.config?.leader} keybinds={props.config?.keybinds}>
         <StoresProvider session={props.session}>
           <RouteProvider initial={props.route}>
             <ToastProvider>

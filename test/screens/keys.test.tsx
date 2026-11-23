@@ -78,3 +78,18 @@ test("ctrl+b hides and shows the sidebar", async () => {
   app.mockInput.pressKey("b", { ctrl: true })
   expect(await app.frame()).not.toContain("Needs you")
 })
+
+test("cli.json keybinds replace the default keys of global and screen commands", async () => {
+  app = await startApp({ config: { keybinds: { "inbox.refresh": "ctrl+e", "go.tasks": "ctrl+g" } } })
+  await app.frame()
+  const feed = () => app!.server.requests.filter((r) => r.endsWith("/attention")).length
+  const before = feed()
+  app.mockInput.pressKey("r")
+  await app.frame()
+  expect(feed()).toBe(before)
+  app.mockInput.pressKey("e", { ctrl: true })
+  await app.frame()
+  expect(feed()).toBe(before + 1)
+  app.mockInput.pressKey("g", { ctrl: true })
+  expect((await app.frame()).split("\n")[0]).toContain("Tasks")
+})

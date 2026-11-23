@@ -168,7 +168,7 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
       },
     },
   ]
-  useCommands(() => commands, { overrides: props.config?.keybinds })
+  useCommands(() => commands)
 
   const param = (name: "item" | "thread" | "run" | "agent") => {
     const r = route.current()
