@@ -71,9 +71,9 @@ The bodies are read from `packages/shared/src/validators` and `server/src/routes
 | Undo a dismissal or snooze | `204` with an empty body |
 | Comment | `201`, the comment. A second request with the same `clientRequestId` also answers `201` and creates no second comment, so a retry is safe. |
 
-Not yet observed: rejecting a confirmation, and rejecting or requesting a revision on an approval; they share the bodies above. Question and option ids are readable keys chosen by the agent (`colour`, `blue`). Answers need them, and the phase 1 item model drops them.
+Rejecting a confirmation, and rejecting or requesting a revision on an approval, were verified through the app on 2026-11-23 (CLI-8): the server recorded `rejected` with the reason, and `rejected` and `revision_requested` with the note. Question and option ids are readable keys chosen by the agent (`colour`, `blue`). Answers need them, and the phase 1 item model drops them.
 
-A fifth decision kind appeared in the probe: a task review (`sourceKind: "review"`) for a task in review. Since 1.1 it has its own row marker, `◇`. Only a stalled review (`subject.metadata.reviewAttentionState: "stalled"`: no reviewer, approval or monitor left) is decided in the inbox, with approve (the task becomes done), request changes (a note is required) or send back; these go through the prompt like approvals. Any other review is decided where it waits, as in the web UI, and its item offers only `o` to open the task. Request bodies come from `stalledReviewDecisionSchema`; not yet seen live.
+A fifth decision kind appeared in the probe: a task review (`sourceKind: "review"`) for a task in review. Since 1.1 it has its own row marker, `◇`. Only a stalled review (`subject.metadata.reviewAttentionState: "stalled"`: no reviewer, approval or monitor left) is decided in the inbox, with approve (the task becomes done), request changes (a note is required) or send back; these go through the prompt like approvals. Any other review is decided where it waits, as in the web UI, and its item offers only `o` to open the task. Request bodies come from `stalledReviewDecisionSchema`. Verified through the app on 2026-11-23: a scratch task moved to in review with nobody assigned became a stalled review (CLI-9), and request changes moved it back to todo with the note posted on the task.
 
 Build order for phase 2:
 
@@ -85,7 +85,7 @@ Build order for phase 2:
 6. **Question context.** The Context section from `originCommentIds`.
 7. **Release 1.0.**
 
-Built as of 1.0: all seven steps. In an opened item, `j`/`k` choose, `enter` or `space` selects, and `ctrl+s` sends answers; `o` opens the task or run. `c` comments from the composer row; `d`, `s` and `u` dismiss, snooze and restore in the inbox. The inbox badge counts items that need you, without snoozed ones. A new toast replaces a passing one; only errors queue. Verified live in the scratch company: answer, accept, approve, comment, dismiss, snooze and restore. Not yet seen live: rejecting a confirmation, and rejecting or requesting a revision on an approval.
+Built as of 1.0: all seven steps. In an opened item, `j`/`k` choose, `enter` or `space` selects, and `ctrl+s` sends answers; `o` opens the task or run. `c` comments from the composer row; `d`, `s` and `u` dismiss, snooze and restore in the inbox. The inbox badge counts items that need you, without snoozed ones. A new toast replaces a passing one; only errors queue. Verified live in the scratch company: answer, accept, approve, comment, dismiss, snooze and restore. Rejections and revision requests were verified later, through the app (CLI-8).
 
 ## Phase 3: operate (release 1.2 onwards)
 
