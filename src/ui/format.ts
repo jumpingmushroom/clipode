@@ -12,6 +12,14 @@ export function age(iso: string | null | undefined, now = Date.now()): string {
   return `${Math.floor(s / (86400 * 7))}w`
 }
 
+/** Compact time until a moment: "in 12m", "in 3h"; "due" once it has passed. */
+export function until(iso: string | null | undefined, now = Date.now()): string {
+  const at = iso ? Date.parse(iso) : NaN
+  if (Number.isNaN(at)) return ""
+  // age() measures from its first argument to its second, so swapping them measures forward.
+  return at <= now ? "due" : `in ${age(new Date(now).toISOString(), at)}`
+}
+
 /** Duration since a time: "3m 12s", "1h 04m". */
 export function elapsed(iso: string | null | undefined, now = Date.now()): string {
   const at = iso ? Date.parse(iso) : NaN

@@ -20,11 +20,12 @@ function debounce(fn: () => void, ms = 300) {
 }
 
 const str = (v: unknown) => (typeof v === "string" ? v : null)
-export function eventIds(event: LiveEvent): { issueId: string | null; runId: string | null } {
+export function eventIds(event: LiveEvent): { issueId: string | null; runId: string | null; entityType: string | null } {
   const p = event.payload
   return {
     issueId: str(p.issueId) ?? (p.entityType === "issue" ? str(p.entityId) : null),
     runId: str(p.runId) ?? (p.entityType === "heartbeat_run" ? str(p.entityId) : null) ?? (event.type.startsWith("heartbeat.run.") ? str(p.id) : null),
+    entityType: str(p.entityType),
   }
 }
 
@@ -44,20 +45,28 @@ export function startLiveSync(
   const refreshTasks = debounce(() => void company.issues.list.refresh())
   const refreshRuns = debounce(() => void company.runs.live.refresh())
   const refreshAgents = debounce(() => void company.agents.list.refresh())
+  // Routines and activity have their own screens; fetch them again only once they have been opened.
+  const ifOpened = (r: { status: string; refresh(): Promise<void> }) => () => void (r.status !== "idle" && r.refresh())
+  const refreshActivity = debounce(ifOpened(company.activity))
+  const refreshRoutines = debounce(ifOpened(company.routines))
   const refreshAll = () => {
     refreshInbox()
     refreshTasks()
     refreshRuns()
     refreshAgents()
+    refreshActivity()
+    refreshRoutines()
   }
 
   const onEvent = (event: LiveEvent) => {
-    const { issueId, runId } = eventIds(event)
+    const { issueId, runId, entityType } = eventIds(event)
     switch (event.type) {
       case "activity.logged":
         // No event announces an inbox change, so any activity may have added or resolved an item.
         refreshInbox()
         refreshTasks()
+        refreshActivity()
+        if (entityType?.startsWith("routine")) refreshRoutines()
         if (issueId) company.issues.refreshThread(issueId)
         break
       case "heartbeat.run.queued":
@@ -109,6 +118,8 @@ export function startLiveSync(
       lastList = now
       void company.issues.list.refresh()
       void company.agents.list.refresh()
+      ifOpened(company.activity)()
+      ifOpened(company.routines)()
     }
   }, 1000)
   tick.unref?.()

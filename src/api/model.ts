@@ -123,6 +123,41 @@ export type SearchResult = {
   excerpt: string | null
 }
 
+export type RoutineSummary = {
+  id: string
+  title: string
+  /** "active" or "paused". */
+  status: string
+  assigneeAgentId: string | null
+  projectId: string | null
+  /** The first trigger's label or cron expression, and how many more triggers there are. */
+  schedule: string | null
+  moreTriggers: number
+  timezone: string | null
+  /** The soonest next run of an enabled trigger. */
+  nextRunAt: string | null
+  lastRun: { at: string; status: string; taskId: string | null; identifier: string | null } | null
+  /** The open task of a run still in progress. */
+  activeTask: { id: string; identifier: string | null } | null
+  concurrency: string
+}
+
+/** One line of company activity, already worded; names of agents are looked up by the screen. */
+export type ActivityEntry = {
+  id: string
+  at: string
+  actor: { type: "agent" | "user" | "system" | "plugin"; id: string }
+  /** "commented on", "changed status from todo to done on", … */
+  verb: string
+  /** What the entry is about, as the details name it: a task identifier and title, or a name. */
+  subject: string | null
+  /** What enter opens. */
+  target: { kind: "task" | "agent" | "run"; id: string; agentId?: string } | null
+  /** Bookkeeping (leases, costs, read marks) the web UI hides by default. */
+  minor: boolean
+  action: string
+}
+
 export type CompanySummary = { id: string; name: string; prefix: string | null }
 
 export type RunDetail = {

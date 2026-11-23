@@ -27,6 +27,8 @@ import { ThreadScreen } from "./thread.tsx"
 import { RunScreen } from "./run.tsx"
 import { AgentsScreen } from "./agents.tsx"
 import { AgentScreen } from "./agent.tsx"
+import { ActivityScreen } from "./activity.tsx"
+import { RoutinesScreen } from "./routines.tsx"
 import { KIND_LABELS } from "./inbox-row.tsx"
 import { SearchDialog } from "./search.tsx"
 import { SettingsDialog } from "./settings.tsx"
@@ -135,6 +137,8 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
     { name: "go.tasks", title: "Tasks", category: "Go to", keys: "<leader>t,g t", run: () => route.reset({ name: "tasks" }) },
     { name: "app.search", title: "Search", category: "Go to", keys: "<leader>/,g /", run: () => dialog.replace(() => <SearchDialog />, undefined, "large") },
     { name: "go.agents", title: "Agents", category: "Go to", keys: "<leader>a,g a", run: () => route.reset({ name: "agents" }) },
+    { name: "go.routines", title: "Routines", category: "Go to", keys: "g r", run: () => route.reset({ name: "routines" }) },
+    { name: "go.activity", title: "Activity", category: "Go to", keys: "g h", run: () => route.reset({ name: "activity" }) },
     ...Array.from({ length: 9 }, (_, i): AppCommand => ({ name: `tabs.${i + 1}`, title: `Tab ${i + 1}`, category: "Tabs", keys: `<leader>${i + 1}`, hidden: true, run: () => tabs.jump(i) })),
     { name: "tabs.next", title: "Next tab", category: "Tabs", keys: "<leader>.", run: () => tabs.cycle(1) },
     { name: "tabs.previous", title: "Previous tab", category: "Tabs", keys: "<leader>comma", run: () => tabs.cycle(-1) },
@@ -206,6 +210,12 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
         </Match>
         <Match when={param("agent")} keyed>
           {(id: string) => <AgentScreen id={id} version={props.version} sidebar={showSidebar()} />}
+        </Match>
+        <Match when={route.current().name === "routines"}>
+          <RoutinesScreen version={props.version} sidebar={showSidebar()} />
+        </Match>
+        <Match when={route.current().name === "activity"}>
+          <ActivityScreen version={props.version} sidebar={showSidebar()} />
         </Match>
         <Match when={route.current().name === "agents"}>
           <AgentsScreen version={props.version} sidebar={showSidebar()} />

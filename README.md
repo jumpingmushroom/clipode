@@ -31,6 +31,7 @@ clipode opens on the inbox. The following keys work everywhere:
 | `ctrl+p` | Command palette |
 | `?` or `ctrl+x h` | Every key binding |
 | `g i`, `g t`, `g a` | Go to the inbox, tasks, or agents |
+| `g r`, `g h` | Go to routines (schedules, next and last runs) or activity (what happened in the company; `a` shows bookkeeping too) |
 | `g /` or `ctrl+x /` | Search tasks, comments, documents, agents and projects |
 | `j`, `k`, `enter`, `esc` | Move, open, go back |
 | `/` | Filter the task list |

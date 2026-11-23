@@ -32,6 +32,8 @@ export function createSession(opts: SessionOptions = {}) {
     email: opts.email ?? "",
     error: null as string | null,
     userName: null as string | null,
+    /** The signed-in user's id, to tell your own activity from others'. */
+    userId: null as string | null,
     companies: [] as CompanySummary[],
     companyId: null as string | null,
     connection: "connecting" as ConnectionState,
@@ -47,7 +49,7 @@ export function createSession(opts: SessionOptions = {}) {
     const companies = await listCompanies(client)
     const remembered = opts.lastCompany?.[client.baseUrl]
     const companyId = companies.find((c) => c.id === remembered)?.id ?? (companies.length === 1 ? companies[0]!.id : null)
-    set({ status: "ready", userName: session.user.name ?? session.user.email, email: session.user.email ?? state.email, companies, companyId, error: null })
+    set({ status: "ready", userName: session.user.name ?? session.user.email, userId: session.user.id, email: session.user.email ?? state.email, companies, companyId, error: null })
     return true
   }
 
@@ -92,7 +94,7 @@ export function createSession(opts: SessionOptions = {}) {
     async signOut() {
       await apiSignOut(client).catch(() => {})
       await clearCookie(client.baseUrl, opts.authPath)
-      set({ status: "signed-out", companyId: null, companies: [], userName: null, error: null })
+      set({ status: "signed-out", companyId: null, companies: [], userName: null, userId: null, error: null })
     },
     /** A 401 anywhere ends the session and returns to sign-in with the URL and email kept. */
     expire() {
