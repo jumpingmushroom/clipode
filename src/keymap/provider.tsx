@@ -28,6 +28,12 @@ export function KeysProvider(props: ParentProps<{ leader?: string; keybinds?: Re
       if (index !== 0 || strokes.length < 2 || strokes.some((s) => s.length !== 1)) return
       return { parts: strokes.map((s) => parseObjectKey({ name: s }, { display: s })), nextIndex: input.length }
     }),
+    // "G": an uppercase letter is that letter with shift. The default parser reads it as the plain letter, which would
+    // take "g" and break every "g …" sequence on the screen.
+    keymap.prependBindingParser(({ input, index, parseObjectKey }) => {
+      if (index !== 0 || !/^[A-Z]$/.test(input)) return
+      return { parts: [parseObjectKey({ name: input.toLowerCase(), shift: true }, { display: input })], nextIndex: 1 }
+    }),
     registerEscapeClearsPendingSequence(keymap),
     registerBackspacePopsPendingSequence(keymap),
     registerTimedLeader(keymap, { trigger: props.leader ?? "ctrl+x", name: "leader", timeoutMs: 2000 }),

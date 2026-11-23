@@ -1,4 +1,5 @@
 import { afterEach, expect, test } from "bun:test"
+import { THREAD_ID } from "../fake-server.ts"
 import { startApp, type Running } from "../helpers.tsx"
 
 let app: Running | undefined
@@ -92,4 +93,14 @@ test("cli.json keybinds replace the default keys of global and screen commands",
   expect(feed()).toBe(before + 1)
   app.mockInput.pressKey("g", { ctrl: true })
   expect((await app.frame()).split("\n")[0]).toContain("Tasks")
+})
+
+test("G is shift+g, so a screen that binds G still lets g start a sequence", async () => {
+  app = await startApp({ route: { name: "thread", id: THREAD_ID }, height: 12 })
+  const top = await app.frame()
+  app.mockInput.pressKey("G")
+  expect(await app.frame()).not.toBe(top)
+  app.mockInput.pressKey("g")
+  app.mockInput.pressKey("i")
+  expect((await app.frame()).split("\n")[0]).toContain("Inbox")
 })
