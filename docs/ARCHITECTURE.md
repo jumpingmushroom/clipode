@@ -87,6 +87,21 @@ Build order for phase 2:
 
 Built as of 1.0: all seven steps. In an opened item, `j`/`k` choose, `enter` or `space` selects, and `ctrl+s` sends answers; `o` opens the task or run. `c` comments from the composer row; `d`, `s` and `u` dismiss, snooze and restore in the inbox. The inbox badge counts items that need you, without snoozed ones. A new toast replaces a passing one; only errors queue. Verified live in the scratch company: answer, accept, approve, comment, dismiss, snooze and restore. Not yet seen live: rejecting a confirmation, and rejecting or requesting a revision on an approval.
 
+## Phase 3: operate (release 1.2 onwards)
+
+Phase 3 starts, as decided on 2026-11-23, with tasks: create and edit them, assign them, and change their status and priority. Agent controls (wake, pause, resume) and cancelling runs follow.
+
+| Action | Route at `2026.1117.0` | Body |
+| --- | --- | --- |
+| Create a task | `POST /api/companies/{companyId}/issues` | `title`, `description?`, `priority?`, `status?`, `assigneeAgentId?`, `projectId?`, `idempotencyKey` (for safe retries) |
+| Edit, assign, change status or priority | `PATCH /api/issues/{id}` | any of `title`, `description`, `status`, `priority`, `assigneeAgentId` (null to unassign) |
+
+Probed in the scratch company on 2026-11-23 (scrubbed in `test/fixtures/writes/task-*.json`): create answers `201` with the task; a second create with the same `idempotencyKey` answers `200` with the same task. Every update answers `200` with the task. `expectedStatusVersion` is accepted only for a status-only backlog-to-todo promotion and otherwise refused with `422`, so clipode sends status changes without it. Assigning an agent wakes it.
+
+`PATCH /api/issues/{id}` accepts many more fields (execution policy, visibility, hiding). The allowlist admits the route; only clipode's task functions build its bodies, and they send the fields in the table and nothing else.
+
+Keys: in the task thread, and on the selected row in Tasks, `s` changes status, `p` changes priority, `a` assigns (agents or unassigned), and `e` edits the title and description. `n` creates a task.
+
 ## Provenance and licensing
 
 The new repository is MIT licensed, and no pasode source is copied into it. A public repository without a licence gives no reuse rights by default, so pasode is used as a design reference only. This is a working rule and not legal advice.

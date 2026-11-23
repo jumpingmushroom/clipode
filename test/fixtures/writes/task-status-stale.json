@@ -1,0 +1,11 @@
+{
+  "method": "PATCH",
+  "status": 422,
+  "request": {
+    "status": "in_review",
+    "expectedStatusVersion": 0
+  },
+  "response": {
+    "error": "example error"
+  }
+}
