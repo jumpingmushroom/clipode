@@ -1,0 +1,20 @@
+{
+  "method": "POST",
+  "status": 201,
+  "request": {
+    "itemKey": "itemKey-7",
+    "kind": "snooze",
+    "snoozedUntil": "2026-11-23T10:09:13.514Z"
+  },
+  "response": {
+    "id": "00000000-0000-4000-8000-000000000008",
+    "companyId": "00000000-0000-4000-8000-000000000002",
+    "userId": "resolvedByUserId-3",
+    "itemKey": "itemKey-7",
+    "kind": "snooze",
+    "dismissedAt": "2026-11-23T09:09:13.522Z",
+    "snoozedUntil": "2026-11-23T10:09:13.514Z",
+    "createdAt": "2026-11-23T09:09:13.523Z",
+    "updatedAt": "2026-11-23T09:09:13.522Z"
+  }
+}

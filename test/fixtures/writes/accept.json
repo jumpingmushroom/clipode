@@ -1,0 +1,55 @@
+{
+  "method": "POST",
+  "status": 200,
+  "request": {},
+  "response": {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "companyId": "00000000-0000-4000-8000-000000000002",
+    "issueId": "00000000-0000-4000-8000-000000000003",
+    "kind": "request_confirmation",
+    "status": "accepted",
+    "continuationPolicy": "wake_assignee",
+    "requestedResolverPolicy": "anyone",
+    "effectiveResolverPolicy": "anyone",
+    "resolverPolicyProvenance": "inherited",
+    "effectiveResolverPolicySource": "requested",
+    "idempotencyKey": "idempotencyKey-1",
+    "originCommentIds": [
+      "00000000-0000-4000-8000-000000000004"
+    ],
+    "sourceCommentId": null,
+    "sourceIdentityContextId": "00000000-0000-4000-8000-000000000005",
+    "sourceRunId": "00000000-0000-4000-8000-000000000006",
+    "title": null,
+    "summary": null,
+    "createdByAgentId": "00000000-0000-4000-8000-000000000007",
+    "addresseeAgentId": null,
+    "addresseeUserId": null,
+    "createdByUserId": null,
+    "resolvedByAgentId": null,
+    "resolvedByRunId": null,
+    "resolvedByUserId": "resolvedByUserId-2",
+    "payload": {
+      "version": 1,
+      "prompt": "example prompt",
+      "acceptLabel": "example acceptLabel",
+      "rejectLabel": "example rejectLabel",
+      "allowDeclineReason": true,
+      "supersedeOnUserComment": false
+    },
+    "result": {
+      "version": 1,
+      "outcome": "accepted"
+    },
+    "resolvedAt": "2026-11-23T09:09:47.834Z",
+    "dismissedAt": null,
+    "dismissedByUserId": null,
+    "createdAt": "2026-11-23T09:09:29.254Z",
+    "updatedAt": "2026-11-23T09:09:47.834Z",
+    "resolverPolicy": "anyone",
+    "legacyResolverPolicyAliases": {
+      "requested": "board_or_agents",
+      "effective": "board_or_agents"
+    }
+  }
+}

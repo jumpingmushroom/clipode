@@ -1,0 +1,19 @@
+{
+  "method": "POST",
+  "status": 201,
+  "request": {
+    "itemKey": "itemKey-7",
+    "kind": "dismiss"
+  },
+  "response": {
+    "id": "00000000-0000-4000-8000-000000000007",
+    "companyId": "00000000-0000-4000-8000-000000000002",
+    "userId": "resolvedByUserId-3",
+    "itemKey": "itemKey-7",
+    "kind": "dismiss",
+    "dismissedAt": "2026-11-23T09:09:13.478Z",
+    "snoozedUntil": null,
+    "createdAt": "2026-11-23T09:09:13.479Z",
+    "updatedAt": "2026-11-23T09:09:13.478Z"
+  }
+}

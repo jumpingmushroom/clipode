@@ -59,7 +59,20 @@ Phase 2 makes clipode read and write, and ships as version 1.0. Decided on 2026-
 | Dismiss or snooze an inbox item | `POST /api/companies/{companyId}/inbox-dismissals` | `itemKey` (the item's `dismissalKey`), `kind: "dismiss" \| "snooze"`, `snoozedUntil?` |
 | Undo a dismissal or snooze | `DELETE /api/companies/{companyId}/inbox-dismissals/{itemKey}` | none |
 
-The bodies are read from `packages/shared/src/validators` and `server/src/routes/inbox-dismissals.ts` at the tag; a live probe in the scratch company confirms them before the client relies on them. Answers need the question and option ids, which the phase 1 item model drops.
+The bodies are read from `packages/shared/src/validators` and `server/src/routes/inbox-dismissals.ts` at the tag. A live probe in the scratch company (prefix `CLI`) on 2026-11-23 confirmed them; scrubbed requests and responses are in `test/fixtures/writes/`:
+
+| Action | Observed |
+| --- | --- |
+| Answer (`respond`) | `200`, the interaction with `status` resolved; the item leaves the feed |
+| Accept a confirmation, body `{}` | `200`, `status: "accepted"`, `result: { version, outcome }` |
+| Approve with a note | `200`, the approval |
+| Dismiss, snooze | `201`, the dismissal record |
+| Undo a dismissal or snooze | `204` with an empty body |
+| Comment | `201`, the comment. A second request with the same `clientRequestId` also answers `201` and creates no second comment, so a retry is safe. |
+
+Not yet observed: rejecting a confirmation, and rejecting or requesting a revision on an approval; they share the bodies above. Question and option ids are readable keys chosen by the agent (`colour`, `blue`). Answers need them, and the phase 1 item model drops them.
+
+A fifth decision kind appeared in the probe: a task review (`sourceKind: "review"`, verbs `approve` and `request_changes`) for a task in review. It is not in phase 2 and shows as a generic row.
 
 Build order for phase 2:
 

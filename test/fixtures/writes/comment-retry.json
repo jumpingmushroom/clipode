@@ -1,0 +1,36 @@
+{
+  "method": "POST",
+  "status": 201,
+  "request": {
+    "body": "example body",
+    "clientRequestId": "00000000-0000-4000-8000-00000000000a"
+  },
+  "response": {
+    "id": "00000000-0000-4000-8000-00000000000b",
+    "companyId": "00000000-0000-4000-8000-000000000002",
+    "issueId": "00000000-0000-4000-8000-000000000003",
+    "authorAgentId": null,
+    "authorUserId": "resolvedByUserId-3",
+    "onBehalfOfUserId": null,
+    "authorType": "user",
+    "createdByRunId": null,
+    "derivedAuthorAgentId": null,
+    "derivedCreatedByRunId": null,
+    "derivedAuthorSource": null,
+    "clientRequestId": "00000000-0000-4000-8000-00000000000a",
+    "conversationSessionGeneration": null,
+    "origin": "comment",
+    "fastResponseRequestId": null,
+    "body": "example body",
+    "presentation": null,
+    "metadata": null,
+    "deletedAt": null,
+    "deletedByType": null,
+    "deletedByAgentId": null,
+    "deletedByUserId": null,
+    "deletedByRunId": null,
+    "sourceTrust": null,
+    "createdAt": "2026-11-23T09:09:13.863Z",
+    "updatedAt": "2026-11-23T09:09:13.863Z"
+  }
+}

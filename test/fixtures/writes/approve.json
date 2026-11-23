@@ -1,0 +1,28 @@
+{
+  "method": "POST",
+  "status": 200,
+  "request": {
+    "decisionNote": "example decisionNote"
+  },
+  "response": {
+    "id": "00000000-0000-4000-8000-000000000009",
+    "companyId": "00000000-0000-4000-8000-000000000002",
+    "type": "request_board_approval",
+    "requestedByAgentId": "00000000-0000-4000-8000-000000000006",
+    "requestedByUserId": null,
+    "status": "approved",
+    "payload": {
+      "risks": [
+        "example risks"
+      ],
+      "title": "example title",
+      "summary": "example summary",
+      "recommendedAction": "example recommendedAction"
+    },
+    "decisionNote": "example decisionNote",
+    "decidedByUserId": "resolvedByUserId-3",
+    "decidedAt": "2026-11-23T09:09:13.568Z",
+    "createdAt": "2026-11-23T09:08:28.320Z",
+    "updatedAt": "2026-11-23T09:09:13.568Z"
+  }
+}

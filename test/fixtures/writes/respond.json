@@ -1,0 +1,114 @@
+{
+  "method": "POST",
+  "status": 200,
+  "request": {
+    "answers": [
+      {
+        "questionId": "questionId-1",
+        "optionIds": [
+          "example optionIds"
+        ]
+      }
+    ]
+  },
+  "response": {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "companyId": "00000000-0000-4000-8000-000000000002",
+    "issueId": "00000000-0000-4000-8000-000000000003",
+    "kind": "ask_user_questions",
+    "status": "answered",
+    "continuationPolicy": "wake_assignee",
+    "requestedResolverPolicy": "human_only",
+    "effectiveResolverPolicy": "human_only",
+    "resolverPolicyProvenance": "explicit",
+    "effectiveResolverPolicySource": "requested",
+    "idempotencyKey": "idempotencyKey-2",
+    "originCommentIds": [],
+    "sourceCommentId": null,
+    "sourceIdentityContextId": "00000000-0000-4000-8000-000000000004",
+    "sourceRunId": "00000000-0000-4000-8000-000000000005",
+    "title": "example title",
+    "summary": null,
+    "createdByAgentId": "00000000-0000-4000-8000-000000000006",
+    "addresseeAgentId": null,
+    "addresseeUserId": null,
+    "createdByUserId": null,
+    "resolvedByAgentId": null,
+    "resolvedByRunId": null,
+    "resolvedByUserId": "resolvedByUserId-3",
+    "payload": {
+      "version": 1,
+      "supersedeOnUserComment": false,
+      "questions": [
+        {
+          "id": "questionId-1",
+          "prompt": "example prompt",
+          "selectionMode": "single",
+          "required": true,
+          "allowOther": false,
+          "options": [
+            {
+              "id": "id-4",
+              "label": "example label"
+            },
+            {
+              "id": "id-5",
+              "label": "example label"
+            },
+            {
+              "id": "id-6",
+              "label": "example label"
+            }
+          ]
+        }
+      ],
+      "questionSet": {
+        "schema": "paperclip.question_set.v1",
+        "questions": [
+          {
+            "id": "questionId-1",
+            "prompt": "example prompt",
+            "required": true,
+            "answerMode": "single_select",
+            "options": [
+              {
+                "id": "id-4",
+                "label": "example label"
+              },
+              {
+                "id": "id-5",
+                "label": "example label"
+              },
+              {
+                "id": "id-6",
+                "label": "example label"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "result": {
+      "version": 1,
+      "answers": [
+        {
+          "questionId": "questionId-1",
+          "optionIds": [
+            "example optionIds"
+          ]
+        }
+      ],
+      "summaryMarkdown": null
+    },
+    "resolvedAt": "2026-11-23T09:09:13.363Z",
+    "dismissedAt": null,
+    "dismissedByUserId": null,
+    "createdAt": "2026-11-23T09:08:28.052Z",
+    "updatedAt": "2026-11-23T09:09:13.363Z",
+    "resolverPolicy": "human_only",
+    "legacyResolverPolicyAliases": {
+      "requested": "board_only",
+      "effective": "board_only"
+    }
+  }
+}
