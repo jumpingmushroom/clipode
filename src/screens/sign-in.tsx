@@ -32,7 +32,8 @@ export function SignInScreen(props: { version: string }) {
   const step = (delta: number) => focusField(FIELDS[(FIELDS.indexOf(focus()) + delta + FIELDS.length) % FIELDS.length]!)
   const submit = () => {
     if (session.state.status === "signing-in") return
-    if (!url() || !email() || !password()) return focusField(!url() ? "url" : !email() ? "email" : "password")
+    // Email and password go together; both empty tries a local instance that needs no sign-in.
+    if (!url() || !!email() !== !!password()) return focusField(!url() ? "url" : !email() ? "email" : "password")
     const pw = password()
     setPassword("")
     void session.signIn(url().trim(), email().trim(), pw)

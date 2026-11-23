@@ -31,7 +31,11 @@ export class Client {
   readonly origin: string
   private readonly jar = new Map<string, string>()
 
-  constructor(baseUrl: string, cookie = "") {
+  /** A bearer token (PAPERCLIP_API_KEY) instead of a session cookie. */
+  readonly token: string | undefined
+
+  constructor(baseUrl: string, cookie = "", token?: string) {
+    this.token = token
     const url = new URL(baseUrl)
     this.baseUrl = url.href.replace(/\/+$/, "")
     this.origin = url.origin
@@ -70,6 +74,7 @@ export class Client {
     const headers: Record<string, string> = { Accept: "application/json" }
     const cookie = this.cookieHeader()
     if (cookie) headers.Cookie = cookie
+    if (this.token) headers.Authorization = `Bearer ${this.token}`
     // Better Auth checks Origin against the trusted origins on state-changing requests.
     if (verb !== "GET") {
       headers.Origin = this.origin

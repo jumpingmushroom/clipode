@@ -20,7 +20,7 @@ To update an installed binary, run `clipode update`, or choose **Update clipode*
 
 ## Sign in
 
-Start `clipode` and enter your instance URL, email, and password. clipode keeps the session cookie in `~/.local/state/clipode/auth.json` with mode `0600`. It never writes your password to disk.
+Start `clipode` and enter your instance URL, email, and password. clipode keeps the session cookie in `~/.local/state/clipode/auth.json` with mode `0600`. It never writes your password to disk. For a local instance in `local_trusted` mode, leave the email and password empty.
 
 ## Use it
 
@@ -57,7 +57,7 @@ clipode reads `~/.config/clipode/cli.json`, a JSON file that can contain comment
 }
 ```
 
-The environment variables `PAPERCLIP_URL` and `CLIPODE_CONFIG_DIR` override the file.
+The environment variables `PAPERCLIP_URL` and `CLIPODE_CONFIG_DIR` override the file. To sign in with a board API key instead of a password, set `PAPERCLIP_API_KEY`; clipode then polls for updates, because the events WebSocket does not accept board keys.
 
 Themes use opencode's theme format. clipode loads themes from `~/.config/clipode/themes` and `~/.config/opencode/themes`, so existing opencode themes work unchanged. For plugins, see [Plugins](docs/PLUGINS.md).
 

@@ -12,6 +12,8 @@ export type ConnectionState = "connecting" | "live" | "polling" | "offline"
 export type SessionOptions = {
   url?: string
   email?: string
+  /** A board API key from PAPERCLIP_API_KEY; replaces the email and password sign-in. */
+  apiKey?: string
   /** Last company per instance URL, from kv.json. */
   lastCompany?: Record<string, string>
   onCompany?: (url: string, companyId: string) => void
@@ -52,6 +54,12 @@ export function createSession(opts: SessionOptions = {}) {
     async start() {
       if (!state.url) return void set("status", "signed-out")
       try {
+        if (opts.apiKey) {
+          client = new Client(state.url, "", opts.apiKey)
+          if (!(await enter())) set({ status: "signed-out", error: "PAPERCLIP_API_KEY was not accepted." })
+          return
+        }
+        // Without a saved cookie this still succeeds on a local_trusted instance, which needs no sign-in.
         client = new Client(state.url, (await loadCookie(new Client(state.url).baseUrl, opts.authPath)) ?? "")
         if (!(await enter())) set("status", "signed-out")
       } catch (err) {
@@ -62,6 +70,11 @@ export function createSession(opts: SessionOptions = {}) {
       set({ status: "signing-in", url, email, error: null })
       try {
         client = new Client(url)
+        // No email and password: a local_trusted instance accepts the request without a session.
+        if (!email && !password) {
+          if (!(await enter())) throw new Error("This instance needs an email and password.")
+          return
+        }
         await apiSignIn(client, email, password)
         await saveCookie(client.baseUrl, client.cookieHeader(), opts.authPath)
         if (!(await enter())) throw new Error("Signed in, but the server did not accept the session")

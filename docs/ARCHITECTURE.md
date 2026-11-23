@@ -109,7 +109,7 @@ The client signs in the way the web UI and paperclip-android do: with an email a
 - **Storage:** the cookie is saved in `~/.local/state/clipode/auth.json` with mode `0600`, keyed by instance URL. The password is never written to disk.
 - **Expiry:** a `401` on any request clears the session and returns to the sign-in screen with the instance URL and email prefilled.
 - **Secondary path:** a bearer token from `PAPERCLIP_API_KEY` (for example a board key from `paperclipai auth login`). It works for REST. The events WebSocket accepts only agent keys as bearer tokens, so this path falls back to polling.
-- **Local instances:** `local_trusted` mode needs no credential on loopback; the client detects this from a successful unauthenticated request and skips sign-in.
+- **Local instances:** `local_trusted` mode needs no credential on loopback; the client detects this from a successful unauthenticated request and skips sign-in. On the sign-in screen, leaving the email and password empty tries exactly that. With `PAPERCLIP_API_KEY` set, the client sends the key as a bearer token, skips the sign-in screen, and polls without opening the WebSocket.
 
 ### Endpoints used in phase 1
 

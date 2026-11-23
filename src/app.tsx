@@ -79,6 +79,7 @@ export async function run(version: string): Promise<boolean> {
   const themes = await discoverThemes([join(configDir(), "themes"), join(homedir(), ".config", "opencode", "themes")])
   const session = createSession({
     url: config.url,
+    apiKey: config.apiKey,
     lastCompany: state.get().lastCompany,
     onCompany: (url, id) => void state.update({ lastCompany: { ...state.get().lastCompany, [url]: id } }),
   })

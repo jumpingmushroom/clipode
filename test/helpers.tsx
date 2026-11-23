@@ -13,14 +13,15 @@ import { COMPANY_ID, startFakeServer, type FakeServer } from "./fake-server.ts"
 
 export type Running = Awaited<ReturnType<typeof testRender>> & { server: FakeServer; frame(): Promise<string>; settle(): Promise<void> }
 
-export async function startApp(opts: { signedIn?: boolean; width?: number; height?: number; onThemeChange?: (n: string | undefined) => void; before?: (s: FakeServer) => void; route?: Route; tabs?: string[]; plugins?: LoadedPlugin[]; config?: Config } = {}): Promise<Running> {
+export async function startApp(opts: { signedIn?: boolean; width?: number; height?: number; onThemeChange?: (n: string | undefined) => void; before?: (s: FakeServer) => void; route?: Route; tabs?: string[]; plugins?: LoadedPlugin[]; config?: Config; apiKey?: string } = {}): Promise<Running> {
   const server = startFakeServer()
   opts.before?.(server)
   const authPath = join(await mkdtemp(join(tmpdir(), "clipode-test-")), "auth.json")
-  if (opts.signedIn !== false) await saveCookie(new URL(server.url).href.replace(/\/+$/, ""), "paperclip-default.session_token=tok", authPath)
+  if (opts.signedIn !== false && !opts.apiKey) await saveCookie(new URL(server.url).href.replace(/\/+$/, ""), "paperclip-default.session_token=tok", authPath)
   const session = createSession({
     url: opts.signedIn === false ? undefined : server.url,
     authPath,
+    apiKey: opts.apiKey,
     lastCompany: opts.signedIn === false ? undefined : { [server.url]: COMPANY_ID },
   })
   const setup = await testRender(

@@ -78,7 +78,10 @@ export function startLiveSync(
   }
 
   const url = `${session.client().origin.replace(/^http/, "ws")}/api/companies/${encodeURIComponent(company.companyId)}/events/ws`
-  const live = connectLive({
+  // The events socket accepts only agent keys as bearer tokens, so a session signed in by API key polls instead.
+  const live = session.client().token
+    ? (session.setConnection("polling"), { setInterests() {}, reconnect() {}, close() {} })
+    : connectLive({
     url,
     headers: () => ({ Cookie: session.client().cookieHeader() }),
     onEvent,

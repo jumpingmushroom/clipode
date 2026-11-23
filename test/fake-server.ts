@@ -22,6 +22,7 @@ export const RUN_ID = run.id
 /** The task whose comments, runs and cost were recorded. */
 export const THREAD_ID = threadCost.issueId
 export const PASSWORD = "correct horse battery staple"
+export const API_KEY = "board-key-for-tests"
 const SESSION = "paperclip-default.session_token"
 
 /** A fixed body, or a function of the request URL for routes whose answer changes (a growing log). */
@@ -81,7 +82,11 @@ export function startFakeServer(): FakeServer {
     async fetch(req, srv) {
       const url = new URL(req.url)
       requests.push(`${req.method} ${url.pathname}`)
-      const signedIn = req.headers.get("cookie")?.includes(`${SESSION}=tok`) ?? false
+      // A session cookie, the test API key, or a local_trusted instance (the "trusted" override) all sign in.
+      const signedIn =
+        (req.headers.get("cookie")?.includes(`${SESSION}=tok`) ?? false) ||
+        req.headers.get("authorization") === `Bearer ${API_KEY}` ||
+        overrides.has("trusted")
       if (url.pathname === "/api/auth/sign-in/email") {
         const body = (await req.json()) as { password: string }
         if (body.password !== PASSWORD) return Response.json({ code: "INVALID_EMAIL_OR_PASSWORD" }, { status: 401 })
