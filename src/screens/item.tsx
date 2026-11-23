@@ -74,6 +74,15 @@ export function ItemScreen(props: { id: string; version: string; sidebar: boolea
       if (reason !== null) void send("Rejected", (it) => company.attention.reject(it, reason || undefined))
       return
     }
+    if (choice.kind === "review") {
+      // Request changes needs a note; approving and sending back take one optionally.
+      const required = choice.action === "request_changes"
+      const note = await dialogs.prompt(choice.label, required ? "What should change? Required" : "Optional note, then enter to send")
+      if (note === null) return
+      if (required && !note.trim()) return toast.show("Request changes needs a note", "warning")
+      void send(`${choice.label}: sent`, (it) => company.attention.review(it, choice.action, note.trim() || undefined))
+      return
+    }
     if (choice.kind === "approval") {
       const note = await dialogs.prompt(choice.label, "Optional note, then enter to send")
       if (note !== null) void send(`${choice.label}: sent`, (it) => company.attention.decide(it, choice.decision, note || undefined))
@@ -303,6 +312,27 @@ function Body(props: { item: InboxItem; detail: ItemDetail } & Pick) {
             <Options {...pick()} show={all()} />
             <Show when={!props.choices.length}>
               <NotYet />
+            </Show>
+          </box>
+        )}
+      </Match>
+      <Match when={d.kind === "review" && d}>
+        {(r: Accessor<Extract<ItemDetail, { kind: "review" }>>) => (
+          <box flexDirection="column">
+            <text fg={theme().text}>{r().whyNow}</text>
+            <Show
+              when={r().stalled}
+              fallback={
+                <text fg={theme().muted} marginTop={1}>
+                  This review is decided where it waits (an approval or a reviewer). o opens the task.
+                </text>
+              }
+            >
+              <Section title="Decide" />
+              <Options {...pick()} show={all()} />
+              <Show when={!props.choices.length}>
+                <NotYet />
+              </Show>
             </Show>
           </box>
         )}

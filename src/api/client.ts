@@ -8,6 +8,7 @@ const WRITES: Record<string, RegExp[]> = {
   POST: [
     new RegExp(`^/api/issues/${ID}/interactions/${ID}/(respond|accept|reject)$`),
     new RegExp(`^/api/approvals/${ID}/(approve|reject|request-revision)$`),
+    new RegExp(`^/api/issues/${ID}/stalled-review-decision$`),
     new RegExp(`^/api/issues/${ID}/comments$`),
     new RegExp(`^/api/companies/${ID}/inbox-dismissals$`),
   ],

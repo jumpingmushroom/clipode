@@ -22,3 +22,10 @@ export type ApprovalDecision = "approve" | "reject" | "request-revision"
 export function decideApproval(client: Client, approvalId: string, decision: ApprovalDecision, note?: string) {
   return client.post(`/api/approvals/${id(approvalId)}/${decision}`, note ? { decisionNote: note } : {})
 }
+
+export type ReviewDecision = "approve" | "request_changes" | "send_back"
+
+/** Decides a stalled review: approve marks the task done; the others return it to the assignee with the note. */
+export function decideStalledReview(client: Client, issueId: string, action: ReviewDecision, note?: string) {
+  return client.post(`/api/issues/${id(issueId)}/stalled-review-decision`, note ? { action, note } : { action })
+}

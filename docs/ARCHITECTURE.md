@@ -55,6 +55,7 @@ Phase 2 makes clipode read and write, and ships as version 1.0. Decided on 2026-
 | Reject a confirmation | `POST …/interactions/{interactionId}/reject` | `reason?` (up to 4000 characters) |
 | Approve or reject an approval | `POST /api/approvals/{id}/approve`, `/reject` | `decisionNote?` |
 | Request a revision | `POST /api/approvals/{id}/request-revision` | `decisionNote?` |
+| Decide a stalled task review (1.1) | `POST /api/issues/{id}/stalled-review-decision` | `action: "approve" \| "request_changes" \| "send_back"`, `note` (required for `request_changes`) |
 | Comment on a task | `POST /api/issues/{id}/comments` | `body`, `clientRequestId?` (a UUID, for safe retries) |
 | Dismiss or snooze an inbox item | `POST /api/companies/{companyId}/inbox-dismissals` | `itemKey` (the item's `dismissalKey`), `kind: "dismiss" \| "snooze"`, `snoozedUntil?` |
 | Undo a dismissal or snooze | `DELETE /api/companies/{companyId}/inbox-dismissals/{itemKey}` | none |
@@ -72,7 +73,7 @@ The bodies are read from `packages/shared/src/validators` and `server/src/routes
 
 Not yet observed: rejecting a confirmation, and rejecting or requesting a revision on an approval; they share the bodies above. Question and option ids are readable keys chosen by the agent (`colour`, `blue`). Answers need them, and the phase 1 item model drops them.
 
-A fifth decision kind appeared in the probe: a task review (`sourceKind: "review"`, verbs `approve` and `request_changes`) for a task in review. It is not in phase 2 and shows as a generic row.
+A fifth decision kind appeared in the probe: a task review (`sourceKind: "review"`) for a task in review. Since 1.1 it has its own row marker, `◇`. Only a stalled review (`subject.metadata.reviewAttentionState: "stalled"`: no reviewer, approval or monitor left) is decided in the inbox, with approve (the task becomes done), request changes (a note is required) or send back; these go through the prompt like approvals. Any other review is decided where it waits, as in the web UI, and its item offers only `o` to open the task. Request bodies come from `stalledReviewDecisionSchema`; not yet seen live.
 
 Build order for phase 2:
 

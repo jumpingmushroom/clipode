@@ -1,11 +1,12 @@
 // What can be chosen in an opened inbox item, and the answers built from those choices.
-import type { Answer, ApprovalDecision, ItemDetail, Question } from "../store/attention.ts"
+import type { Answer, ApprovalDecision, ItemDetail, Question, ReviewDecision } from "../store/attention.ts"
 
 export type Choice =
   | { kind: "option"; questionId: string; optionId: string; label: string }
   | { kind: "other"; questionId: string; label: string }
   | { kind: "accept" | "reject"; label: string }
   | { kind: "approval"; decision: ApprovalDecision; label: string }
+  | { kind: "review"; action: ReviewDecision; label: string }
 
 /** Every choice in display order, so one cursor can move through all of them. */
 export function choicesFor(detail: ItemDetail): Choice[] {
@@ -26,6 +27,13 @@ export function choicesFor(detail: ItemDetail): Choice[] {
       { kind: "approval", decision: "approve", label: "Approve" },
       { kind: "approval", decision: "reject", label: "Reject" },
       { kind: "approval", decision: "request-revision", label: "Request revision" },
+    ]
+  }
+  if (detail.kind === "review" && detail.stalled) {
+    return [
+      { kind: "review", action: "approve", label: "Approve, and mark the task done" },
+      { kind: "review", action: "request_changes", label: "Request changes" },
+      { kind: "review", action: "send_back", label: "Send back to work" },
     ]
   }
   return []

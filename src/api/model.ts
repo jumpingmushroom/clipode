@@ -1,6 +1,6 @@
 // Client-side shapes for the stores and screens. They hold no wire fields; src/api maps responses onto them.
 
-export type ItemKind = "question" | "confirmation" | "approval" | "failed_run" | "blocked" | "other"
+export type ItemKind = "question" | "confirmation" | "approval" | "review" | "failed_run" | "blocked" | "other"
 
 export type InboxItem = {
   id: string
@@ -29,6 +29,8 @@ export type InboxItem = {
   subjectId: string
   /** The key for dismissing or snoozing this item. */
   dismissalKey: string
+  /** For a review item: no reviewer, approval or monitor is left, so it is decided in the inbox. */
+  reviewStalled: boolean
   /** Server-side source kind, for kinds shown as a generic row. */
   sourceKind: string
 }
@@ -52,6 +54,8 @@ export type ItemDetail =
   | { kind: "approval"; summary: string; identifier: string | null }
   | { kind: "failed_run"; error: string; runId: string }
   | { kind: "blocked"; description: string | null; blockers: { identifier: string | null; title: string; status: string }[] }
+  /** A task in review. Only a stalled review is decided here; otherwise its decision lives elsewhere (approval, reviewer). */
+  | { kind: "review"; stalled: boolean; whyNow: string }
   | { kind: "other"; summary: string | null }
 
 export type AgentSummary = {

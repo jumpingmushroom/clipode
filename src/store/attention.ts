@@ -15,11 +15,11 @@ import {
   type InboxFeed,
 } from "../api/endpoints/attention.ts"
 import type { Answer, InboxItem, ItemDetail } from "../api/model.ts"
-import { acceptConfirmation, answerQuestions, decideApproval, rejectConfirmation, type ApprovalDecision } from "../api/endpoints/decisions.ts"
+import { acceptConfirmation, answerQuestions, decideApproval, decideStalledReview, rejectConfirmation, type ApprovalDecision, type ReviewDecision } from "../api/endpoints/decisions.ts"
 import { createResource } from "./resource.ts"
 import type { Session } from "./session.ts"
 export type { Answer, InboxItem, ItemDetail, Question } from "../api/model.ts"
-export type { ApprovalDecision } from "../api/endpoints/decisions.ts"
+export type { ApprovalDecision, ReviewDecision } from "../api/endpoints/decisions.ts"
 
 export type Sort = "activity" | "decide"
 
@@ -54,6 +54,8 @@ export function createAttentionStore(session: Session, companyId: string) {
         return approvalDetail(client, item.subjectId)
       case "failed_run":
         return { kind: "failed_run", error: item.summary ?? item.whyNow, runId: item.subjectId }
+      case "review":
+        return { kind: "review", stalled: item.reviewStalled, whyNow: item.whyNow }
       case "blocked":
         return item.issueId ? blockedDetail(client, item.issueId) : { kind: "blocked", description: null, blockers: [] }
       default:
@@ -97,6 +99,9 @@ export function createAttentionStore(session: Session, companyId: string) {
     },
     reject(item: InboxItem, reason?: string) {
       return this.act(item, () => rejectConfirmation(session.client(), item.issueId!, item.subjectId, reason))
+    },
+    review(item: InboxItem, action: ReviewDecision, note?: string) {
+      return this.act(item, () => decideStalledReview(session.client(), item.issueId!, action, note))
     },
     decide(item: InboxItem, decision: ApprovalDecision, note?: string) {
       return this.act(item, () => decideApproval(session.client(), item.subjectId, decision, note))

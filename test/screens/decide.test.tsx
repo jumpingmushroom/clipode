@@ -135,3 +135,43 @@ test("without linked comments, the context is what the same run wrote on the tas
   expect(text).toContain("Route A enables auth.")
   expect(text).not.toContain("Older note")
 })
+
+const reviewItem = (stalled: boolean) => ({
+  ...QUESTION,
+  id: "review-1",
+  sourceKind: "review",
+  whyNow: stalled ? "Issue is in review without a maintained reviewer." : "Issue is in review with a linked pending approval.",
+  subject: { ...QUESTION.subject, kind: "issue", id: "task-9", identifier: "DEMO-9", metadata: stalled ? { reviewAttentionState: "stalled" } : {} },
+  relatedIssue: null,
+  detail: { kind: "generic", summaryExcerpt: null, images: [] },
+})
+
+test("a stalled review: request changes needs a note; approve sends with an optional one", async () => {
+  app = await startApp({ route: { name: "item", id: "review-1" }, before: (s) => s.set(`/api/companies/${COMPANY_ID}/attention`, { ...feed, items: [reviewItem(true)] }) })
+  let text = await app.frame()
+  expect(text).toMatch(/› Approve, and mark the task done[\s\S]*› Request changes[\s\S]*› Send back to work/)
+  app.mockInput.pressKey("j")
+  app.mockInput.pressEnter()
+  expect(await app.frame()).toContain("What should change? Required")
+  app.mockInput.pressEnter()
+  expect(await app.frame()).toContain("Request changes needs a note")
+  expect(app.server.writes).toHaveLength(0)
+  app.mockInput.pressEnter()
+  await app.frame()
+  await app.mockInput.typeText("Add tests for the importer")
+  app.mockInput.pressEnter()
+  await Bun.sleep(60)
+  expect(app.server.writes[0]).toEqual({ method: "POST", path: "/api/issues/task-9/stalled-review-decision", body: { action: "request_changes", note: "Add tests for the importer" } })
+  text = await app.frame()
+  expect(text).toContain("Request changes: sent")
+})
+
+test("a review that is not stalled is decided elsewhere and offers no actions", async () => {
+  app = await startApp({ route: { name: "item", id: "review-1" }, before: (s) => s.set(`/api/companies/${COMPANY_ID}/attention`, { ...feed, items: [reviewItem(false)] }) })
+  const text = await app.frame()
+  expect(text).toContain("decided where it waits")
+  expect(text).not.toContain("Request changes")
+  app.mockInput.pressEnter()
+  await Bun.sleep(40)
+  expect(app.server.writes).toHaveLength(0)
+})

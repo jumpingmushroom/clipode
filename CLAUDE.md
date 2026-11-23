@@ -1,6 +1,6 @@
 # clipode
 
-A read-only terminal client (TUI) for a self-hosted Paperclip instance, in the style of the OpenCode TUI. MIT licensed.
+A terminal client (TUI) for a self-hosted Paperclip instance, in the style of the OpenCode TUI. It reads everything and sends a small allowlist of writes (answers, decisions, comments, dismissals). MIT licensed.
 
 Read `docs/ARCHITECTURE.md` before any work. It is the agreed design and holds the build order. `docs/design/` holds the agreed mockup, and `docs/research/attention-and-live-findings.md` holds what the real instance returns. Where the probe disagrees with Paperclip's docs or source, the probe wins.
 

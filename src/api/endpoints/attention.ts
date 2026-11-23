@@ -20,6 +20,7 @@ export async function getInboxCount(client: Client, companyId: string): Promise<
 }
 
 function kindOf(item: AttentionItem): ItemKind {
+  if (item.sourceKind === "review") return "review"
   switch (item.detail?.kind) {
     case "questions":
       return "question"
@@ -47,7 +48,11 @@ export function toInboxItem(item: AttentionItem): InboxItem {
     kind,
     title: item.subject.title ?? item.whyNow,
     identifier: item.subject.identifier ?? item.relatedIssue?.identifier ?? null,
-    issueId: kind === "blocked" ? (item.relatedIssue?.id ?? null) : (str(meta.issueId) ?? item.relatedIssue?.id ?? (item.subject.kind === "issue" ? item.subject.id : null)),
+    // An issue subject is the task itself (reviews, generic rows); a blocked item's task is the one it holds up.
+    issueId:
+      kind === "blocked"
+        ? (item.relatedIssue?.id ?? null)
+        : (str(meta.issueId) ?? (item.subject.kind === "issue" ? item.subject.id : (item.relatedIssue?.id ?? null))),
     agentName: item.originAgentName ?? str(detail?.agentName),
     agentId: str(meta.createdByAgentId) ?? str(meta.assigneeAgentId) ?? str(meta.requestedByAgentId),
     whyNow: item.whyNow,
@@ -66,6 +71,7 @@ export function toInboxItem(item: AttentionItem): InboxItem {
     blockedTaskCount: typeof detail?.blockedTaskCount === "number" ? detail.blockedTaskCount : null,
     subjectId: item.subject.id,
     dismissalKey: item.dismissalKey,
+    reviewStalled: meta.reviewAttentionState === "stalled",
     sourceKind: item.sourceKind,
   }
 }

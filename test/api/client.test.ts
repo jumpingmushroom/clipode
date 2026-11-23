@@ -182,6 +182,7 @@ describe("write allowlist", () => {
     ["POST", "/api/approvals/a1/approve", true],
     ["POST", "/api/approvals/a1/reject", true],
     ["POST", "/api/approvals/a1/request-revision", true],
+    ["POST", "/api/issues/i1/stalled-review-decision", true],
     ["POST", "/api/issues/i1/comments", true],
     ["POST", "/api/companies/c1/inbox-dismissals", true],
     ["DELETE", "/api/companies/c1/inbox-dismissals/attention%3Aitem%3A1", true],
