@@ -2,7 +2,7 @@
 
 clipode is a terminal client for a self-hosted [Paperclip](https://github.com/paperclipai/paperclip) instance, in the style of the OpenCode terminal client. It shows what a board operator needs: the attention inbox, tasks and their threads, agent run transcripts, and the agents, with live updates.
 
-You can answer what agents ask, accept or reject confirmations, approve or reject approvals, comment on tasks, and dismiss or snooze inbox items. clipode sends only those writes, each to one specific route, and refuses any other change to your instance. To make it read-only, set `"readOnly": true` in `cli.json`.
+You can answer what agents ask, accept or reject confirmations, approve or reject approvals, decide stalled task reviews, comment on tasks, and dismiss or snooze inbox items. clipode sends only those writes, each to one specific route, and refuses any other change to your instance. To make it read-only, set `"readOnly": true` in `cli.json`.
 
 clipode is tested against Paperclip `2026.1117.0`. The oldest supported server is `2026.1106.0`.
 
@@ -34,7 +34,7 @@ clipode opens on the inbox. The following keys work everywhere:
 | `j`, `k`, `enter`, `esc` | Move, open, go back |
 | `/` | Filter the task list |
 | `ctrl+s` | Send the answers to an agent's questions (in an opened item, `enter` selects an option) |
-| `c` | Comment on the task on screen |
+| `c` | Comment on the task on screen; `ctrl+j` adds a line, `enter` sends |
 | `d`, `s`, `u` | Dismiss, snooze, or restore the selected inbox item |
 | `ctrl+b` | Show or hide the sidebar |
 | `ctrl+t` | Switch theme, with a live preview |
