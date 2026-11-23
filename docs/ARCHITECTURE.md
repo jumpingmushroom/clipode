@@ -113,6 +113,12 @@ Since 1.3, `n` and `e` open one task dialog modelled on the web UI's composer: d
 
 Since 1.4 the new-task dialog has a Files row. `enter` opens a prompt for file paths: dragging files into the terminal pastes their paths, and quoted paths, backslash-escaped spaces and `~` all work. Files are checked to exist and be non-empty when added; `backspace` removes the last. As in the web UI, files are uploaded once the task exists; a file the server refuses is named in the toast with its reason, and the task stays. clipode does not guess the server's size and type limits. Verified with CLI-7. Since 1.5, `ctrl+v` on the Files row, or in the attach prompt, reads an image from the system clipboard through OpenTUI's native host clipboard (as opencode does; no external tool), saves it as a PNG in the temp folder and adds it like any other file. Where the system offers no clipboard access (a headless server, for example), the dialog says so.
 
+## Phase 4: round out (release 1.7 onwards)
+
+Phase 4 adds reads only; the write allowlist does not change. It starts with desktop notifications, then search, then the rest of the scope line in the table above.
+
+Desktop notifications (1.7): when an inbox refresh, live or polled, brings an item that was not in the feed before, clipode sends one notification through OpenTUI's `renderer.triggerNotification`, which writes the terminal's own notification escape sequence (so it works over SSH and needs no system tool; a terminal without one ignores it). The items present at the first load, snoozed items, and items seen before are never reported. One new item is named (kind, task identifier and title); several at once are counted. Notifications are sent only while the terminal does not have focus, or always where the terminal cannot report focus. `"notifications": false` in `cli.json` turns them off.
+
 ## Provenance and licensing
 
 The new repository is MIT licensed, and no pasode source is copied into it. A public repository without a licence gives no reuse rights by default, so pasode is used as a design reference only. This is a working rule and not legal advice.

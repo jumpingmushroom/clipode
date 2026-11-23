@@ -19,6 +19,8 @@ export type Config = {
   mouse?: boolean
   animations?: boolean
   plugins?: (string | [string, Record<string, unknown>])[]
+  /** Desktop notifications for new inbox items while the terminal is in the background; on unless false. */
+  notifications?: boolean
   /** Refuse every write (answers, decisions, comments, dismissals), as clipode 0.x did. */
   readOnly?: boolean
   /** Bearer token instead of a session cookie; from PAPERCLIP_API_KEY. */

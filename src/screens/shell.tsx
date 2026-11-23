@@ -9,6 +9,7 @@ import { CommandPalette, HelpDialog } from "../keymap/palette.tsx"
 import { useRoute } from "../route.tsx"
 import { useCompany, useStores } from "../store/context.tsx"
 import { startLiveSync } from "../store/live.ts"
+import { watchNewItems } from "../store/new-items.ts"
 import { useTheme } from "../theme/context.tsx"
 import { useDialog } from "../ui/dialog.tsx"
 import { openThemeDialog } from "../ui/dialog-theme.tsx"
@@ -26,6 +27,7 @@ import { ThreadScreen } from "./thread.tsx"
 import { RunScreen } from "./run.tsx"
 import { AgentsScreen } from "./agents.tsx"
 import { AgentScreen } from "./agent.tsx"
+import { KIND_LABELS } from "./inbox-row.tsx"
 import { SettingsDialog } from "./settings.tsx"
 import { TabsProvider, useTabs } from "./tabs.tsx"
 import { PluginHostProvider, usePluginHost } from "../plugin/host.tsx"
@@ -108,6 +110,17 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
   const onBlur = () => setFocused(false)
   renderer.on("focus", onFocus)
   renderer.on("blur", onBlur)
+  if (props.config?.notifications !== false) {
+    // Only while you look elsewhere; a terminal that cannot report focus always gets them.
+    watchNewItems(() => company.attention.feed.data.items, () => !!company.attention.feed.loadedAt, (items) => {
+      if (focused() && renderer.capabilities?.focus_tracking) return
+      const one = items[0]!
+      renderer.triggerNotification(
+        items.length === 1 ? `${KIND_LABELS[one.kind][0]}${one.identifier ? ` on ${one.identifier}` : ""}: ${one.title}` : `${items.length} new items in the inbox`,
+        "clipode",
+      )
+    })
+  }
   onCleanup(() => {
     live.stop()
     renderer.off("focus", onFocus)

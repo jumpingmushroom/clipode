@@ -60,12 +60,15 @@ clipode reads `~/.config/clipode/cli.json`, a JSON file that can contain comment
   "sidebar": "auto",
   "polling": { "inbox": 30, "list": 60 },
   "mouse": true,
+  "notifications": true,
   "readOnly": false,
   "plugins": ["~/clipode-plugins/hello.tsx"]
 }
 ```
 
 The environment variables `PAPERCLIP_URL` and `CLIPODE_CONFIG_DIR` override the file. To sign in with a board API key instead of a password, set `PAPERCLIP_API_KEY`; clipode then polls for updates, because the events WebSocket does not accept board keys.
+
+While the terminal is in the background, clipode sends a desktop notification when a new item reaches the inbox. It uses the terminal's own notification support (for example in kitty, Ghostty, WezTerm, iTerm2 or foot), so it also works over SSH; set `"notifications": false` to turn it off.
 
 Themes use opencode's theme format. clipode loads themes from `~/.config/clipode/themes` and `~/.config/opencode/themes`, so existing opencode themes work unchanged. For plugins, see [Plugins](docs/PLUGINS.md).
 
