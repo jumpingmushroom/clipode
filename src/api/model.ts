@@ -110,6 +110,19 @@ export type TaskCost = { costUsd: number; runCount: number; inputTokens: number;
 
 export type ProjectSummary = { id: string; name: string }
 
+/** One company search hit. A task hit also stands for a match in its comments, documents or files. */
+export type SearchResult = {
+  type: "task" | "agent" | "project"
+  /** The task, agent or project to open. */
+  id: string
+  title: string
+  identifier: string | null
+  /** Where the match is: "Title", "Comment", a document's title, and so on. */
+  where: string | null
+  /** Text around the first match, for matches outside the title. */
+  excerpt: string | null
+}
+
 export type CompanySummary = { id: string; name: string; prefix: string | null }
 
 export type RunDetail = {

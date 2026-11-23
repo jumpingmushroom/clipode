@@ -6,7 +6,7 @@ import { createSignal, Match, onCleanup, onMount, Show, Switch } from "solid-js"
 import type { Config } from "../config.ts"
 import { useCommands, type AppCommand } from "../keymap/commands.tsx"
 import { CommandPalette, HelpDialog } from "../keymap/palette.tsx"
-import { useRoute } from "../route.tsx"
+import { useRoute, type Route } from "../route.tsx"
 import { useCompany, useStores } from "../store/context.tsx"
 import { startLiveSync } from "../store/live.ts"
 import { watchNewItems } from "../store/new-items.ts"
@@ -28,6 +28,7 @@ import { RunScreen } from "./run.tsx"
 import { AgentsScreen } from "./agents.tsx"
 import { AgentScreen } from "./agent.tsx"
 import { KIND_LABELS } from "./inbox-row.tsx"
+import { SearchDialog } from "./search.tsx"
 import { SettingsDialog } from "./settings.tsx"
 import { TabsProvider, useTabs } from "./tabs.tsx"
 import { PluginHostProvider, usePluginHost } from "../plugin/host.tsx"
@@ -132,6 +133,7 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
     { name: "app.help", title: "Help", category: "App", keys: "<leader>h,?", run: () => dialog.replace(() => <HelpDialog />, undefined, "large") },
     { name: "go.inbox", title: "Inbox", category: "Go to", keys: "<leader>i,g i", run: () => route.reset({ name: "inbox" }) },
     { name: "go.tasks", title: "Tasks", category: "Go to", keys: "<leader>t,g t", run: () => route.reset({ name: "tasks" }) },
+    { name: "app.search", title: "Search", category: "Go to", keys: "<leader>/,g /", run: () => dialog.replace(() => <SearchDialog />, undefined, "large") },
     { name: "go.agents", title: "Agents", category: "Go to", keys: "<leader>a,g a", run: () => route.reset({ name: "agents" }) },
     ...Array.from({ length: 9 }, (_, i): AppCommand => ({ name: `tabs.${i + 1}`, title: `Tab ${i + 1}`, category: "Tabs", keys: `<leader>${i + 1}`, hidden: true, run: () => tabs.jump(i) })),
     { name: "tabs.next", title: "Next tab", category: "Tabs", keys: "<leader>.", run: () => tabs.cycle(1) },
@@ -208,8 +210,9 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
         <Match when={route.current().name === "agents"}>
           <AgentsScreen version={props.version} sidebar={showSidebar()} />
         </Match>
-        <Match when={route.current().name === "tasks"}>
-          <TasksScreen version={props.version} sidebar={showSidebar()} />
+        {/* Keyed on the route, so opening Tasks with a filter from search rebuilds an open Tasks screen. */}
+        <Match when={route.current().name === "tasks" && route.current()} keyed>
+          {(r: Route) => <TasksScreen filter={r.name === "tasks" ? r.filter : undefined} version={props.version} sidebar={showSidebar()} />}
         </Match>
         <Match when={true}>
           <InboxScreen version={props.version} sidebar={showSidebar()} />

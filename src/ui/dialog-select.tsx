@@ -11,6 +11,8 @@ export type SelectOption<T> = {
   title: string
   value: T
   category?: string
+  /** Muted text after the title, such as an excerpt. */
+  description?: string
   /** Muted text on the right, such as a key binding or "current". */
   footer?: string
   disabled?: boolean
@@ -27,6 +29,10 @@ export type SelectProps<T> = {
   onMove?: (option: SelectOption<T>) => void
   /** A muted line under the list, such as "enter apply  esc cancel". */
   hint?: string
+  /** Set when the options come from elsewhere (a server search): called as the text changes, options kept as given. */
+  onFilter?: (text: string) => void
+  /** Shown instead of the list when there are no options; "No results" by default. */
+  empty?: string
   /** "modal" inside a dialog (the default); "base" when the list is a screen of its own. */
   mode?: "base" | "modal"
 }
@@ -43,7 +49,7 @@ export function DialogSelect<T>(props: SelectProps<T>) {
   const shown = createMemo(() => {
     const options = props.options.filter((o) => !o.disabled)
     const query = filter().trim()
-    if (!query) return options
+    if (!query || props.onFilter) return options
     return options
       .map((o) => ({ o, score: fuzzyScore(`${o.title} ${o.category ?? ""}`, query) }))
       .filter((x): x is { o: SelectOption<T>; score: number } => x.score !== null)
@@ -110,7 +116,10 @@ export function DialogSelect<T>(props: SelectProps<T>) {
             input = r
             setTimeout(() => !input?.isDestroyed && input?.focus(), 1)
           }}
-          onInput={(value: string) => setFilter(value)}
+          onInput={(value: string) => {
+            setFilter(value)
+            props.onFilter?.(value)
+          }}
           placeholder={props.placeholder ?? "Type to filter"}
           placeholderColor={theme().muted}
           textColor={theme().text}
@@ -120,7 +129,7 @@ export function DialogSelect<T>(props: SelectProps<T>) {
           cursorColor={theme().accent}
         />
       </box>
-      <Show when={flat().length > 0} fallback={<text fg={theme().muted} paddingLeft={DIALOG_INSET}>No results</text>}>
+      <Show when={flat().length > 0} fallback={<text fg={theme().muted} paddingLeft={DIALOG_INSET}>{props.empty ?? "No results"}</text>}>
         <scrollbox ref={(r: ScrollBoxRenderable) => (scroll = r)} maxHeight={height()} scrollbarOptions={{ visible: false }}>
           <For each={grouped()}>
             {([category, options], g) => (
@@ -147,6 +156,9 @@ export function DialogSelect<T>(props: SelectProps<T>) {
                       >
                         <text flexGrow={1} fg={theme().text} wrapMode="none" overflow="hidden">
                           {option.title}
+                          <Show when={option.description}>
+                            <span style={{ fg: theme().muted }}>{"  " + option.description}</span>
+                          </Show>
                         </text>
                         <Show when={option.footer}>
                           <text flexShrink={0} fg={theme().muted} marginLeft={2}>

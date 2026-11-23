@@ -42,14 +42,14 @@ export function priorityColor(priority: string, theme: Theme): RGBA {
 
 type Row = { type: "task"; task: TaskSummary } | { type: "more"; status: string; count: number }
 
-export function TasksScreen(props: { version: string; sidebar: boolean }) {
+export function TasksScreen(props: { version: string; sidebar: boolean; filter?: string }) {
   const { theme } = useTheme()
   const company = useCompany()
   const route = useRoute()
   const keymap = useKeymap()
   const dimensions = useTerminalDimensions()
   const issues = company.issues
-  const [query, setQuery] = createSignal("")
+  const [query, setQuery] = createSignal(props.filter ?? "")
   const [filtering, setFiltering] = createSignal(false)
   const [expanded, setExpanded] = createSignal<string[]>([])
   const [selected, setSelected] = createSignal(0)
