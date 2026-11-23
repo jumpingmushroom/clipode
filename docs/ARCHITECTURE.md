@@ -39,6 +39,38 @@ Out of scope for now: instance administration, adapter and connection setup, com
 
 Phase 1 performs `GET` requests only, plus the sign-in and sign-out calls. The client refuses any other method unless a later phase enables it explicitly, so a bug cannot mutate the instance.
 
+## Phase 2: decide and reply (release 1.0)
+
+Phase 2 makes clipode read and write, and ships as version 1.0. Decided on 2026-11-23:
+
+- **A write allowlist, not a removed guard.** `src/api/client.ts` keeps refusing every request that is not a `GET`, except for the exact routes in the following table. Setting `readOnly: true` in `cli.json` restores phase 1 behaviour.
+- **Confirm before sending** only for approvals and rejections (an approval's approve, reject and request revision, and a confirmation's reject). Answers, accepts, comments, dismissals and snoozes are sent at once.
+- **Optimistic updates.** An item leaves the inbox when its answer is sent and comes back, with an error toast, if the server refuses.
+- **Live testing** happens in a scratch company with a test agent on the target instance, never on real work. Tests stay on the fake server.
+
+| Action | Route at `2026.1117.0` | Body |
+| --- | --- | --- |
+| Answer an agent's questions | `POST /api/issues/{id}/interactions/{interactionId}/respond` | `answers: [{ questionId, optionIds, otherText? }]`, `summaryMarkdown?` |
+| Accept a confirmation | `POST …/interactions/{interactionId}/accept` | `selectedOptionIds?` |
+| Reject a confirmation | `POST …/interactions/{interactionId}/reject` | `reason?` (up to 4000 characters) |
+| Approve or reject an approval | `POST /api/approvals/{id}/approve`, `/reject` | `decisionNote?` |
+| Request a revision | `POST /api/approvals/{id}/request-revision` | `decisionNote?` |
+| Comment on a task | `POST /api/issues/{id}/comments` | `body`, `clientRequestId?` (a UUID, for safe retries) |
+| Dismiss or snooze an inbox item | `POST /api/companies/{companyId}/inbox-dismissals` | `itemKey` (the item's `dismissalKey`), `kind: "dismiss" \| "snooze"`, `snoozedUntil?` |
+| Undo a dismissal or snooze | `DELETE /api/companies/{companyId}/inbox-dismissals/{itemKey}` | none |
+
+The bodies are read from `packages/shared/src/validators` and `server/src/routes/inbox-dismissals.ts` at the tag; a live probe in the scratch company confirms them before the client relies on them. Answers need the question and option ids, which the phase 1 item model drops.
+
+Build order for phase 2:
+
+1. **Probe.** Send each action once in the scratch company and record the requests and responses, scrubbed, as fixtures.
+2. **Write guard.** The allowlist, `readOnly`, and tests that every other method and path still throws.
+3. **Answer and decide.** Selectable options in the item view, the confirm step for approvals and rejections, optimistic removal from the inbox.
+4. **Composer.** The composer row becomes a text field for comments and written answers.
+5. **Dismiss and snooze.** Inbox keys, a snooze duration choice, and undo.
+6. **Question context.** The Context section from `originCommentIds`.
+7. **Release 1.0.**
+
 ## Provenance and licensing
 
 The new repository is MIT licensed, and no pasode source is copied into it. A public repository without a licence gives no reuse rights by default, so pasode is used as a design reference only. This is a working rule and not legal advice.
@@ -397,8 +429,8 @@ Open questions:
 
 Open after the mockup review:
 
-- [ ] Whether the shelf rule above matches how you triage, in particular treating every high-severity item as Decide now.
-- [ ] Whether a question's detail should also pull in the comment the agent wrote alongside it (`originCommentIds`), to get closer to the mockup.
+- [x] Decided: the shelf rule stands, including every high-severity item on Decide now.
+- [x] Decided: a question's detail shows the comment the agent wrote alongside it (`originCommentIds`) as a Context section above the question, from the task's comments.
 - [x] Observed: `live.interests` is answered by `live.subscribed` with the same revision.
 
 ## Prompt for Claude Design
