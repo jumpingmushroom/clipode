@@ -2,7 +2,7 @@
 
 clipode is a terminal client for a self-hosted [Paperclip](https://github.com/paperclipai/paperclip) instance, in the style of the OpenCode terminal client. It shows what a board operator needs: the attention inbox, tasks and their threads, agent run transcripts, and the agents, with live updates.
 
-This version is read-only. It sends `GET` requests, plus the sign-in and sign-out requests, and refuses anything else, so it cannot change your instance.
+You can answer what agents ask, accept or reject confirmations, approve or reject approvals, comment on tasks, and dismiss or snooze inbox items. clipode sends only those writes, each to one specific route, and refuses any other change to your instance. To make it read-only, set `"readOnly": true` in `cli.json`.
 
 clipode is tested against Paperclip `2026.1117.0`. The oldest supported server is `2026.1106.0`.
 
@@ -33,6 +33,9 @@ clipode opens on the inbox. The following keys work everywhere:
 | `g i`, `g t`, `g a` | Go to the inbox, tasks, or agents |
 | `j`, `k`, `enter`, `esc` | Move, open, go back |
 | `/` | Filter the task list |
+| `ctrl+s` | Send the answers to an agent's questions (in an opened item, `enter` selects an option) |
+| `c` | Comment on the task on screen |
+| `d`, `s`, `u` | Dismiss, snooze, or restore the selected inbox item |
 | `ctrl+b` | Show or hide the sidebar |
 | `ctrl+t` | Switch theme, with a live preview |
 | `ctrl+x c` | Switch company |
@@ -53,6 +56,7 @@ clipode reads `~/.config/clipode/cli.json`, a JSON file that can contain comment
   "sidebar": "auto",
   "polling": { "inbox": 30, "list": 60 },
   "mouse": true,
+  "readOnly": false,
   "plugins": ["~/clipode-plugins/hello.tsx"]
 }
 ```

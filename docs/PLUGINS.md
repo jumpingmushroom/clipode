@@ -1,6 +1,6 @@
 # Plugins
 
-A plugin adds sections to clipode's screens, adds commands, and reacts to live events. A plugin can read from the Paperclip instance, and it cannot change anything on it: phase 1 is read-only, and the plugin context uses the same read-only client as the rest of clipode.
+A plugin adds sections to clipode's screens, adds commands, and reacts to live events. A plugin can read from the Paperclip instance through `ctx.paperclip.get`, which sends `GET` requests only. It can act through the stores, for example `ctx.paperclip.attention.answer` or `ctx.paperclip.issues.comment`, which use the same write routes as the screens and honour `readOnly`.
 
 ## Write a plugin
 

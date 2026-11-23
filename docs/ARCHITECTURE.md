@@ -84,6 +84,8 @@ Build order for phase 2:
 6. **Question context.** The Context section from `originCommentIds`.
 7. **Release 1.0.**
 
+Built as of 1.0: all seven steps. In an opened item, `j`/`k` choose, `enter` or `space` selects, and `ctrl+s` sends answers; `o` opens the task or run. `c` comments from the composer row; `d`, `s` and `u` dismiss, snooze and restore in the inbox. The inbox badge counts items that need you, without snoozed ones. A new toast replaces a passing one; only errors queue. Verified live in the scratch company: answer, accept, approve, comment, dismiss, snooze and restore. Not yet seen live: rejecting a confirmation, and rejecting or requesting a revision on an approval.
+
 ## Provenance and licensing
 
 The new repository is MIT licensed, and no pasode source is copied into it. A public repository without a licence gives no reuse rights by default, so pasode is used as a design reference only. This is a working rule and not legal advice.
