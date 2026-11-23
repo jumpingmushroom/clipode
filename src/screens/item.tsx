@@ -258,6 +258,11 @@ function Body(props: { item: InboxItem; detail: ItemDetail } & Pick) {
     <Switch fallback={<Markdown content={props.item.summary ?? props.item.whyNow} />}>
       <Match when={d.kind === "question" && d}>
         {(q: Accessor<Extract<ItemDetail, { kind: "question" }>>) => (
+          <box flexDirection="column">
+          <Show when={q().context}>
+            <Section title="Context" />
+            <Markdown content={q().context!} />
+          </Show>
           <For each={q().questions}>
             {(question, i) => (
               <box flexDirection="column">
@@ -271,6 +276,7 @@ function Body(props: { item: InboxItem; detail: ItemDetail } & Pick) {
               </box>
             )}
           </For>
+          </box>
         )}
       </Match>
       <Match when={d.kind === "confirmation" && d}>

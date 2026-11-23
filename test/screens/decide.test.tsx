@@ -1,6 +1,7 @@
 import { afterEach, expect, test } from "bun:test"
 import { COMPANY_ID } from "../fake-server.ts"
 import feed from "../fixtures/company/attention-feed.json"
+import allInteractions from "../fixtures/company/issue-interactions.json"
 import { startApp, type Running } from "../helpers.tsx"
 
 let app: Running | undefined
@@ -97,4 +98,21 @@ test("with readOnly the options stay inactive and nothing is sent", async () => 
   app.mockInput.pressKey("s", { ctrl: true })
   await Bun.sleep(50)
   expect(app.server.writes).toHaveLength(0)
+})
+
+test("a question shows the comment the agent wrote with it as Context", async () => {
+  const issueId = QUESTION.subject.metadata.issueId as string
+  app = await startApp({
+    route: { name: "item", id: QUESTION.id },
+    before: (s) => {
+      const interactions = (allInteractions as Record<string, { id: string; originCommentIds: string[] }[]>)[issueId]!
+      const withContext = interactions.map((x) => (x.id === QUESTION.subject.id ? { ...x, originCommentIds: ["c-1"] } : x))
+      s.set(`/api/issues/${issueId}/interactions`, withContext)
+      s.set(`/api/issues/${issueId}/comments`, [{ id: "c-1", body: "I compared **three queues**; pg-boss needs no new infrastructure." }, { id: "c-2", body: "unrelated" }])
+    },
+  })
+  const text = await app.frame()
+  expect(text).toContain("Context")
+  expect(text).toContain("three queues")
+  expect(text).not.toContain("unrelated")
 })

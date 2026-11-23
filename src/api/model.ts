@@ -46,7 +46,8 @@ export type Question = {
 export type Answer = { questionId: string; optionIds: string[]; otherText?: string }
 
 export type ItemDetail =
-  | { kind: "question"; questions: Question[] }
+  /** `context`: what the agent wrote alongside the question, from the comments named in originCommentIds. */
+  | { kind: "question"; questions: Question[]; context: string | null }
   | { kind: "confirmation"; prompt: string; detailsMarkdown: string | null; acceptLabel: string; rejectLabel: string }
   | { kind: "approval"; summary: string; identifier: string | null }
   | { kind: "failed_run"; error: string; runId: string }

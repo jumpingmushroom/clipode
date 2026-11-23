@@ -6,7 +6,7 @@ const single: Question = { id: "colour", prompt: "Which colour?", options: [{ id
 const multi: Question = { id: "days", prompt: "Which days?", options: [{ id: "mon", label: "Mon" }, { id: "tue", label: "Tue" }], multiple: true, allowOther: false, required: false }
 
 test("choices cover every option, the written answer, and the decision verbs", () => {
-  expect(choicesFor({ kind: "question", questions: [single, multi] }).map((c) => c.label)).toEqual(["Red", "Blue", "Something else, with a written reply", "Mon", "Tue"])
+  expect(choicesFor({ kind: "question", questions: [single, multi], context: null }).map((c) => c.label)).toEqual(["Red", "Blue", "Something else, with a written reply", "Mon", "Tue"])
   expect(choicesFor({ kind: "confirmation", prompt: "", detailsMarkdown: null, acceptLabel: "Confirm Blue", rejectLabel: "Choose again" }).map((c) => c.kind)).toEqual(["accept", "reject"])
   expect(choicesFor({ kind: "approval", summary: "", identifier: null }).map((c) => c.kind === "approval" && c.decision)).toEqual(["approve", "reject", "request-revision"])
 })

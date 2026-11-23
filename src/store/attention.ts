@@ -8,6 +8,7 @@ import {
   getInbox,
   dismissItem,
   getInteractions,
+  questionContext,
   questionDetail,
   restoreItem,
   snoozeItem,
@@ -41,8 +42,12 @@ export function createAttentionStore(session: Session, companyId: string) {
       return interactions.get(issueId)!
     }
     switch (item.kind) {
-      case "question":
-        return questionDetail(item.issueId ? (await forIssue(item.issueId)).find((i) => i.id === item.subjectId) : undefined)
+      case "question": {
+        const interaction = item.issueId ? (await forIssue(item.issueId)).find((i) => i.id === item.subjectId) : undefined
+        // The context is a nicety: without it the question still shows.
+        const context = item.issueId ? await questionContext(client, item.issueId, interaction).catch(() => null) : null
+        return questionDetail(interaction, context)
+      }
       case "confirmation":
         return confirmationDetail(item.issueId ? (await forIssue(item.issueId)).find((i) => i.id === item.subjectId) : undefined, item.summary)
       case "approval":

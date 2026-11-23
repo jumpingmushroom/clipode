@@ -70,7 +70,7 @@ export function toInboxItem(item: AttentionItem): InboxItem {
   }
 }
 
-type Interaction = { id: string; kind: string; payload: Record<string, unknown> }
+type Interaction = { id: string; kind: string; payload: Record<string, unknown>; originCommentIds?: string[] }
 type QuestionPayload = { id?: string; prompt?: string; selectionMode?: string; allowOther?: boolean; required?: boolean; options?: { id?: string; label?: string }[] }
 
 /** Every interaction on a task. One request serves all inbox items on that task, so the store caches it. */
@@ -78,10 +78,20 @@ export function getInteractions(client: Client, issueId: string): Promise<Intera
   return client.get<Interaction[]>(`/api/issues/${id(issueId)}/interactions`)
 }
 
-export function questionDetail(interaction: Interaction | undefined): ItemDetail {
+/** The comments an agent wrote alongside a question, as one Markdown text, or null without any. */
+export async function questionContext(client: Client, issueId: string, interaction: Interaction | undefined): Promise<string | null> {
+  const ids = interaction?.originCommentIds ?? []
+  if (!ids.length) return null
+  const comments = await client.get<{ id: string; body: string }[]>(`/api/issues/${id(issueId)}/comments`)
+  const bodies = ids.map((cid) => comments.find((c) => c.id === cid)?.body).filter((b): b is string => !!b)
+  return bodies.length ? bodies.join("\n\n") : null
+}
+
+export function questionDetail(interaction: Interaction | undefined, context: string | null = null): ItemDetail {
   const questions = (interaction?.payload.questions ?? []) as QuestionPayload[]
   return {
     kind: "question",
+    context,
     questions: questions.map(
       (q, i): Question => ({
         id: q.id ?? String(i),
