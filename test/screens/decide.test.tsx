@@ -175,3 +175,17 @@ test("a review that is not stalled is decided elsewhere and offers no actions", 
   await Bun.sleep(40)
   expect(app.server.writes).toHaveLength(0)
 })
+
+test("a reject reason can span lines", async () => {
+  app = await startApp({ route: { name: "item", id: CONFIRMATION.id } })
+  await app.frame()
+  app.mockInput.pressKey("j")
+  app.mockInput.pressEnter()
+  await app.frame()
+  await app.mockInput.typeText("Not this one.")
+  app.mockInput.pressKey("j", { ctrl: true })
+  await app.mockInput.typeText("Pick green.")
+  app.mockInput.pressEnter()
+  await Bun.sleep(60)
+  expect(writesTo("/reject")[0]?.body).toEqual({ reason: "Not this one.\nPick green." })
+})

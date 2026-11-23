@@ -77,7 +77,8 @@ export function Frame(
           </box>
         </Show>
       </box>
-      <box flexDirection="row" height={1} paddingLeft={1} paddingRight={sidebarShown() ? SIDEBAR_WIDTH + 1 : 1}>
+      {/* The composer row grows while a multi-line comment is typed. */}
+      <box flexDirection="row" flexShrink={0} paddingLeft={1} paddingRight={sidebarShown() ? SIDEBAR_WIDTH + 1 : 1}>
         <box flexGrow={1} backgroundColor={theme().panel} paddingLeft={2}>
           <Composer target={props.composer} />
         </box>

@@ -1,10 +1,11 @@
 // The composer row above the footer: a comment field for the task on screen. c focuses it, enter sends, esc cancels.
-import type { InputRenderable } from "@opentui/core"
+import type { TextareaRenderable } from "@opentui/core"
 import { useBindings, useKeymap } from "@opentui/keymap/solid"
 import { createSignal, onCleanup, Show } from "solid-js"
 import { setMode } from "../keymap/provider.tsx"
 import { useStores } from "../store/context.tsx"
 import { useTheme } from "../theme/context.tsx"
+import { TextArea } from "../ui/text-area.tsx"
 import { useToast } from "../ui/toast.tsx"
 
 export type ComposerTarget = { label: string; send: (text: string) => Promise<void> }
@@ -16,19 +17,19 @@ export function Composer(props: { target?: ComposerTarget }) {
   const toast = useToast()
   const [open, setOpen] = createSignal(false)
   const [sending, setSending] = createSignal(false)
-  let input: InputRenderable | undefined
+  let input: TextareaRenderable | undefined
   const writable = () => !!props.target && session.client().writes
 
   const close = () => {
     setOpen(false)
-    if (input) input.value = ""
+    input?.setText("")
     input?.blur()
     setMode(keymap, "base")
   }
   onCleanup(() => open() && setMode(keymap, "base"))
 
   const submit = async () => {
-    const text = input?.value.trim() ?? ""
+    const text = input?.plainText.trim() ?? ""
     if (!text || sending() || !props.target) return
     setSending(true)
     try {
@@ -73,16 +74,11 @@ export function Composer(props: { target?: ComposerTarget }) {
         <text fg={theme().accent} flexShrink={0}>
           {sending() ? "… " : "› "}
         </text>
-        <input
-          ref={(r: InputRenderable) => (input = r)}
-          flexGrow={1}
-          placeholder={`Comment on ${props.target?.label ?? ""}, enter to send, esc to cancel`}
-          placeholderColor={theme().muted}
-          textColor={theme().text}
-          focusedTextColor={theme().text}
-          backgroundColor={theme().panel}
-          focusedBackgroundColor={theme().panel}
-          cursorColor={theme().accent}
+        <TextArea
+          mode="input"
+          ref={(r) => (input = r)}
+          background="panel"
+          placeholder={`Comment on ${props.target?.label ?? ""}: enter sends, ctrl+j adds a line, esc cancels`}
         />
       </box>
     </Show>
