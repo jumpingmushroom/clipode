@@ -4,6 +4,11 @@ import { TextAttributes, type ScrollBoxRenderable } from "@opentui/core"
 import { useBindings } from "@opentui/keymap/solid"
 import { createMemo, createSignal, For, Match, onCleanup, onMount, Show, Switch } from "solid-js"
 import { useRoute } from "../route.tsx"
+import { useCommands } from "../keymap/commands.tsx"
+import { createDialogs } from "../plugin/dialogs.tsx"
+import { useStores } from "../store/context.tsx"
+import { afterDispatch, useDialog } from "../ui/dialog.tsx"
+import { useToast } from "../ui/toast.tsx"
 import { useCompany } from "../store/context.tsx"
 import type { ToolEntry, TranscriptItem } from "../store/runs.ts"
 import { useTheme } from "../theme/context.tsx"
@@ -56,6 +61,20 @@ export function RunScreen(props: { id: string; version: string; sidebar: boolean
   })
 
   const run = () => transcript.run.data
+  const { session } = useStores()
+  const toast = useToast()
+  const dialogs = createDialogs(useDialog())
+  // Cancelling interrupts work, so it asks first.
+  const cancel = () =>
+    afterDispatch(async () => {
+      if (!transcript.live()) return
+      if (!(await dialogs.confirm("Cancel this run?", "The agent stops where it is."))) return
+      company.runs.cancel(props.id).then(
+        () => toast.show("Run cancelled", "success"),
+        (err) => toast.error(err),
+      )
+    })
+  useCommands(() => (session.client().writes && transcript.live() ? [{ name: "run.cancel", title: "Cancel run", category: "Run", keys: "x", run: cancel }] : []))
   const agent = () => company.agents.byId(run()?.agentId)
   const task = () => company.issues.byId(run()?.issueId)
   const items = createMemo(() => transcript.items().filter((i) => system() || i.kind !== "system"))
@@ -107,7 +126,7 @@ export function RunScreen(props: { id: string; version: string; sidebar: boolean
       badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<RunSidebar runId={props.id} model={model()} duration={duration()} cost={cost()} tools={tools()} result={result()} />}
-      hints={[["esc", "back"], ["j/k", "scroll"], ["G", "follow"], ["t", "thinking"], ["e", "expand tools"], ["s", "status lines"]]}
+      hints={[["esc", "back"], ["j/k", "scroll"], ["G", "follow"], ["t", "thinking"], ["e", "tools"], ["s", "status"], ...(transcript.live() && session.client().writes ? ([["x", "cancel run"]] as [string, string][]) : [])]}
       narrowHints={[["esc", "back"], ["j/k", "scroll"], ["t", "think"], ["e", "tools"]]}
       version={props.version}
     >

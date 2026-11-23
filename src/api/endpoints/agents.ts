@@ -23,3 +23,16 @@ export async function listModels(client: Client, companyId: string, adapterType:
   const rows = await client.get<{ id: string; label?: string }[]>(`/api/companies/${encodeURIComponent(companyId)}/adapters/${encodeURIComponent(adapterType)}/models`)
   return rows.map((m) => ({ id: m.id, label: m.label ?? m.id }))
 }
+
+// Agent controls (phase 3), as probed in the scratch company.
+const agentPath = (agentId: string, verb: string) => `/api/agents/${encodeURIComponent(agentId)}/${verb}`
+
+export const pauseAgent = (client: Client, agentId: string) => client.post(agentPath(agentId, "pause"), {})
+
+/** Resume answers before the agent's status changes; read the agent again a moment later. */
+export const resumeAgent = (client: Client, agentId: string) => client.post(agentPath(agentId, "resume"), {})
+
+/** Starts a run now. The same idempotency key makes a retry start no second run. */
+export function wakeAgent(client: Client, agentId: string, idempotencyKey: string, reason?: string) {
+  return client.post(agentPath(agentId, "wakeup"), { source: "on_demand", triggerDetail: "manual", idempotencyKey, ...(reason ? { reason } : {}) })
+}

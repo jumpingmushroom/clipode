@@ -64,3 +64,8 @@ export async function getRunLog(client: Client, runId: string, offset: number, l
   if (typeof log.nextOffset === "number") return { content: log.content, next: log.nextOffset, more: true }
   return { content: log.content, next: offset + Buffer.byteLength(log.content, "utf8"), more: false }
 }
+
+/** Stops a run. Cancelling an already cancelled run answers as success. */
+export function cancelRun(client: Client, runId: string) {
+  return client.post(`/api/heartbeat-runs/${encodeURIComponent(runId)}/cancel`, {})
+}

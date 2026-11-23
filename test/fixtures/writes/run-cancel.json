@@ -1,0 +1,488 @@
+{
+  "method": "POST",
+  "status": 200,
+  "request": {},
+  "response": {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "companyId": "00000000-0000-4000-8000-000000000002",
+    "agentId": "00000000-0000-4000-8000-000000000003",
+    "scopeKind": "company",
+    "issueId": null,
+    "invocationSource": "on_demand",
+    "triggerDetail": "manual",
+    "status": "cancelled",
+    "responsibleUserId": "responsibleUserId-1",
+    "activeIdentityContextId": "00000000-0000-4000-8000-000000000004",
+    "startedAt": "2026-11-23T13:21:18.105Z",
+    "finishedAt": "2026-11-23T13:21:21.151Z",
+    "executionControlDeadlineAt": null,
+    "executionStatusDeliveryId": null,
+    "error": "example error",
+    "wakeupRequestId": "00000000-0000-4000-8000-000000000005",
+    "exitCode": 1,
+    "signal": null,
+    "costAccountingPending": false,
+    "costAccountedAt": "2026-11-23T13:21:21.213Z",
+    "accountingProjectionVersion": null,
+    "accountingLastAttemptAt": null,
+    "accountingLastError": null,
+    "accountingAttemptCount": 0,
+    "usageJson": {
+      "model": "claude-sonnet-5-5",
+      "biller": "anthropic",
+      "provider": "anthropic",
+      "costStatus": "example costStatus",
+      "billingType": "subscription_included",
+      "ledgerScope": {
+        "issueId": null,
+        "projectId": null,
+        "billingCode": null
+      },
+      "costUsdExact": null,
+      "freshSession": true,
+      "sessionReused": false,
+      "budgetDispatch": {
+        "admittedAt": "2026-11-23T13:21:18.873Z",
+        "handedOffAt": "2026-11-23T13:21:18.884Z",
+        "reservationId": "00000000-0000-4000-8000-000000000006",
+        "recoveryLeaseOwner": null
+      },
+      "sessionRotated": false,
+      "configFreshness": {
+        "session": {
+          "reset": false,
+          "categories": [
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories"
+          ],
+          "resetReasons": [],
+          "nextFingerprint": "example nextFingerprint",
+          "changedCategories": [],
+          "taskSessionReused": false,
+          "fingerprintVersion": 1,
+          "taskSessionAvailable": false,
+          "storedFingerprintPresent": false
+        },
+        "version": 1,
+        "workspace": {
+          "action": "create",
+          "reasons": [],
+          "categories": [
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories"
+          ],
+          "reuseRequested": false,
+          "nextFingerprint": "example nextFingerprint",
+          "workspaceReused": false,
+          "activeWorkspaceId": null,
+          "changedCategories": [],
+          "storedFingerprint": null,
+          "fingerprintVersion": 1,
+          "inferredFingerprint": null,
+          "previousWorkspaceId": null,
+          "configSnapshotRefreshed": false,
+          "storedFingerprintPresent": false
+        }
+      },
+      "providerRequestId": null,
+      "taskSessionReused": false,
+      "sessionRotationReason": null,
+      "accountingReceiptReady": false,
+      "accountingReceiptSequence": 0,
+      "accountingReceiptSourceId": "00000000-0000-4000-8000-000000000007",
+      "accountingProviderWorkStarted": false,
+      "accountingReceiptSourceFences": {}
+    },
+    "resultJson": {
+      "phase": "example phase",
+      "summary": "example summary",
+      "stopReason": "example stopReason",
+      "cancellation": {
+        "reason": "example reason",
+        "source": "operator",
+        "expected": true,
+        "initiator": {
+          "id": "responsibleUserId-1",
+          "type": "user"
+        },
+        "recordedAt": "2026-11-23T13:21:19.681Z"
+      },
+      "timeoutFired": false,
+      "timeoutSource": "example timeoutSource",
+      "configFreshness": {
+        "session": {
+          "reset": false,
+          "categories": [
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories"
+          ],
+          "resetReasons": [],
+          "nextFingerprint": "example nextFingerprint",
+          "changedCategories": [],
+          "taskSessionReused": false,
+          "fingerprintVersion": 1,
+          "taskSessionAvailable": false,
+          "storedFingerprintPresent": false
+        },
+        "version": 1,
+        "workspace": {
+          "action": "create",
+          "reasons": [],
+          "categories": [
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories",
+            "example categories"
+          ],
+          "reuseRequested": false,
+          "nextFingerprint": "example nextFingerprint",
+          "workspaceReused": false,
+          "activeWorkspaceId": null,
+          "changedCategories": [],
+          "storedFingerprint": null,
+          "fingerprintVersion": 1,
+          "inferredFingerprint": null,
+          "previousWorkspaceId": null,
+          "configSnapshotRefreshed": false,
+          "storedFingerprintPresent": false
+        }
+      },
+      "instructionSave": {
+        "state": "unchanged",
+        "contract": "example contract",
+        "entryFile": "example entryFile",
+        "errorCode": null,
+        "errorMessage": null,
+        "storageWarning": null,
+        "appliedCandidateHash": null
+      },
+      "cancelledByUserId": "responsibleUserId-1",
+      "executionRecovery": {
+        "kind": "bootstrap",
+        "providerWorkStarted": false
+      },
+      "timeoutConfigured": false,
+      "acpPendingToolCount": 0,
+      "effectiveTimeoutSec": 0,
+      "cancelledByActorType": "example cancelledByActorType",
+      "presentationDecision": {
+        "schema": "paperclip.run_presentation_decision.v1",
+        "commentId": null,
+        "reasonCodes": [
+          "example reasonCodes",
+          "example reasonCodes"
+        ],
+        "chosenSource": "example chosenSource",
+        "commentAction": "example commentAction",
+        "sourceEventId": null,
+        "resolverVersion": "example resolverVersion",
+        "activityDisposition": "example activityDisposition"
+      },
+      "acpObservedEventCount": 0,
+      "executionCancellation": {
+        "state": "acknowledged",
+        "forced": false,
+        "acknowledgedAt": "2026-11-23T13:21:21.102Z"
+      },
+      "adapterExecutionTimeout": {
+        "source": "unlimited",
+        "timeoutSec": 0
+      },
+      "acpToolInventoryComplete": true,
+      "conversationContinuation": "example conversationContinuation"
+    },
+    "runtimeMode": "example runtimeMode",
+    "runtimeModeResolverVersion": "example runtimeModeResolverVersion",
+    "runtimeModeReason": "example runtimeModeReason",
+    "runtimeModeResolvedAt": "2026-11-23T13:21:18.803Z",
+    "runnerProfileJson": {
+      "adapterDispatch": {
+        "adapterType": "claude_local"
+      }
+    },
+    "runnerInstanceId": null,
+    "nativeSessionId": null,
+    "nativeIssueId": null,
+    "driverKind": null,
+    "driverVersion": null,
+    "completionContractId": null,
+    "completionContractSha256": null,
+    "nextEventSeq": 24,
+    "nativePhase": null,
+    "nativePhaseUpdatedAt": null,
+    "sessionIdBefore": null,
+    "sessionIdAfter": null,
+    "logStore": "local_file",
+    "logRef": "example logRef",
+    "logBytes": 1611,
+    "logSha256": "example logSha256",
+    "logCompressed": false,
+    "stdoutExcerpt": "example stdoutExcerpt",
+    "stderrExcerpt": "example stderrExcerpt",
+    "errorCode": "cancelled",
+    "externalRunId": null,
+    "controllerBootId": "00000000-0000-4000-8000-000000000008",
+    "controllerLeaseExpiresAt": null,
+    "controllerProcess": {
+      "pid": 7,
+      "bootId": "00000000-0000-4000-8000-000000000008",
+      "hostHash": "example hostHash",
+      "processStartedAt": "2026-11-20T14:16:21.940Z"
+    },
+    "executionStage": "example executionStage",
+    "processPid": 750135,
+    "processGroupId": null,
+    "processStartedAt": "2026-11-23T13:21:18.300Z",
+    "processHostHash": "example processHostHash",
+    "lastOutputAt": "2026-11-23T13:21:21.006Z",
+    "lastOutputSeq": 4,
+    "lastOutputStream": "stdout",
+    "lastOutputBytes": 1611,
+    "retryOfRunId": null,
+    "processLossRetryCount": 0,
+    "scheduledRetryAt": null,
+    "scheduledRetryAttempt": 0,
+    "scheduledRetryReason": null,
+    "issueCommentStatus": "example issueCommentStatus",
+    "issueCommentSatisfiedByCommentId": null,
+    "issueCommentRetryQueuedAt": null,
+    "livenessState": "failed",
+    "livenessReason": "example livenessReason",
+    "continuationAttempt": 0,
+    "lastUsefulActionAt": null,
+    "nextAction": null,
+    "contextSnapshot": {
+      "actorId": "responsibleUserId-1",
+      "wakeReason": "example wakeReason",
+      "wakeSource": "example wakeSource",
+      "triggeredBy": "example triggeredBy",
+      "aiConnection": {
+        "mode": "example mode",
+        "method": "example method",
+        "grantId": "00000000-0000-4000-8000-000000000009",
+        "identity": "example identity",
+        "provider": "anthropic",
+        "accountName": "example accountName",
+        "connectionId": "00000000-0000-4000-8000-00000000000a",
+        "subscriptionId": "00000000-0000-4000-8000-00000000000b",
+        "sessionIdentity": "example sessionIdentity",
+        "responsibleUserId": "responsibleUserId-1"
+      },
+      "paperclipWake": {
+        "connectionInstructions": null,
+        "connectorSkillInstructions": ""
+      },
+      "skillVersions": {
+        "example_key_1": "00000000-0000-4000-8000-00000000000c",
+        "example_key_2": "00000000-0000-4000-8000-00000000000d",
+        "example_key_3": "00000000-0000-4000-8000-00000000000e",
+        "example_key_4": "00000000-0000-4000-8000-00000000000f",
+        "example_key_5": "00000000-0000-4000-8000-000000000010",
+        "example_key_6": "00000000-0000-4000-8000-000000000011",
+        "example_key_7": "00000000-0000-4000-8000-000000000012",
+        "example_key_8": "00000000-0000-4000-8000-000000000013"
+      },
+      "paperclipScratch": {
+        "dir": "example dir",
+        "type": "heartbeat_run",
+        "marker": "example marker",
+        "cleanupPolicy": "example cleanupPolicy",
+        "tempKeysApplied": [
+          "example tempKeysApplied",
+          "example tempKeysApplied",
+          "example tempKeysApplied"
+        ]
+      },
+      "forceFreshSession": false,
+      "responsibleUserId": "responsibleUserId-1",
+      "wakeTriggerDetail": "example wakeTriggerDetail",
+      "paperclipWorkspace": {
+        "cwd": "example cwd",
+        "mode": "example mode",
+        "source": "agent_home",
+        "repoRef": null,
+        "repoUrl": null,
+        "strategy": "example strategy",
+        "agentHome": "example agentHome",
+        "projectId": null,
+        "branchName": null,
+        "realization": {
+          "mode": "example mode",
+          "local": {
+            "path": "example path",
+            "source": "agent_home",
+            "repoRef": null,
+            "repoUrl": null,
+            "strategy": "example strategy",
+            "projectId": null,
+            "branchName": null,
+            "worktreePath": null,
+            "projectWorkspaceId": null
+          },
+          "remote": {
+            "path": null
+          },
+          "leaseId": "00000000-0000-4000-8000-000000000014",
+          "rebuild": {
+            "mode": "example mode",
+            "repoRef": null,
+            "repoUrl": null,
+            "metadata": {
+              "source": {
+                "kind": "agent_home",
+                "repoRef": null,
+                "repoUrl": null,
+                "strategy": "example strategy",
+                "localPath": "example localPath",
+                "projectId": null,
+                "branchName": null,
+                "worktreePath": null,
+                "projectWorkspaceId": null
+              },
+              "provider": "local",
+              "runtimeOverlay": {
+                "cleanupCommand": null,
+                "teardownCommand": null,
+                "provisionCommand": null,
+                "workspaceRuntime": null,
+                "runtimeProvisionCommand": null
+              },
+              "providerMetadata": {},
+              "environmentDriver": "example environmentDriver"
+            },
+            "localPath": "example localPath",
+            "remotePath": null,
+            "providerLeaseId": null,
+            "executionWorkspaceId": null
+          },
+          "summary": "example summary",
+          "version": 1,
+          "provider": "local",
+          "bootstrap": {
+            "command": null
+          },
+          "additional": [],
+          "pathAliases": [],
+          "environmentId": "00000000-0000-4000-8000-000000000015",
+          "providerLeaseId": null,
+          "authoritativeRoot": "example authoritativeRoot",
+          "outboundRestorePaths": []
+        },
+        "workspaceId": null,
+        "worktreePath": null
+      },
+      "paperclipWorkspaces": [],
+      "paperclipEnvironment": {
+        "id": "00000000-0000-4000-8000-000000000015",
+        "name": "example name",
+        "driver": "example driver",
+        "leaseId": "00000000-0000-4000-8000-000000000014",
+        "workspaceRealization": {
+          "mode": "example mode",
+          "local": {
+            "path": "example path",
+            "source": "agent_home",
+            "repoRef": null,
+            "repoUrl": null,
+            "strategy": "example strategy",
+            "projectId": null,
+            "branchName": null,
+            "worktreePath": null,
+            "projectWorkspaceId": null
+          },
+          "remote": {
+            "path": null
+          },
+          "leaseId": "00000000-0000-4000-8000-000000000014",
+          "rebuild": {
+            "mode": "example mode",
+            "repoRef": null,
+            "repoUrl": null,
+            "metadata": {
+              "source": {
+                "kind": "agent_home",
+                "repoRef": null,
+                "repoUrl": null,
+                "strategy": "example strategy",
+                "localPath": "example localPath",
+                "projectId": null,
+                "branchName": null,
+                "worktreePath": null,
+                "projectWorkspaceId": null
+              },
+              "provider": "local",
+              "runtimeOverlay": {
+                "cleanupCommand": null,
+                "teardownCommand": null,
+                "provisionCommand": null,
+                "workspaceRuntime": null,
+                "runtimeProvisionCommand": null
+              },
+              "providerMetadata": {},
+              "environmentDriver": "example environmentDriver"
+            },
+            "localPath": "example localPath",
+            "remotePath": null,
+            "providerLeaseId": null,
+            "executionWorkspaceId": null
+          },
+          "summary": "example summary",
+          "version": 1,
+          "provider": "local",
+          "bootstrap": {
+            "command": null
+          },
+          "additional": [],
+          "pathAliases": [],
+          "environmentId": "00000000-0000-4000-8000-000000000015",
+          "providerLeaseId": null,
+          "authoritativeRoot": "example authoritativeRoot",
+          "outboundRestorePaths": []
+        },
+        "sandboxLeaseAcquisition": null
+      },
+      "executionContinuation": null,
+      "paperclipCasesEnabled": false,
+      "paperclipTaskMarkdown": "example paperclipTaskMarkdown",
+      "connectionInstructions": null,
+      "executionIdentityRunId": "00000000-0000-4000-8000-000000000001",
+      "paperclipAgentJwtScope": {
+        "kind": "standard"
+      },
+      "skillSelectionSnapshot": true,
+      "originIdentityContextId": null,
+      "githubAuthenticationMode": "example githubAuthenticationMode",
+      "paperclipTaskMarkdownAssignment": "example paperclipTaskMarkdownAssignment",
+      "paperclipTaskCommunicationGuidance": "example paperclipTaskCommunicationGuidance",
+      "paperclipCoordinatorWorkspaceEnabled": false
+    },
+    "createdAt": "2026-11-23T13:21:18.071Z",
+    "updatedAt": "2026-11-23T13:21:21.344Z"
+  }
+}

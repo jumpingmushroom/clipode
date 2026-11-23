@@ -118,6 +118,12 @@ export function createSession(opts: SessionOptions = {}) {
     handleError(err: unknown) {
       if (err instanceof ApiError && err.kind === "unauthorized") api.expire()
     },
+    /** For a refused write: handles a 401, and words the error with the server's own reason ("Not sent: …"). */
+    notSent(err: unknown): Error {
+      api.handleError(err)
+      const reason = (err as { body?: { error?: unknown } }).body?.error
+      return new Error(`Not sent: ${typeof reason === "string" ? reason : (err as Error).message}`)
+    },
   }
   return api
 }

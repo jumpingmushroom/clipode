@@ -12,6 +12,7 @@ import { elapsed, fit } from "../ui/format.ts"
 import { Spinner } from "../ui/spinner.tsx"
 import { Frame } from "./frame.tsx"
 import { SidebarHeader, SidebarLine } from "./inbox-sidebar.tsx"
+import { useAgentActions } from "./agent-actions.tsx"
 
 /** What an agent is doing now, from live runs and the inbox. */
 export function useAgentNow() {
@@ -55,6 +56,7 @@ export function AgentsScreen(props: { version: string; sidebar: boolean }) {
 
   const agents = createMemo(() => company.agents.list.data.filter((a) => a.status !== "terminated"))
   const current = () => agents()[Math.min(selected(), agents().length - 1)]
+  useAgentActions(current)
   const move = (delta: number) => {
     const next = Math.max(0, Math.min(agents().length - 1, selected() + delta))
     setSelected(next)
@@ -78,7 +80,7 @@ export function AgentsScreen(props: { version: string; sidebar: boolean }) {
       badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<Show when={current()}>{(a: () => AgentSummary) => <AgentSidebar agent={a()} now={now()} />}</Show>}
-      hints={[["j/k", "move"], ["enter", "open"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
+      hints={[["j/k", "move"], ["enter", "open"], ["w", "wake"], ["p", "pause/resume"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
       narrowHints={[["j/k", "move"], ["enter", "open"], ["^p", "cmds"]]}
       version={props.version}
     >

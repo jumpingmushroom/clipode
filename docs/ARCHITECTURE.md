@@ -97,12 +97,17 @@ Phase 3 starts, as decided on 2026-11-23, with tasks: create and edit them, assi
 | Edit, assign, change status or priority | `PATCH /api/issues/{id}` | any of `title`, `description`, `status`, `priority`, `assigneeAgentId` (null to unassign), `projectId` |
 | Models for the model choice (a read) | `GET /api/companies/{companyId}/adapters/{adapterType}/models` | answers `[{ id, label }]` |
 | Attach a file to a task (1.4) | `POST /api/companies/{companyId}/issues/{issueId}/attachments` | multipart form, field `file`; answers `201` with the attachment. Size (10 MB by default) and types are server settings. |
+| Wake an agent (1.6) | `POST /api/agents/{id}/wakeup` | `source: "on_demand"`, `triggerDetail: "manual"`, `reason?`, `idempotencyKey`; answers `202` with the queued run |
+| Pause or resume an agent (1.6) | `POST /api/agents/{id}/pause`, `/resume` | none; answers `200` with the agent. A resume takes effect a moment after the answer, so the agent is read again. |
+| Cancel a run (1.6) | `POST /api/heartbeat-runs/{runId}/cancel` | none; answers `200` with the run, also when it is already cancelled. A `cancellationRequestId` is refused with `409` ("Correlated Stop requires a native run") for these runs, so it is not sent. |
 
 Probed in the scratch company on 2026-11-23 (scrubbed in `test/fixtures/writes/task-*.json`): create answers `201` with the task; a second create with the same `idempotencyKey` answers `200` with the same task. Every update answers `200` with the task. `expectedStatusVersion` is accepted only for a status-only backlog-to-todo promotion and otherwise refused with `422`, so clipode sends status changes without it. Assigning an agent wakes it.
 
 `PATCH /api/issues/{id}` accepts many more fields (execution policy, visibility, hiding). The allowlist admits the route; only clipode's task functions build its bodies, and they send the fields in the table and nothing else.
 
 Keys: in the task thread, and on the selected row in Tasks, `s` changes status, `p` changes priority, `a` assigns (agents or unassigned), and `e` edits. `n` creates a task.
+
+Agent controls (1.6): on the Agents screen and agent detail, `w` wakes the agent after a prompt for an optional reason, and `p` pauses it (after a confirmation) or resumes a paused one at once. In a live run's transcript, `x` cancels the run after a confirmation. Verified in the scratch company.
 
 Since 1.3, `n` and `e` open one task dialog modelled on the web UI's composer: description first, an optional title, then project, assignee, and, for a new task, model (from the assignee's adapter), mode (standard, plan, ask) and private. `tab` moves between fields, `enter` or `space` changes a choice field through a picker, and `ctrl+s` saves. A new task starts in the project of the task on screen. Unset fields are left out of the request so the server applies its defaults. Verified in the scratch company: CLI-5 (every field) and CLI-6 (description only, project, private).
 

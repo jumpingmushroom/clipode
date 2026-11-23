@@ -83,10 +83,7 @@ export function createAttentionStore(session: Session, companyId: string) {
         await send()
         await feed.refresh()
       } catch (err) {
-        session.handleError(err)
-        // The server's own reason ("Interaction already resolved") reads better than the request line.
-        const body = (err as { body?: { error?: unknown } }).body
-        throw new Error(`Not sent: ${typeof body?.error === "string" ? body.error : (err as Error).message}`)
+        throw session.notSent(err)
       } finally {
         setHidden((h) => h.filter((id) => id !== item.id))
       }

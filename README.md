@@ -2,7 +2,7 @@
 
 clipode is a terminal client for a self-hosted [Paperclip](https://github.com/paperclipai/paperclip) instance, in the style of the OpenCode terminal client. It shows what a board operator needs: the attention inbox, tasks and their threads, agent run transcripts, and the agents, with live updates.
 
-You can answer what agents ask, accept or reject confirmations, approve or reject approvals, decide stalled task reviews, comment on tasks, dismiss or snooze inbox items, and create, edit, assign and triage tasks. clipode sends only those writes, each to one specific route, and refuses any other change to your instance. To make it read-only, set `"readOnly": true` in `cli.json`.
+You can answer what agents ask, accept or reject confirmations, approve or reject approvals, decide stalled task reviews, comment on tasks, dismiss or snooze inbox items, create, edit, assign and triage tasks, wake, pause and resume agents, and cancel runs. clipode sends only those writes, each to one specific route, and refuses any other change to your instance. To make it read-only, set `"readOnly": true` in `cli.json`.
 
 clipode is tested against Paperclip `2026.1117.0`. The oldest supported server is `2026.1106.0`.
 
@@ -38,6 +38,8 @@ clipode opens on the inbox. The following keys work everywhere:
 | `d`, `s`, `u` | Dismiss, snooze, or restore the selected inbox item |
 | `n` | New task (in Tasks): description, optional title, project, assignee, model, plan or ask mode, private, and files (paste or drag their paths; `ctrl+v` on the Files row pastes a clipboard image) |
 | `s`, `p`, `a`, `e` | Change status or priority, assign, or edit the title and description (in a task thread, or on the selected task in Tasks) |
+| `w`, `p` | Wake an agent, or pause or resume it (on Agents and agent detail) |
+| `x` | Cancel a live run (in its transcript) |
 | `ctrl+b` | Show or hide the sidebar |
 | `ctrl+t` | Switch theme, with a live preview |
 | `ctrl+x c` | Switch company |

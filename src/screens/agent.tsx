@@ -11,6 +11,7 @@ import { Spinner } from "../ui/spinner.tsx"
 import { useAgentNow, stateColor } from "./agents.tsx"
 import { Frame } from "./frame.tsx"
 import { runDuration } from "./thread.tsx"
+import { useAgentActions } from "./agent-actions.tsx"
 
 export function AgentScreen(props: { id: string; version: string; sidebar: boolean }) {
   const { theme } = useTheme()
@@ -29,6 +30,7 @@ export function AgentScreen(props: { id: string; version: string; sidebar: boole
   onCleanup(() => clearInterval(tick))
 
   const agent = () => company.agents.byId(props.id)
+  useAgentActions(agent)
   const move = (d: number) => setSelected((s) => Math.max(0, Math.min(runs.data.length - 1, s + d)))
   const open = () => {
     const run = runs.data[selected()]
@@ -49,7 +51,7 @@ export function AgentScreen(props: { id: string; version: string; sidebar: boole
     <Frame
       view={`Agent · ${agent()?.name ?? ""}`}
       badge={company.attention.badge()}
-      hints={[["esc", "back"], ["j/k", "move"], ["enter", "open run"], ["g", "go to"], ["ctrl+p", "commands"]]}
+      hints={[["esc", "back"], ["j/k", "move"], ["enter", "open run"], ["w", "wake"], ["p", "pause/resume"], ["ctrl+p", "commands"]]}
       narrowHints={[["esc", "back"], ["enter", "open run"]]}
       version={props.version}
     >

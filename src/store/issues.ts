@@ -12,15 +12,8 @@ export const IN_FLIGHT = ["in_progress", "in_review", "blocked"]
 
 export type Thread = { detail: Resource<TaskDetail | null>; entries: Resource<ThreadEntry[]>; cost: Resource<TaskCost | null> }
 
-/** The server's own reason reads better than the request line; a 401 still ends the session. */
-function notSentError(session: Session, err: unknown): Error {
-  session.handleError(err)
-  const reason = (err as { body?: { error?: unknown } }).body?.error
-  return new Error(`Not sent: ${typeof reason === "string" ? reason : (err as Error).message}`)
-}
-
 export function createIssuesStore(session: Session, companyId: string) {
-  const notSent = (err: unknown) => notSentError(session, err)
+  const notSent = (err: unknown) => session.notSent(err)
   const list = createResource<TaskSummary[]>(() => listTasks(session.client(), companyId), [], session.handleError)
   const projects = createResource<ProjectSummary[]>(() => listProjects(session.client(), companyId), [], session.handleError)
   const [threads, setThreads] = createStore<Record<string, Thread>>({})

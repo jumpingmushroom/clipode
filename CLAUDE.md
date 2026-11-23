@@ -1,6 +1,6 @@
 # clipode
 
-A terminal client (TUI) for a self-hosted Paperclip instance, in the style of the OpenCode TUI. It reads everything and sends a small allowlist of writes (answers, decisions, comments, dismissals, and task create and update). MIT licensed.
+A terminal client (TUI) for a self-hosted Paperclip instance, in the style of the OpenCode TUI. It reads everything and sends a small allowlist of writes (answers, decisions, comments, dismissals, task create and update, and agent and run controls). MIT licensed.
 
 Read `docs/ARCHITECTURE.md` before any work. It is the agreed design and holds the build order. `docs/design/` holds the agreed mockup, and `docs/research/attention-and-live-findings.md` holds what the real instance returns. Where the probe disagrees with Paperclip's docs or source, the probe wins.
 
@@ -25,7 +25,7 @@ The last five need `PAPERCLIP_URL`, `PAPERCLIP_EMAIL` and `PAPERCLIP_PASSWORD`. 
 
 ## Hard constraints
 
-- **Writes only through the allowlist.** `src/api/client.ts` sends `GET` anywhere, sign-in and sign-out, and, when the client allows writes, only the routes listed in `WRITES` (phase 2: answers, decisions, comments, dismissals; phase 3: creating and updating tasks). Everything else throws `ReadOnlyError` before a request is sent, and `readOnly: true` in `cli.json` turns all writes off. Tests cover both lists. Add a route only with its phase in `docs/ARCHITECTURE.md`, and send writes to a real instance only in the scratch company (prefix `CLI`).
+- **Writes only through the allowlist.** `src/api/client.ts` sends `GET` anywhere, sign-in and sign-out, and, when the client allows writes, only the routes listed in `WRITES` (phase 2: answers, decisions, comments, dismissals; phase 3: creating and updating tasks, attachments, agent and run controls). Everything else throws `ReadOnlyError` before a request is sent, and `readOnly: true` in `cli.json` turns all writes off. Tests cover both lists. Add a route only with its phase in `docs/ARCHITECTURE.md`, and send writes to a real instance only in the scratch company (prefix `CLI`).
 - **Credentials.** Sign in with email and password to get a session cookie. Never write the password to disk. The cookie goes in `~/.local/state/clipode/auth.json` with mode `0600`.
 - **No real data in git.** Never commit credentials, cookies, the instance URL or raw responses. Fixtures recorded from the instance go through `script/scrub.ts`, and `bun run audit-fixtures` must pass before they are committed.
 - **Wire format stays in two folders.** Only `src/api` and `src/transcript` know Paperclip's wire format. Screens read from stores.

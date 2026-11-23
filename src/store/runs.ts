@@ -1,6 +1,6 @@
 // Runs: those queued or running now, and the transcript of an opened run.
 import { createSignal } from "solid-js"
-import { getRun, getRunLog, listLiveRuns } from "../api/endpoints/runs.ts"
+import { cancelRun, getRun, getRunLog, listLiveRuns } from "../api/endpoints/runs.ts"
 import type { LiveRunSummary, RunDetail } from "../api/model.ts"
 import { createTranscriptReader, type TranscriptItem } from "../transcript/parse.ts"
 import { createResource } from "./resource.ts"
@@ -68,6 +68,13 @@ export function createRunsStore(session: Session, companyId: string) {
     watch(runId: string) {
       setWatching((w) => [...w, runId])
       return () => setWatching((w) => w.filter((id) => id !== runId))
+    },
+    /** Stops a run, then refreshes the live runs and, if open, its transcript. */
+    async cancel(runId: string) {
+      await cancelRun(session.client(), runId).catch((err) => Promise.reject(session.notSent(err)))
+      void this.live.refresh()
+      const t = transcripts.get(runId)
+      if (t) void t.poll()
     },
     /** Reads new log lines of an open transcript; does nothing for a run that is not open. */
     refreshTranscript(runId: string) {
