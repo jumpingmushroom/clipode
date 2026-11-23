@@ -80,6 +80,7 @@ export async function run(version: string): Promise<boolean> {
   const session = createSession({
     url: config.url,
     apiKey: config.apiKey,
+    readOnly: config.readOnly,
     lastCompany: state.get().lastCompany,
     onCompany: (url, id) => void state.update({ lastCompany: { ...state.get().lastCompany, [url]: id } }),
   })

@@ -1,11 +1,30 @@
-// HTTP access to one Paperclip instance: base URL, cookie jar, Origin header, read-only guard, typed errors.
+// HTTP access to one Paperclip instance: base URL, cookie jar, Origin header, write guard, typed errors.
 
-// Phase 1 is read-only: GET anywhere, POST only to these paths.
-const ALLOWED_POSTS = new Set(["/api/auth/sign-in/email", "/api/auth/sign-out"])
+// GET goes anywhere. Sign-in and sign-out are always allowed; the writes below only when the client allows writes.
+// Each pattern is a whole path; an id segment is anything but "/", and paths with "." or ".." segments never match.
+const AUTH = [/^\/api\/auth\/sign-(in\/email|out)$/]
+const ID = "[^/]+"
+const WRITES: Record<string, RegExp[]> = {
+  POST: [
+    new RegExp(`^/api/issues/${ID}/interactions/${ID}/(respond|accept|reject)$`),
+    new RegExp(`^/api/approvals/${ID}/(approve|reject|request-revision)$`),
+    new RegExp(`^/api/issues/${ID}/comments$`),
+    new RegExp(`^/api/companies/${ID}/inbox-dismissals$`),
+  ],
+  DELETE: [new RegExp(`^/api/companies/${ID}/inbox-dismissals/${ID}$`)],
+}
+
+/** Whether a request may be sent. Exported for tests. */
+export function allowed(method: string, path: string, writes: boolean): boolean {
+  if (method === "GET") return true
+  if (path.split("/").some((seg) => seg === "." || seg === "..")) return false
+  if (method === "POST" && AUTH.some((re) => re.test(path))) return true
+  return writes && (WRITES[method] ?? []).some((re) => re.test(path))
+}
 
 export class ReadOnlyError extends Error {
   constructor(method: string, path: string) {
-    super(`clipode is read-only: ${method} ${path} is not allowed`)
+    super(`clipode does not send ${method} ${path}`)
     this.name = "ReadOnlyError"
   }
 }
@@ -34,8 +53,12 @@ export class Client {
   /** A bearer token (PAPERCLIP_API_KEY) instead of a session cookie. */
   readonly token: string | undefined
 
-  constructor(baseUrl: string, cookie = "", token?: string) {
+  /** Whether the phase 2 writes (answers, decisions, comments, dismissals) may be sent. */
+  readonly writes: boolean
+
+  constructor(baseUrl: string, cookie = "", token?: string, writes = false) {
     this.token = token
+    this.writes = writes
     const url = new URL(baseUrl)
     this.baseUrl = url.href.replace(/\/+$/, "")
     this.origin = url.origin
@@ -63,9 +86,13 @@ export class Client {
     return this.request<T>("POST", path, { body })
   }
 
+  delete<T>(path: string): Promise<T> {
+    return this.request<T>("DELETE", path)
+  }
+
   async request<T>(method: string, path: string, opts: { query?: Query; body?: unknown } = {}): Promise<T> {
     const verb = method.toUpperCase()
-    if (verb !== "GET" && !(verb === "POST" && ALLOWED_POSTS.has(path))) throw new ReadOnlyError(verb, path)
+    if (!allowed(verb, path, this.writes)) throw new ReadOnlyError(verb, path)
 
     const url = new URL(this.baseUrl + path)
     for (const [key, value] of Object.entries(opts.query ?? {})) {

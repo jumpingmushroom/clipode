@@ -14,6 +14,8 @@ export type SessionOptions = {
   email?: string
   /** A board API key from PAPERCLIP_API_KEY; replaces the email and password sign-in. */
   apiKey?: string
+  /** From cli.json `readOnly`: refuse every write, as in phase 1. */
+  readOnly?: boolean
   /** Last company per instance URL, from kv.json. */
   lastCompany?: Record<string, string>
   onCompany?: (url: string, companyId: string) => void
@@ -21,6 +23,7 @@ export type SessionOptions = {
 }
 
 export function createSession(opts: SessionOptions = {}) {
+  const writes = !opts.readOnly
   const [state, set] = createStore({
     status: "starting" as SessionStatus,
     url: opts.url ?? "",
@@ -55,12 +58,12 @@ export function createSession(opts: SessionOptions = {}) {
       if (!state.url) return void set("status", "signed-out")
       try {
         if (opts.apiKey) {
-          client = new Client(state.url, "", opts.apiKey)
+          client = new Client(state.url, "", opts.apiKey, writes)
           if (!(await enter())) set({ status: "signed-out", error: "PAPERCLIP_API_KEY was not accepted." })
           return
         }
         // Without a saved cookie this still succeeds on a local_trusted instance, which needs no sign-in.
-        client = new Client(state.url, (await loadCookie(new Client(state.url).baseUrl, opts.authPath)) ?? "")
+        client = new Client(state.url, (await loadCookie(new Client(state.url).baseUrl, opts.authPath)) ?? "", undefined, writes)
         if (!(await enter())) set("status", "signed-out")
       } catch (err) {
         set({ status: "signed-out", error: err instanceof Error ? err.message : String(err) })
@@ -69,7 +72,7 @@ export function createSession(opts: SessionOptions = {}) {
     async signIn(url: string, email: string, password: string) {
       set({ status: "signing-in", url, email, error: null })
       try {
-        client = new Client(url)
+        client = new Client(url, "", undefined, writes)
         // No email and password: a local_trusted instance accepts the request without a session.
         if (!email && !password) {
           if (!(await enter())) throw new Error("This instance needs an email and password.")

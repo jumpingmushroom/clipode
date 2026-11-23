@@ -2,7 +2,7 @@ import { afterAll, afterEach, beforeAll, describe, expect, test } from "bun:test
 import { mkdtemp, readFile, rm, stat } from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
-import { ApiError, Client, ReadOnlyError } from "../../src/api/client.ts"
+import { allowed, ApiError, Client, ReadOnlyError } from "../../src/api/client.ts"
 import { clearCookie, getSession, loadCookie, saveCookie, signIn, signOut, SignInError } from "../../src/api/auth.ts"
 import feed from "../fixtures/attention-feed.json"
 
@@ -171,5 +171,45 @@ describe("cookie storage", () => {
     expect(await loadCookie(client.baseUrl, file)).toBeNull()
     expect(await loadCookie("https://other.example", file)).toBe("x=1")
     expect((await stat(file)).mode & 0o777).toBe(0o600)
+  })
+})
+
+describe("write allowlist", () => {
+  test.each([
+    ["POST", "/api/issues/i1/interactions/x1/respond", true],
+    ["POST", "/api/issues/i1/interactions/x1/accept", true],
+    ["POST", "/api/issues/i1/interactions/x1/reject", true],
+    ["POST", "/api/approvals/a1/approve", true],
+    ["POST", "/api/approvals/a1/reject", true],
+    ["POST", "/api/approvals/a1/request-revision", true],
+    ["POST", "/api/issues/i1/comments", true],
+    ["POST", "/api/companies/c1/inbox-dismissals", true],
+    ["DELETE", "/api/companies/c1/inbox-dismissals/attention%3Aitem%3A1", true],
+    ["POST", "/api/issues/i1/interactions", false],
+    ["POST", "/api/issues/i1/interactions/x1/cancel", false],
+    ["POST", "/api/approvals/a1/resubmit", false],
+    ["POST", "/api/companies", false],
+    ["PATCH", "/api/issues/i1", false],
+    ["PUT", "/api/issues/i1/comments", false],
+    ["DELETE", "/api/issues/i1", false],
+    ["DELETE", "/api/companies/c1/inbox-dismissals", false],
+    ["POST", "/api/issues/i1/comments/extra", false],
+    ["POST", "/api/issues/../companies/c1/inbox-dismissals", false],
+    ["POST", "/api/issues/i1/interactions/x1/../../comments", false],
+    ["POST", "/api/issues//comments", false],
+  ])("%s %s → %p", (method, path, expected) => {
+    expect(allowed(method, path, true)).toBe(expected)
+    if (method !== "GET") expect(allowed(method, path, false)).toBe(false)
+  })
+
+  test("a writing client sends an allowed write with Origin; a read-only client refuses it before sending", async () => {
+    const writer = new Client(base, `${SESSION}=tok123`, undefined, true)
+    await writer.post("/api/issues/i1/comments", { body: "hi" }).catch(() => {})
+    expect(seen.at(-1)).toMatchObject({ method: "POST", path: "/api/issues/i1/comments", origin: base })
+    seen.length = 0
+    const reader = new Client(base, `${SESSION}=tok123`)
+    await expect(reader.post("/api/issues/i1/comments", { body: "hi" })).rejects.toBeInstanceOf(ReadOnlyError)
+    await expect(writer.request("PATCH", "/api/issues/i1", { body: {} })).rejects.toBeInstanceOf(ReadOnlyError)
+    expect(seen).toHaveLength(0)
   })
 })

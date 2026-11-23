@@ -25,7 +25,7 @@ The last five need `PAPERCLIP_URL`, `PAPERCLIP_EMAIL` and `PAPERCLIP_PASSWORD`. 
 
 ## Hard constraints
 
-- **Read-only.** `src/api/client.ts` allows `GET`, plus `POST` to `/api/auth/sign-in/email` and `/api/auth/sign-out` only. Any other method throws `ReadOnlyError` before a request is sent. A test covers this guard. Do not loosen it until a later phase says so.
+- **Writes only through the allowlist.** `src/api/client.ts` sends `GET` anywhere, sign-in and sign-out, and, when the client allows writes, only the phase 2 routes listed in `WRITES` (answers, decisions, comments, dismissals). Everything else throws `ReadOnlyError` before a request is sent, and `readOnly: true` in `cli.json` turns all writes off. Tests cover both lists. Add a route only with its phase in `docs/ARCHITECTURE.md`, and send writes to a real instance only in the scratch company (prefix `CLI`).
 - **Credentials.** Sign in with email and password to get a session cookie. Never write the password to disk. The cookie goes in `~/.local/state/clipode/auth.json` with mode `0600`.
 - **No real data in git.** Never commit credentials, cookies, the instance URL or raw responses. Fixtures recorded from the instance go through `script/scrub.ts`, and `bun run audit-fixtures` must pass before they are committed.
 - **Wire format stays in two folders.** Only `src/api` and `src/transcript` know Paperclip's wire format. Screens read from stores.
