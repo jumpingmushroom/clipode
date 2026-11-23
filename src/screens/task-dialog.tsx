@@ -11,6 +11,9 @@ import { DialogPrompt } from "../ui/dialog-prompt.tsx"
 import { TextArea } from "../ui/text-area.tsx"
 import { basename } from "node:path"
 import { checkFiles, parsePaths } from "./file-paths.ts"
+import { useReadImage } from "../ui/clipboard.tsx"
+import { tmpdir } from "node:os"
+import { join } from "node:path"
 
 export type WorkMode = "standard" | "planning" | "ask"
 export type TaskForm = {
@@ -101,6 +104,23 @@ export function TaskDialog(props: {
     }
   }
 
+  const readImage = useReadImage()
+  /** Saves the clipboard's image as a PNG in the temp folder and adds it like any other file. */
+  const pasteImage = async () => {
+    // Messages show in the form, so an open attach prompt closes first.
+    setPicker(null)
+    try {
+      const bytes = await readImage()
+      if (!bytes) return setError("The clipboard holds no image")
+      const path = join(tmpdir(), `clipode-clipboard-${new Date().toISOString().replace(/[:.]/g, "-")}.png`)
+      await Bun.write(path, bytes)
+      set({ files: [...form().files, path] })
+      setError(null)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err))
+    }
+  }
+
   const addFiles = async (text: string) => {
     const { ok, bad } = await checkFiles(parsePaths(text))
     set({ files: [...new Set([...form().files, ...ok])] })
@@ -112,7 +132,12 @@ export function TaskDialog(props: {
     mode: "modal",
     enabled: !picker(),
     bindings: [
-      ...(focus() === "files" ? [{ key: "backspace,delete", cmd: () => set({ files: form().files.slice(0, -1) }) }] : []),
+      ...(focus() === "files"
+        ? [
+            { key: "backspace,delete", cmd: () => set({ files: form().files.slice(0, -1) }) },
+            { key: "ctrl+v", cmd: () => void pasteImage() },
+          ]
+        : []),
       // Moving focus rebuilds this layer (its keys depend on the field), so it happens after the dispatch.
       { key: "tab", cmd: () => afterDispatch(() => move(1)) },
       { key: "shift+tab", cmd: () => afterDispatch(() => move(-1)) },
@@ -123,6 +148,8 @@ export function TaskDialog(props: {
   }))
   // While a picker is open, esc closes it rather than the whole dialog.
   useBindings(() => ({ mode: "modal", priority: 10, enabled: !!picker(), bindings: [{ key: "escape", cmd: () => afterDispatch(() => setPicker(null)) }] }))
+  // In the attach prompt, ctrl+v takes an image from the clipboard instead of a path.
+  useBindings(() => ({ mode: "modal", priority: 10, enabled: picker() === "files", bindings: [{ key: "ctrl+v", cmd: () => void pasteImage() }] }))
 
   const pickerOptions = (): { title: string; options: SelectOption<string>[]; current: string } => {
     const p = picker()! as Exclude<Picker, "files">
@@ -174,7 +201,7 @@ export function TaskDialog(props: {
       when={!picker()}
       fallback={
         picker() === "files" ? (
-          <DialogPrompt title="Attach files" placeholder="Paste or drag file paths, then enter" onSubmit={(text) => void addFiles(text)} />
+          <DialogPrompt title="Attach files" placeholder="Paste or drag file paths, then enter; ctrl+v pastes a clipboard image" onSubmit={(text) => void addFiles(text)} />
         ) : (
         <DialogSelect
           title={pickerOptions().title}
@@ -234,7 +261,7 @@ export function TaskDialog(props: {
                 {label("private", "Private")}
                 <text fg={theme().text}>{form().private ? "[x] private task" : "[ ] visible to the company"}</text>
               </box>
-              {choice("files", "Files", form().files.length ? `${form().files.map((f) => basename(f)).join(", ")}  (backspace removes the last)` : "none, enter to attach")}
+              {choice("files", "Files", form().files.length ? `${form().files.map((f) => basename(f)).join(", ")}  (backspace removes the last)` : "none, enter to attach, ctrl+v pastes an image")}
             </Show>
           </box>
           <Show when={error()}>

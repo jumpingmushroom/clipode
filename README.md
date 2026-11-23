@@ -36,7 +36,7 @@ clipode opens on the inbox. The following keys work everywhere:
 | `ctrl+s` | Send the answers to an agent's questions (in an opened item, `enter` selects an option) |
 | `c` | Comment on the task on screen; `ctrl+j` adds a line, `enter` sends |
 | `d`, `s`, `u` | Dismiss, snooze, or restore the selected inbox item |
-| `n` | New task (in Tasks): description, optional title, project, assignee, model, plan or ask mode, private, and files (paste or drag their paths) |
+| `n` | New task (in Tasks): description, optional title, project, assignee, model, plan or ask mode, private, and files (paste or drag their paths; `ctrl+v` on the Files row pastes a clipboard image) |
 | `s`, `p`, `a`, `e` | Change status or priority, assign, or edit the title and description (in a task thread, or on the selected task in Tasks) |
 | `ctrl+b` | Show or hide the sidebar |
 | `ctrl+t` | Switch theme, with a live preview |
