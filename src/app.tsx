@@ -78,11 +78,14 @@ export async function run(version: string): Promise<boolean> {
   const { plugins, errors: pluginErrors } = await loadPlugins(config.plugins ?? [], configDir())
   const themes = await discoverThemes([join(configDir(), "themes"), join(homedir(), ".config", "opencode", "themes")])
   const session = createSession({
-    url: config.url,
+    // cli.json or PAPERCLIP_URL wins; otherwise the last instance signed in to, whose saved cookie restores the session.
+    url: config.url ?? state.get().lastUrl,
+    email: state.get().lastEmail,
     apiKey: config.apiKey,
     readOnly: config.readOnly,
     lastCompany: state.get().lastCompany,
     onCompany: (url, id) => void state.update({ lastCompany: { ...state.get().lastCompany, [url]: id } }),
+    onSignIn: (url, email) => void state.update({ lastUrl: url, lastEmail: email || undefined }),
   })
   const renderer = await createCliRenderer({ exitOnCtrlC: false, useMouse: config.mouse ?? true, targetFps: 60 })
   const mode = config.mode ?? (await renderer.waitForThemeMode(1000)) ?? "dark"

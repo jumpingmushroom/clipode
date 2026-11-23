@@ -19,6 +19,8 @@ export type SessionOptions = {
   /** Last company per instance URL, from kv.json. */
   lastCompany?: Record<string, string>
   onCompany?: (url: string, companyId: string) => void
+  /** After a successful sign-in, so the URL and email can be remembered for the next start. */
+  onSignIn?: (url: string, email: string) => void
   authPath?: string
 }
 
@@ -76,11 +78,13 @@ export function createSession(opts: SessionOptions = {}) {
         // No email and password: a local_trusted instance accepts the request without a session.
         if (!email && !password) {
           if (!(await enter())) throw new Error("This instance needs an email and password.")
+          opts.onSignIn?.(url, "")
           return
         }
         await apiSignIn(client, email, password)
         await saveCookie(client.baseUrl, client.cookieHeader(), opts.authPath)
         if (!(await enter())) throw new Error("Signed in, but the server did not accept the session")
+        opts.onSignIn?.(url, email)
       } catch (err) {
         set({ status: "signed-out", error: signInMessage(err) })
       }

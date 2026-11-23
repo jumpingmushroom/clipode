@@ -4,6 +4,9 @@ import { homedir } from "node:os"
 import { dirname, join } from "node:path"
 
 export type State = {
+  /** The instance and email of the last successful sign-in, so the next start can restore its session. */
+  lastUrl?: string
+  lastEmail?: string
   lastCompany?: Record<string, string>
   theme?: string
   lastView?: string
