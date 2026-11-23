@@ -7,7 +7,10 @@ import { useCompany } from "../store/context.tsx"
 import { useTheme } from "../theme/context.tsx"
 import { afterDispatch, DIALOG_INSET } from "../ui/dialog.tsx"
 import { DialogSelect, type SelectOption } from "../ui/dialog-select.tsx"
+import { DialogPrompt } from "../ui/dialog-prompt.tsx"
 import { TextArea } from "../ui/text-area.tsx"
+import { basename } from "node:path"
+import { checkFiles, parsePaths } from "./file-paths.ts"
 
 export type WorkMode = "standard" | "planning" | "ask"
 export type TaskForm = {
@@ -18,6 +21,8 @@ export type TaskForm = {
   model: string | null
   workMode: WorkMode
   private: boolean
+  /** Local files to upload once the task exists. */
+  files: string[]
 }
 
 const MODES: { value: WorkMode; label: string }[] = [
@@ -25,8 +30,8 @@ const MODES: { value: WorkMode; label: string }[] = [
   { value: "planning", label: "Plan" },
   { value: "ask", label: "Ask" },
 ]
-type Field = "description" | "title" | "project" | "assignee" | "model" | "mode" | "private"
-type Picker = "project" | "assignee" | "model"
+type Field = "description" | "title" | "project" | "assignee" | "model" | "mode" | "private" | "files"
+type Picker = "project" | "assignee" | "model" | "files"
 
 export function TaskDialog(props: {
   heading: string
@@ -48,7 +53,7 @@ export function TaskDialog(props: {
   const live = <T extends { isDestroyed: boolean }>(r: T | undefined) => (r && !r.isDestroyed ? r : undefined)
   const texts = () => ({ description: live(description)?.plainText ?? form().description, title: live(title)?.value ?? form().title })
 
-  const fields = (): Field[] => (props.edit ? ["description", "title", "project", "assignee"] : ["description", "title", "project", "assignee", "model", "mode", "private"])
+  const fields = (): Field[] => (props.edit ? ["description", "title", "project", "assignee"] : ["description", "title", "project", "assignee", "model", "mode", "private", "files"])
   const set = (patch: Partial<TaskForm>) => setForm((f) => ({ ...f, ...patch }))
   const agents = () => company.agents.list.data.filter((a) => a.status !== "terminated")
   const assignee = () => agents().find((a) => a.id === form().assigneeAgentId)
@@ -75,7 +80,7 @@ export function TaskDialog(props: {
   const keepText = () => set(texts())
   const change = () => {
     const f = focus()
-    if (f === "project" || f === "assignee" || f === "model") {
+    if (f === "project" || f === "assignee" || f === "model" || f === "files") {
       keepText()
       return setPicker(f)
     }
@@ -96,10 +101,18 @@ export function TaskDialog(props: {
     }
   }
 
+  const addFiles = async (text: string) => {
+    const { ok, bad } = await checkFiles(parsePaths(text))
+    set({ files: [...new Set([...form().files, ...ok])] })
+    setError(bad.length ? `Not added: ${bad.map((b) => `${basename(b.path)} (${b.reason})`).join(", ")}` : null)
+    setPicker(null)
+  }
+
   useBindings(() => ({
     mode: "modal",
     enabled: !picker(),
     bindings: [
+      ...(focus() === "files" ? [{ key: "backspace,delete", cmd: () => set({ files: form().files.slice(0, -1) }) }] : []),
       // Moving focus rebuilds this layer (its keys depend on the field), so it happens after the dispatch.
       { key: "tab", cmd: () => afterDispatch(() => move(1)) },
       { key: "shift+tab", cmd: () => afterDispatch(() => move(-1)) },
@@ -112,7 +125,7 @@ export function TaskDialog(props: {
   useBindings(() => ({ mode: "modal", priority: 10, enabled: !!picker(), bindings: [{ key: "escape", cmd: () => afterDispatch(() => setPicker(null)) }] }))
 
   const pickerOptions = (): { title: string; options: SelectOption<string>[]; current: string } => {
-    const p = picker()!
+    const p = picker()! as Exclude<Picker, "files">
     if (p === "project") {
       return {
         title: "Project",
@@ -160,6 +173,9 @@ export function TaskDialog(props: {
     <Show
       when={!picker()}
       fallback={
+        picker() === "files" ? (
+          <DialogPrompt title="Attach files" placeholder="Paste or drag file paths, then enter" onSubmit={(text) => void addFiles(text)} />
+        ) : (
         <DialogSelect
           title={pickerOptions().title}
           options={pickerOptions().options}
@@ -167,6 +183,7 @@ export function TaskDialog(props: {
           onSelect={(o) => pick(o.value)}
           hint="enter choose   esc back to the task"
         />
+        )
       }
     >
       <box flexDirection="column" gap={1}>
@@ -217,6 +234,7 @@ export function TaskDialog(props: {
                 {label("private", "Private")}
                 <text fg={theme().text}>{form().private ? "[x] private task" : "[ ] visible to the company"}</text>
               </box>
+              {choice("files", "Files", form().files.length ? `${form().files.map((f) => basename(f)).join(", ")}  (backspace removes the last)` : "none, enter to attach")}
             </Show>
           </box>
           <Show when={error()}>

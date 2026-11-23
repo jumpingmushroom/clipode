@@ -96,6 +96,7 @@ Phase 3 starts, as decided on 2026-11-23, with tasks: create and edit them, assi
 | Create a task | `POST /api/companies/{companyId}/issues` | `description` and/or `title` (without a title the server takes one from the description and flags it for generation), `projectId?`, `assigneeAgentId?`, `assigneeAdapterOverrides?: { adapterConfig: { model } }`, `workMode?: "planning" \| "ask"`, `visibility?: "private"`, `idempotencyKey` |
 | Edit, assign, change status or priority | `PATCH /api/issues/{id}` | any of `title`, `description`, `status`, `priority`, `assigneeAgentId` (null to unassign), `projectId` |
 | Models for the model choice (a read) | `GET /api/companies/{companyId}/adapters/{adapterType}/models` | answers `[{ id, label }]` |
+| Attach a file to a task (1.4) | `POST /api/companies/{companyId}/issues/{issueId}/attachments` | multipart form, field `file`; answers `201` with the attachment. Size (10 MB by default) and types are server settings. |
 
 Probed in the scratch company on 2026-11-23 (scrubbed in `test/fixtures/writes/task-*.json`): create answers `201` with the task; a second create with the same `idempotencyKey` answers `200` with the same task. Every update answers `200` with the task. `expectedStatusVersion` is accepted only for a status-only backlog-to-todo promotion and otherwise refused with `422`, so clipode sends status changes without it. Assigning an agent wakes it.
 
@@ -103,7 +104,9 @@ Probed in the scratch company on 2026-11-23 (scrubbed in `test/fixtures/writes/t
 
 Keys: in the task thread, and on the selected row in Tasks, `s` changes status, `p` changes priority, `a` assigns (agents or unassigned), and `e` edits. `n` creates a task.
 
-Since 1.3, `n` and `e` open one task dialog modelled on the web UI's composer: description first, an optional title, then project, assignee, and, for a new task, model (from the assignee's adapter), mode (standard, plan, ask) and private. `tab` moves between fields, `enter` or `space` changes a choice field through a picker, and `ctrl+s` saves. A new task starts in the project of the task on screen. Unset fields are left out of the request so the server applies its defaults. Verified in the scratch company: CLI-5 (every field) and CLI-6 (description only, project, private). Files and images come later.
+Since 1.3, `n` and `e` open one task dialog modelled on the web UI's composer: description first, an optional title, then project, assignee, and, for a new task, model (from the assignee's adapter), mode (standard, plan, ask) and private. `tab` moves between fields, `enter` or `space` changes a choice field through a picker, and `ctrl+s` saves. A new task starts in the project of the task on screen. Unset fields are left out of the request so the server applies its defaults. Verified in the scratch company: CLI-5 (every field) and CLI-6 (description only, project, private).
+
+Since 1.4 the new-task dialog has a Files row. `enter` opens a prompt for file paths: dragging files into the terminal pastes their paths, and quoted paths, backslash-escaped spaces and `~` all work. Files are checked to exist and be non-empty when added; `backspace` removes the last. As in the web UI, files are uploaded once the task exists; a file the server refuses is named in the toast with its reason, and the task stays. clipode does not guess the server's size and type limits. Verified with CLI-7.
 
 ## Provenance and licensing
 

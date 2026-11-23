@@ -1,0 +1,28 @@
+{
+  "method": "POST",
+  "status": 201,
+  "request": {
+    "file": "clipode-probe.txt"
+  },
+  "response": {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "companyId": "00000000-0000-4000-8000-000000000002",
+    "issueId": "00000000-0000-4000-8000-000000000003",
+    "issueCommentId": null,
+    "originatingRunId": null,
+    "assetId": "00000000-0000-4000-8000-000000000004",
+    "provider": "local_disk",
+    "objectKey": "objectKey-1",
+    "contentType": "example contentType",
+    "byteSize": 25,
+    "sha256": "example sha256",
+    "originalFilename": "example originalFilename",
+    "createdByAgentId": null,
+    "createdByUserId": "createdByUserId-2",
+    "createdAt": "2026-11-23T12:19:12.633Z",
+    "updatedAt": "2026-11-23T12:19:12.633Z",
+    "contentPath": "example contentPath",
+    "openPath": "example openPath",
+    "downloadPath": "example downloadPath"
+  }
+}

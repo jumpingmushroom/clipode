@@ -1,6 +1,6 @@
 // Tasks: the full list for the Tasks screen and the sidebars, projects, and a cache of opened threads.
 import { createStore } from "solid-js/store"
-import { createTask, getTask, getTaskCost, getThread, listProjects, listTasks, postComment, updateTask, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
+import { createTask, getTask, getTaskCost, getThread, listProjects, listTasks, postComment, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
 import { ApiError } from "../api/client.ts"
 import type { ProjectSummary, TaskCost, TaskDetail, TaskSummary, ThreadEntry } from "../api/model.ts"
 import { createResource, type Resource } from "./resource.ts"
@@ -58,6 +58,14 @@ export function createIssuesStore(session: Session, companyId: string) {
         .catch((err) => Promise.reject(notSent(err)))
       void list.refresh()
       return created
+    },
+    /** Uploads files to a task one by one; returns the files the server did not take, with its reason. */
+    async attach(issueId: string, paths: string[]): Promise<{ path: string; reason: string }[]> {
+      const failed: { path: string; reason: string }[] = []
+      for (const path of paths) {
+        await uploadAttachment(session.client(), companyId, issueId, path).catch((err) => failed.push({ path, reason: notSent(err).message.replace(/^Not sent: /, "") }))
+      }
+      return failed
     },
     /** Changes a task's fields, then refreshes the list and, if open, its thread. */
     async update(issueId: string, patch: TaskPatch): Promise<void> {

@@ -1,5 +1,6 @@
 // Tasks (Paperclip calls them issues): the list, one task with its thread, and its cost.
 import type { Issue, IssueComment } from "@paperclipai/shared"
+import { basename } from "node:path"
 import type { Client } from "../client.ts"
 import type { ProjectSummary, TaskCost, TaskDetail, TaskSummary, ThreadEntry } from "../model.ts"
 
@@ -132,4 +133,11 @@ export async function createTask(client: Client, companyId: string, task: NewTas
 export async function updateTask(client: Client, issueId: string, patch: TaskPatch): Promise<TaskSummary> {
   const body = Object.fromEntries(Object.entries(patch).filter(([k, v]) => v !== undefined && PATCH_FIELDS.includes(k)))
   return toTask(await client.request<IssueRow>("PATCH", `/api/issues/${id(issueId)}`, { body }))
+}
+
+/** Uploads a local file to a task. The server decides which types and sizes it accepts. */
+export async function uploadAttachment(client: Client, companyId: string, issueId: string, path: string): Promise<void> {
+  const form = new FormData()
+  form.append("file", Bun.file(path), basename(path))
+  await client.post(`/api/companies/${id(companyId)}/issues/${id(issueId)}/attachments`, form)
 }

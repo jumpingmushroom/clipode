@@ -63,7 +63,7 @@ export function useTaskActions(task: () => TaskSummary | undefined, opts: { desc
           <TaskDialog
             heading={`Edit ${t.identifier ?? "task"}`}
             edit
-            initial={{ description: opts.description?.() ?? "", title: t.title, projectId: t.projectId, assigneeAgentId: t.assigneeAgentId, model: null, workMode: "standard", private: false }}
+            initial={{ description: opts.description?.() ?? "", title: t.title, projectId: t.projectId, assigneeAgentId: t.assigneeAgentId, model: null, workMode: "standard", private: false, files: [] }}
             onSubmit={async (form) => {
               await company.issues.update(t.id, {
                 title: form.title.trim() || t.title,
@@ -89,7 +89,7 @@ export function useTaskActions(task: () => TaskSummary | undefined, opts: { desc
           <TaskDialog
             heading="New task"
             // Like the web UI, a new task starts in the project of the task on screen.
-            initial={{ description: "", title: "", projectId: t?.projectId ?? null, assigneeAgentId: null, model: null, workMode: "standard", private: false }}
+            initial={{ description: "", title: "", projectId: t?.projectId ?? null, assigneeAgentId: null, model: null, workMode: "standard", private: false, files: [] }}
             onSubmit={async (form) => {
               const created = await company.issues.create({
                 description: form.description.trim() || undefined,
@@ -100,8 +100,11 @@ export function useTaskActions(task: () => TaskSummary | undefined, opts: { desc
                 workMode: form.workMode,
                 private: form.private,
               })
+              // Files go up once the task exists, as in the web UI; the task stays even if some are refused.
+              const failed = form.files.length ? await company.issues.attach(created.id, form.files) : []
               dialog.clear()
-              toast.show(`${created.identifier ?? "Task"} created`, "success")
+              if (failed.length) toast.show(`${created.identifier ?? "Task"} created; not attached: ${failed.map((f) => `${f.path.split("/").pop()} (${f.reason})`).join(", ")}`, "warning", 8000)
+              else toast.show(`${created.identifier ?? "Task"} created${form.files.length ? ` with ${form.files.length} file${form.files.length === 1 ? "" : "s"}` : ""}`, "success")
               route.navigate({ name: "thread", id: created.id })
             }}
           />

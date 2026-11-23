@@ -107,12 +107,19 @@ export function startFakeServer(): FakeServer {
       if (!signedIn) return Response.json({ error: "Board authentication required" }, { status: 401 })
       const override = overrides.get(url.pathname)
       if (req.method !== "GET") {
-        const text = await req.text()
-        writes.push({ method: req.method, path: url.pathname, body: text ? JSON.parse(text) : null })
+        // A file upload is recorded as its file name and text, a JSON body as the parsed object.
+        if (req.headers.get("content-type")?.startsWith("multipart/form-data")) {
+          const file = (await req.formData()).get("file") as File
+          writes.push({ method: req.method, path: url.pathname, body: { file: file.name, text: await file.text() } })
+        } else {
+          const text = await req.text()
+          writes.push({ method: req.method, path: url.pathname, body: text ? JSON.parse(text) : null })
+        }
         if (override) return Response.json(typeof override.body === "function" ? override.body(url) : override.body, { status: override.status })
         // As the real server answers: an undo is 204 with no body, a new record 201, a decision 200.
         if (req.method === "DELETE") return new Response(null, { status: 204 })
         // Creating a task answers with the new task, as the real server does.
+        if (url.pathname.endsWith("/attachments")) return Response.json({ id: "att-1" }, { status: 201 })
         if (url.pathname.endsWith("/issues")) {
           const body = writes.at(-1)!.body as Record<string, unknown>
           return Response.json({ id: "new-task", identifier: "DEMO-99", status: "backlog", priority: "medium", assigneeAgentId: null, assigneeUserId: null, parentId: null, projectId: null, updatedAt: new Date().toISOString(), ...body }, { status: 201 })

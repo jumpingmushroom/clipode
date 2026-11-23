@@ -12,6 +12,7 @@ const WRITES: Record<string, RegExp[]> = {
     new RegExp(`^/api/issues/${ID}/comments$`),
     new RegExp(`^/api/companies/${ID}/inbox-dismissals$`),
     new RegExp(`^/api/companies/${ID}/issues$`),
+    new RegExp(`^/api/companies/${ID}/issues/${ID}/attachments$`),
   ],
   PATCH: [new RegExp(`^/api/issues/${ID}$`)],
   DELETE: [new RegExp(`^/api/companies/${ID}/inbox-dismissals/${ID}$`)],
@@ -108,15 +109,17 @@ export class Client {
     // Better Auth checks Origin against the trusted origins on state-changing requests.
     // GET and DELETE carry no body, as in the write probe.
     const hasBody = verb !== "GET" && verb !== "DELETE"
+    // A FormData body (a file upload) sets its own multipart Content-Type with the boundary.
+    const form = opts.body instanceof FormData ? opts.body : null
     if (verb !== "GET") headers.Origin = this.origin
-    if (hasBody) headers["Content-Type"] = "application/json"
+    if (hasBody && !form) headers["Content-Type"] = "application/json"
 
     let res: Response
     try {
       res = await fetch(url, {
         method: verb,
         headers,
-        body: hasBody ? JSON.stringify(opts.body ?? {}) : undefined,
+        body: form ?? (hasBody ? JSON.stringify(opts.body ?? {}) : undefined),
         redirect: "manual",
       })
     } catch (err) {

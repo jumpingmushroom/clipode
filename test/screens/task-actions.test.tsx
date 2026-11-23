@@ -1,4 +1,7 @@
 import { afterEach, expect, test } from "bun:test"
+import { mkdtemp, rm, writeFile } from "node:fs/promises"
+import { tmpdir } from "node:os"
+import { join } from "node:path"
 import { COMPANY_ID, THREAD_ID } from "../fake-server.ts"
 import agents from "../fixtures/company/agents.json"
 import details from "../fixtures/company/issue-details.json"
@@ -153,4 +156,60 @@ test("with readOnly the task keys send nothing", async () => {
   await Bun.sleep(60)
   expect(app.server.writes).toHaveLength(0)
   expect(await app.frame()).not.toMatch(/Status\s+esc/)
+})
+
+test("files are checked when added and uploaded once the task exists", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "clipode-attach-"))
+  const file = join(dir, "screen shot.txt")
+  await writeFile(file, "diagram")
+  try {
+    app = await startApp({ route: { name: "tasks" } })
+    await app.frame()
+    app.mockInput.pressKey("n")
+    await app.frame()
+    await app.mockInput.typeText("Attach the diagram")
+    for (let i = 0; i < 7; i++) await tab() // title, project, assignee, model, mode, private, files
+    app.mockInput.pressEnter()
+    expect(await app.frame()).toContain("Attach files")
+    await app.mockInput.typeText(`'${file}' ${join(dir, "missing.txt")}`)
+    app.mockInput.pressEnter()
+    await Bun.sleep(40)
+    let text = await app.frame()
+    expect(text).toContain("screen shot.txt")
+    expect(text).toContain("Not added: missing.txt (not found)")
+    app.mockInput.pressKey("s", { ctrl: true })
+    await Bun.sleep(100)
+    const upload = app.server.writes.find((w) => w.path.endsWith("/attachments"))
+    expect(upload).toEqual({ method: "POST", path: `/api/companies/${COMPANY_ID}/issues/new-task/attachments`, body: { file: "screen shot.txt", text: "diagram" } })
+    text = await app.frame()
+    expect(text).toContain("DEMO-99 created with 1 file")
+  } finally {
+    await rm(dir, { recursive: true, force: true })
+  }
+})
+
+test("a file the server refuses is named, and the task is still created", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "clipode-attach-"))
+  await writeFile(join(dir, "big.bin"), "x")
+  try {
+    app = await startApp({ route: { name: "tasks" }, before: (s) => s.set(`/api/companies/${COMPANY_ID}/issues/new-task/attachments`, { error: "Attachment is larger than the 10 MB limit" }, 422) })
+    await app.frame()
+    app.mockInput.pressKey("n")
+    await app.frame()
+    await app.mockInput.typeText("With a big file")
+    for (let i = 0; i < 7; i++) await tab()
+    app.mockInput.pressEnter()
+    await app.frame()
+    await app.mockInput.typeText(join(dir, "big.bin"))
+    app.mockInput.pressEnter()
+    await Bun.sleep(40)
+    await app.frame()
+    app.mockInput.pressKey("s", { ctrl: true })
+    await Bun.sleep(100)
+    const text = await app.frame()
+    expect(text).toContain("DEMO-99 created; not attached: big.bin")
+    expect(text).toContain("10 MB limit")
+  } finally {
+    await rm(dir, { recursive: true, force: true })
+  }
 })
