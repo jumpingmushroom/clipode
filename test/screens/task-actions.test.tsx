@@ -48,36 +48,102 @@ test("p changes the priority and a assigns or unassigns", async () => {
   expect(agents.map((a) => a.id)).toContain((assign!.body as { assigneeAgentId: string }).assigneeAgentId)
 })
 
-test("e edits the title and description, starting from the current text", async () => {
-  app = await startApp({ route: { name: "thread", id: THREAD_ID } })
+const projects = (await import("../fixtures/company/projects.json")).default as { id: string; name: string }[]
+const create = () => app!.server.writes.find((w) => w.method === "POST")
+// tab moves focus after the key dispatch; a person never types the next key before that, so the tests wait too.
+const tab = async () => {
+  app!.mockInput.pressTab()
+  await app!.frame()
+}
+
+test("n opens the new task dialog; a description alone creates the task and opens it", async () => {
+  app = await startApp({ route: { name: "tasks" } })
   await app.frame()
-  app.mockInput.pressKey("e")
-  expect(await app.frame()).toContain(task.title)
-  await app.mockInput.typeText(" v2")
-  app.mockInput.pressEnter()
-  await app.frame()
-  app.mockInput.pressEnter()
-  await Bun.sleep(60)
-  expect(patch()?.body).toEqual({ title: `${task.title} v2`, description: task.description })
+  app.mockInput.pressKey("n")
+  let text = await app.frame()
+  expect(text).toContain("New task")
+  expect(text).toContain("Optional: generated from the description")
+  await app.mockInput.typeText("Write the release notes for 1.2")
+  app.mockInput.pressKey("s", { ctrl: true })
+  await Bun.sleep(80)
+  expect(create()).toMatchObject({ path: `/api/companies/${COMPANY_ID}/issues` })
+  expect(create()?.body).toEqual({ description: "Write the release notes for 1.2", idempotencyKey: expect.stringMatching(/^[0-9a-f-]{36}$/) })
+  text = await app.frame()
+  expect(text).toContain("DEMO-99 created")
+  expect(text).toContain("Task · ")
 })
 
-test("n in Tasks creates a task with an idempotency key and opens it", async () => {
+test("every field: project, assignee, model, plan mode and private; the description survives the pickers", async () => {
   app = await startApp({ route: { name: "tasks" } })
   await app.frame()
   app.mockInput.pressKey("n")
   await app.frame()
-  await app.mockInput.typeText("Write the release notes")
+  await app.mockInput.typeText("Rotate the backup keys")
+  await tab() // title
+  await tab() // project
+  app.mockInput.pressEnter()
+  expect(await app.frame()).toContain("No project")
+  await app.mockInput.typeText(projects[0]!.name)
   app.mockInput.pressEnter()
   await app.frame()
-  await app.mockInput.typeText("For 1.2")
+  await tab() // assignee
   app.mockInput.pressEnter()
-  await Bun.sleep(80)
-  const create = app.server.writes.find((w) => w.method === "POST")
-  expect(create).toMatchObject({ path: `/api/companies/${COMPANY_ID}/issues` })
-  expect(create?.body).toEqual({ title: "Write the release notes", description: "For 1.2", idempotencyKey: expect.stringMatching(/^[0-9a-f-]{36}$/) })
+  await app.frame()
+  app.mockInput.pressArrow("down")
+  app.mockInput.pressEnter()
+  await app.frame()
+  await tab() // model
+  app.mockInput.pressEnter()
+  expect(await app.frame()).toContain("Claude Haiku 4.5")
+  await app.mockInput.typeText("haiku")
+  app.mockInput.pressEnter()
+  await app.frame()
+  await tab() // mode
+  app.mockInput.pressKey(" ")
+  await tab() // private
+  app.mockInput.pressKey(" ")
   const text = await app.frame()
-  expect(text).toContain("DEMO-99 created")
-  expect(text).toContain("Task · ")
+  expect(text).toContain("Rotate the backup keys")
+  expect(text).toContain("● Plan")
+  expect(text).toContain("[x] private task")
+  app.mockInput.pressKey("s", { ctrl: true })
+  await Bun.sleep(80)
+  expect(create()?.body).toEqual({
+    description: "Rotate the backup keys",
+    projectId: projects[0]!.id,
+    assigneeAgentId: expect.any(String),
+    workMode: "planning",
+    visibility: "private",
+    assigneeAdapterOverrides: { adapterConfig: { model: "claude-haiku-4-5" } },
+    idempotencyKey: expect.any(String),
+  })
+})
+
+test("an empty dialog is not sent", async () => {
+  app = await startApp({ route: { name: "tasks" } })
+  await app.frame()
+  app.mockInput.pressKey("n")
+  await app.frame()
+  app.mockInput.pressKey("s", { ctrl: true })
+  expect(await app.frame()).toContain("Write a description (or a title)")
+  expect(app.server.writes).toHaveLength(0)
+})
+
+test("e edits the task in the same dialog, starting from its title and description", async () => {
+  app = await startApp({ route: { name: "thread", id: THREAD_ID } })
+  await app.frame()
+  app.mockInput.pressKey("e")
+  let text = await app.frame()
+  expect(text).toContain("Edit DEMO-")
+  expect(text).not.toContain("Private")
+  await app.mockInput.typeText(" More detail.")
+  await tab()
+  await app.mockInput.typeText(" v2")
+  app.mockInput.pressKey("s", { ctrl: true })
+  await Bun.sleep(60)
+  expect(patch()?.body).toEqual({ title: `${task.title} v2`, description: `${task.description} More detail.` })
+  text = await app.frame()
+  expect(text).toMatch(/DEMO-\d+: saved/)
 })
 
 test("with readOnly the task keys send nothing", async () => {

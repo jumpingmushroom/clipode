@@ -59,6 +59,10 @@ export function startFakeServer(): FakeServer {
       const agentId = url.searchParams.get("agentId")
       return heartbeatRuns.filter((r) => !agentId || r.agentId === agentId)
     },
+    [`/api/companies/${COMPANY_ID}/adapters/claude_local/models`]: [
+      { id: "claude-sonnet-5-5", label: "Claude Sonnet 5.5" },
+      { id: "claude-haiku-4-5", label: "Claude Haiku 4.5" },
+    ],
     [`/api/heartbeat-runs/${run.id}`]: run,
     // The recorded log is complete, so a read from offset 0 returns all of it and no nextOffset.
     [`/api/heartbeat-runs/${run.id}/log`]: (url: URL) => ({ ...runLog, content: Number(url.searchParams.get("offset") ?? 0) > 0 ? "" : runLog.content, nextOffset: undefined }),

@@ -7,13 +7,15 @@ import type { TaskPatch, TaskSummary } from "../store/issues.ts"
 import { afterDispatch, useDialog } from "../ui/dialog.tsx"
 import { useToast } from "../ui/toast.tsx"
 import { PRIORITY, STATUS_GROUPS } from "./tasks.tsx"
+import { TaskDialog } from "./task-dialog.tsx"
 
 export function useTaskActions(task: () => TaskSummary | undefined, opts: { description?: () => string | null } = {}) {
   const { session } = useStores()
   const company = useCompany()
   const route = useRoute()
   const toast = useToast()
-  const dialogs = createDialogs(useDialog())
+  const dialog = useDialog()
+  const dialogs = createDialogs(dialog)
 
   const change = (done: string, patch: TaskPatch) => {
     const t = task()
@@ -56,27 +58,57 @@ export function useTaskActions(task: () => TaskSummary | undefined, opts: { desc
     later(async () => {
       const t = task()
       if (!t) return
-      const title = await dialogs.prompt(`Edit ${t.identifier ?? "task"}: title`, "Title", t.title)
-      if (title === null) return
-      // List rows carry no description, so from the list only the title is edited.
-      const description = opts.description ? await dialogs.prompt(`Edit ${t.identifier ?? "task"}: description`, "Description (Markdown)", opts.description() ?? undefined) : ""
-      if (description === null) return
-      if (!title.trim()) return toast.show("A task needs a title", "warning")
-      change("saved", { title: title.trim(), ...(opts.description ? { description: description.trim() || null } : {}) })
+      dialog.replace(
+        () => (
+          <TaskDialog
+            heading={`Edit ${t.identifier ?? "task"}`}
+            edit
+            initial={{ description: opts.description?.() ?? "", title: t.title, projectId: t.projectId, assigneeAgentId: t.assigneeAgentId, model: null, workMode: "standard", private: false }}
+            onSubmit={async (form) => {
+              await company.issues.update(t.id, {
+                title: form.title.trim() || t.title,
+                // List rows carry no description, so it is sent only when it was loaded (in the thread).
+                ...(opts.description ? { description: form.description.trim() || null } : {}),
+                ...(form.projectId !== t.projectId ? { projectId: form.projectId } : {}),
+                ...(form.assigneeAgentId !== t.assigneeAgentId ? { assigneeAgentId: form.assigneeAgentId } : {}),
+              })
+              dialog.clear()
+              toast.show(`${t.identifier ?? "Task"}: saved`, "success")
+            }}
+          />
+        ),
+        undefined,
+        "large",
+      )
     })
   const create = () =>
     later(async () => {
-      const title = await dialogs.prompt("New task: title", "Title")
-      if (!title?.trim()) return
-      const description = await dialogs.prompt("New task: description", "Optional description (Markdown), enter to create")
-      if (description === null) return
-      try {
-        const created = await company.issues.create({ title: title.trim(), ...(description.trim() ? { description: description.trim() } : {}) })
-        toast.show(`${created.identifier ?? "Task"} created`, "success")
-        route.navigate({ name: "thread", id: created.id })
-      } catch (err) {
-        toast.error(err)
-      }
+      const t = task()
+      dialog.replace(
+        () => (
+          <TaskDialog
+            heading="New task"
+            // Like the web UI, a new task starts in the project of the task on screen.
+            initial={{ description: "", title: "", projectId: t?.projectId ?? null, assigneeAgentId: null, model: null, workMode: "standard", private: false }}
+            onSubmit={async (form) => {
+              const created = await company.issues.create({
+                description: form.description.trim() || undefined,
+                title: form.title.trim() || undefined,
+                projectId: form.projectId,
+                assigneeAgentId: form.assigneeAgentId,
+                model: form.model,
+                workMode: form.workMode,
+                private: form.private,
+              })
+              dialog.clear()
+              toast.show(`${created.identifier ?? "Task"} created`, "success")
+              route.navigate({ name: "thread", id: created.id })
+            }}
+          />
+        ),
+        undefined,
+        "large",
+      )
     })
 
   useCommands(() =>

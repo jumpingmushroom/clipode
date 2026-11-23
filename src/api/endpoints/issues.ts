@@ -99,16 +99,37 @@ export function postComment(client: Client, issueId: string, body: string, clien
   return client.post(`/api/issues/${id(issueId)}/comments`, { body, clientRequestId })
 }
 
-export type NewTask = { title: string; description?: string; priority?: string; assigneeAgentId?: string | null; projectId?: string | null }
+/** A new task. Without a title the server takes one from the description and generates a better one later. */
+export type NewTask = {
+  title?: string
+  description?: string
+  priority?: string
+  assigneeAgentId?: string | null
+  projectId?: string | null
+  workMode?: "standard" | "planning" | "ask"
+  private?: boolean
+  /** A model for the assignee's run, instead of the agent's default. */
+  model?: string | null
+}
 /** The task fields clipode changes; PATCH /api/issues/{id} accepts many more, and none of them are sent. */
-export type TaskPatch = { title?: string; description?: string | null; status?: string; priority?: string; assigneeAgentId?: string | null }
+export type TaskPatch = { title?: string; description?: string | null; status?: string; priority?: string; assigneeAgentId?: string | null; projectId?: string | null }
+const PATCH_FIELDS = ["title", "description", "status", "priority", "assigneeAgentId", "projectId"]
 
 /** Creates a task. The same idempotencyKey makes a retry return the first task instead of a second one. */
 export async function createTask(client: Client, companyId: string, task: NewTask, idempotencyKey: string): Promise<TaskSummary> {
-  return toTask(await client.post<IssueRow>(`/api/companies/${id(companyId)}/issues`, { ...task, idempotencyKey }))
+  const { model, private: isPrivate, workMode, ...fields } = task
+  const body = {
+    // Unset fields are left out, so the server applies its defaults (no project, unassigned).
+    ...Object.fromEntries(Object.entries(fields).filter(([, v]) => v !== undefined && v !== null && v !== "")),
+    ...(workMode && workMode !== "standard" ? { workMode } : {}),
+    ...(isPrivate ? { visibility: "private" } : {}),
+    ...(model ? { assigneeAdapterOverrides: { adapterConfig: { model } } } : {}),
+    idempotencyKey,
+  }
+  return toTask(await client.post<IssueRow>(`/api/companies/${id(companyId)}/issues`, body))
 }
 
 export async function updateTask(client: Client, issueId: string, patch: TaskPatch): Promise<TaskSummary> {
-  const body = Object.fromEntries(Object.entries(patch).filter(([k, v]) => v !== undefined && ["title", "description", "status", "priority", "assigneeAgentId"].includes(k)))
+  const body = Object.fromEntries(Object.entries(patch).filter(([k, v]) => v !== undefined && PATCH_FIELDS.includes(k)))
   return toTask(await client.request<IssueRow>("PATCH", `/api/issues/${id(issueId)}`, { body }))
 }
