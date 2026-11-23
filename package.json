@@ -1,6 +1,6 @@
 {
   "name": "clipode",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "A terminal client for a self-hosted Paperclip instance",
   "license": "MIT",
   "type": "module",
