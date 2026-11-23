@@ -190,7 +190,10 @@ describe("write allowlist", () => {
     ["POST", "/api/issues/i1/interactions/x1/cancel", false],
     ["POST", "/api/approvals/a1/resubmit", false],
     ["POST", "/api/companies", false],
-    ["PATCH", "/api/issues/i1", false],
+    ["PATCH", "/api/issues/i1", true],
+    ["POST", "/api/companies/c1/issues", true],
+    ["PATCH", "/api/issues/i1/comments", false],
+    ["PATCH", "/api/companies/c1", false],
     ["PUT", "/api/issues/i1/comments", false],
     ["DELETE", "/api/issues/i1", false],
     ["DELETE", "/api/companies/c1/inbox-dismissals", false],
@@ -210,7 +213,7 @@ describe("write allowlist", () => {
     seen.length = 0
     const reader = new Client(base, `${SESSION}=tok123`)
     await expect(reader.post("/api/issues/i1/comments", { body: "hi" })).rejects.toBeInstanceOf(ReadOnlyError)
-    await expect(writer.request("PATCH", "/api/issues/i1", { body: {} })).rejects.toBeInstanceOf(ReadOnlyError)
+    await expect(writer.request("PUT", "/api/issues/i1", { body: {} })).rejects.toBeInstanceOf(ReadOnlyError)
     expect(seen).toHaveLength(0)
   })
 })

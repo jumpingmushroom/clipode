@@ -16,6 +16,7 @@ import { SidebarHeader } from "./inbox-sidebar.tsx"
 import { PRIORITY, priorityColor, StatusMark } from "./tasks.tsx"
 import { useTabs } from "./tabs.tsx"
 import { Slot } from "../plugin/host.tsx"
+import { useTaskActions } from "./task-actions.tsx"
 
 const LIVE = ["queued", "running"]
 
@@ -79,6 +80,7 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
     ))
   }
   const detail = () => thread.detail.data
+  useTaskActions(() => detail() ?? undefined, { description: () => detail()?.description ?? null })
   const agentName = (id: string | null) => company.agents.byId(id)?.name
   const agentRole = (id: string | null) => {
     const a = company.agents.byId(id)
@@ -91,7 +93,7 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
       badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<Show when={detail()}>{(d: () => TaskDetail) => <ThreadSidebar task={d()} now={now()} />}</Show>}
-      hints={[["esc", "back"], ["o", "open run"], ["j/k", "scroll"], ["G", "end"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
+      hints={[["esc", "back"], ["s/p/a", "status, priority, assign"], ["e", "edit"], ["o", "open run"], ["j/k", "scroll"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
       narrowHints={[["esc", "back"], ["j/k", "scroll"], ["^p", "cmds"]]}
       version={props.version}
       composer={{ label: detail()?.identifier ?? "this task", send: (text) => company.issues.comment(props.id, text) }}

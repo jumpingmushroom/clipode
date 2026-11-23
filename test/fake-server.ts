@@ -108,6 +108,11 @@ export function startFakeServer(): FakeServer {
         if (override) return Response.json(typeof override.body === "function" ? override.body(url) : override.body, { status: override.status })
         // As the real server answers: an undo is 204 with no body, a new record 201, a decision 200.
         if (req.method === "DELETE") return new Response(null, { status: 204 })
+        // Creating a task answers with the new task, as the real server does.
+        if (url.pathname.endsWith("/issues")) {
+          const body = writes.at(-1)!.body as Record<string, unknown>
+          return Response.json({ id: "new-task", identifier: "DEMO-99", status: "backlog", priority: "medium", assigneeAgentId: null, assigneeUserId: null, parentId: null, projectId: null, updatedAt: new Date().toISOString(), ...body }, { status: 201 })
+        }
         return Response.json({ ok: true }, { status: /comments$|inbox-dismissals$/.test(url.pathname) ? 201 : 200 })
       }
       if (override) return Response.json(typeof override.body === "function" ? override.body(url) : override.body, { status: override.status })

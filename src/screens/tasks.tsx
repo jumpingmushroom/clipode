@@ -14,6 +14,7 @@ import type { Theme } from "../theme/tokens.ts"
 import { fit, elapsed } from "../ui/format.ts"
 import { Spinner } from "../ui/spinner.tsx"
 import { Frame, SIDEBAR_MIN_COLUMNS, SIDEBAR_WIDTH } from "./frame.tsx"
+import { useTaskActions } from "./task-actions.tsx"
 import { SidebarHeader, SidebarLine } from "./inbox-sidebar.tsx"
 
 export const STATUS_GROUPS: { status: string; title: string }[] = [
@@ -86,6 +87,10 @@ export function TasksScreen(props: { version: string; sidebar: boolean }) {
     ]),
   )
   const current = () => rows()[Math.min(selected(), rows().length - 1)]
+  useTaskActions(() => {
+    const row = current()
+    return row?.type === "task" ? row.task : undefined
+  })
 
   const wide = () => dimensions().width >= SIDEBAR_MIN_COLUMNS
   const mainWidth = () => dimensions().width - (wide() && props.sidebar ? SIDEBAR_WIDTH : 0) - 2
@@ -156,7 +161,7 @@ export function TasksScreen(props: { version: string; sidebar: boolean }) {
       badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<TasksSidebar tasks={shown()} now={now()} />}
-      hints={[["j/k", "move"], ["enter", "open"], ["/", "filter"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
+      hints={[["j/k", "move"], ["enter", "open"], ["/", "filter"], ["n", "new"], ["s/p/a", "status, priority, assign"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
       narrowHints={[["j/k", "move"], ["enter", "open"], ["/", "filter"]]}
       version={props.version}
     >

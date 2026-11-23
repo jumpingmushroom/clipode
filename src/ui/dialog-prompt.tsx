@@ -5,7 +5,7 @@ import { useTheme } from "../theme/context.tsx"
 import { afterDispatch, DIALOG_INSET, DialogHeader } from "./dialog.tsx"
 import { TextArea } from "./text-area.tsx"
 
-export function DialogPrompt(props: { title: string; placeholder?: string; onSubmit: (value: string) => void }) {
+export function DialogPrompt(props: { title: string; placeholder?: string; initial?: string; onSubmit: (value: string) => void }) {
   const { theme } = useTheme()
   let input: TextareaRenderable | undefined
   useBindings(() => ({ mode: "modal", bindings: [{ key: "return", cmd: () => afterDispatch(() => props.onSubmit(input?.plainText ?? "")) }] }))
@@ -17,6 +17,7 @@ export function DialogPrompt(props: { title: string; placeholder?: string; onSub
           mode="modal"
           background="background"
           placeholder={props.placeholder ?? ""}
+          initial={props.initial}
           ref={(r) => {
             input = r
             setTimeout(() => !input?.isDestroyed && input?.focus(), 1)

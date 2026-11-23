@@ -24,7 +24,7 @@ export type PluginCommand = {
 export type Dialogs = {
   alert(title: string, message: string): Promise<void>
   confirm(title: string, message: string): Promise<boolean>
-  prompt(title: string, placeholder?: string): Promise<string | null>
+  prompt(title: string, placeholder?: string, initial?: string): Promise<string | null>
   select<T>(title: string, options: SelectOption<T>[]): Promise<T | null>
 }
 

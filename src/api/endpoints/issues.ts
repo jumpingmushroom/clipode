@@ -98,3 +98,17 @@ export async function listProjects(client: Client, companyId: string): Promise<P
 export function postComment(client: Client, issueId: string, body: string, clientRequestId: string) {
   return client.post(`/api/issues/${id(issueId)}/comments`, { body, clientRequestId })
 }
+
+export type NewTask = { title: string; description?: string; priority?: string; assigneeAgentId?: string | null; projectId?: string | null }
+/** The task fields clipode changes; PATCH /api/issues/{id} accepts many more, and none of them are sent. */
+export type TaskPatch = { title?: string; description?: string | null; status?: string; priority?: string; assigneeAgentId?: string | null }
+
+/** Creates a task. The same idempotencyKey makes a retry return the first task instead of a second one. */
+export async function createTask(client: Client, companyId: string, task: NewTask, idempotencyKey: string): Promise<TaskSummary> {
+  return toTask(await client.post<IssueRow>(`/api/companies/${id(companyId)}/issues`, { ...task, idempotencyKey }))
+}
+
+export async function updateTask(client: Client, issueId: string, patch: TaskPatch): Promise<TaskSummary> {
+  const body = Object.fromEntries(Object.entries(patch).filter(([k, v]) => v !== undefined && ["title", "description", "status", "priority", "assigneeAgentId"].includes(k)))
+  return toTask(await client.request<IssueRow>("PATCH", `/api/issues/${id(issueId)}`, { body }))
+}

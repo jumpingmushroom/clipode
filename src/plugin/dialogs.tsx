@@ -38,7 +38,8 @@ export function createDialogs(dialog: DialogContext): Dialogs {
           <DialogSelect title={title} options={[{ title: "Yes", value: true }, { title: "No", value: false }]} onSelect={(o) => done(o.value)} />
         </box>
       )),
-    prompt: (title, placeholder) => open<string | null>(null, (done) => () => <DialogPrompt title={title} placeholder={placeholder} onSubmit={done} />),
+    prompt: (title, placeholder, initial) =>
+      open<string | null>(null, (done) => () => <DialogPrompt title={title} placeholder={placeholder} initial={initial} onSubmit={done} />),
     select: <T,>(title: string, options: SelectOption<T>[]) =>
       open<T | null>(null, (done) => () => <DialogSelect title={title} options={options} onSelect={(o) => done(o.value)} />),
   }

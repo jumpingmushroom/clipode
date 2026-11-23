@@ -11,6 +11,8 @@ export function TextArea(props: {
   placeholder: string
   ref: (area: TextareaRenderable) => void
   maxLines?: number
+  /** Text the field starts with, for editing. */
+  initial?: string
   /** The background behind the field, so it blends with its row or dialog. */
   background: "panel" | "background"
 }) {
@@ -23,10 +25,13 @@ export function TextArea(props: {
       ref={(r: TextareaRenderable) => {
         area = r
         props.ref(r)
+        // Editing starts after the existing text, so typing extends it.
+        if (props.initial) queueMicrotask(() => !r.isDestroyed && r.gotoBufferEnd())
       }}
       flexGrow={1}
       height={lines()}
       wrapMode="word"
+      initialValue={props.initial ?? ""}
       onContentChange={() => {
         // Line breaks count at once; wrapped lines are known only after layout, so measure again then.
         const measure = () => {
