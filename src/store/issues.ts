@@ -1,6 +1,7 @@
 // Tasks: the full list for the Tasks screen and the sidebars, projects, and a cache of opened threads.
 import { createStore } from "solid-js/store"
-import { getTask, getTaskCost, getThread, listProjects, listTasks } from "../api/endpoints/issues.ts"
+import { getTask, getTaskCost, getThread, listProjects, listTasks, postComment } from "../api/endpoints/issues.ts"
+import { ApiError } from "../api/client.ts"
 import type { ProjectSummary, TaskCost, TaskDetail, TaskSummary, ThreadEntry } from "../api/model.ts"
 import { createResource, type Resource } from "./resource.ts"
 import type { Session } from "./session.ts"
@@ -30,6 +31,19 @@ export function createIssuesStore(session: Session, companyId: string) {
       return kids.length ? [kids.filter((k) => k.status === "done").length, kids.length] : null
     },
     projectName: (id: string | null) => (id ? projects.data.find((p) => p.id === id)?.name : undefined),
+    /** Posts a comment, retrying once after a network error with the same request id, then refreshes the thread. */
+    async comment(issueId: string, body: string) {
+      const requestId = crypto.randomUUID()
+      const send = () => postComment(session.client(), issueId, body, requestId)
+      try {
+        await send().catch((err) => (err instanceof ApiError && err.kind === "network" ? send() : Promise.reject(err)))
+      } catch (err) {
+        session.handleError(err)
+        const reason = (err as { body?: { error?: unknown } }).body?.error
+        throw new Error(`Not sent: ${typeof reason === "string" ? reason : (err as Error).message}`)
+      }
+      if (threads[issueId]) void threads[issueId]!.entries.refresh()
+    },
     /** Refetches a thread that has been opened; other tasks are left alone. */
     refreshThread(id: string) {
       const t = threads[id]

@@ -128,6 +128,7 @@ export function ItemScreen(props: { id: string; version: string; sidebar: boolea
       }
       narrowHints={choices().length ? [["j/k", "choose"], ["enter", "select"], ["esc", "back"]] : [["esc", "back"], ["o", "open"], ["^p", "cmds"]]}
       version={props.version}
+      composer={item()?.issueId ? { label: item()!.blocked?.identifier ?? item()!.identifier ?? "this task", send: (text) => company.issues.comment(item()!.issueId!, text) } : undefined}
     >
       <Show
         when={item()}

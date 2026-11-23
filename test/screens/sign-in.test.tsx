@@ -39,7 +39,7 @@ test("signs in, picks a company, and lands on the inbox", async () => {
   await Bun.sleep(80)
   text = await app.frame()
   expect(text).toContain("Decide now")
-  expect(text).toContain("read-only - replies arrive in a later version")
+  expect(text).toContain("open a task to comment")
 })
 
 test("an unreachable instance is reported", async () => {

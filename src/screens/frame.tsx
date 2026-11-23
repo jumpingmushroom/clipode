@@ -6,6 +6,7 @@ import { useStores } from "../store/context.tsx"
 import { useTheme } from "../theme/context.tsx"
 import { TabBar } from "./tabs.tsx"
 import { Slot } from "../plugin/host.tsx"
+import { Composer, type ComposerTarget } from "./composer.tsx"
 
 export const SIDEBAR_WIDTH = 32
 /** Below this width the sidebar is hidden, as in the 80-column mockup frames. */
@@ -23,6 +24,8 @@ export function Frame(
     /** Shorter hints for narrow terminals. */
     narrowHints?: Hint[]
     version: string
+    /** Where a comment typed in the composer row goes; without it the row shows a hint. */
+    composer?: ComposerTarget
   }>,
 ) {
   const { theme } = useTheme()
@@ -76,7 +79,7 @@ export function Frame(
       </box>
       <box flexDirection="row" height={1} paddingLeft={1} paddingRight={sidebarShown() ? SIDEBAR_WIDTH + 1 : 1}>
         <box flexGrow={1} backgroundColor={theme().panel} paddingLeft={2}>
-          <text fg={theme().muted}>read-only - replies arrive in a later version</text>
+          <Composer target={props.composer} />
         </box>
       </box>
       <box flexDirection="row" height={1} paddingLeft={1} paddingRight={1} gap={2}>

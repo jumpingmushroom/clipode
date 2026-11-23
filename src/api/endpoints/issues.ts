@@ -93,3 +93,8 @@ export async function listProjects(client: Client, companyId: string): Promise<P
   const rows = await client.get<{ id: string; name: string }[]>(`/api/companies/${id(companyId)}/projects`)
   return rows.map((p) => ({ id: p.id, name: p.name }))
 }
+
+/** Posts a comment. The same clientRequestId makes a retry safe: the server creates no second comment. */
+export function postComment(client: Client, issueId: string, body: string, clientRequestId: string) {
+  return client.post(`/api/issues/${id(issueId)}/comments`, { body, clientRequestId })
+}
