@@ -88,7 +88,7 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
   return (
     <Frame
       view={`Task · ${detail()?.identifier ?? company.issues.byId(props.id)?.identifier ?? ""}`}
-      badge={company.attention.feed.loadedAt ? company.attention.feed.data.totalCount : null}
+      badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<Show when={detail()}>{(d: () => TaskDetail) => <ThreadSidebar task={d()} now={now()} />}</Show>}
       hints={[["esc", "back"], ["o", "open run"], ["j/k", "scroll"], ["G", "end"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}

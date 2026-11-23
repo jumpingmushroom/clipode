@@ -34,6 +34,8 @@ export type FakeServer = {
   set(path: string, body: Body, status?: number): void
   /** Sends a live event to every connected WebSocket. */
   emit(type: string, payload: Record<string, unknown>): void
+  /** Writes clients sent (POST and DELETE), with their JSON bodies. */
+  writes: { method: string; path: string; body: unknown }[]
   /** Messages clients sent over the WebSocket. */
   received: Record<string, unknown>[]
   sockets: () => number
@@ -66,6 +68,7 @@ export function startFakeServer(): FakeServer {
 
   const sockets = new Set<{ send(d: string): void }>()
   const received: Record<string, unknown>[] = []
+  const writes: { method: string; path: string; body: unknown }[] = []
   let eventId = 0
   const server = Bun.serve({
     port: 0,
@@ -99,6 +102,14 @@ export function startFakeServer(): FakeServer {
       }
       if (!signedIn) return Response.json({ error: "Board authentication required" }, { status: 401 })
       const override = overrides.get(url.pathname)
+      if (req.method !== "GET") {
+        const text = await req.text()
+        writes.push({ method: req.method, path: url.pathname, body: text ? JSON.parse(text) : null })
+        if (override) return Response.json(typeof override.body === "function" ? override.body(url) : override.body, { status: override.status })
+        // As the real server answers: an undo is 204 with no body, a new record 201, a decision 200.
+        if (req.method === "DELETE") return new Response(null, { status: 204 })
+        return Response.json({ ok: true }, { status: /comments$|inbox-dismissals$/.test(url.pathname) ? 201 : 200 })
+      }
       if (override) return Response.json(typeof override.body === "function" ? override.body(url) : override.body, { status: override.status })
       if (url.pathname === "/api/auth/get-session") {
         return Response.json({ session: { id: "s", userId: "u" }, user: { id: "u", email: "user@example.com", name: "Operator" } })
@@ -120,6 +131,7 @@ export function startFakeServer(): FakeServer {
       for (const ws of sockets) ws.send(event)
     },
     received,
+    writes,
     sockets: () => sockets.size,
   }
 }

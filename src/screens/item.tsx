@@ -1,10 +1,14 @@
-// An opened inbox item: the request as the agent wrote it, with answer options shown but inactive in phase 1.
-import { TextAttributes, type ScrollBoxRenderable } from "@opentui/core"
+// An opened inbox item: the request as the agent wrote it, and the answer: options to choose, or a decision to make.
+import { RGBA, TextAttributes, type ScrollBoxRenderable } from "@opentui/core"
 import { useBindings } from "@opentui/keymap/solid"
-import { createSignal, For, Match, onCleanup, onMount, Show, Switch, type Accessor } from "solid-js"
+import { createEffect, createMemo, createSignal, For, Match, onCleanup, onMount, Show, Switch, untrack, type Accessor } from "solid-js"
+import { createDialogs } from "../plugin/dialogs.tsx"
 import { useRoute } from "../route.tsx"
 import type { InboxItem, ItemDetail } from "../store/attention.ts"
-import { useCompany } from "../store/context.tsx"
+import { useCompany, useStores } from "../store/context.tsx"
+import { afterDispatch, useDialog } from "../ui/dialog.tsx"
+import { useToast } from "../ui/toast.tsx"
+import { choicesFor, missing, toAnswers, toggle, writeOther, type Choice, type Selection } from "./answer.ts"
 import { useTheme } from "../theme/context.tsx"
 import { age, dateTime, elapsed } from "../ui/format.ts"
 import { Markdown } from "../ui/markdown.tsx"
@@ -16,32 +20,96 @@ export function ItemScreen(props: { id: string; version: string; sidebar: boolea
   const { theme } = useTheme()
   const company = useCompany()
   const route = useRoute()
+  // The full feed, not items(): the item stays on screen while its answer is being sent.
   const item = () => company.attention.feed.data.items.find((i) => i.id === props.id)
+  const { session } = useStores()
+  const toast = useToast()
+  const dialogs = createDialogs(useDialog())
   const [now, setNow] = createSignal(Date.now())
+  const [cursor, setCursor] = createSignal(0)
+  const [selection, setSelection] = createSignal<Selection>({})
   let scroll: ScrollBoxRenderable | undefined
 
-  onMount(() => {
+  onMount(() => void company.attention.feed.load())
+  // Opened from a tab or a route before the inbox loaded: fetch the detail once the item is known.
+  createEffect(() => {
     const it = item()
-    if (it) company.attention.open(it)
+    if (it) untrack(() => company.attention.open(it))
   })
   const tick = setInterval(() => setNow(Date.now()), 1000)
   onCleanup(() => clearInterval(tick))
+
+  const detail = () => company.attention.detail(props.id)?.detail
+  const choices = createMemo(() => (detail() && session.client().writes ? choicesFor(detail()!) : []))
+  const questions = () => {
+    const d = detail()
+    return d?.kind === "question" ? d.questions : []
+  }
+
+  /** Leaves the item and sends; the store hides it at once and brings it back if the server refuses. */
+  const send = async (done: string, action: (it: InboxItem) => Promise<void>) => {
+    const it = item()
+    if (!it) return
+    route.back()
+    try {
+      await action(it)
+      toast.show(done, "success")
+    } catch (err) {
+      toast.error(err)
+    }
+  }
+
+  const activate = async (choice: Choice) => {
+    const q = questions().find((x) => "questionId" in choice && x.id === choice.questionId)
+    if (choice.kind === "option" && q) return setSelection((s) => toggle(s, q, choice.optionId))
+    if (choice.kind === "other" && q) {
+      const text = await dialogs.prompt("Something else", "Your answer")
+      if (text !== null) setSelection((s) => writeOther(s, q, text))
+      return
+    }
+    if (choice.kind === "accept") return send("Accepted", (it) => company.attention.accept(it))
+    // Rejections and approval decisions are confirmed: the prompt shows what is sent and takes an optional reason.
+    if (choice.kind === "reject") {
+      const reason = await dialogs.prompt(`Reject: ${choice.label}`, "Optional reason, then enter to send")
+      if (reason !== null) void send("Rejected", (it) => company.attention.reject(it, reason || undefined))
+      return
+    }
+    if (choice.kind === "approval") {
+      const note = await dialogs.prompt(choice.label, "Optional note, then enter to send")
+      if (note !== null) void send(`${choice.label}: sent`, (it) => company.attention.decide(it, choice.decision, note || undefined))
+    }
+  }
+
+  const submit = () => {
+    if (!questions().length) return
+    const left = missing(questions(), selection())
+    if (left.length) return toast.show(`Answer every question first (${left.length} left)`, "warning")
+    void send("Answer sent", (it) => company.attention.answer(it, toAnswers(questions(), selection())))
+  }
+
+  const move = (delta: number) => {
+    if (!choices().length) return scroll?.scrollBy(delta)
+    setCursor((c) => Math.max(0, Math.min(choices().length - 1, c + delta)))
+    scroll?.scrollChildIntoView(`choice-${cursor()}`)
+  }
 
   useBindings(() => ({
     mode: "base",
     bindings: [
       { key: "escape,backspace,h", cmd: () => route.back() },
       {
-        key: "return",
+        key: "o",
         cmd: () => {
           const it = item()
           if (it?.kind === "failed_run") route.navigate({ name: "run", id: it.subjectId })
           else if (it?.issueId) route.navigate({ name: "thread", id: it.issueId })
         },
       },
-      { key: "down,j", cmd: () => scroll?.scrollBy(1) },
-      { key: "up,k", cmd: () => scroll?.scrollBy(-1) },
-      { key: "pagedown,space", cmd: () => scroll?.scrollBy(10) },
+      { key: "down,j", cmd: () => move(1) },
+      { key: "up,k", cmd: () => move(-1) },
+      { key: "return,space", cmd: () => choices()[cursor()] && afterDispatch(() => void activate(choices()[cursor()]!)) },
+      { key: "ctrl+s", cmd: submit },
+      { key: "pagedown", cmd: () => scroll?.scrollBy(10) },
       { key: "pageup", cmd: () => scroll?.scrollBy(-10) },
     ],
   }))
@@ -50,14 +118,25 @@ export function ItemScreen(props: { id: string; version: string; sidebar: boolea
   return (
     <Frame
       view={`Inbox · ${kindLabel()}`}
-      badge={company.attention.feed.data.totalCount}
+      badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<Show when={item()}>{(it: Accessor<InboxItem>) => <ItemSidebar item={it()} now={now()} />}</Show>}
-      hints={[["esc", "back"], ["enter", "open task"], ["j/k", "scroll"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
-      narrowHints={[["esc", "back"], ["j/k", "scroll"], ["^p", "cmds"]]}
+      hints={
+        choices().length
+          ? [["j/k", "choose"], ["enter", "select"], ...(questions().length ? [["ctrl+s", "send"] as [string, string]] : []), ["o", "open task"], ["esc", "back"]]
+          : [["esc", "back"], ["o", "open task"], ["pgup/pgdn", "scroll"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]
+      }
+      narrowHints={choices().length ? [["j/k", "choose"], ["enter", "select"], ["esc", "back"]] : [["esc", "back"], ["o", "open"], ["^p", "cmds"]]}
       version={props.version}
     >
-      <Show when={item()} fallback={<text fg={theme().muted} paddingLeft={2}>This item is no longer in the inbox.</text>}>
+      <Show
+        when={item()}
+        fallback={
+          <text fg={theme().muted} paddingLeft={2}>
+            {company.attention.feed.loadedAt ? "This item is no longer in the inbox." : "loading"}
+          </text>
+        }
+      >
         {(it: Accessor<InboxItem>) => (
           <scrollbox ref={(r: ScrollBoxRenderable) => (scroll = r)} flexGrow={1} paddingLeft={2} paddingRight={2} scrollbarOptions={{ visible: false }}>
             <text fg={theme().muted} wrapMode="none">
@@ -74,7 +153,17 @@ export function ItemScreen(props: { id: string; version: string; sidebar: boolea
             <box marginTop={1} flexDirection="column">
               <Switch>
                 <Match when={company.attention.detail(it().id)?.status === "ready"}>
-                  <Body item={it()} detail={company.attention.detail(it().id)!.detail!} />
+                  <Body
+                    item={it()}
+                    detail={company.attention.detail(it().id)!.detail!}
+                    choices={choices()}
+                    cursor={cursor()}
+                    selection={selection()}
+                    onPick={(i) => {
+                      setCursor(i)
+                      void activate(choices()[i]!)
+                    }}
+                  />
                 </Match>
                 <Match when={company.attention.detail(it().id)?.status === "error"}>
                   <text fg={theme().error}>Could not load the request: {company.attention.detail(it().id)?.error}</text>
@@ -108,31 +197,62 @@ function Section(props: { title: string }) {
   )
 }
 
-function Options(props: { options: string[]; multiple?: boolean }) {
+type Pick = { choices: Choice[]; cursor: number; selection: Selection; onPick: (index: number) => void }
+
+/** Answer rows. Without writes (readOnly) they are shown inactive, with the phase 1 note. */
+function Options(props: Pick & { show: Choice[]; multiple?: boolean }) {
   const { theme } = useTheme()
+  const chosen = (c: Choice) => {
+    if (c.kind === "option") return props.selection[c.questionId]?.optionIds.includes(c.optionId) ?? false
+    if (c.kind === "other") return !!props.selection[c.questionId]?.otherText
+    return false
+  }
+  const box = (c: Choice) => (props.multiple ? (chosen(c) ? "[x]" : "[ ]") : chosen(c) ? "(•)" : "( )")
   return (
-    <For each={props.options}>
-      {(label) => (
-        <text fg={theme().muted}>
-          <span style={{ attributes: TextAttributes.DIM }}>{props.multiple ? "[ ]" : "( )"}</span> {label}
-        </text>
-      )}
+    <For each={props.show}>
+      {(choice) => {
+        const index = () => props.choices.indexOf(choice)
+        const active = () => index() >= 0 && index() === props.cursor
+        return (
+          <box
+            id={`choice-${index()}`}
+            flexDirection="row"
+            backgroundColor={active() ? theme().selection : RGBA.fromInts(0, 0, 0, 0)}
+            onMouseUp={() => index() >= 0 && props.onPick(index())}
+          >
+            <text fg={index() >= 0 ? theme().text : theme().muted}>
+              <span style={{ fg: chosen(choice) ? theme().accent : theme().muted, attributes: index() >= 0 ? undefined : TextAttributes.DIM }}>
+                {choice.kind === "option" || choice.kind === "other" ? box(choice) : "›"}
+              </span>{" "}
+              {choice.label}
+              <Show when={choice.kind === "other" && props.selection[(choice as { questionId: string }).questionId]?.otherText}>
+                <span style={{ fg: theme().muted }}>: {props.selection[(choice as { questionId: string }).questionId]?.otherText}</span>
+              </Show>
+            </text>
+          </box>
+        )
+      }}
     </For>
   )
 }
+
+/** Choices for rendering when writes are off: the same rows, not in the cursor's list. */
+const inert = (detail: ItemDetail) => choicesFor(detail)
 
 function NotYet() {
   const { theme } = useTheme()
   return (
     <text fg={theme().muted}>
-      <span style={{ fg: theme().warning }}>·</span> Answering is not available yet. This version only shows the request.
+      <span style={{ fg: theme().warning }}>·</span> Answering is turned off (readOnly in cli.json).
     </text>
   )
 }
 
-function Body(props: { item: InboxItem; detail: ItemDetail }) {
+function Body(props: { item: InboxItem; detail: ItemDetail } & Pick) {
   const { theme } = useTheme()
   const d = props.detail
+  const all = () => (props.choices.length ? props.choices : inert(d))
+  const pick = () => ({ choices: props.choices, cursor: props.cursor, selection: props.selection, onPick: props.onPick })
   return (
     <Switch fallback={<Markdown content={props.item.summary ?? props.item.whyNow} />}>
       <Match when={d.kind === "question" && d}>
@@ -143,8 +263,8 @@ function Body(props: { item: InboxItem; detail: ItemDetail }) {
                 <Section title={q().questions.length > 1 ? `Question ${i() + 1}` : "Question"} />
                 <Markdown content={question.prompt} />
                 <Section title="Answer" />
-                <Options options={[...question.options, ...(question.allowOther ? ["Something else, with a written reply"] : [])]} multiple={question.multiple} />
-                <Show when={i() === q().questions.length - 1}>
+                <Options {...pick()} show={all().filter((c) => "questionId" in c && c.questionId === question.id)} multiple={question.multiple} />
+                <Show when={i() === q().questions.length - 1 && !props.choices.length}>
                   <NotYet />
                 </Show>
               </box>
@@ -161,8 +281,10 @@ function Body(props: { item: InboxItem; detail: ItemDetail }) {
               <Markdown content={c().detailsMarkdown!} />
             </Show>
             <Section title="Answer" />
-            <Options options={[c().acceptLabel, c().rejectLabel]} />
-            <NotYet />
+            <Options {...pick()} show={all()} />
+            <Show when={!props.choices.length}>
+              <NotYet />
+            </Show>
           </box>
         )}
       </Match>
@@ -171,8 +293,10 @@ function Body(props: { item: InboxItem; detail: ItemDetail }) {
           <box flexDirection="column">
             <Markdown content={a().summary} />
             <Section title="Answer" />
-            <Options options={["Approve", "Reject", "Request revision"]} />
-            <NotYet />
+            <Options {...pick()} show={all()} />
+            <Show when={!props.choices.length}>
+              <NotYet />
+            </Show>
           </box>
         )}
       </Match>

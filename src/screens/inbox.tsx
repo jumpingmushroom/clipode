@@ -37,7 +37,7 @@ export function InboxScreen(props: { version: string; sidebar: boolean }) {
   const tick = setInterval(() => setNow(Date.now()), 1000)
   onCleanup(() => clearInterval(tick))
 
-  const items = () => attention.feed.data.items
+  const items = () => attention.items()
   const shelves = createMemo(() => groupByShelf(items(), new Date(now())))
   // Rows in display order: shelf items, then the Snoozed toggle and, when open, its items.
   const rows = createMemo<Row[]>(() => {
@@ -93,7 +93,7 @@ export function InboxScreen(props: { version: string; sidebar: boolean }) {
   return (
     <Frame
       view="Inbox"
-      badge={attention.feed.status === "ready" || attention.feed.loadedAt ? attention.feed.data.totalCount : null}
+      badge={attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<InboxSidebar items={items()} now={now()} />}
       hints={[["j/k", "move"], ["enter", "open"], ["tab", "sort"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}

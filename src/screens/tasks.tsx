@@ -153,7 +153,7 @@ export function TasksScreen(props: { version: string; sidebar: boolean }) {
   return (
     <Frame
       view="Tasks"
-      badge={company.attention.feed.loadedAt ? company.attention.feed.data.totalCount : null}
+      badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<TasksSidebar tasks={shown()} now={now()} />}
       hints={[["j/k", "move"], ["enter", "open"], ["/", "filter"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}

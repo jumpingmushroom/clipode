@@ -22,6 +22,7 @@ export async function startApp(opts: { signedIn?: boolean; width?: number; heigh
     url: opts.signedIn === false ? undefined : server.url,
     authPath,
     apiKey: opts.apiKey,
+    readOnly: opts.config?.readOnly,
     lastCompany: opts.signedIn === false ? undefined : { [server.url]: COMPANY_ID },
   })
   const setup = await testRender(

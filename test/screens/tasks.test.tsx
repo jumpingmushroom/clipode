@@ -56,11 +56,11 @@ test("a thread shows the description, comments and runs in time order, and the t
   expect(await app.frame()).toContain("Task · ")
 })
 
-test("enter on an inbox item opens its task thread", async () => {
+test("o on an inbox item opens its task thread", async () => {
   app = await startApp()
   await app.frame()
   app.mockInput.pressEnter()
   await app.frame()
-  app.mockInput.pressEnter()
+  app.mockInput.pressKey("o")
   expect(await app.frame()).toMatch(/Task · DEMO-\d+/)
 })

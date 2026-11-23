@@ -22,7 +22,7 @@ export function useAgentNow() {
       const task = company.issues.byId(run.issueId)
       return { state: "running" as const, line: `running · ${elapsed(run.startedAt ?? run.createdAt, now)}`, detail: task ? `${task.identifier ?? ""} ${task.title}` : "", run, task }
     }
-    const waiting = company.attention.feed.data.items.filter((i) => !i.snoozed && (i.agentId === agent.id || i.agentName === agent.name))
+    const waiting = company.attention.items().filter((i) => !i.snoozed && (i.agentId === agent.id || i.agentName === agent.name))
     if (waiting.length) {
       const first = waiting[0]!
       return { state: "waiting" as const, line: "waiting on you", detail: `${first.title}${first.identifier ? ` · ${first.identifier}` : ""}`, run: undefined, task: undefined }
@@ -75,7 +75,7 @@ export function AgentsScreen(props: { version: string; sidebar: boolean }) {
   return (
     <Frame
       view="Agents"
-      badge={company.attention.feed.loadedAt ? company.attention.feed.data.totalCount : null}
+      badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<Show when={current()}>{(a: () => AgentSummary) => <AgentSidebar agent={a()} now={now()} />}</Show>}
       hints={[["j/k", "move"], ["enter", "open"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}

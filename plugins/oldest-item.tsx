@@ -9,7 +9,8 @@ const plugin: Plugin = {
   setup(ctx) {
     const attention = ctx.paperclip.attention
     const oldest = () =>
-      attention.feed.data.items
+      attention
+        .items()
         .filter((i) => !i.snoozed)
         .sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt))[0]
     const days = (iso: string) => Math.floor((Date.now() - Date.parse(iso)) / 86_400_000)

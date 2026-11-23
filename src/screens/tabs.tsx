@@ -70,7 +70,7 @@ export function TabBar() {
   const narrow = () => dimensions().width < 100
   const marker = (id: string) => {
     if (company.runs.live.data.some((r) => r.issueId === id)) return "live"
-    const items = company.attention.feed.data.items.filter((i) => !i.snoozed && (i.issueId === id || i.blocked?.identifier === company.issues.byId(id)?.identifier))
+    const items = company.attention.items().filter((i) => !i.snoozed && (i.issueId === id || i.blocked?.identifier === company.issues.byId(id)?.identifier))
     if (items.some((i) => i.kind === "failed_run")) return "error"
     return items.length ? "attention" : null
   }

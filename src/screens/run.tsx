@@ -104,7 +104,7 @@ export function RunScreen(props: { id: string; version: string; sidebar: boolean
   return (
     <Frame
       view={`Run · ${task()?.identifier ?? props.id.slice(0, 8)}`}
-      badge={company.attention.feed.loadedAt ? company.attention.feed.data.totalCount : null}
+      badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<RunSidebar runId={props.id} model={model()} duration={duration()} cost={cost()} tools={tools()} result={result()} />}
       hints={[["esc", "back"], ["j/k", "scroll"], ["G", "follow"], ["t", "thinking"], ["e", "expand tools"], ["s", "status lines"]]}

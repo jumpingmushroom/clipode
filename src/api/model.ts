@@ -31,7 +31,17 @@ export type InboxItem = {
   sourceKind: string
 }
 
-export type Question = { prompt: string; options: string[]; multiple: boolean; allowOther: boolean }
+export type Question = {
+  id: string
+  prompt: string
+  options: { id: string; label: string }[]
+  multiple: boolean
+  allowOther: boolean
+  required: boolean
+}
+
+/** One answer per question: the chosen option ids, and free text for "Something else". */
+export type Answer = { questionId: string; optionIds: string[]; otherText?: string }
 
 export type ItemDetail =
   | { kind: "question"; questions: Question[] }

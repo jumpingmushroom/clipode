@@ -70,7 +70,7 @@ export function toInboxItem(item: AttentionItem): InboxItem {
 }
 
 type Interaction = { id: string; kind: string; payload: Record<string, unknown> }
-type QuestionPayload = { prompt?: string; selectionMode?: string; allowOther?: boolean; options?: { label?: string }[] }
+type QuestionPayload = { id?: string; prompt?: string; selectionMode?: string; allowOther?: boolean; required?: boolean; options?: { id?: string; label?: string }[] }
 
 /** Every interaction on a task. One request serves all inbox items on that task, so the store caches it. */
 export function getInteractions(client: Client, issueId: string): Promise<Interaction[]> {
@@ -82,11 +82,13 @@ export function questionDetail(interaction: Interaction | undefined): ItemDetail
   return {
     kind: "question",
     questions: questions.map(
-      (q): Question => ({
+      (q, i): Question => ({
+        id: q.id ?? String(i),
         prompt: q.prompt ?? "",
-        options: (q.options ?? []).map((o) => o.label ?? "").filter(Boolean),
+        options: (q.options ?? []).filter((o) => o.label).map((o, j) => ({ id: o.id ?? String(j), label: o.label! })),
         multiple: q.selectionMode === "multi",
         allowOther: q.allowOther === true,
+        required: q.required !== false,
       }),
     ),
   }

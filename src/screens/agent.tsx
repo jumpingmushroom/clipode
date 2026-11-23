@@ -48,7 +48,7 @@ export function AgentScreen(props: { id: string; version: string; sidebar: boole
   return (
     <Frame
       view={`Agent · ${agent()?.name ?? ""}`}
-      badge={company.attention.feed.loadedAt ? company.attention.feed.data.totalCount : null}
+      badge={company.attention.badge()}
       hints={[["esc", "back"], ["j/k", "move"], ["enter", "open run"], ["g", "go to"], ["ctrl+p", "commands"]]}
       narrowHints={[["esc", "back"], ["enter", "open run"]]}
       version={props.version}

@@ -38,7 +38,7 @@ test("enter opens an item with its answer options; esc goes back", async () => {
   expect(await app.frame()).toContain("Decide now")
 })
 
-test("a question shows each prompt with its options and the read-only note", async () => {
+test("a question shows each prompt with its options to choose", async () => {
   app = await startApp()
   const rows = (await app.frame()).split("\n").filter((l) => /^ {2}[■?!◆✗•] /.test(l))
   const target = rows.findIndex((l) => l.startsWith("  ? "))
@@ -48,7 +48,7 @@ test("a question shows each prompt with its options and the read-only note", asy
   const text = await app.frame()
   expect(text).toContain("Inbox · question")
   expect(text).toMatch(/\( \)|\[ \]/)
-  expect(text).toContain("Answering is not available yet")
+  expect(text).toContain("ctrl+s send")
   expect(app.server.requests.filter((r) => r.endsWith("/interactions")).length).toBe(1)
 })
 
