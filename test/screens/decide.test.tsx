@@ -116,3 +116,22 @@ test("a question shows the comment the agent wrote with it as Context", async ()
   expect(text).toContain("three queues")
   expect(text).not.toContain("unrelated")
 })
+
+test("without linked comments, the context is what the same run wrote on the task", async () => {
+  const issueId = QUESTION.subject.metadata.issueId as string
+  app = await startApp({
+    route: { name: "item", id: QUESTION.id },
+    before: (s) => {
+      const interactions = (allInteractions as Record<string, { id: string }[]>)[issueId]!
+      s.set(`/api/issues/${issueId}/interactions`, interactions.map((x) => (x.id === QUESTION.subject.id ? { ...x, originCommentIds: [], sourceRunId: "run-7" } : x)))
+      s.set(`/api/issues/${issueId}/comments`, [
+        { id: "c-1", body: "Older note from another run", createdByRunId: "run-3" },
+        { id: "c-2", body: "## Proposal\n\nRoute A enables auth.", createdByRunId: "run-7" },
+      ])
+    },
+  })
+  const text = await app.frame()
+  expect(text).toContain("Context")
+  expect(text).toContain("Route A enables auth.")
+  expect(text).not.toContain("Older note")
+})

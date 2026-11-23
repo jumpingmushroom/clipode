@@ -70,7 +70,7 @@ export function toInboxItem(item: AttentionItem): InboxItem {
   }
 }
 
-type Interaction = { id: string; kind: string; payload: Record<string, unknown>; originCommentIds?: string[] }
+type Interaction = { id: string; kind: string; payload: Record<string, unknown>; originCommentIds?: string[]; sourceRunId?: string | null }
 type QuestionPayload = { id?: string; prompt?: string; selectionMode?: string; allowOther?: boolean; required?: boolean; options?: { id?: string; label?: string }[] }
 
 /** Every interaction on a task. One request serves all inbox items on that task, so the store caches it. */
@@ -78,12 +78,19 @@ export function getInteractions(client: Client, issueId: string): Promise<Intera
   return client.get<Interaction[]>(`/api/issues/${id(issueId)}/interactions`)
 }
 
-/** The comments an agent wrote alongside a question, as one Markdown text, or null without any. */
+/**
+ * What the agent wrote alongside a question, as one Markdown text, or null. Agents do not always link it: the comments
+ * named in originCommentIds come first; without any, the comments written by the same run that asked the question.
+ */
 export async function questionContext(client: Client, issueId: string, interaction: Interaction | undefined): Promise<string | null> {
-  const ids = interaction?.originCommentIds ?? []
-  if (!ids.length) return null
-  const comments = await client.get<{ id: string; body: string }[]>(`/api/issues/${id(issueId)}/comments`)
-  const bodies = ids.map((cid) => comments.find((c) => c.id === cid)?.body).filter((b): b is string => !!b)
+  if (!interaction) return null
+  const linked = interaction.originCommentIds ?? []
+  if (!linked.length && !interaction.sourceRunId) return null
+  const comments = await client.get<{ id: string; body: string; createdByRunId?: string | null }[]>(`/api/issues/${id(issueId)}/comments`)
+  const chosen = linked.length
+    ? linked.map((cid) => comments.find((c) => c.id === cid)).filter((c) => !!c)
+    : comments.filter((c) => c.createdByRunId === interaction.sourceRunId)
+  const bodies = chosen.map((c) => c!.body).filter(Boolean)
   return bodies.length ? bodies.join("\n\n") : null
 }
 

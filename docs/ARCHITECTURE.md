@@ -445,7 +445,7 @@ Open questions:
 Open after the mockup review:
 
 - [x] Decided: the shelf rule stands, including every high-severity item on Decide now.
-- [x] Decided: a question's detail shows the comment the agent wrote alongside it (`originCommentIds`) as a Context section above the question, from the task's comments.
+- [x] Decided: a question's detail shows the comment the agent wrote alongside it (`originCommentIds`) as a Context section above the question, from the task's comments. Agents do not always link it: on 2026-11-23 a question said "see the proposal comment" with `originCommentIds` empty, while the proposal was a comment written 12 seconds earlier by the same run. So without linked comments, the context is the comments whose `createdByRunId` equals the interaction's `sourceRunId`.
 - [x] Observed: `live.interests` is answered by `live.subscribed` with the same revision.
 
 ## Prompt for Claude Design
