@@ -65,6 +65,7 @@ export function toInboxItem(item: AttentionItem): InboxItem {
     blocked,
     blockedTaskCount: typeof detail?.blockedTaskCount === "number" ? detail.blockedTaskCount : null,
     subjectId: item.subject.id,
+    dismissalKey: item.dismissalKey,
     sourceKind: item.sourceKind,
   }
 }
@@ -126,4 +127,20 @@ export async function blockedDetail(client: Client, issueId: string): Promise<It
     description: issue.description,
     blockers: (issue.blockedBy ?? []).map((b) => ({ identifier: b.identifier, title: b.title, status: b.status })),
   }
+}
+
+// Dismiss, snooze and restore: phase 2 writes, as probed in the scratch company.
+const dismissals = (companyId: string) => `/api/companies/${id(companyId)}/inbox-dismissals`
+
+export function dismissItem(client: Client, companyId: string, itemKey: string) {
+  return client.post(dismissals(companyId), { itemKey, kind: "dismiss" })
+}
+
+export function snoozeItem(client: Client, companyId: string, itemKey: string, until: Date) {
+  return client.post(dismissals(companyId), { itemKey, kind: "snooze", snoozedUntil: until.toISOString() })
+}
+
+/** Undoes a dismissal or snooze. The server answers 204 with no body. */
+export function restoreItem(client: Client, companyId: string, itemKey: string) {
+  return client.delete(`${dismissals(companyId)}/${id(itemKey)}`)
 }

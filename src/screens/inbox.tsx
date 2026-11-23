@@ -6,7 +6,11 @@ import { createMemo, createSignal, For, Match, onCleanup, onMount, Show, Switch 
 import { useCommands } from "../keymap/commands.tsx"
 import { useRoute } from "../route.tsx"
 import type { InboxItem } from "../store/attention.ts"
-import { useCompany } from "../store/context.tsx"
+import { useCompany, useStores } from "../store/context.tsx"
+import { SNOOZE_CHOICES, snoozeUntil } from "../store/snooze.ts"
+import { createDialogs } from "../plugin/dialogs.tsx"
+import { afterDispatch, useDialog } from "../ui/dialog.tsx"
+import { useToast } from "../ui/toast.tsx"
 import { groupByShelf, SHELVES } from "../store/shelves.ts"
 import { useTheme } from "../theme/context.tsx"
 import { Spinner } from "../ui/spinner.tsx"
@@ -82,7 +86,55 @@ export function InboxScreen(props: { version: string; sidebar: boolean }) {
       { key: "return", cmd: open },
     ],
   }))
+  const { session } = useStores()
+  const toast = useToast()
+  const dialogs = createDialogs(useDialog())
+  // The last item dismissed or snoozed in this session, so u can bring it back from anywhere in the list.
+  let lastPut: InboxItem | undefined
+  const selectedItem = () => {
+    const row = current()
+    return row?.type === "item" ? row.item : undefined
+  }
+  const run = async (done: string, action: () => Promise<void>) => {
+    try {
+      await action()
+      toast.show(done, "success")
+    } catch (err) {
+      toast.error(err)
+    }
+  }
+  const dismiss = () => {
+    const item = selectedItem()
+    if (!item || item.snoozed) return
+    lastPut = item
+    void run("Dismissed · u to undo", () => attention.dismiss(item))
+  }
+  const snooze = () => {
+    const item = selectedItem()
+    if (!item || item.snoozed) return
+    afterDispatch(async () => {
+      const choice = await dialogs.select("Snooze until", SNOOZE_CHOICES.map((c) => ({ title: c.title, value: c.value })))
+      if (!choice) return
+      lastPut = item
+      void run(`Snoozed until ${SNOOZE_CHOICES.find((c) => c.value === choice)!.title.toLowerCase()} · u to undo`, () => attention.snooze(item, snoozeUntil(choice)))
+    })
+  }
+  const restore = () => {
+    const selected = selectedItem()
+    const item = selected?.snoozed ? selected : (lastPut && attention.items().find((i) => i.id === lastPut!.id && i.snoozed))
+    if (!item) return toast.show("Select a snoozed item to restore", "info", 2000)
+    lastPut = undefined
+    void run("Restored", () => attention.restore(item))
+  }
+
   useCommands(() => [
+    ...(session.client().writes
+      ? [
+          { name: "inbox.dismiss", title: "Dismiss item", category: "Inbox", keys: "d", run: dismiss },
+          { name: "inbox.snooze", title: "Snooze item", category: "Inbox", keys: "s", run: snooze },
+          { name: "inbox.restore", title: "Restore a dismissed or snoozed item", category: "Inbox", keys: "u", run: restore },
+        ]
+      : []),
     { name: "inbox.sort", title: "Sort by activity or decide-by", category: "View", keys: "tab", run: () => attention.setSort(attention.sort() === "activity" ? "decide" : "activity") },
     { name: "inbox.refresh", title: "Refresh", category: "View", keys: "r", run: () => void attention.refresh() },
   ])
@@ -96,7 +148,7 @@ export function InboxScreen(props: { version: string; sidebar: boolean }) {
       badge={attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<InboxSidebar items={items()} now={now()} />}
-      hints={[["j/k", "move"], ["enter", "open"], ["tab", "sort"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
+      hints={[["j/k", "move"], ["enter", "open"], ...(session.client().writes ? ([["d", "dismiss"], ["s", "snooze"]] as [string, string][]) : []), ["tab", "sort"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
       narrowHints={[["j/k", "move"], ["enter", "open"], ["^p", "cmds"]]}
       version={props.version}
     >
@@ -170,7 +222,7 @@ export function InboxScreen(props: { version: string; sidebar: boolean }) {
                     onMouseUp={() => setShowSnoozed((v) => !v)}
                   >
                     <text fg={theme().muted}>
-                      {showSnoozed() ? "▾" : "▸"} Snoozed  {row.count}
+                      {`${showSnoozed() ? "▾" : "▸"} Snoozed  ${row.count}`}
                     </text>
                   </box>
                   <Show when={showSnoozed()}>

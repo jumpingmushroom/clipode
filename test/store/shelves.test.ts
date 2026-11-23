@@ -6,7 +6,7 @@ const now = new Date(2026, 10, 20, 15, 0)
 const item = (over: Partial<InboxItem>): InboxItem => ({
   id: "i", kind: "question", title: "t", identifier: null, issueId: null, agentName: null, agentId: null, whyNow: "",
   severity: "medium", createdAt: new Date(2026, 10, 10).toISOString(), activityAt: "", decideBy: null, expiresAt: null,
-  snoozed: false, snoozedUntil: null, summary: null, blocked: null, blockedTaskCount: null, subjectId: "s", sourceKind: "x",
+  snoozed: false, snoozedUntil: null, summary: null, blocked: null, blockedTaskCount: null, subjectId: "s", sourceKind: "x", dismissalKey: "k",
   ...over,
 })
 

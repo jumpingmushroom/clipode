@@ -6,8 +6,11 @@ import {
   blockedDetail,
   confirmationDetail,
   getInbox,
+  dismissItem,
   getInteractions,
   questionDetail,
+  restoreItem,
+  snoozeItem,
   type InboxFeed,
 } from "../api/endpoints/attention.ts"
 import type { Answer, InboxItem, ItemDetail } from "../api/model.ts"
@@ -58,8 +61,11 @@ export function createAttentionStore(session: Session, companyId: string) {
     feed,
     /** The inbox without items whose decision is being sent. */
     items,
-    /** The header badge: the server's total minus items being decided, or null before the first load. */
-    badge: () => (feed.loadedAt ? Math.max(0, feed.data.totalCount - hidden().length) : null),
+    /**
+     * The header badge: items that need you, without snoozed or dismissed ones and those being decided; null before the
+     * first load. The feed is loaded whole (all=true), so counting it is exact; the server's total includes dismissals.
+     */
+    badge: () => (feed.loadedAt ? items().filter((i) => !i.snoozed).length : null),
     /**
      * Sends a decision for an item optimistically: the item leaves the inbox at once and the feed is refetched after
      * the server accepts. If the server refuses, the item comes back and the error is thrown to the caller.
@@ -89,6 +95,16 @@ export function createAttentionStore(session: Session, companyId: string) {
     },
     decide(item: InboxItem, decision: ApprovalDecision, note?: string) {
       return this.act(item, () => decideApproval(session.client(), item.subjectId, decision, note))
+    },
+    dismiss(item: InboxItem) {
+      return this.act(item, () => dismissItem(session.client(), companyId, item.dismissalKey))
+    },
+    snooze(item: InboxItem, until: Date) {
+      return this.act(item, () => snoozeItem(session.client(), companyId, item.dismissalKey, until))
+    },
+    /** Brings a dismissed or snoozed item back onto its shelf. */
+    restore(item: InboxItem) {
+      return this.act(item, () => restoreItem(session.client(), companyId, item.dismissalKey))
     },
     sort,
     setSort(next: Sort) {

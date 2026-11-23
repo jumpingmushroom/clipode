@@ -30,8 +30,7 @@ test("a question: j/k choose, enter selects, ctrl+s sends the answer with questi
   expect(write?.method).toBe("POST")
   expect(write?.body).toMatchObject({ answers: [{ questionId: expect.any(String), optionIds: [expect.any(String)] }] })
   expect(write?.path).toContain(`/interactions/${QUESTION.subject.id}/respond`)
-  // "Answer sent" is queued behind the earlier warning toast.
-  expect(text).toContain("+1")
+  expect(text).toContain("Answer sent")
 })
 
 test("a confirmation: enter on accept sends at once; reject asks for an optional reason first", async () => {

@@ -71,7 +71,8 @@ function init() {
   return {
     show(message: string, variant: ToastVariant = "info", duration = 5000) {
       const options = { message, variant, duration }
-      if (store.current) {
+      // A newer message replaces a passing one at once; only errors wait their turn, so none goes unseen.
+      if (store.current?.variant === "error") {
         setStore("queue", (queue) => [...queue, options])
         return
       }

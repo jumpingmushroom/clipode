@@ -27,6 +27,8 @@ export type InboxItem = {
   blockedTaskCount: number | null
   /** The subject's own id: interaction, approval or run id. */
   subjectId: string
+  /** The key for dismissing or snoozing this item. */
+  dismissalKey: string
   /** Server-side source kind, for kinds shown as a generic row. */
   sourceKind: string
 }

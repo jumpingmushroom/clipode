@@ -103,17 +103,17 @@ export class Client {
     if (cookie) headers.Cookie = cookie
     if (this.token) headers.Authorization = `Bearer ${this.token}`
     // Better Auth checks Origin against the trusted origins on state-changing requests.
-    if (verb !== "GET") {
-      headers.Origin = this.origin
-      headers["Content-Type"] = "application/json"
-    }
+    // GET and DELETE carry no body, as in the write probe.
+    const hasBody = verb !== "GET" && verb !== "DELETE"
+    if (verb !== "GET") headers.Origin = this.origin
+    if (hasBody) headers["Content-Type"] = "application/json"
 
     let res: Response
     try {
       res = await fetch(url, {
         method: verb,
         headers,
-        body: verb === "GET" ? undefined : JSON.stringify(opts.body ?? {}),
+        body: hasBody ? JSON.stringify(opts.body ?? {}) : undefined,
         redirect: "manual",
       })
     } catch (err) {
