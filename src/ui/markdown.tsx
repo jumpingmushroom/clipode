@@ -1,5 +1,5 @@
-// Markdown rendered with the theme's syntax colours.
-// shortcut: no tree-sitter client, so fenced code shows as plain text; add one (see opencode parsers-config.ts) with the run transcript.
+// Markdown rendered with the theme's syntax colours. Fenced code is highlighted by OpenTUI's default tree-sitter
+// client, with bundled grammars for JavaScript, TypeScript, TSX, Markdown and Zig; other languages stay plain.
 import { useTheme } from "../theme/context.tsx"
 
 export function Markdown(props: { content: string; streaming?: boolean }) {
