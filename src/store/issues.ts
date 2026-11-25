@@ -2,12 +2,12 @@
 import { basename } from "node:path"
 import { createMemo } from "solid-js"
 import { createStore } from "solid-js/store"
-import { commentAndAssign, createTask, getTask, getTaskCost, getThread, handBackAgent, listProjects, listTasks, postComment, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
+import { commentAndAssign, createTask, getDocument, getTask, getTaskCost, getThread, handBackAgent, listProjects, listTasks, postComment, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
 import { ApiError } from "../api/client.ts"
-import type { ProjectSummary, TaskCost, TaskDetail, TaskSummary, ThreadEntry } from "../api/model.ts"
+import type { ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
 import { createResource, type Resource } from "./resource.ts"
 import type { Session } from "./session.ts"
-export type { ProjectSummary, TaskCost, TaskDetail, TaskSummary, ThreadEntry } from "../api/model.ts"
+export type { DocumentSummary, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
 export type { NewTask, TaskPatch } from "../api/endpoints/issues.ts"
 
 export const IN_FLIGHT = ["in_progress", "in_review", "blocked"]
@@ -19,6 +19,7 @@ export function createIssuesStore(session: Session, companyId: string) {
   const list = createResource<TaskSummary[]>(() => listTasks(session.client(), companyId), [], session.handleError)
   const projects = createResource<ProjectSummary[]>(() => listProjects(session.client(), companyId), [], session.handleError)
   const [threads, setThreads] = createStore<Record<string, Thread>>({})
+  const documents = new Map<string, Resource<TaskDocument | null>>()
 
   /** Uploads files to a task one by one; returns the new attachments' ids and the files the server did not take. */
   async function attach(issueId: string, paths: string[]): Promise<{ ids: string[]; failed: { path: string; reason: string }[] }> {
@@ -110,6 +111,12 @@ export function createIssuesStore(session: Session, companyId: string) {
       void t.detail.refresh()
       void t.entries.refresh()
       void t.cost.refresh()
+    },
+    /** One document of a task, created on first use; the screen reads it again on every visit. */
+    document(issueId: string, key: string): Resource<TaskDocument | null> {
+      const k = `${issueId}/${key}`
+      if (!documents.has(k)) documents.set(k, createResource<TaskDocument | null>(() => getDocument(session.client(), issueId, key), null, session.handleError))
+      return documents.get(k)!
     },
     /** The thread of one task, created on first use and kept for the session. */
     thread(id: string): Thread {

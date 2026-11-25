@@ -1,0 +1,21 @@
+{
+  "id": "00000000-0000-4000-8000-000000000007",
+  "companyId": "00000000-0000-4000-8000-000000000008",
+  "issueId": "00000000-0000-4000-8000-000000000001",
+  "key": "example key",
+  "title": "example title",
+  "format": "example format",
+  "body": "example body",
+  "latestRevisionId": "00000000-0000-4000-8000-000000000009",
+  "latestRevisionNumber": 2,
+  "createdByAgentId": "00000000-0000-4000-8000-000000000002",
+  "createdByUserId": null,
+  "updatedByAgentId": "00000000-0000-4000-8000-000000000002",
+  "updatedByUserId": null,
+  "lockedAt": null,
+  "lockedByAgentId": null,
+  "lockedByUserId": null,
+  "sourceTrust": null,
+  "createdAt": "2026-11-12T07:28:00.337Z",
+  "updatedAt": "2026-11-12T07:34:33.188Z"
+}

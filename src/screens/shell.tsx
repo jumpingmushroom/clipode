@@ -25,6 +25,7 @@ import { ItemScreen } from "./item.tsx"
 import { SignInScreen } from "./sign-in.tsx"
 import { TasksScreen } from "./tasks.tsx"
 import { ThreadScreen } from "./thread.tsx"
+import { DocumentScreen } from "./document.tsx"
 import { RunScreen } from "./run.tsx"
 import { AgentsScreen } from "./agents.tsx"
 import { AgentScreen } from "./agent.tsx"
@@ -210,6 +211,9 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
         </Match>
         <Match when={param("thread")} keyed>
           {(id: string) => <ThreadScreen id={id} version={props.version} sidebar={showSidebar()} />}
+        </Match>
+        <Match when={route.current().name === "document" && route.current()} keyed>
+          {(r: Route) => r.name === "document" && <DocumentScreen issueId={r.issueId} docKey={r.key} version={props.version} />}
         </Match>
         <Match when={param("run")} keyed>
           {(id: string) => <RunScreen id={id} version={props.version} sidebar={showSidebar()} />}

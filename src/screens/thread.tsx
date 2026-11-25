@@ -61,8 +61,43 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
       { key: "G,end", cmd: () => scroll?.scrollTo(scroll.scrollHeight) },
       { key: "r", cmd: () => void Promise.all([thread.detail.refresh(), thread.entries.refresh(), thread.cost.refresh()]) },
       { key: "o", cmd: () => openRuns() },
+      { key: "d", cmd: () => openDocuments() },
+      { key: "t", cmd: () => openRelated() },
     ],
   }))
+
+  const openDocument = (key: string) => route.navigate({ name: "document", issueId: props.id, key })
+  const openDocuments = () => {
+    const docs = detail()?.documents ?? []
+    if (docs.length === 1) return openDocument(docs[0]!.key)
+    if (!docs.length) return
+    dialog.replace(() => (
+      <DialogSelect
+        title="Documents"
+        options={docs.map((d) => ({ title: d.title, value: d.key, footer: `rev ${d.revision} · ${dateTime(d.updatedAt)}` }))}
+        onSelect={(o) => {
+          dialog.clear()
+          openDocument(o.value)
+        }}
+      />
+    ))
+  }
+  /** The parent and the sub-tasks, to move around a task tree. */
+  const openRelated = () => {
+    const parent = company.issues.byId(detail()?.parentId)
+    const related = [...(parent ? [{ task: parent, footer: "parent" }] : []), ...company.issues.children(props.id).map((task) => ({ task, footer: "sub-task" }))]
+    if (!related.length) return
+    dialog.replace(() => (
+      <DialogSelect
+        title="Parent and sub-tasks"
+        options={related.map((r) => ({ title: `${STATUS_GLYPHS[r.task.status] ?? "○"} ${r.task.identifier ?? ""}  ${r.task.title}`, value: r.task.id, footer: r.footer }))}
+        onSelect={(o) => {
+          dialog.clear()
+          route.navigate({ name: "thread", id: o.value })
+        }}
+      />
+    ))
+  }
 
   const openRuns = () => {
     const runs = thread.entries.data.filter((e): e is Extract<ThreadEntry, { kind: "run" }> => e.kind === "run").reverse()
@@ -96,7 +131,19 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
       badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<Show when={detail()}>{(d: () => TaskDetail) => <ThreadSidebar task={d()} now={now()} />}</Show>}
-      hints={[["esc", "back"], ["s/p/a", "status, priority, assign"], ["e", "edit"], ["f", "attach"], ["o", "open run"], ["j/k", "scroll"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
+      hints={[
+        ["esc", "back"],
+        ...(detail()?.documents.length ? [["d", "documents"] as [string, string]] : []),
+        ...(detail()?.parentId || company.issues.children(props.id).length ? [["t", "sub-tasks"] as [string, string]] : []),
+        ["s/p/a", "status, priority, assign"],
+        ["e", "edit"],
+        ["f", "attach"],
+        ["o", "open run"],
+        ["j/k", "scroll"],
+        ["g", "go to"],
+        ["ctrl+p", "commands"],
+        ["?", "help"],
+      ]}
       narrowHints={[["esc", "back"], ["j/k", "scroll"], ["^p", "cmds"]]}
       version={props.version}
       composer={{ label: detail()?.identifier ?? "this task", send: (text, files, assignTo) => company.issues.comment(props.id, text, files, assignTo), handBack: () => company.issues.handBackTo(props.id) }}
@@ -122,6 +169,25 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
             </text>
             <Show when={detail()!.description}>
               <Markdown content={detail()!.description!} links={links} />
+            </Show>
+            <Show when={detail()!.documents.length}>
+              <text fg={theme().accent} attributes={TextAttributes.BOLD} marginTop={1}>
+                Documents <span style={{ fg: theme().muted, attributes: 0 }}> d opens</span>
+              </text>
+              <For each={detail()!.documents}>
+                {(d) => (
+                  <text fg={theme().text} wrapMode="none" onMouseUp={() => openDocument(d.key)}>
+                    <span style={{ fg: theme().muted }}>▤</span> {d.title}
+                    <span style={{ fg: theme().muted }}>{`  rev ${d.revision} · ${agentName(d.agentId) ?? (d.agentId ? "agent" : "you")} · ${dateTime(d.updatedAt)}`}</span>
+                  </text>
+                )}
+              </For>
+            </Show>
+            <Show when={detail()!.workProducts.length}>
+              <text fg={theme().accent} attributes={TextAttributes.BOLD} marginTop={1}>
+                Work products
+              </text>
+              <Markdown content={workProducts(detail()!.workProducts)} links={links} />
             </Show>
             <Show when={thread.entries.status === "error"}>
               <text fg={theme().error} marginTop={1}>
@@ -178,6 +244,13 @@ function RunLine(props: { entry: Extract<ThreadEntry, { kind: "run" }>; name?: s
   )
 }
 
+/** Work products as a Markdown list, so a pull request's or preview's link can be followed. */
+function workProducts(list: TaskDetail["workProducts"]): string {
+  return list
+    .map((w) => `- ${w.url ? `[${w.title}](${w.url})` : w.title} · ${w.type.replace(/_/g, " ")}${w.status === "active" ? "" : ` · ${w.status.replace(/_/g, " ")}`}`)
+    .join("\n")
+}
+
 function Field(props: { label: string; value: string; color?: "text" | "muted" }) {
   const { theme } = useTheme()
   return (
@@ -191,6 +264,7 @@ function Field(props: { label: string; value: string; color?: "text" | "muted" }
 function ThreadSidebar(props: { task: TaskDetail; now: number }) {
   const { theme } = useTheme()
   const company = useCompany()
+  const route = useRoute()
   const thread = company.issues.thread(props.task.id)
   const kids = () => company.issues.children(props.task.id)
   const run = () => company.runs.live.data.find((r) => r.issueId === props.task.id)
@@ -218,7 +292,7 @@ function ThreadSidebar(props: { task: TaskDetail; now: number }) {
           <SidebarHeader title="Sub-tasks" count={`${kids().filter((k) => k.status === "done").length}/${kids().length}`} />
           <For each={kids()}>
             {(kid) => (
-              <text fg={theme().muted} wrapMode="none">
+              <text fg={theme().muted} wrapMode="none" onMouseUp={() => route.navigate({ name: "thread", id: kid.id })}>
                 <span style={{ fg: statusColor(kid.status, theme()) }}>{STATUS_GLYPHS[kid.status] ?? "○"}</span> {fit(kid.title, 26)}
               </text>
             )}

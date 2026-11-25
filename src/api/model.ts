@@ -132,7 +132,15 @@ export type TaskDetail = TaskSummary & {
   parent: { identifier: string | null; title: string } | null
   blockers: { identifier: string | null; title: string; status: string }[]
   createdAt: string
+  /** Documents on the task (a plan, a spec, a price list), without their text. */
+  documents: DocumentSummary[]
+  /** What the work produced: pull requests, branches, previews, files. */
+  workProducts: { title: string; type: string; status: string; url: string | null }[]
 }
+
+export type DocumentSummary = { key: string; title: string; revision: number; updatedAt: string; agentId: string | null }
+
+export type TaskDocument = DocumentSummary & { body: string }
 
 export type ThreadEntry =
   | { kind: "comment"; id: string; at: string; agentId: string | null; userId: string | null; body: string }

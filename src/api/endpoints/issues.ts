@@ -2,7 +2,7 @@
 import type { Issue, IssueComment, Project } from "@paperclipai/shared"
 import { basename } from "node:path"
 import type { Client } from "../client.ts"
-import type { ProjectSummary, TaskCost, TaskDetail, TaskSummary, ThreadEntry } from "../model.ts"
+import type { DocumentSummary, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../model.ts"
 
 const id = encodeURIComponent
 
@@ -38,7 +38,19 @@ type IssueDetail = IssueRow & {
   goal?: { title: string } | null
   ancestors?: { identifier: string | null; title: string }[]
   blockedBy?: { identifier: string | null; title: string; status: string }[]
+  documentSummaries?: WireDocument[]
+  workProducts?: { title: string; type: string; status: string; url: string | null }[]
 }
+
+type WireDocument = { key: string; title: string | null; latestRevisionNumber: number; updatedAt: string; updatedByAgentId: string | null }
+
+const toDocument = (d: WireDocument): DocumentSummary => ({
+  key: d.key,
+  title: d.title || d.key,
+  revision: d.latestRevisionNumber,
+  updatedAt: d.updatedAt,
+  agentId: d.updatedByAgentId,
+})
 
 export async function getTask(client: Client, issueId: string): Promise<TaskDetail> {
   const i = await client.get<IssueDetail>(`/api/issues/${id(issueId)}`)
@@ -51,7 +63,15 @@ export async function getTask(client: Client, issueId: string): Promise<TaskDeta
     parent: parent ? { identifier: parent.identifier, title: parent.title } : null,
     blockers: (i.blockedBy ?? []).map((b) => ({ identifier: b.identifier, title: b.title, status: b.status })),
     createdAt: String(i.createdAt),
+    documents: (i.documentSummaries ?? []).map(toDocument),
+    workProducts: (i.workProducts ?? []).map((w) => ({ title: w.title, type: w.type, status: w.status, url: w.url })),
   }
+}
+
+/** One document with its text, at its latest revision. */
+export async function getDocument(client: Client, issueId: string, key: string): Promise<TaskDocument> {
+  const d = await client.get<WireDocument & { body: string }>(`/api/issues/${id(issueId)}/documents/${id(key)}`)
+  return { ...toDocument(d), body: d.body }
 }
 
 type RunRow = { runId: string; agentId: string; status: string; createdAt: string; startedAt: string | null; finishedAt: string | null; usageJson?: { costUsd?: number } | null }

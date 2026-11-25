@@ -1,6 +1,12 @@
 // Text helpers for fixed-width columns.
 
 /** Compact age: "now", "12m", "3h", "2d", "5w". */
+/** "5m ago", or "just now" where age() says "now". */
+export const ago = (iso: string | null | undefined, now = Date.now()) => {
+  const a = age(iso, now)
+  return a === "now" ? "just now" : `${a} ago`
+}
+
 export function age(iso: string | null | undefined, now = Date.now()): string {
   const at = iso ? Date.parse(iso) : NaN
   if (Number.isNaN(at)) return ""

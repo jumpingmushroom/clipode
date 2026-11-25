@@ -162,6 +162,12 @@ Costs and quotas (1.11, `g c`): one scrolling report built from seven reads, fet
 
 Probed on 2026-11-25: every run on the instance is billed to a Claude subscription (`billingType: "subscription_included"`), so spend is $0 everywhere; no company has a budget; and every quota request fails ("Subscription quota is currently unavailable", `errorFamily` `permission_denied` or `provider_unavailable`). The report therefore leads with runs and tokens, adds a cost column only when there is spend, says when every run is on a subscription, and shows the server's reason for a missing quota. Agents and projects are sorted busiest first. There is no sidebar warning for budgets or quotas: none exist here, and checking quotas on every start would make the server ask the provider each time.
 
+Task content (1.15), as decided on 2026-11-25. Probed the same day: `GET /api/issues/{id}` already carries `documentSummaries` (key, title, latest revision number, who updated it and when, no body) and `workProducts` (type, provider, title, url, status), so the thread needs no extra request; 4 of 44 tasks in one company had documents (a price list, a ledger at revision 13, plans), and work products were attachments recorded as `artifact`. Sub-tasks come from the task list already loaded (`parentId`).
+
+- The thread shows a Documents section under the description (title, revision, who, when) and a Work products section as Markdown links, so a pull request's or preview's URL can be followed. `d` opens the task's document, through a picker when there are several; the document screen sends `GET /api/issues/{id}/documents/{key}` on every visit and shows the latest revision as Markdown, with its number, author and time. Older revisions are not shown.
+- `t` picks the parent or a sub-task and opens it; sub-task rows in the thread sidebar open on click.
+- Queued comments (`GET /api/issues/{id}/queued-comments`) are left out: on this instance every task answered `protocol: "legacy"`, `steeringDisposition: "unsupported"` with no entries.
+
 ## Provenance and licensing
 
 The new repository is MIT licensed, and no pasode source is copied into it. A public repository without a licence gives no reuse rights by default, so pasode is used as a design reference only. This is a working rule and not legal advice.

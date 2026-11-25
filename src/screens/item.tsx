@@ -10,7 +10,7 @@ import { afterDispatch, useDialog } from "../ui/dialog.tsx"
 import { useToast } from "../ui/toast.tsx"
 import { choicesFor, missing, toAnswers, toggle, writeOther, type Choice, type Selection } from "./answer.ts"
 import { useTheme } from "../theme/context.tsx"
-import { age, dateTime, elapsed } from "../ui/format.ts"
+import { ago, dateTime, elapsed } from "../ui/format.ts"
 import { Markdown } from "../ui/markdown.tsx"
 import { Spinner } from "../ui/spinner.tsx"
 import { Frame } from "./frame.tsx"
@@ -217,7 +217,7 @@ export function ItemScreen(props: { id: string; version: string; sidebar: boolea
               {it().title}
             </text>
             <text fg={theme().muted}>
-              {[it().agentName ?? company.agents.byId(it().agentId)?.name, agentRole(it()), `asked ${age(it().createdAt, now())} ago`].filter(Boolean).join(" · ")}
+              {[it().agentName ?? company.agents.byId(it().agentId)?.name, agentRole(it()), `asked ${ago(it().createdAt, now())}`].filter(Boolean).join(" · ")}
             </text>
             <box marginTop={1} flexDirection="column">
               <Switch>
@@ -559,7 +559,7 @@ function ItemSidebar(props: { item: InboxItem; now: number }) {
       </box>
       <box flexDirection="column">
         {heading("Asked")}
-        <text fg={theme().muted}>{age(props.item.createdAt, props.now)} ago</text>
+        <text fg={theme().muted}>{ago(props.item.createdAt, props.now)}</text>
         <text fg={theme().muted}>{dateTime(props.item.createdAt)}</text>
       </box>
       <box flexDirection="column">
