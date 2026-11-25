@@ -54,3 +54,18 @@ test("lines split across chunks and across reads are joined; other adapters fall
   expect(items[2]).toMatchObject({ text: "plain output" })
   expect(createTranscriptReader().finish()).toEqual([])
 })
+
+test("an ACP terminal call sent as several updates becomes one call with its command and its output", () => {
+  const call = (o: Record<string, unknown>) => rec("stdout", JSON.stringify({ type: "acpx.tool_call", toolCallId: "t1", ...o }) + "\n")
+  // As CLI-17's log had them on 2026-11-25.
+  const items = parseLog(
+    log(
+      call({ name: "Terminal", status: "pending", text: "Terminal (pending)", tag: "tool_call" }),
+      call({ name: "sleep 8; date", text: "sleep 8; date: sleep 8; date", tag: "tool_call_update" }),
+      call({ name: "Terminal", text: "tool call", tag: "tool_call_update" }),
+      call({ name: "Terminal", status: "completed", text: "tool call (completed): ```console\nWed Nov 25 13:44:07 CET 2026\n```", tag: "tool_call_update" }),
+    ),
+  )
+  expect(items).toHaveLength(1)
+  expect(items[0]).toMatchObject({ kind: "tool", name: "Terminal", input: { command: "sleep 8; date" }, output: "Wed Nov 25 13:44:07 CET 2026", status: "done" })
+})

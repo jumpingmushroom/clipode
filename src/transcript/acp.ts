@@ -33,6 +33,12 @@ export function parseAcpLine(p: Record<string, unknown>, line: string, ts: strin
     const text = asString(p.text)
     const name = asString(p.name, "acp_tool")
     const id = toolId(p)
+    // Claude over ACP sends one call as several updates (CLI-17, 2026-11-25): "Terminal (pending)", then one whose name
+    // is the command ("sleep 8; date", text "sleep 8; date: sleep 8; date"), then "tool call", then the output.
+    if (asString(p.tag) === "tool_call_update" && !status) {
+      if (text.startsWith(`${name}:`)) return [{ kind: "tool_call", ts, name: "acp_tool", toolUseId: id || undefined, input: { command: name } }]
+      return []
+    }
     const record = asRecord(p.input)
     const input =
       p.input === undefined
@@ -40,10 +46,10 @@ export function parseAcpLine(p: Record<string, unknown>, line: string, ts: strin
         : record
           ? { ...record, ...(status && record.status === undefined ? { status } : {}), ...(text && record.text === undefined ? { text } : {}) }
           : p.input
-    const events: TranscriptEvent[] = [{ kind: "tool_call", ts, name, toolUseId: id || undefined, input }]
-    if (status === "completed" || status === "failed" || status === "cancelled") {
-      events.push({ kind: "tool_result", ts, toolUseId: id || name, toolName: name, content: text || status, isError: status !== "completed" })
-    }
+    const done = status === "completed" || status === "failed" || status === "cancelled"
+    // A finishing update only adds the output; the call's name and command came before.
+    const events: TranscriptEvent[] = done && asString(p.tag) === "tool_call_update" ? [] : [{ kind: "tool_call", ts, name, toolUseId: id || undefined, input }]
+    if (done) events.push({ kind: "tool_result", ts, toolUseId: id || name, toolName: name, content: unwrapOutput(text) || status, isError: status !== "completed" })
     return events
   }
   if (type === "acpx.tool_result") {
@@ -72,4 +78,10 @@ export function parseAcpLine(p: Record<string, unknown>, line: string, ts: strin
   }
   if (type === "acpx.error") return [{ kind: "stderr", ts, text: asString(p.message, line) }]
   return [{ kind: "system", ts, text: asString(p.message, type) }]
+}
+
+/** "tool call (completed): ```console\nout\n```" → "out"; other text as it is. */
+function unwrapOutput(text: string): string {
+  const m = /^tool call \([a-z]+\):\s*(?:```[a-z]*\n([\s\S]*?)\n?```)?\s*$/.exec(text)
+  return m ? (m[1] ?? "") : text
 }

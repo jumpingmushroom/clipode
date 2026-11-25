@@ -20,6 +20,7 @@ import { STATUS_GLYPHS, statusColor, useTaskRefs } from "./task-refs.tsx"
 import { useTabs } from "./tabs.tsx"
 import { Slot } from "../plugin/host.tsx"
 import { useTaskActions } from "./task-actions.tsx"
+import { LiveRun } from "./live-run.tsx"
 
 const LIVE = ["queued", "running"]
 
@@ -67,6 +68,7 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
       { key: "G,end", cmd: () => scroll?.scrollTo(scroll.scrollHeight) },
       { key: "r", cmd: () => company.issues.refreshThread(props.id) },
       { key: "o", cmd: () => openRuns() },
+      { key: "return", cmd: () => openLatestRun() },
       { key: "d", cmd: () => openDocuments() },
       { key: "t", cmd: () => openRelated() },
       { key: "w", cmd: () => afterDispatch(() => void wake()) },
@@ -135,6 +137,12 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
     ))
   }
 
+  /** The run going now, else the latest. */
+  const openLatestRun = () => {
+    const runs = thread.entries.data.filter((e): e is Extract<ThreadEntry, { kind: "run" }> => e.kind === "run")
+    const run = runs.findLast((r) => LIVE.includes(r.status)) ?? runs.at(-1)
+    if (run) route.navigate({ name: "run", id: run.id })
+  }
   const openRuns = () => {
     const runs = thread.entries.data.filter((e): e is Extract<ThreadEntry, { kind: "run" }> => e.kind === "run").reverse()
     if (!runs.length) return
@@ -175,7 +183,8 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
         ["s/p/a", "status, priority, assign"],
         ["e", "edit"],
         ["f", "attach"],
-        ["o", "open run"],
+        ["enter", "latest run"],
+        ["o", "runs"],
         ["j/k", "scroll"],
         ["g", "go to"],
         ["ctrl+p", "commands"],
@@ -233,7 +242,16 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
             </Show>
             <For each={thread.entries.data}>
               {(entry) => (
-                <Show when={entry.kind === "comment"} fallback={<RunLine entry={entry as Extract<ThreadEntry, { kind: "run" }>} name={agentName((entry as { agentId: string }).agentId)} now={now()} />}>
+                <Show
+                  when={entry.kind === "comment"}
+                  fallback={
+                    LIVE.includes((entry as { status: string }).status) ? (
+                      <LiveRun runId={entry.id} agentName={agentName((entry as { agentId: string }).agentId)} startedAt={(entry as { startedAt: string | null }).startedAt ?? entry.at} now={now()} onEnd={() => void thread.entries.refresh()} />
+                    ) : (
+                      <RunLine entry={entry as Extract<ThreadEntry, { kind: "run" }>} name={agentName((entry as { agentId: string }).agentId)} now={now()} />
+                    )
+                  }
+                >
                   {(() => {
                     const c = entry as Extract<ThreadEntry, { kind: "comment" }>
                     return (
@@ -312,10 +330,11 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
 
 function RunLine(props: { entry: Extract<ThreadEntry, { kind: "run" }>; name?: string; now: number }) {
   const { theme } = useTheme()
+  const route = useRoute()
   const live = () => LIVE.includes(props.entry.status)
   const failed = () => ["failed", "timed_out", "error"].includes(props.entry.status)
   return (
-    <box flexDirection="row" marginTop={1} paddingLeft={1}>
+    <box flexDirection="row" marginTop={1} paddingLeft={1} onMouseUp={() => route.navigate({ name: "run", id: props.entry.id })}>
       <Show when={live()} fallback={<text fg={failed() ? theme().error : theme().success}>{failed() ? "✗" : "✓"}</text>}>
         <Spinner color={theme().accent} />
       </Show>

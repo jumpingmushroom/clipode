@@ -39,10 +39,11 @@ test("esc closes the composer without sending", async () => {
   await app.mockInput.typeText("never mind")
   app.mockInput.pressEscape()
   await Bun.sleep(40)
+  expect(await app.frame()).toMatch(/c {2}comment on/)
+  // enter now belongs to the thread (it opens the latest run), not to the closed composer.
   app.mockInput.pressEnter()
   await Bun.sleep(40)
   expect(app.server.writes).toHaveLength(0)
-  expect(await app.frame()).toMatch(/c {2}comment on/)
 })
 
 test("with readOnly the composer row says so and c does nothing", async () => {
