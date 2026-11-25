@@ -217,7 +217,7 @@ test("a file the server refuses is named, and the task is still created", async 
 const PNG = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 1, 2, 3])
 
 test("ctrl+v on the Files row pastes a clipboard image as a PNG file and uploads it", async () => {
-  app = await startApp({ route: { name: "tasks" }, readImage: async () => PNG })
+  app = await startApp({ route: { name: "tasks" }, readClipboard: async () => ({ image: PNG }) })
   await app.frame()
   app.mockInput.pressKey("n")
   await app.frame()
@@ -233,7 +233,7 @@ test("ctrl+v on the Files row pastes a clipboard image as a PNG file and uploads
   expect(await app.frame()).toContain("DEMO-99 created with 1 file")
 })
 
-test("without an image on the clipboard, or without a way to read it, ctrl+v says so", async () => {
+test("with an empty clipboard, or without a way to read it, ctrl+v on Files says so", async () => {
   app = await startApp({ route: { name: "tasks" } })
   await app.frame()
   app.mockInput.pressKey("n")
@@ -241,10 +241,10 @@ test("without an image on the clipboard, or without a way to read it, ctrl+v say
   for (let i = 0; i < 7; i++) await tab()
   app.mockInput.pressKey("v", { ctrl: true })
   await Bun.sleep(40)
-  expect(await app.frame()).toContain("The clipboard holds no image")
+  expect(await app.frame()).toContain("The clipboard is empty")
   app.renderer.destroy()
 
-  app = await startApp({ route: { name: "tasks" }, readImage: async () => Promise.reject(new Error("This system offers no way to read clipboard images")) })
+  app = await startApp({ route: { name: "tasks" }, readClipboard: async () => Promise.reject(new Error("This system offers no way to read clipboard images")) })
   await app.frame()
   app.mockInput.pressKey("n")
   await app.frame()
@@ -257,7 +257,7 @@ test("without an image on the clipboard, or without a way to read it, ctrl+v say
 })
 
 test("f attaches files to the task without a comment; ctrl+v in the prompt adds the clipboard image", async () => {
-  app = await startApp({ route: { name: "thread", id: THREAD_ID }, readImage: async () => new Uint8Array([137, 80, 78, 71]) })
+  app = await startApp({ route: { name: "thread", id: THREAD_ID }, readClipboard: async () => ({ image: new Uint8Array([137, 80, 78, 71]) }) })
   await app.frame()
   app.mockInput.pressKey("f")
   expect(await app.frame()).toContain("Attach files")

@@ -72,7 +72,7 @@ test("ctrl+j adds a line; enter sends the whole multi-line comment", async () =>
 test("ctrl+v and ctrl+o add files to a comment; they are uploaded first and the comment carries their ids", async () => {
   const dir = await mkdtemp(join(tmpdir(), "clipode-composer-"))
   await Bun.write(join(dir, "notes.txt"), "some notes")
-  app = await startApp({ route: { name: "thread", id: THREAD_ID }, readImage: async () => new Uint8Array([137, 80, 78, 71]) })
+  app = await startApp({ route: { name: "thread", id: THREAD_ID }, readClipboard: async () => ({ image: new Uint8Array([137, 80, 78, 71]) }) })
   await app.frame()
   app.mockInput.pressKey("c")
   await app.frame()
@@ -97,4 +97,18 @@ test("ctrl+v and ctrl+o add files to a comment; they are uploaded first and the 
   expect(comment?.body).toEqual({ body: "See attached now", clientRequestId: expect.any(String), attachmentIds: ["att-1", "att-2"] })
   expect(text).toContain("Comment posted with 2 files")
   await rm(dir, { recursive: true, force: true })
+})
+
+test("ctrl+v pastes the clipboard's text into a comment", async () => {
+  app = await startApp({ route: { name: "thread", id: THREAD_ID }, readClipboard: async () => ({ text: "copied from elsewhere" }) })
+  await app.frame()
+  app.mockInput.pressKey("c")
+  await app.frame()
+  await app.mockInput.typeText("Note: ")
+  app.mockInput.pressKey("v", { ctrl: true })
+  await Bun.sleep(40)
+  expect(await app.frame()).toContain("› Note: copied from elsewhere")
+  app.mockInput.pressEnter()
+  await Bun.sleep(80)
+  expect(app.server.writes[0]?.body).toEqual({ body: "Note: copied from elsewhere", clientRequestId: expect.any(String) })
 })

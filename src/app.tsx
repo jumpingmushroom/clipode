@@ -16,7 +16,7 @@ import { discoverThemes, type Mode } from "./theme/registry.ts"
 import { loadPlugins, type LoadedPlugin, type PluginError } from "./plugin/loader.ts"
 import { DialogProvider } from "./ui/dialog.tsx"
 import { Toast, ToastProvider } from "./ui/toast.tsx"
-import { ClipboardProvider, type ReadImage } from "./ui/clipboard.tsx"
+import { ClipboardProvider, type ReadClipboard } from "./ui/clipboard.tsx"
 
 export type AppProps = {
   version: string
@@ -34,7 +34,7 @@ export type AppProps = {
   /** Quits so the launcher can start the updated binary. */
   onRestart?: () => void
   /** For tests: a stand-in for the system clipboard. */
-  readImage?: ReadImage
+  readClipboard?: ReadClipboard
 }
 
 /** Every provider the screens need, in dependency order. */
@@ -45,7 +45,7 @@ export function Providers(props: ParentProps<Omit<AppProps, "version">>) {
         <StoresProvider session={props.session}>
           <RouteProvider initial={props.route}>
             <ToastProvider>
-              <ClipboardProvider readImage={props.readImage}>
+              <ClipboardProvider read={props.readClipboard}>
                 <DialogProvider>
                   {props.children}
                   <Toast />

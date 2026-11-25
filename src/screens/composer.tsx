@@ -1,5 +1,5 @@
 // The composer row above the footer: a comment field for the task on screen. c focuses it, enter sends, esc cancels.
-// ctrl+v adds the clipboard's image and ctrl+o file paths; the files go up with the comment.
+// ctrl+v pastes text, or adds the clipboard's image as a file; ctrl+o adds files by path. Files go up with the comment.
 import type { TextareaRenderable } from "@opentui/core"
 import { useBindings, useKeymap } from "@opentui/keymap/solid"
 import { basename } from "node:path"
@@ -7,12 +7,11 @@ import { createSignal, onCleanup, Show } from "solid-js"
 import { setMode } from "../keymap/provider.tsx"
 import { useStores } from "../store/context.tsx"
 import { useTheme } from "../theme/context.tsx"
-import { useReadImage } from "../ui/clipboard.tsx"
 import { afterDispatch, useDialog } from "../ui/dialog.tsx"
 import { truncate } from "../ui/format.ts"
 import { TextArea } from "../ui/text-area.tsx"
 import { useToast } from "../ui/toast.tsx"
-import { AttachPrompt, clipboardImage, type Added } from "./attach-prompt.tsx"
+import { AttachPrompt, saveImage, type Added } from "./attach-prompt.tsx"
 
 /** Where a comment goes. send uploads the files first and returns those the server did not take. */
 export type ComposerTarget = { label: string; send: (text: string, files: string[]) => Promise<{ path: string; reason: string }[]> }
@@ -23,7 +22,6 @@ export function Composer(props: { target?: ComposerTarget }) {
   const keymap = useKeymap()
   const toast = useToast()
   const dialog = useDialog()
-  const readImage = useReadImage()
   const [open, setOpen] = createSignal(false)
   const [files, setFiles] = createSignal<string[]>([])
   const [sending, setSending] = createSignal(false)
@@ -85,7 +83,6 @@ export function Composer(props: { target?: ComposerTarget }) {
     bindings: [
       { key: "return", cmd: () => void submit() },
       { key: "escape", cmd: close },
-      { key: "ctrl+v", cmd: () => void clipboardImage(readImage).then(addFiles) },
       { key: "ctrl+o", cmd: () => afterDispatch(attachPaths) },
     ],
   }))
@@ -107,6 +104,7 @@ export function Composer(props: { target?: ComposerTarget }) {
           mode="input"
           ref={(r) => (input = r)}
           background="panel"
+          onImage={(png) => void saveImage(png).then((path) => addFiles({ files: [path], problem: null }))}
           placeholder={`Comment on ${props.target?.label ?? ""}: enter sends, ctrl+j new line, ctrl+v image, ctrl+o files, esc cancels`}
         />
       </box>

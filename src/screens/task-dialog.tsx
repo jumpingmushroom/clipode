@@ -9,8 +9,8 @@ import { afterDispatch, DIALOG_INSET } from "../ui/dialog.tsx"
 import { DialogSelect, type SelectOption } from "../ui/dialog-select.tsx"
 import { TextArea } from "../ui/text-area.tsx"
 import { basename } from "node:path"
-import { useReadImage } from "../ui/clipboard.tsx"
-import { AttachPrompt, clipboardImage, type Added } from "./attach-prompt.tsx"
+import { useReadClipboard } from "../ui/clipboard.tsx"
+import { AttachPrompt, clipboardFiles, saveImage, type Added } from "./attach-prompt.tsx"
 
 export type WorkMode = "standard" | "planning" | "ask"
 export type TaskForm = {
@@ -101,7 +101,7 @@ export function TaskDialog(props: {
     }
   }
 
-  const readImage = useReadImage()
+  const readClipboard = useReadClipboard()
   // Messages show in the form, so an open attach prompt closes first.
   const addFiles = (added: Added) => {
     set({ files: [...new Set([...form().files, ...added.files])] })
@@ -116,7 +116,6 @@ export function TaskDialog(props: {
       ...(focus() === "files"
         ? [
             { key: "backspace,delete", cmd: () => set({ files: form().files.slice(0, -1) }) },
-            { key: "ctrl+v", cmd: () => void clipboardImage(readImage).then(addFiles) },
           ]
         : []),
       // Moving focus rebuilds this layer (its keys depend on the field), so it happens after the dispatch.
@@ -127,6 +126,8 @@ export function TaskDialog(props: {
       ...(focus() === "description" || focus() === "title" ? [] : [{ key: "return,space,left,right", cmd: () => afterDispatch(change) }]),
     ],
   }))
+  // On the Files row, ctrl+v adds files; above the description field's own ctrl+v, which pastes text.
+  useBindings(() => ({ mode: "modal", priority: 10, enabled: focus() === "files" && !picker(), bindings: [{ key: "ctrl+v", cmd: () => void clipboardFiles(readClipboard).then(addFiles) }] }))
   // While a picker is open, esc closes it rather than the whole dialog.
   useBindings(() => ({ mode: "modal", priority: 10, enabled: !!picker(), bindings: [{ key: "escape", cmd: () => afterDispatch(() => setPicker(null)) }] }))
 
@@ -202,7 +203,7 @@ export function TaskDialog(props: {
         <box flexDirection="column" paddingLeft={DIALOG_INSET} paddingRight={DIALOG_INSET} gap={1}>
           <box flexDirection="row" onMouseUp={() => setFocus("description")}>
             {label("description", "Description")}
-            <TextArea mode="modal" background="background" initial={form().description} maxLines={8} placeholder="What should be done? Markdown" ref={(r) => (description = r)} />
+            <TextArea mode="modal" background="background" initial={form().description} maxLines={8} placeholder="What should be done? Markdown" ref={(r) => (description = r)} onImage={(png) => void saveImage(png).then((path) => addFiles({ files: [path], problem: null }))} />
           </box>
           <box flexDirection="row" onMouseUp={() => setFocus("title")}>
             {label("title", "Title")}
