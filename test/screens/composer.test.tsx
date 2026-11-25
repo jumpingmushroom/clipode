@@ -2,7 +2,9 @@ import { afterEach, expect, test } from "bun:test"
 import { mkdtemp, rm } from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
-import { THREAD_ID } from "../fake-server.ts"
+import { THREAD_ID, type FakeServer } from "../fake-server.ts"
+import agents from "../fixtures/company/agents.json"
+import details from "../fixtures/company/issue-details.json"
 import { startApp, type Running } from "../helpers.tsx"
 
 let app: Running | undefined
@@ -131,4 +133,41 @@ test("closing a dialog opened while writing gives the keys back to the comment, 
   text = await app.frame()
   expect(text.split("\n")[0]).toContain("Task · ")
   expect(text).toMatch(/c {2}comment on DEMO-\d+/)
+})
+
+test("on a task assigned to you, a comment hands it back to the agent that gave it to you; ctrl+t picks none", async () => {
+  const handedBy = agents[0]!
+  const handBack = (s: FakeServer) => {
+    s.set(`/api/issues/${THREAD_ID}`, { ...(details as Record<string, object>)[THREAD_ID], assigneeAgentId: null, assigneeUserId: "u" })
+    s.set(`/api/issues/${THREAD_ID}/activity`, [
+      { actorType: "agent", actorId: handedBy.id, action: "issue.updated", createdAt: "2026-11-25T07:06:10.000Z", details: { assigneeUserId: "u", _previous: { assigneeUserId: null } } },
+    ])
+  }
+  app = await startApp({ route: { name: "thread", id: THREAD_ID }, before: handBack })
+  await app.frame()
+  app.mockInput.pressKey("c")
+  await Bun.sleep(40)
+  expect(await app.frame()).toContain(`› to ${handedBy.name} `)
+  await app.mockInput.typeText("Skip it and close the task")
+  app.mockInput.pressEnter()
+  await Bun.sleep(80)
+  expect(app.server.writes).toEqual([
+    { method: "PATCH", path: `/api/issues/${THREAD_ID}`, body: { comment: "Skip it and close the task", commentClientRequestId: expect.any(String), assigneeAgentId: handedBy.id, assigneeUserId: null } },
+  ])
+  expect(await app.frame()).toContain(`handed to ${handedBy.name}`)
+  app.renderer.destroy()
+
+  app = await startApp({ route: { name: "thread", id: THREAD_ID }, before: handBack })
+  await app.frame()
+  app.mockInput.pressKey("c")
+  await Bun.sleep(40)
+  app.mockInput.pressKey("t", { ctrl: true })
+  expect(await app.frame()).toContain("Hand the task to")
+  app.mockInput.pressEnter() // "No one: comment only" is first
+  await Bun.sleep(40)
+  expect(await app.frame()).not.toContain(`› to ${handedBy.name}`)
+  await app.mockInput.typeText("Just a note")
+  app.mockInput.pressEnter()
+  await Bun.sleep(80)
+  expect(app.server.writes.map((w) => `${w.method} ${w.path}`)).toEqual([`POST /api/issues/${THREAD_ID}/comments`])
 })

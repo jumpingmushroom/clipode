@@ -68,7 +68,7 @@ SOFTWARE.
 
 https://github.com/paperclipai/paperclip
 
-API types generated from the server's OpenAPI document, and type declarations from the `@paperclipai/shared` package. The run-log parsers in `src/transcript` (`acp.ts`, `claude.ts`, `codex.ts`) are ported from `packages/adapter-utils/src/acpx-engine/ui.ts` and `packages/adapters/{claude,codex}-local/src/ui/parse-stdout.ts`. The wording of activity entries and the list of bookkeeping actions in `src/api/activity-format.ts` are ported from `ui/src/lib/activity-format.ts` and `ui/src/components/ActivityFeed.tsx`.
+API types generated from the server's OpenAPI document, and type declarations from the `@paperclipai/shared` package. The run-log parsers in `src/transcript` (`acp.ts`, `claude.ts`, `codex.ts`) are ported from `packages/adapter-utils/src/acpx-engine/ui.ts` and `packages/adapters/{claude,codex}-local/src/ui/parse-stdout.ts`. The wording of activity entries and the list of bookkeeping actions in `src/api/activity-format.ts` are ported from `ui/src/lib/activity-format.ts` and `ui/src/components/ActivityFeed.tsx`. The choice of whom a comment hands a task back to (`handBackAgent` in `src/api/endpoints/issues.ts`) is ported from `ui/src/lib/assignees.ts`.
 
 ```text
 MIT License

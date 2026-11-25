@@ -108,6 +108,48 @@ export function postComment(client: Client, issueId: string, body: string, clien
   return client.post(`/api/issues/${id(issueId)}/comments`, { body, clientRequestId, ...(attachmentIds.length ? { attachmentIds } : {}) })
 }
 
+/**
+ * Comments and reassigns in one request, as the web UI's composer does when it hands a task back: the server adds the
+ * comment and wakes the new assignee. commentClientRequestId makes a retry safe, as with a plain comment.
+ */
+export function commentAndAssign(client: Client, issueId: string, body: string, clientRequestId: string, attachmentIds: string[], assigneeAgentId: string) {
+  return client.request("PATCH", `/api/issues/${id(issueId)}`, {
+    body: { comment: body, commentClientRequestId: clientRequestId, ...(attachmentIds.length ? { attachmentIds } : {}), assigneeAgentId, assigneeUserId: null },
+  })
+}
+
+type AssignmentEvent = { actorType: string; actorId: string; action: string; createdAt: string; details: Record<string, unknown> | null }
+
+/**
+ * The agent a comment on a task assigned to you should hand it back to: the agent that last assigned it to you, else
+ * the agent that commented last; null when the last other comment is a person's or there is none. Ported from Paperclip
+ * ui/src/lib/assignees.ts (suggestedCommentAssigneeValue), agents only.
+ */
+export async function handBackAgent(client: Client, issueId: string, userId: string): Promise<string | null> {
+  const [activity, comments] = await Promise.all([
+    client.get<AssignmentEvent[]>(`/api/issues/${id(issueId)}/activity`),
+    client.get<{ authorAgentId?: string | null; authorUserId?: string | null; createdAt: string }[]>(`/api/issues/${id(issueId)}/comments`),
+  ])
+  const handedOver = activity
+    .filter((e) => {
+      const d = e.details
+      if (e.actorType !== "agent" || !e.actorId || !d || d.assigneeUserId !== userId) return false
+      if (e.action === "issue.created" || e.action === "issue.child_created") return true
+      if (e.action === "issue.reassigned") return d.changed === true && Object.hasOwn(d, "previousAssigneeUserId") && d.previousAssigneeUserId !== userId
+      // Updates can resend unchanged fields; only a real assignment counts.
+      const previous = d._previous as Record<string, unknown> | null | undefined
+      return e.action === "issue.updated" && !!previous && typeof previous === "object" && Object.hasOwn(previous, "assigneeUserId") && previous.assigneeUserId !== userId
+    })
+    .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))[0]
+  if (handedOver) return handedOver.actorId
+  // The comments route answers newest first.
+  for (const c of [...comments].sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))) {
+    if (c.authorAgentId) return c.authorAgentId
+    if (c.authorUserId && c.authorUserId !== userId) return null
+  }
+  return null
+}
+
 /** A new task. Without a title the server takes one from the description and generates a better one later. */
 export type NewTask = {
   title?: string

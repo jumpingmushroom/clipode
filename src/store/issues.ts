@@ -2,7 +2,7 @@
 import { basename } from "node:path"
 import { createMemo } from "solid-js"
 import { createStore } from "solid-js/store"
-import { createTask, getTask, getTaskCost, getThread, listProjects, listTasks, postComment, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
+import { commentAndAssign, createTask, getTask, getTaskCost, getThread, handBackAgent, listProjects, listTasks, postComment, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
 import { ApiError } from "../api/client.ts"
 import type { ProjectSummary, TaskCost, TaskDetail, TaskSummary, ThreadEntry } from "../api/model.ts"
 import { createResource, type Resource } from "./resource.ts"
@@ -55,22 +55,36 @@ export function createIssuesStore(session: Session, companyId: string) {
     progress: (id: string): [done: number, total: number] | null => counts().get(id) ?? null,
     projectName: (id: string | null) => (id ? projects.data.find((p) => p.id === id)?.name : undefined),
     /**
-     * Posts a comment with files: the files are uploaded first and the comment carries the ones the server took. Retries
-     * the comment once after a network error with the same request id, refreshes the thread, and returns the files
-     * that were not attached.
+     * Posts a comment with files: the files are uploaded first and the comment carries the ones the server took. With an
+     * agent to assign, the comment hands the task to it in the same request, which wakes it. Retries once after a
+     * network error with the same request id, refreshes the thread, and returns the files that were not attached.
      */
-    async comment(issueId: string, body: string, files: string[] = []) {
+    async comment(issueId: string, body: string, files: string[] = [], assignTo: string | null = null) {
       const { ids, failed } = files.length ? await attach(issueId, files) : { ids: [], failed: [] }
       if (files.length && !ids.length && !body) throw new Error(`Not sent: no file was attached (${failed.map((f) => f.reason).join(", ")})`)
       const requestId = crypto.randomUUID()
       // The server needs some text; a comment of files alone names them.
       const text = body || `Attached ${files.filter((f) => !failed.some((x) => x.path === f)).map((f) => basename(f)).join(", ")}`
-      const send = () => postComment(session.client(), issueId, text, requestId, ids)
+      const send = () => (assignTo ? commentAndAssign(session.client(), issueId, text, requestId, ids, assignTo) : postComment(session.client(), issueId, text, requestId, ids))
       await send()
         .catch((err) => (err instanceof ApiError && err.kind === "network" ? send() : Promise.reject(err)))
         .catch((err) => Promise.reject(notSent(err)))
       if (threads[issueId]) void threads[issueId]!.entries.refresh()
+      if (assignTo) {
+        void list.refresh()
+        if (threads[issueId]) void threads[issueId]!.detail.refresh()
+      }
       return failed
+    },
+    /**
+     * For a task assigned to you, the agent a comment should hand it back to, as the web UI suggests; null for other
+     * tasks, or when there is no agent to suggest.
+     */
+    async handBackTo(issueId: string): Promise<string | null> {
+      const me = session.state.userId
+      const task = threads[issueId]?.detail.data ?? byId(issueId)
+      if (!me || task?.assigneeUserId !== me) return null
+      return handBackAgent(session.client(), issueId, me).catch(() => null)
     },
     /** Creates a task, retrying once after a network error with the same idempotency key, then refreshes the list. */
     async create(task: NewTask): Promise<TaskSummary> {

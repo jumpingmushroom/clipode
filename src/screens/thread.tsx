@@ -99,7 +99,7 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
       hints={[["esc", "back"], ["s/p/a", "status, priority, assign"], ["e", "edit"], ["f", "attach"], ["o", "open run"], ["j/k", "scroll"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
       narrowHints={[["esc", "back"], ["j/k", "scroll"], ["^p", "cmds"]]}
       version={props.version}
-      composer={{ label: detail()?.identifier ?? "this task", send: (text, files) => company.issues.comment(props.id, text, files) }}
+      composer={{ label: detail()?.identifier ?? "this task", send: (text, files, assignTo) => company.issues.comment(props.id, text, files, assignTo), handBack: () => company.issues.handBackTo(props.id) }}
     >
       <Switch>
         <Match when={thread.detail.status === "error" && !detail()}>

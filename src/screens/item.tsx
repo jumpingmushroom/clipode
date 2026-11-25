@@ -148,7 +148,7 @@ export function ItemScreen(props: { id: string; version: string; sidebar: boolea
       }
       narrowHints={choices().length ? [["j/k", "choose"], ["enter", "select"], ["esc", "back"]] : [["esc", "back"], ["o", "open"], ["^p", "cmds"]]}
       version={props.version}
-      composer={item()?.issueId ? { label: item()!.blocked?.identifier ?? item()!.identifier ?? "this task", send: (text, files) => company.issues.comment(item()!.issueId!, text, files) } : undefined}
+      composer={item()?.issueId ? { label: item()!.blocked?.identifier ?? item()!.identifier ?? "this task", send: (text, files, assignTo) => company.issues.comment(item()!.issueId!, text, files, assignTo), handBack: () => company.issues.handBackTo(item()!.issueId!) } : undefined}
     >
       <Show
         when={item()}
