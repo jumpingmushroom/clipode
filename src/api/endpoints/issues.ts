@@ -2,7 +2,7 @@
 import type { Issue, IssueComment, Project } from "@paperclipai/shared"
 import { basename } from "node:path"
 import type { Client } from "../client.ts"
-import type { DocumentSummary, HeldComments, Waiting, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../model.ts"
+import type { DocumentSummary, HeldComments, MineTask, Waiting, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../model.ts"
 
 const id = encodeURIComponent
 
@@ -29,6 +29,17 @@ export function toTask(i: IssueRow): TaskSummary {
 export async function listTasks(client: Client, companyId: string, status?: string): Promise<TaskSummary[]> {
   const rows = await client.get<IssueRow[]>(`/api/companies/${id(companyId)}/issues`, { status, view: "index" })
   return rows.map(toTask)
+}
+
+/** The tasks you have touched, newest activity first (the server sends at most 100), with whether each is unread. */
+export async function listMine(client: Client, companyId: string): Promise<MineTask[]> {
+  const body = await client.get<{ issues: (IssueRow & { isUnreadForMe?: boolean; lastActivityAt?: string | null })[] }>(`/api/companies/${id(companyId)}/inbox/mine`)
+  return body.issues.map((i) => ({ ...toTask(i), unread: !!i.isUnreadForMe, lastActivityAt: i.lastActivityAt ?? String(i.updatedAt) }))
+}
+
+/** Marks a task read for the signed-in user, as opening it in the web UI does. */
+export function markRead(client: Client, issueId: string) {
+  return client.post(`/api/issues/${id(issueId)}/read`, {})
 }
 
 type IssueDetail = IssueRow & {

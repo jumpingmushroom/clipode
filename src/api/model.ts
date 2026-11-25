@@ -125,6 +125,9 @@ export type TaskSummary = {
   updatedAt: string
 }
 
+/** A task you have touched, from the web UI's Mine inbox: unread when someone else wrote since you last read it. */
+export type MineTask = TaskSummary & { unread: boolean; lastActivityAt: string }
+
 export type TaskDetail = TaskSummary & {
   description: string | null
   projectName: string | null

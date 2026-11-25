@@ -1,7 +1,7 @@
 // HTTP access to one Paperclip instance: base URL, cookie jar, Origin header, write guard, typed errors.
 
 // GET goes anywhere. Sign-in and sign-out are always allowed; the writes below only when the client allows writes.
-// Phase 3 adds creating and updating tasks, agent and run controls, the inbox's other decisions, and running, pausing and resuming routines. Each pattern is a whole path; an id segment is anything but "/", and paths with "." or ".." segments never match.
+// Phase 3 adds creating and updating tasks, agent and run controls, the inbox's other decisions, and running, pausing and resuming routines; phase 4 adds marking a task read. Each pattern is a whole path; an id segment is anything but "/", and paths with "." or ".." segments never match.
 const AUTH = [/^\/api\/auth\/sign-(in\/email|out)$/]
 const ID = "[^/]+"
 const WRITES: Record<string, RegExp[]> = {
@@ -9,7 +9,7 @@ const WRITES: Record<string, RegExp[]> = {
     new RegExp(`^/api/issues/${ID}/interactions/${ID}/(respond|accept|reject)$`),
     new RegExp(`^/api/approvals/${ID}/(approve|reject|request-revision|comments)$`),
     new RegExp(`^/api/decisions/${ID}/(decide|dismiss)$`),
-    new RegExp(`^/api/issues/${ID}/(retry|recovery-actions/resolve|queued-comments/interrupt|monitor/check-now|scheduled-retry/retry-now)$`),
+    new RegExp(`^/api/issues/${ID}/(retry|recovery-actions/resolve|queued-comments/interrupt|monitor/check-now|scheduled-retry/retry-now|read)$`),
     new RegExp(`^/api/issues/${ID}/stalled-review-decision$`),
     new RegExp(`^/api/issues/${ID}/comments$`),
     new RegExp(`^/api/companies/${ID}/inbox-dismissals$`),

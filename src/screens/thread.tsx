@@ -1,7 +1,7 @@
 // A task thread: title and description, then comments and runs in time order. The sidebar holds the task's fields.
 import { TextAttributes, type ScrollBoxRenderable } from "@opentui/core"
 import { useBindings } from "@opentui/keymap/solid"
-import { createSignal, For, Match, onCleanup, onMount, Show, Switch } from "solid-js"
+import { createEffect, createSignal, For, Match, onCleanup, onMount, Show, Switch } from "solid-js"
 import { useRoute } from "../route.tsx"
 import { createDialogs } from "../plugin/dialogs.tsx"
 import { afterDispatch, useDialog } from "../ui/dialog.tsx"
@@ -56,6 +56,8 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
   })
   const tick = setInterval(() => setNow(Date.now()), 1000)
   onCleanup(() => clearInterval(tick))
+  // Reading the thread reads the task, as in the web UI; also when something new arrives while it is open.
+  createEffect(() => company.issues.isUnread(props.id) && void company.issues.markRead(props.id))
 
   useBindings(() => ({
     mode: "base",

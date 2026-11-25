@@ -172,7 +172,7 @@ Since 1.12, files go on comments and existing tasks too, through the same two al
 
 ## Phase 4: round out (release 1.7 onwards)
 
-Phase 4 adds reads only; the write allowlist does not change. It starts with desktop notifications, then search, then the rest of the scope line in the table above.
+Phase 4 adds reads, and one write (marking a task read, 1.19). It starts with desktop notifications, then search, then the rest of the scope line in the table above.
 
 Desktop notifications (1.7): when an inbox refresh, live or polled, brings an item that was not in the feed before, clipode sends one notification through OpenTUI's `renderer.triggerNotification`, which writes the terminal's own notification escape sequence (so it works over SSH and needs no system tool; a terminal without one ignores it). The items present at the first load, snoozed items, and items seen before are never reported. One new item is named (kind, task identifier and title); several at once are counted. Notifications are sent only while the terminal does not have focus, or always where the terminal cannot report focus. `"notifications": false` in `cli.json` turns them off.
 
@@ -203,6 +203,20 @@ Task content (1.15), as decided on 2026-11-25. Probed the same day: `GET /api/is
 - The thread shows a Documents section under the description (title, revision, who, when) and a Work products section as Markdown links, so a pull request's or preview's URL can be followed. `d` opens the task's document, through a picker when there are several; the document screen sends `GET /api/issues/{id}/documents/{key}` on every visit and shows the latest revision as Markdown, with its number, author and time. Older revisions are not shown.
 - `t` picks the parent or a sub-task and opens it; sub-task rows in the thread sidebar open on click.
 - Queued comments: see held comments (1.16.1) below. The probe saw only empty queues, which was wrong to generalise.
+
+Mine and unread (1.19), as decided on 2026-11-25 after a comparison with the web UI. The web UI's inbox has a Mine tab of the tasks you have touched, and its badge counts the unread ones: tasks where someone else wrote after you last read them. The probe that day found 2 to 15 unread tasks per company, and clipode showed none of them, since its inbox holds only items that need a decision.
+
+| Action | Route at `2026.1117.0` | Notes |
+| --- | --- | --- |
+| Mine (a read) | `GET /api/companies/{companyId}/inbox/mine` | no query parameters; `issues` (at most 100, index rows, newest first) with `isUnreadForMe`, `myLastTouchAt`, `lastExternalCommentAt` and `lastActivityAt`, plus `contextIssues` and `failureRuns`, which clipode does not use |
+| Mark read | `POST /api/issues/{id}/read`, body `{}` | board users only; answers with the read state (`lastReadAt`) |
+
+- `g m` opens Tasks in a Mine mode: an Unread group, then Recent, each newest activity first, with `●` on unread rows. Filtering and the task keys work as on Tasks.
+- The header shows "unread N" beside the inbox badge when N is above zero. Mine is read at start, and again with the task list (on live events and when polling).
+- Opening a task marks it read when Mine says it is unread, also when something new arrives while it is open, as the web UI does. With `readOnly`, nothing is marked and the count stays.
+- Left out: the web UI's archive from Mine (`/issues/{id}/inbox-archive`) and mark unread (`DELETE …/read`).
+
+Verified in the scratch company on 2026-11-25: CLI-17 was unread, `POST …/read` answered with the read state, and Mine then reported it read.
 
 ## Provenance and licensing
 

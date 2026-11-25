@@ -42,7 +42,10 @@ export function startLiveSync(
 ) {
   const poll = { ...DEFAULT_POLL, ...opts.poll }
   const refreshInbox = debounce(() => void company.attention.refresh())
-  const refreshTasks = debounce(() => void company.issues.list.refresh())
+  const refreshTasks = debounce(() => {
+    void company.issues.list.refresh()
+    void company.issues.mine.refresh()
+  })
   const refreshRuns = debounce(() => void company.runs.live.refresh())
   const refreshAgents = debounce(() => void company.agents.list.refresh())
   // Routines and activity have their own screens; fetch them again only once they have been opened.
@@ -117,6 +120,7 @@ export function startLiveSync(
     if (now - lastList >= poll.list * 1000 * factor) {
       lastList = now
       void company.issues.list.refresh()
+      void company.issues.mine.refresh()
       void company.agents.list.refresh()
       ifOpened(company.activity)()
       ifOpened(company.routines)()

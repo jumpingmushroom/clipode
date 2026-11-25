@@ -41,6 +41,7 @@ export function Frame(
   // The shell decides (width, ctrl+b and "sidebar" in cli.json); a second width check here would undo "show".
   const sidebarShown = () => props.showSidebar !== false && !!props.sidebar
   const companyName = () => session.state.companies.find((c) => c.id === company()?.companyId)?.name ?? ""
+  const unread = () => company()?.issues.unreadCount() ?? 0
   const connection = () => session.state.connection
   const dot = () => ({ live: theme().success, polling: theme().warning, offline: theme().error, connecting: theme().muted })[connection()]
   const hints = () => (wide() ? props.hints : (props.narrowHints ?? props.hints))
@@ -65,6 +66,9 @@ export function Frame(
         <text fg={theme().muted}>{props.view}</text>
         <box flexGrow={1} flexBasis={0} alignItems="flex-end">
           <text fg={theme().muted}>
+            {unread() ? "unread " : ""}
+            <span style={{ fg: theme().accent, attributes: TextAttributes.BOLD }}>{unread() ? `${unread()}` : ""}</span>
+            {unread() ? "  " : ""}
             inbox <span style={{ fg: theme().accent, attributes: TextAttributes.BOLD }}>{props.badge ?? "–"}</span>
           </text>
         </box>

@@ -2,12 +2,12 @@
 import { basename } from "node:path"
 import { createMemo } from "solid-js"
 import { createStore } from "solid-js/store"
-import { checkMonitorNow, commentAndAssign, createTask, getDocument, getHeldComments, getTask, getTaskCost, getThread, handBackAgent, listProjects, listTasks, postComment, retryNow, sendHeldComments, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
+import { checkMonitorNow, commentAndAssign, createTask, getDocument, getHeldComments, getTask, getTaskCost, getThread, handBackAgent, listMine, listProjects, listTasks, markRead, postComment, retryNow, sendHeldComments, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
 import { ApiError } from "../api/client.ts"
-import type { HeldComments, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
+import type { HeldComments, MineTask, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
 import { createResource, type Resource } from "./resource.ts"
 import type { Session } from "./session.ts"
-export type { DocumentSummary, HeldComments, Waiting, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
+export type { DocumentSummary, HeldComments, MineTask, Waiting, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
 export type { NewTask, TaskPatch } from "../api/endpoints/issues.ts"
 
 export const IN_FLIGHT = ["in_progress", "in_review", "blocked"]
@@ -20,6 +20,7 @@ export type CommentResult = { failed: { path: string; reason: string }[]; held: 
 export function createIssuesStore(session: Session, companyId: string) {
   const notSent = (err: unknown) => session.notSent(err)
   const list = createResource<TaskSummary[]>(() => listTasks(session.client(), companyId), [], session.handleError)
+  const mine = createResource<MineTask[]>(() => listMine(session.client(), companyId), [], session.handleError)
   const projects = createResource<ProjectSummary[]>(() => listProjects(session.client(), companyId), [], session.handleError)
   const [threads, setThreads] = createStore<Record<string, Thread>>({})
   const documents = new Map<string, Resource<TaskDocument | null>>()
@@ -51,7 +52,15 @@ export function createIssuesStore(session: Session, companyId: string) {
 
   return {
     list,
+    /** Tasks you have touched, as in the web UI's Mine inbox. */
+    mine,
     projects,
+    unreadCount: () => mine.data.filter((t) => t.unread).length,
+    isUnread: (id: string) => mine.data.some((t) => t.id === id && t.unread),
+    /** Marks a task read, then reads Mine again; a refusal (read-only mode, say) changes nothing and is not reported. */
+    async markRead(issueId: string) {
+      await markRead(session.client(), issueId).then(() => mine.refresh(), () => {})
+    },
     byId,
     children,
     inFlight: () => list.data.filter((t) => IN_FLIGHT.includes(t.status)),

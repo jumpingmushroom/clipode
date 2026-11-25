@@ -6,7 +6,7 @@ import { useCommands } from "../keymap/commands.tsx"
 import { setMode } from "../keymap/provider.tsx"
 import { useRoute } from "../route.tsx"
 import { useCompany } from "../store/context.tsx"
-import type { TaskSummary } from "../store/issues.ts"
+import type { MineTask, TaskSummary } from "../store/issues.ts"
 import { matchesFilter, parseFilter } from "../store/task-filter.ts"
 import { useTheme } from "../theme/context.tsx"
 import type { Theme } from "../theme/tokens.ts"
@@ -41,13 +41,17 @@ export function priorityColor(priority: string, theme: Theme): RGBA {
 
 type Row = { type: "task"; task: TaskSummary } | { type: "more"; status: string; count: number }
 
-/** With a projectId, only that project's tasks; the frame names the project. */
-export function TasksScreen(props: { version: string; sidebar: boolean; filter?: string; projectId?: string }) {
+/**
+ * With a projectId, only that project's tasks; the frame names the project. With mine, the tasks you have touched,
+ * unread first, as in the web UI's Mine inbox.
+ */
+export function TasksScreen(props: { version: string; sidebar: boolean; filter?: string; projectId?: string; mine?: boolean }) {
   const { theme } = useTheme()
   const company = useCompany()
   const route = useRoute()
   const keymap = useKeymap()
   const issues = company.issues
+  const source = () => (props.mine ? issues.mine : issues.list)
   const [query, setQuery] = createSignal(props.filter ?? "")
   const [filtering, setFiltering] = createSignal(false)
   const [expanded, setExpanded] = createSignal<string[]>([])
@@ -58,6 +62,7 @@ export function TasksScreen(props: { version: string; sidebar: boolean; filter?:
 
   onMount(() => {
     void issues.list.load()
+    if (props.mine) void issues.mine.refresh()
     void issues.projects.load()
     void company.agents.list.load()
     void company.runs.live.load()
@@ -70,15 +75,23 @@ export function TasksScreen(props: { version: string; sidebar: boolean; filter?:
 
   const assignee = (t: TaskSummary) => company.agents.byId(t.assigneeAgentId)?.name ?? (t.assigneeUserId ? "you" : undefined)
   const filter = createMemo(() => parseFilter(query()))
-  const shown = createMemo(() => issues.list.data.filter((t) => (!props.projectId || t.projectId === props.projectId) && matchesFilter(t, filter(), { assignee, project: (t) => issues.projectName(t.projectId) })))
+  const shown = createMemo(() => source().data.filter((t) => (!props.projectId || t.projectId === props.projectId) && matchesFilter(t, filter(), { assignee, project: (t) => issues.projectName(t.projectId) })))
   const liveTasks = createMemo(() => new Set(company.runs.live.data.map((r) => r.issueId).filter(Boolean)))
-  const groups = createMemo(() =>
-    STATUS_GROUPS.map((g) => {
+  const unread = (t: TaskSummary) => "unread" in t && !!t.unread
+  const groups = createMemo(() => {
+    if (props.mine) {
+      const recent = [...shown()].sort((a, b) => ((b as MineTask).lastActivityAt ?? "").localeCompare((a as MineTask).lastActivityAt ?? ""))
+      return [
+        { status: "unread", title: "Unread", all: recent.filter(unread) },
+        { status: "read", title: "Recent", all: recent.filter((t) => !unread(t)) },
+      ].map((g) => ({ ...g, visible: g.all })).filter((g) => g.all.length > 0)
+    }
+    return STATUS_GROUPS.map((g) => {
       const all = shown().filter((t) => t.status === g.status)
       const collapsible = (g.status === "done" || g.status === "cancelled") && !expanded().includes(g.status)
       return { ...g, all, visible: collapsible ? all.slice(0, COLLAPSED) : all }
-    }).filter((g) => g.all.length > 0),
-  )
+    }).filter((g) => g.all.length > 0)
+  })
   const rows = createMemo<Row[]>(() =>
     groups().flatMap((g): Row[] => [
       ...g.visible.map((task): Row => ({ type: "task", task })),
@@ -146,7 +159,7 @@ export function TasksScreen(props: { version: string; sidebar: boolean; filter?:
   }))
   useCommands(() => [
     { name: "tasks.filter", title: "Filter tasks", category: "View", keys: "/", hidden: true, run: startFilter },
-    { name: "tasks.refresh", title: "Refresh", category: "View", keys: "r", run: () => void issues.list.refresh() },
+    { name: "tasks.refresh", title: "Refresh", category: "View", keys: "r", run: () => void source().refresh() },
   ])
 
   // Each row's place in the list, worked out once per list rather than searched for by every row.
@@ -155,7 +168,7 @@ export function TasksScreen(props: { version: string; sidebar: boolean; filter?:
 
   return (
     <Frame
-      view={props.projectId ? `Tasks · ${issues.projectName(props.projectId) ?? "project"}` : "Tasks"}
+      view={props.mine ? "Mine" : props.projectId ? `Tasks · ${issues.projectName(props.projectId) ?? "project"}` : "Tasks"}
       badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<TasksSidebar tasks={shown()} now={now()} />}
@@ -184,14 +197,14 @@ export function TasksScreen(props: { version: string; sidebar: boolean; filter?:
           />
         </Show>
         <text fg={theme().muted} flexShrink={0}>
-          {issues.list.status === "loading" && !issues.list.loadedAt ? "loading" : `${shown().length} tasks`}
+          {source().status === "loading" && !source().loadedAt ? "loading" : `${shown().length} tasks`}
         </text>
       </box>
-      <Show when={issues.list.loadedAt} fallback={<Show when={issues.list.status === "error"}><text fg={theme().error} paddingLeft={2}>✗ {issues.list.error}</text></Show>}>
+      <Show when={source().loadedAt} fallback={<Show when={source().status === "error"}><text fg={theme().error} paddingLeft={2}>✗ {source().error}</text></Show>}>
         <scrollbox ref={(r: ScrollBoxRenderable) => (scroll = r)} flexGrow={1} paddingTop={1} scrollbarOptions={{ visible: false }}>
           <Show when={rows().length === 0}>
             <text fg={theme().muted} paddingLeft={2}>
-              No tasks match.
+              {props.mine && !query() ? "No tasks you are on." : "No tasks match."}
             </text>
           </Show>
           {/* Index, not For: groups are rebuilt on every change, and their rows should stay when their tasks do. */}
@@ -217,7 +230,7 @@ export function TasksScreen(props: { version: string; sidebar: boolean; filter?:
                         onMouseUp={open}
                       >
                         <box width={2} flexShrink={0}>
-                          <Show when={liveTasks().has(task.id)} fallback={<StatusMark status={task.status} />}>
+                          <Show when={liveTasks().has(task.id)} fallback={unread(task) ? <text fg={theme().accent}>●</text> : <StatusMark status={task.status} />}>
                             <Spinner color={theme().accent} />
                           </Show>
                         </box>

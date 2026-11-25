@@ -115,6 +115,8 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
   const company = useCompany()
   const host = usePluginHost()
   const live = startLiveSync(session, company, { poll: props.config?.polling, focused, onEvent: (e) => host?.emit(e) })
+  // For the header's unread count, on every screen.
+  void company.issues.mine.load()
   const onFocus = () => setFocused(true)
   const onBlur = () => setFocused(false)
   renderer.on("focus", onFocus)
@@ -141,6 +143,7 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
     { name: "app.help", title: "Help", category: "App", keys: "<leader>h,?", run: () => dialog.replace(() => <HelpDialog />, undefined, "large") },
     { name: "go.inbox", title: "Inbox", category: "Go to", keys: "<leader>i,g i", run: () => route.reset({ name: "inbox" }) },
     { name: "go.tasks", title: "Tasks", category: "Go to", keys: "<leader>t,g t", run: () => route.reset({ name: "tasks" }) },
+    { name: "go.mine", title: "Mine (tasks you are on)", category: "Go to", keys: "g m", run: () => route.reset({ name: "tasks", mine: true }) },
     { name: "app.search", title: "Search", category: "Go to", keys: "<leader>/,g /", run: () => dialog.replace(() => <SearchDialog />, undefined, "large") },
     { name: "go.agents", title: "Agents", category: "Go to", keys: "<leader>a,g a", run: () => route.reset({ name: "agents" }) },
     { name: "go.projects", title: "Projects", category: "Go to", keys: "g p", run: () => route.reset({ name: "projects" }) },
@@ -242,7 +245,7 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
         </Match>
         {/* Keyed on the route, so opening Tasks with a filter from search rebuilds an open Tasks screen. */}
         <Match when={route.current().name === "tasks" && route.current()} keyed>
-          {(r: Route) => <TasksScreen filter={r.name === "tasks" ? r.filter : undefined} projectId={r.name === "tasks" ? r.projectId : undefined} version={props.version} sidebar={showSidebar()} />}
+          {(r: Route) => <TasksScreen filter={r.name === "tasks" ? r.filter : undefined} projectId={r.name === "tasks" ? r.projectId : undefined} mine={r.name === "tasks" && r.mine} version={props.version} sidebar={showSidebar()} />}
         </Match>
         <Match when={true}>
           <InboxScreen version={props.version} sidebar={showSidebar()} />
