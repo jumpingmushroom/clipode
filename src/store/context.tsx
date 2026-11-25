@@ -8,6 +8,7 @@ import { listRoutines } from "../api/endpoints/routines.ts"
 import { searchCompany } from "../api/endpoints/search.ts"
 import type { ActivityEntry, RoutineSummary } from "../api/model.ts"
 import { createResource } from "./resource.ts"
+import { createCostsStore } from "./costs.ts"
 import { createRunsStore } from "./runs.ts"
 import type { Session } from "./session.ts"
 
@@ -18,6 +19,7 @@ export function createCompanyStores(session: Session, companyId: string) {
     agents: createAgentsStore(session, companyId),
     runs: createRunsStore(session, companyId),
     issues: createIssuesStore(session, companyId),
+    costs: createCostsStore(session, companyId),
     routines: createResource<RoutineSummary[]>(() => listRoutines(session.client(), companyId), [], session.handleError),
     activity: createResource<ActivityEntry[]>(() => listActivity(session.client(), companyId), [], session.handleError),
     /** Searches the company on the server; an expired session is handled like any other read. */

@@ -129,6 +129,18 @@ Routines and activity (1.9), as decided on 2026-11-23 (costs and quotas wait). B
 
 Projects (1.10, `g p`): the list clipode already reads for the task dialog (`GET /api/companies/{companyId}/projects`), now with `status`, `description`, `leadAgentId`, `targetDate` and `archivedAt`. Probed on 2026-11-23: one to four projects per company, none with a lead, goals or a target date. Archived projects are left out. Each row has the status and the project's open, in-flight and done task counts, counted from the task list; the sidebar adds lead, target date and description. `enter` opens Tasks limited to the project by id (the route's `projectId`), with the project's name in the title; `g t` shows all tasks again.
 
+Costs and quotas (1.11, `g c`): one scrolling report built from seven reads, fetched again each time the screen opens and on `r`:
+
+| Part | Route at `2026.1117.0` | Notes |
+| --- | --- | --- |
+| Total | `GET /api/companies/{id}/costs/summary?period=month\|all` | spend, budget and pricing state; `eventCount` counts ledger events, so runs come from the model rows |
+| By agent, by model, by project | `…/costs/by-agent`, `…/costs/by-provider`, `…/costs/by-project` (same `period`) | agent and model rows count runs (`apiRunCount + subscriptionRunCount`); project rows only events, shown as runs |
+| Rolling windows | `…/costs/window-spend` | 5h, 24h and 7d tokens per provider |
+| Quotas | `…/costs/quota-windows` | the server asks each provider; a failed account carries `error` |
+| Budgets | `GET /api/companies/{id}/budgets/overview` | policies, active incidents, paused agents and projects |
+
+Probed on 2026-11-25: every run on the instance is billed to a Claude subscription (`billingType: "subscription_included"`), so spend is $0 everywhere; no company has a budget; and every quota request fails ("Subscription quota is currently unavailable", `errorFamily` `permission_denied` or `provider_unavailable`). The report therefore leads with runs and tokens, adds a cost column only when there is spend, says when every run is on a subscription, and shows the server's reason for a missing quota. Agents and projects are sorted busiest first. There is no sidebar warning for budgets or quotas: none exist here, and checking quotas on every start would make the server ask the provider each time.
+
 ## Provenance and licensing
 
 The new repository is MIT licensed, and no pasode source is copied into it. A public repository without a licence gives no reuse rights by default, so pasode is used as a design reference only. This is a working rule and not legal advice.

@@ -167,6 +167,20 @@ export type ActivityEntry = {
   action: string
 }
 
+/** Tokens and spend for one row of the cost report; runs are the server's cost events, one per run. */
+export type Usage = { runs: number | null; input: number; cached: number; output: number; cents: number }
+
+export type CostReport = {
+  total: Usage & { budgetCents: number; budgetUsedPercent: number; pendingRuns: number; pricingComplete: boolean; subscriptionOnly: boolean }
+  byAgent: (Usage & { agentId: string | null; name: string })[]
+  byModel: (Usage & { provider: string; model: string; billing: string })[]
+  byProject: (Usage & { projectId: string | null; name: string | null })[]
+  /** Rolling windows, such as 5h, 24h and 7d. */
+  windows: (Usage & { provider: string; window: string })[]
+  quotas: { provider: string; account: string | null; error: string | null; windows: { label: string; usedPercent: number | null; resetsAt: string | null; value: string | null }[] }[]
+  budgets: { policies: number; incidents: number; pausedAgents: number; pausedProjects: number }
+}
+
 export type CompanySummary = { id: string; name: string; prefix: string | null }
 
 export type RunDetail = {

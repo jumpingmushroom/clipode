@@ -28,6 +28,7 @@ import { RunScreen } from "./run.tsx"
 import { AgentsScreen } from "./agents.tsx"
 import { AgentScreen } from "./agent.tsx"
 import { ActivityScreen } from "./activity.tsx"
+import { CostsScreen } from "./costs.tsx"
 import { ProjectsScreen } from "./projects.tsx"
 import { RoutinesScreen } from "./routines.tsx"
 import { KIND_LABELS } from "./inbox-row.tsx"
@@ -139,6 +140,7 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
     { name: "app.search", title: "Search", category: "Go to", keys: "<leader>/,g /", run: () => dialog.replace(() => <SearchDialog />, undefined, "large") },
     { name: "go.agents", title: "Agents", category: "Go to", keys: "<leader>a,g a", run: () => route.reset({ name: "agents" }) },
     { name: "go.projects", title: "Projects", category: "Go to", keys: "g p", run: () => route.reset({ name: "projects" }) },
+    { name: "go.costs", title: "Costs", category: "Go to", keys: "g c", run: () => route.reset({ name: "costs" }) },
     { name: "go.routines", title: "Routines", category: "Go to", keys: "g r", run: () => route.reset({ name: "routines" }) },
     { name: "go.activity", title: "Activity", category: "Go to", keys: "g h", run: () => route.reset({ name: "activity" }) },
     ...Array.from({ length: 9 }, (_, i): AppCommand => ({ name: `tabs.${i + 1}`, title: `Tab ${i + 1}`, category: "Tabs", keys: `<leader>${i + 1}`, hidden: true, run: () => tabs.jump(i) })),
@@ -212,6 +214,9 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
         </Match>
         <Match when={param("agent")} keyed>
           {(id: string) => <AgentScreen id={id} version={props.version} sidebar={showSidebar()} />}
+        </Match>
+        <Match when={route.current().name === "costs"}>
+          <CostsScreen version={props.version} sidebar={showSidebar()} />
         </Match>
         <Match when={route.current().name === "projects"}>
           <ProjectsScreen version={props.version} sidebar={showSidebar()} />

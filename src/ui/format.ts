@@ -12,6 +12,15 @@ export function age(iso: string | null | undefined, now = Date.now()): string {
   return `${Math.floor(s / (86400 * 7))}w`
 }
 
+/** Compact count: 950, 12.3k, 4.5M, 1.2B. */
+export function count(n: number): string {
+  for (const [size, unit] of [[1e9, "B"], [1e6, "M"], [1e3, "k"]] as const) if (n >= size) return `${(n / size).toFixed(n >= size * 100 ? 0 : 1)}${unit}`
+  return String(n)
+}
+
+/** Cents as dollars: "$12.34". */
+export const money = (cents: number) => `$${(cents / 100).toFixed(2)}`
+
 /** Compact time until a moment: "in 12m", "in 3h"; "due" once it has passed. */
 export function until(iso: string | null | undefined, now = Date.now()): string {
   const at = iso ? Date.parse(iso) : NaN
