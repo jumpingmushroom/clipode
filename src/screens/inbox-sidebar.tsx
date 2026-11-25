@@ -42,7 +42,7 @@ export function InboxSidebar(props: { items: InboxItem[]; now: number }) {
   const kinds = () => {
     const shown: InboxItem["kind"][] = ["question", "confirmation", "approval", "failed_run", "blocked"]
     // Reviews and other kinds are listed only when present, so the mockup's five rows stay the default.
-    for (const extra of ["review", "other"] as const) if (active().some((i) => i.kind === extra)) shown.push(extra)
+    for (const extra of ["review", "decision", "agent_error", "recovery", "other"] as const) if (active().some((i) => i.kind === extra)) shown.push(extra)
     return shown
   }
   const agents = () => company.agents.active()

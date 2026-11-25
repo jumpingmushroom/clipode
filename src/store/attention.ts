@@ -5,6 +5,7 @@ import {
   approvalDetail,
   blockedDetail,
   confirmationDetail,
+  decisionDetail,
   getInbox,
   dismissItem,
   getInteractions,
@@ -15,11 +16,27 @@ import {
   type InboxFeed,
 } from "../api/endpoints/attention.ts"
 import type { Answer, InboxItem, ItemDetail } from "../api/model.ts"
-import { acceptConfirmation, answerQuestions, decideApproval, decideStalledReview, rejectConfirmation, type ApprovalDecision, type ReviewDecision } from "../api/endpoints/decisions.ts"
+import { clearAgentError, retryRun } from "../api/endpoints/agents.ts"
+import {
+  acceptConfirmation,
+  answerQuestions,
+  commentOnApproval,
+  decideApproval,
+  decideDecision,
+  decideStalledReview,
+  dismissDecision,
+  rejectConfirmation,
+  resolveRecovery,
+  retryTask,
+  type ApprovalDecision,
+  type RecoveryOutcome,
+  type ReviewDecision,
+} from "../api/endpoints/decisions.ts"
+import { ApiError } from "../api/client.ts"
 import { createResource } from "./resource.ts"
 import type { Session } from "./session.ts"
-export type { Answer, InboxItem, ItemDetail, Question } from "../api/model.ts"
-export type { ApprovalDecision, ReviewDecision } from "../api/endpoints/decisions.ts"
+export type { Answer, DecisionOption, InboxItem, ItemDetail, Question } from "../api/model.ts"
+export { RECOVERY_OUTCOMES, type ApprovalDecision, type RecoveryOutcome, type ReviewDecision } from "../api/endpoints/decisions.ts"
 
 export type Sort = "activity" | "decide"
 
@@ -52,8 +69,14 @@ export function createAttentionStore(session: Session, companyId: string) {
         return confirmationDetail(item.issueId ? (await forIssue(item.issueId)).find((i) => i.id === item.subjectId) : undefined, item.summary)
       case "approval":
         return approvalDetail(client, item.subjectId)
+      case "decision":
+        return decisionDetail(client, item.subjectId)
       case "failed_run":
         return { kind: "failed_run", error: item.summary ?? item.whyNow, runId: item.subjectId }
+      case "agent_error":
+        return { kind: "agent_error", error: item.summary ?? item.whyNow }
+      case "recovery":
+        return { kind: "recovery", summary: item.summary ?? item.title, cause: item.cause }
       case "review":
         return { kind: "review", stalled: item.reviewStalled, whyNow: item.whyNow }
       case "blocked":
@@ -83,7 +106,7 @@ export function createAttentionStore(session: Session, companyId: string) {
         await send()
         await feed.refresh()
       } catch (err) {
-        throw session.notSent(err)
+        throw err instanceof ApiError ? session.notSent(err) : err
       } finally {
         setHidden((h) => h.filter((id) => id !== item.id))
       }
@@ -102,6 +125,35 @@ export function createAttentionStore(session: Session, companyId: string) {
     },
     decide(item: InboxItem, decision: ApprovalDecision, note?: string) {
       return this.act(item, () => decideApproval(session.client(), item.subjectId, decision, note))
+    },
+    /** Chooses a decision's option; the key makes a resend after a lost answer replay the first outcome. */
+    choose(item: InboxItem, optionId: string, inputs: Record<string, string>) {
+      const key = crypto.randomUUID()
+      return this.act(item, () => decideDecision(session.client(), item.subjectId, optionId, inputs, key))
+    },
+    dismissDecision(item: InboxItem, reason?: string) {
+      return this.act(item, () => dismissDecision(session.client(), item.subjectId, reason))
+    },
+    /** Retries a failed run: through its task when it had one, else by waking its agent on that run. */
+    retry(item: InboxItem) {
+      const key = crypto.randomUUID()
+      return this.act(item, async () => {
+        if (!item.issueId) return void (await retryRun(session.client(), item.agentId!, item.subjectId, key))
+        const result = await retryTask(session.client(), item.issueId, item.subjectId, key)
+        // Not an HTTP error, so act would not report it: the task moved on since the run failed.
+        if (!result.accepted) throw new Error("Not retried: the task has a newer run, or is closed or unassigned")
+      })
+    },
+    clearError(item: InboxItem) {
+      return this.act(item, () => clearAgentError(session.client(), item.subjectId))
+    },
+    resolveRecovery(item: InboxItem, choice: RecoveryOutcome, note?: string) {
+      return this.act(item, () => resolveRecovery(session.client(), item.issueId!, item.subjectId, choice, note))
+    },
+    /** Comments on an approval; the item stays, and its discussion is read again. */
+    async commentOnApproval(item: InboxItem, body: string) {
+      await commentOnApproval(session.client(), item.subjectId, body).catch((err) => Promise.reject(session.notSent(err)))
+      setDetails(item.id, { status: "ready", detail: await approvalDetail(session.client(), item.subjectId) })
     },
     dismiss(item: InboxItem) {
       return this.act(item, () => dismissItem(session.client(), companyId, item.dismissalKey))

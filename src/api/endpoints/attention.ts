@@ -1,7 +1,7 @@
 // The attention feed (the inbox) and the extra request each kind of item needs when it is opened.
 import type { Approval, AttentionFeed, AttentionItem, Issue } from "@paperclipai/shared"
 import type { Client } from "../client.ts"
-import type { InboxItem, ItemDetail, ItemKind, Question } from "../model.ts"
+import type { ApprovalComment, DecisionInput, DecisionOption, InboxItem, ItemDetail, ItemKind, Question } from "../model.ts"
 
 const id = encodeURIComponent
 
@@ -13,8 +13,10 @@ export async function getInbox(client: Client, companyId: string, sort: "activit
   return { items: feed.items.map(toInboxItem), totalCount: feed.totalCount }
 }
 
+const SOURCE_KINDS: Record<string, ItemKind> = { review: "review", decision: "decision", agent_error_alert: "agent_error", recovery_action: "recovery" }
+
 function kindOf(item: AttentionItem): ItemKind {
-  if (item.sourceKind === "review") return "review"
+  if (SOURCE_KINDS[item.sourceKind]) return SOURCE_KINDS[item.sourceKind]!
   switch (item.detail?.kind) {
     case "questions":
       return "question"
@@ -48,7 +50,10 @@ export function toInboxItem(item: AttentionItem): InboxItem {
         ? (item.relatedIssue?.id ?? null)
         : (str(meta.issueId) ?? (item.subject.kind === "issue" ? item.subject.id : (item.relatedIssue?.id ?? null))),
     agentName: item.originAgentName ?? str(detail?.agentName),
-    agentId: str(meta.createdByAgentId) ?? str(meta.assigneeAgentId) ?? str(meta.requestedByAgentId),
+    agentId:
+      kind === "agent_error"
+        ? item.subject.id
+        : (str(meta.createdByAgentId) ?? str(meta.assigneeAgentId) ?? str(meta.requestedByAgentId) ?? str(meta.originAgentId) ?? str(meta.agentId)),
     whyNow: item.whyNow,
     severity: item.severity,
     createdAt: item.createdAt,
@@ -58,8 +63,8 @@ export function toInboxItem(item: AttentionItem): InboxItem {
     snoozed: item.dismissal?.isActive === true,
     snoozedUntil: item.dismissal?.snoozedUntil ?? item.snoozedUntil,
     summary:
-      kind === "failed_run"
-        ? (str(meta.error) ?? str(detail?.failureReasonExcerpt))
+      kind === "failed_run" || kind === "agent_error"
+        ? (str(meta.error) ?? str(meta.errorReason) ?? str(detail?.failureReasonExcerpt))
         : (str(detail?.summaryExcerpt) ?? str(detail?.promptExcerpt) ?? str(detail?.firstQuestionText)),
     blocked,
     blockedTaskCount: typeof detail?.blockedTaskCount === "number" ? detail.blockedTaskCount : null,
@@ -67,6 +72,7 @@ export function toInboxItem(item: AttentionItem): InboxItem {
     dismissalKey: item.dismissalKey,
     reviewStalled: meta.reviewAttentionState === "stalled",
     sourceKind: item.sourceKind,
+    cause: str(meta.cause),
   }
 }
 
@@ -124,15 +130,58 @@ export function confirmationDetail(interaction: Interaction | undefined, fallbac
   }
 }
 
-// From source, not observed on the test instance.
+type WireApprovalComment = { id: string; authorAgentId: string | null; body: string; createdAt: string }
+
 export async function approvalDetail(client: Client, approvalId: string): Promise<ItemDetail> {
-  const [approval, issues] = await Promise.all([
+  const [approval, issues, comments] = await Promise.all([
     client.get<Approval>(`/api/approvals/${id(approvalId)}`),
     client.get<Pick<Issue, "identifier">[]>(`/api/approvals/${id(approvalId)}/issues`).catch(() => []),
+    // The discussion is a nicety: without it the approval still shows.
+    client.get<WireApprovalComment[]>(`/api/approvals/${id(approvalId)}/comments`).catch(() => []),
   ])
   const p = approval.payload
   const text = [p.title, p.summary, p.description, p.body].filter((v): v is string => typeof v === "string" && v.length > 0)
-  return { kind: "approval", summary: text.join("\n\n") || approval.type, identifier: issues[0]?.identifier ?? null }
+  return {
+    kind: "approval",
+    summary: text.join("\n\n") || approval.type,
+    identifier: issues[0]?.identifier ?? null,
+    comments: comments.map((c): ApprovalComment => ({ id: c.id, agentId: c.authorAgentId, body: c.body, at: c.createdAt })),
+  }
+}
+
+type WireDecision = {
+  body: string
+  options: { id: string; label: string; description?: string | null; style?: string; effects?: { type: string }[] }[]
+  inputs: { id: string; label: string; placeholder?: string | null; required?: boolean; maxLength?: number | null }[] | null
+}
+
+const EFFECTS: Record<string, string> = {
+  comment_on_issue: "comments on a task",
+  create_issue: "creates a task",
+  update_issue_status: "changes a task's status",
+  assign_issue: "assigns a task",
+  cancel_issue_tree: "cancels a task and its subtasks",
+  resolve_blocker: "resolves a blocker",
+}
+
+export async function decisionDetail(client: Client, decisionId: string): Promise<ItemDetail> {
+  const d = await client.get<WireDecision>(`/api/decisions/${id(decisionId)}`)
+  return {
+    kind: "decision",
+    body: d.body,
+    options: d.options.map((o): DecisionOption => {
+      const types = (o.effects ?? []).map((e) => e.type)
+      return {
+        id: o.id,
+        label: o.label,
+        description: o.description ?? null,
+        destructive: o.style === "destructive",
+        effects: types.map((t) => EFFECTS[t] ?? t.replace(/_/g, " ")),
+        cancelsTree: types.includes("cancel_issue_tree"),
+      }
+    }),
+    inputs: (d.inputs ?? []).map((i): DecisionInput => ({ id: i.id, label: i.label, placeholder: i.placeholder ?? null, required: i.required === true, maxLength: i.maxLength ?? null })),
+  }
 }
 
 export async function blockedDetail(client: Client, issueId: string): Promise<ItemDetail> {

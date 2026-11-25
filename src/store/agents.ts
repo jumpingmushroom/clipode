@@ -1,5 +1,5 @@
 // The company's agents, loaded once per session and looked up by id.
-import { listAgents, listModels, pauseAgent, resumeAgent, wakeAgent, type ModelOption } from "../api/endpoints/agents.ts"
+import { clearAgentError, listAgents, listModels, pauseAgent, resumeAgent, wakeAgent, type ModelOption } from "../api/endpoints/agents.ts"
 import { ApiError } from "../api/client.ts"
 import { listRuns } from "../api/endpoints/runs.ts"
 import type { AgentSummary, RunDetail } from "../api/model.ts"
@@ -24,6 +24,10 @@ export function createAgentsStore(session: Session, companyId: string) {
       void list.refresh()
       // The server applies a resume a moment after answering.
       setTimeout(() => void list.refresh(), 2000)
+    },
+    async clearError(agentId: string) {
+      await clearAgentError(session.client(), agentId).catch((err) => Promise.reject(notSent(err)))
+      void list.refresh()
     },
     /** Wakes an agent, retrying once after a network error with the same idempotency key. */
     async wake(agentId: string, reason?: string) {

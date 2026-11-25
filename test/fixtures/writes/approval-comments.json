@@ -1,0 +1,17 @@
+{
+  "method": "GET",
+  "status": 200,
+  "request": null,
+  "response": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "companyId": "00000000-0000-4000-8000-000000000002",
+      "approvalId": "00000000-0000-4000-8000-000000000003",
+      "authorAgentId": null,
+      "authorUserId": "authorUserId-1",
+      "body": "example body",
+      "createdAt": "2026-11-25T11:26:53.153Z",
+      "updatedAt": "2026-11-25T11:26:53.153Z"
+    }
+  ]
+}

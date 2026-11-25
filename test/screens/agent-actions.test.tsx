@@ -48,6 +48,28 @@ test("p resumes a paused agent at once", async () => {
   expect(await app.frame()).toContain("resumed")
 })
 
+test("x clears an agent's error; an agent not in error sends nothing", async () => {
+  app = await startApp({
+    route: { name: "agents" },
+    before: (s) => {
+      s.set(`/api/companies/${COMPANY_ID}/agents`, agents.map((a) => (a.id === first.id ? { ...a, status: "error" } : a)))
+      s.set(`/api/agents/${first.id}/clear-error`, {})
+    },
+  })
+  expect(await app.frame()).toContain("x clear error")
+  app.mockInput.pressKey("x")
+  await Bun.sleep(60)
+  expect(app.server.writes[0]).toEqual({ method: "POST", path: `/api/agents/${first.id}/clear-error`, body: {} })
+  expect(await app.frame()).toContain("is idle again")
+  app.renderer.destroy()
+  app = await startApp({ route: { name: "agents" } })
+  await app.frame()
+  app.mockInput.pressKey("x")
+  await Bun.sleep(60)
+  expect(app.server.writes).toHaveLength(0)
+  expect(await app.frame()).toContain("is not in error")
+})
+
 test("x cancels a live run after confirming; a finished run offers no cancel", async () => {
   app = await startApp({
     route: { name: "run", id: "live-run" },

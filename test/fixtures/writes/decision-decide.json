@@ -1,0 +1,89 @@
+{
+  "method": "POST",
+  "status": 200,
+  "request": {
+    "optionId": "id-10",
+    "inputValues": {
+      "why": "example why"
+    },
+    "idempotencyKey": "00000000-0000-4000-8000-000000000008"
+  },
+  "response": {
+    "id": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "bundleId": null,
+    "originAgentId": "00000000-0000-4000-8000-000000000004",
+    "originIssueId": "00000000-0000-4000-8000-000000000003",
+    "originRunId": "00000000-0000-4000-8000-000000000007",
+    "ruleKey": null,
+    "title": "example title",
+    "body": "example body",
+    "options": [
+      {
+        "id": "id-10",
+        "label": "example label",
+        "effects": [
+          {
+            "type": "comment_on_issue",
+            "staleness": "example staleness",
+            "bodyMarkdown": "example bodyMarkdown",
+            "targetIssueId": "00000000-0000-4000-8000-000000000003"
+          }
+        ]
+      },
+      {
+        "id": "id-11",
+        "label": "example label",
+        "effects": []
+      }
+    ],
+    "inputs": [
+      {
+        "id": "id-12",
+        "label": "example label",
+        "required": false
+      }
+    ],
+    "status": "decided",
+    "executionStatus": "example executionStatus",
+    "chosenOptionId": "id-10",
+    "inputValues": {
+      "why": "example why"
+    },
+    "decidedByUserId": "decidedByUserId-13",
+    "decidedAt": "2026-11-25T11:27:50.876Z",
+    "expiresAt": "2026-12-02T11:27:14.523Z",
+    "idempotencyKey": null,
+    "signedSpec": "example signedSpec",
+    "targetSnapshots": {
+      "00000000-0000-4000-8000-000000000003": {
+        "status": "in_progress",
+        "updatedAt": "2026-11-25T11:27:01.584Z",
+        "assigneeUserId": null,
+        "assigneeAgentId": "00000000-0000-4000-8000-000000000004"
+      }
+    },
+    "continuationPolicy": "none",
+    "metadata": {
+      "decideIdempotencyKey": "00000000-0000-4000-8000-000000000008"
+    },
+    "createdAt": "2026-11-25T11:27:14.515Z",
+    "updatedAt": "2026-11-25T11:27:51.205Z",
+    "executions": [
+      {
+        "id": "00000000-0000-4000-8000-000000000009",
+        "decisionId": "00000000-0000-4000-8000-000000000005",
+        "effectIndex": 0,
+        "effectType": "example effectType",
+        "targetIssueId": "00000000-0000-4000-8000-000000000003",
+        "status": "executed",
+        "result": {
+          "commentId": "00000000-0000-4000-8000-00000000000a"
+        },
+        "error": null,
+        "activityLogId": "00000000-0000-4000-8000-00000000000b",
+        "executedAt": "2026-11-25T11:27:51.195Z"
+      }
+    ]
+  }
+}

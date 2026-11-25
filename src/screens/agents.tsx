@@ -80,7 +80,7 @@ export function AgentsScreen(props: { version: string; sidebar: boolean }) {
       badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<Show when={current()}>{(a: () => AgentSummary) => <AgentSidebar agent={a()} now={now()} />}</Show>}
-      hints={[["j/k", "move"], ["enter", "open"], ["w", "wake"], ["p", "pause/resume"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
+      hints={[["j/k", "move"], ["enter", "open"], ["w", "wake"], ["p", "pause/resume"], ...(current()?.status === "error" ? [["x", "clear error"] as [string, string]] : []), ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
       narrowHints={[["j/k", "move"], ["enter", "open"], ["^p", "cmds"]]}
       version={props.version}
     >

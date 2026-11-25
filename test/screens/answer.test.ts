@@ -8,7 +8,7 @@ const multi: Question = { id: "days", prompt: "Which days?", options: [{ id: "mo
 test("choices cover every option, the written answer, and the decision verbs", () => {
   expect(choicesFor({ kind: "question", questions: [single, multi], context: null }).map((c) => c.label)).toEqual(["Red", "Blue", "Something else, with a written reply", "Mon", "Tue"])
   expect(choicesFor({ kind: "confirmation", prompt: "", detailsMarkdown: null, acceptLabel: "Confirm Blue", rejectLabel: "Choose again" }).map((c) => c.kind)).toEqual(["accept", "reject"])
-  expect(choicesFor({ kind: "approval", summary: "", identifier: null }).map((c) => c.kind === "approval" && c.decision)).toEqual(["approve", "reject", "request-revision"])
+  expect(choicesFor({ kind: "approval", summary: "", identifier: null, comments: [] }).map((c) => (c.kind === "approval" ? c.decision : c.kind))).toEqual(["approve", "reject", "request-revision", "approval-comment"])
   expect(choicesFor({ kind: "review", stalled: true, whyNow: "" }).map((c) => c.kind === "review" && c.action)).toEqual(["approve", "request_changes", "send_back"])
   expect(choicesFor({ kind: "review", stalled: false, whyNow: "" })).toEqual([])
 })

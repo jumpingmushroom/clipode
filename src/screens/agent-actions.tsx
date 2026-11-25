@@ -1,4 +1,4 @@
-// Agent commands shared by the Agents screen (on the selected agent) and agent detail: wake, and pause or resume.
+// Agent commands shared by the Agents screen (on the selected agent) and agent detail: wake, pause or resume, and clear an error.
 import { useCommands, type AppCommand } from "../keymap/commands.tsx"
 import { createDialogs } from "../plugin/dialogs.tsx"
 import type { AgentSummary } from "../store/agents.ts"
@@ -32,11 +32,19 @@ export function useAgentActions(agent: () => AgentSummary | undefined) {
       void run(`${a.name} paused`, () => company.agents.pause(a.id))
     })
 
+  const clearError = () => {
+    const a = agent()
+    if (!a) return
+    if (a.status !== "error") return toast.show(`${a.name} is not in error`, "info")
+    void run(`${a.name} is idle again`, () => company.agents.clearError(a.id))
+  }
+
   useCommands(() =>
     session.client().writes
       ? ([
           { name: "agent.wake", title: "Wake agent", category: "Agent", keys: "w", run: wake },
           { name: "agent.pause", title: "Pause or resume agent", category: "Agent", keys: "p", run: pauseOrResume },
+          { name: "agent.clear-error", title: "Clear agent error", category: "Agent", keys: "x", run: clearError },
         ] satisfies AppCommand[])
       : [],
   )

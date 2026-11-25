@@ -1,0 +1,64 @@
+{
+  "method": "GET",
+  "status": 200,
+  "request": null,
+  "response": {
+    "id": "00000000-0000-4000-8000-000000000005",
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "bundleId": null,
+    "originAgentId": "00000000-0000-4000-8000-000000000004",
+    "originIssueId": "00000000-0000-4000-8000-000000000003",
+    "originRunId": "00000000-0000-4000-8000-000000000007",
+    "ruleKey": null,
+    "title": "example title",
+    "body": "example body",
+    "options": [
+      {
+        "id": "id-10",
+        "label": "example label",
+        "effects": [
+          {
+            "type": "comment_on_issue",
+            "staleness": "example staleness",
+            "bodyMarkdown": "example bodyMarkdown",
+            "targetIssueId": "00000000-0000-4000-8000-000000000003"
+          }
+        ]
+      },
+      {
+        "id": "id-11",
+        "label": "example label",
+        "effects": []
+      }
+    ],
+    "inputs": [
+      {
+        "id": "id-12",
+        "label": "example label",
+        "required": false
+      }
+    ],
+    "status": "open",
+    "executionStatus": null,
+    "chosenOptionId": null,
+    "inputValues": null,
+    "decidedByUserId": null,
+    "decidedAt": null,
+    "expiresAt": "2026-12-02T11:27:14.523Z",
+    "idempotencyKey": null,
+    "signedSpec": "example signedSpec",
+    "targetSnapshots": {
+      "00000000-0000-4000-8000-000000000003": {
+        "status": "in_progress",
+        "updatedAt": "2026-11-25T11:27:01.584Z",
+        "assigneeUserId": null,
+        "assigneeAgentId": "00000000-0000-4000-8000-000000000004"
+      }
+    },
+    "continuationPolicy": "none",
+    "metadata": {},
+    "createdAt": "2026-11-25T11:27:14.515Z",
+    "updatedAt": "2026-11-25T11:27:14.515Z",
+    "executions": []
+  }
+}

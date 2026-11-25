@@ -1,0 +1,14 @@
+{
+  "method": "POST",
+  "status": 409,
+  "request": {
+    "optionId": "id-11"
+  },
+  "response": {
+    "error": "example error",
+    "code": "example code",
+    "details": {
+      "code": "example code"
+    }
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "method": "GET",
+  "status": 200,
+  "request": null,
+  "response": {
+    "companyId": "00000000-0000-4000-8000-000000000001",
+    "generatedAt": "2026-11-25T11:27:50.614Z",
+    "totalCount": 4,
+    "deskBadgeCount": 3,
+    "countsBySourceKind": {
+      "approval": 1,
+      "decision": 2,
+      "issue_thread_interaction": 1,
+      "join_request": 0,
+      "recovery_action": 0,
+      "productivity_review": 0,
+      "blocker_attention": 0,
+      "review": 0,
+      "failed_run": 0,
+      "budget_alert": 0,
+      "agent_error_alert": 0
+    },
+    "nextCursor": null,
+    "items": [
+      {
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "sourceKind": "decision",
+        "subject": {
+          "kind": "decision",
+          "id": "00000000-0000-4000-8000-000000000002",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "title": "example title",
+          "identifier": null,
+          "status": "open",
+          "href": "/demo/path",
+          "metadata": {
+            "originIssueId": "00000000-0000-4000-8000-000000000003",
+            "originAgentId": "00000000-0000-4000-8000-000000000004",
+            "bundleId": null,
+            "bundleTitle": null
+          }
+        },
+        "whyNow": "example whyNow",
+        "decisionVerbs": [
+          {
+            "id": "decide",
+            "label": "example label",
+            "description": "example description"
+          }
+        ],
+        "inlineResolvable": true,
+        "entryRule": "example entryRule",
+        "exitRule": "example exitRule",
+        "dedupKey": "dedupKey-1",
+        "severity": "medium",
+        "expiresAt": "2026-12-02T11:27:14.903Z",
+        "ruleKey": null,
+        "activityAt": "2026-11-25T11:27:14.899Z",
+        "createdAt": "2026-11-25T11:27:14.899Z",
+        "updatedAt": "2026-11-25T11:27:14.899Z",
+        "relatedIssue": {
+          "kind": "issue",
+          "id": "00000000-0000-4000-8000-000000000003",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "title": "example title",
+          "identifier": "DEMO-1",
+          "status": "done",
+          "href": "/demo/path",
+          "metadata": {
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000004",
+            "assigneeUserId": null,
+            "reviewPolicy": null
+          }
+        },
+        "project": null,
+        "workspace": null,
+        "detail": {
+          "kind": "generic",
+          "summaryExcerpt": "example summaryExcerpt",
+          "images": []
+        },
+        "id": "id-2",
+        "dismissalKey": "dismissalKey-3",
+        "dismissal": null,
+        "originAgentName": "example originAgentName",
+        "queues": [],
+        "shelf": false,
+        "retentionDays": 30,
+        "keep": false,
+        "archivedAt": null,
+        "retentionVersion": 1,
+        "decideBy": null,
+        "decideByAttribution": null,
+        "snoozedUntil": null,
+        "trainingExampleId": null,
+        "resolverAudience": null,
+        "rank": 1
+      },
+      {
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "sourceKind": "decision",
+        "subject": {
+          "kind": "decision",
+          "id": "00000000-0000-4000-8000-000000000005",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "title": "example title",
+          "identifier": null,
+          "status": "open",
+          "href": "/demo/path",
+          "metadata": {
+            "originIssueId": "00000000-0000-4000-8000-000000000003",
+            "originAgentId": "00000000-0000-4000-8000-000000000004",
+            "bundleId": null,
+            "bundleTitle": null
+          }
+        },
+        "whyNow": "example whyNow",
+        "decisionVerbs": [
+          {
+            "id": "decide",
+            "label": "example label",
+            "description": "example description"
+          }
+        ],
+        "inlineResolvable": true,
+        "entryRule": "example entryRule",
+        "exitRule": "example exitRule",
+        "dedupKey": "dedupKey-4",
+        "severity": "medium",
+        "expiresAt": "2026-12-02T11:27:14.523Z",
+        "ruleKey": null,
+        "activityAt": "2026-11-25T11:27:14.515Z",
+        "createdAt": "2026-11-25T11:27:14.515Z",
+        "updatedAt": "2026-11-25T11:27:14.515Z",
+        "relatedIssue": {
+          "kind": "issue",
+          "id": "00000000-0000-4000-8000-000000000003",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "title": "example title",
+          "identifier": "DEMO-1",
+          "status": "done",
+          "href": "/demo/path",
+          "metadata": {
+            "priority": "medium",
+            "assigneeAgentId": "00000000-0000-4000-8000-000000000004",
+            "assigneeUserId": null,
+            "reviewPolicy": null
+          }
+        },
+        "project": null,
+        "workspace": null,
+        "detail": {
+          "kind": "generic",
+          "summaryExcerpt": "example summaryExcerpt",
+          "images": []
+        },
+        "id": "id-5",
+        "dismissalKey": "dismissalKey-6",
+        "dismissal": null,
+        "originAgentName": "example originAgentName",
+        "queues": [],
+        "shelf": false,
+        "retentionDays": 30,
+        "keep": false,
+        "archivedAt": null,
+        "retentionVersion": 1,
+        "decideBy": null,
+        "decideByAttribution": null,
+        "snoozedUntil": null,
+        "trainingExampleId": null,
+        "resolverAudience": null,
+        "rank": 2
+      },
+      {
+        "companyId": "00000000-0000-4000-8000-000000000001",
+        "sourceKind": "approval",
+        "subject": {
+          "kind": "approval",
+          "id": "00000000-0000-4000-8000-000000000006",
+          "companyId": "00000000-0000-4000-8000-000000000001",
+          "title": "example title",
+          "identifier": null,
+          "status": "pending",
+          "href": "/demo/path",
+          "metadata": {
+            "type": "request_board_approval",
+            "requestedByAgentId": "00000000-0000-4000-8000-000000000004",
+            "requestedByUserId": null,
+            "issueId": "00000000-0000-4000-8000-000000000003"
+          }
+        },
+        "whyNow": "example whyNow",
+        "decisionVerbs": [
+          {
+            "id": "approve",
+            "label": "example label",
+            "description": "example description"
+          },
+          {
+            "id": "reject",
+            "label": "example label",
+            "description": "example description"
+          },
+          {
+            "id": "request_revision",
+            "label": "example label",
+            "description": "example description"
+          }
+        ],
+        "inlineResolvable": false,
+        "entryRule": "example entryRule",
+        "exitRule": "example exitRule",
+        "dedupKey": "dedupKey-7",
+        "severity": "medium",
+        "activityAt": "2026-11-25T11:27:10.696Z",
+        "createdAt": "2026-11-25T11:27:10.696Z",
+        "updatedAt": "2026-11-25T11:27:10.696Z",
+        "relatedIssue": null,
+        "detail": {
+          "kind": "approval",
+          "approvalType": "request_board_approval",
+          "summaryExcerpt": "example summaryExcerpt",
+          "images": []
+        },
+        "id": "id-8",
+        "dismissalKey": "dismissalKey-9",
+        "dismissal": null,
+        "project": null,
+        "workspace": null,
+        "expiresAt": null,
+        "ruleKey": null,
+        "originAgentName": "example originAgentName",
+        "queues": [],
+        "shelf": false,
+        "retentionDays": 30,
+        "keep": false,
+        "archivedAt": null,
+        "retentionVersion": 1,
+        "decideBy": null,
+        "decideByAttribution": null,
+        "snoozedUntil": null,
+        "trainingExampleId": null,
+        "resolverAudience": null,
+        "rank": 3
+      }
+    ]
+  }
+}

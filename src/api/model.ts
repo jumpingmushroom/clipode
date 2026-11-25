@@ -1,6 +1,16 @@
 // Client-side shapes for the stores and screens. They hold no wire fields; src/api maps responses onto them.
 
-export type ItemKind = "question" | "confirmation" | "approval" | "review" | "failed_run" | "blocked" | "other"
+export type ItemKind =
+  | "question"
+  | "confirmation"
+  | "approval"
+  | "review"
+  | "decision"
+  | "failed_run"
+  | "agent_error"
+  | "recovery"
+  | "blocked"
+  | "other"
 
 export type InboxItem = {
   id: string
@@ -33,6 +43,8 @@ export type InboxItem = {
   reviewStalled: boolean
   /** Server-side source kind, for kinds shown as a generic row. */
   sourceKind: string
+  /** Why a recovery action exists, as the server names it ("stranded_assigned_issue", …). */
+  cause: string | null
 }
 
 export type Question = {
@@ -51,12 +63,32 @@ export type ItemDetail =
   /** `context`: what the agent wrote alongside the question, from the comments named in originCommentIds. */
   | { kind: "question"; questions: Question[]; context: string | null }
   | { kind: "confirmation"; prompt: string; detailsMarkdown: string | null; acceptLabel: string; rejectLabel: string }
-  | { kind: "approval"; summary: string; identifier: string | null }
+  | { kind: "approval"; summary: string; identifier: string | null; comments: ApprovalComment[] }
+  /** An agent's decision: choosing an option runs its effects (comment, create, reassign, cancel tasks). */
+  | { kind: "decision"; body: string; options: DecisionOption[]; inputs: DecisionInput[] }
   | { kind: "failed_run"; error: string; runId: string }
+  | { kind: "agent_error"; error: string }
+  /** A stalled task a person must settle; `summary` is the next step the server suggests. */
+  | { kind: "recovery"; summary: string; cause: string | null }
   | { kind: "blocked"; description: string | null; blockers: { identifier: string | null; title: string; status: string }[] }
   /** A task in review. Only a stalled review is decided here; otherwise its decision lives elsewhere (approval, reviewer). */
   | { kind: "review"; stalled: boolean; whyNow: string }
   | { kind: "other"; summary: string | null }
+
+export type ApprovalComment = { id: string; agentId: string | null; body: string; at: string }
+
+export type DecisionOption = {
+  id: string
+  label: string
+  description: string | null
+  /** The server's destructive style; cancelling a task tree always has it. */
+  destructive: boolean
+  /** What choosing it does, in words: "comment on the task", "cancel the task tree", … */
+  effects: string[]
+  cancelsTree: boolean
+}
+
+export type DecisionInput = { id: string; label: string; placeholder: string | null; required: boolean; maxLength: number | null }
 
 export type AgentSummary = {
   id: string

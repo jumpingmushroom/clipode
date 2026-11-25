@@ -4,7 +4,7 @@ import { useBindings } from "@opentui/keymap/solid"
 import { createEffect, createMemo, createSignal, For, Match, onCleanup, onMount, Show, Switch, untrack, type Accessor } from "solid-js"
 import { createDialogs } from "../plugin/dialogs.tsx"
 import { useRoute } from "../route.tsx"
-import type { InboxItem, ItemDetail } from "../store/attention.ts"
+import type { DecisionOption, InboxItem, ItemDetail } from "../store/attention.ts"
 import { useCompany, useStores } from "../store/context.tsx"
 import { afterDispatch, useDialog } from "../ui/dialog.tsx"
 import { useToast } from "../ui/toast.tsx"
@@ -97,7 +97,54 @@ export function ItemScreen(props: { id: string; version: string; sidebar: boolea
     if (choice.kind === "approval") {
       const text = await note(choice.decision, choice.label, "Optional note, then enter to send")
       if (text !== null) void send(`${choice.label}: sent`, (it) => company.attention.decide(it, choice.decision, text || undefined), choice.decision)
+      return
     }
+    if (choice.kind === "approval-comment") {
+      const text = await note("comment", "Comment on the approval", "Your comment, then enter to post")
+      const it = item()
+      if (!text?.trim() || !it) return
+      return company.attention.commentOnApproval(it, text.trim()).then(
+        () => (drafts.delete(`${it.id}:comment`), toast.show("Comment posted", "success")),
+        (err) => toast.error(err),
+      )
+    }
+    if (choice.kind === "decision") return chooseOption(choice.option, choice.label)
+    if (choice.kind === "decision-dismiss") {
+      const reason = await note("dismiss", "Dismiss the decision", "Optional reason, then enter to dismiss")
+      if (reason !== null) void send("Decision dismissed", (it) => company.attention.dismissDecision(it, reason.trim() || undefined), "dismiss")
+      return
+    }
+    if (choice.kind === "retry") return send("Retry queued", (it) => company.attention.retry(it))
+    if (choice.kind === "clear-error") return send("Error cleared", (it) => company.attention.clearError(it))
+    if (choice.kind === "recovery") {
+      const text = await note(choice.label, choice.outcome.label, "Optional note, then enter to send")
+      if (text !== null) void send(`${choice.label}: sent`, (it) => company.attention.resolveRecovery(it, choice.outcome, text.trim() || undefined), choice.label)
+    }
+  }
+
+  /** A decision's option: its inputs are asked for first; a destructive one is confirmed, a task-tree cancel typed out. */
+  const chooseOption = async (option: DecisionOption, label: string) => {
+    const d = detail()
+    const it = item()
+    if (d?.kind !== "decision" || !it) return
+    const values: Record<string, string> = {}
+    for (const input of d.inputs) {
+      const text = await note(`input:${input.id}`, input.label, input.placeholder ?? (input.required ? "Required" : "Optional, enter to skip"))
+      if (text === null) return
+      if (input.required && !text.trim()) return toast.show(`${input.label} is required`, "warning")
+      if (input.maxLength && text.length > input.maxLength) return toast.show(`${input.label} takes at most ${input.maxLength} characters`, "warning")
+      if (text.trim()) values[input.id] = text.trim()
+    }
+    if (option.cancelsTree) {
+      const want = it.identifier ?? "cancel"
+      const typed = await dialogs.prompt(`${option.label}: this cancels a task and its subtasks`, `Type ${want} to confirm`)
+      if (typed === null) return
+      if (typed.trim() !== want) return toast.show(`Not sent: type ${want} to confirm`, "warning")
+    } else if (option.destructive && !(await dialogs.confirm(option.label, label))) return
+    void send(`${option.label}: sent`, async (i) => {
+      await company.attention.choose(i, option.id, values)
+      for (const input of d.inputs) drafts.delete(`${i.id}:input:${input.id}`)
+    })
   }
 
   const submit = () => {
@@ -122,6 +169,7 @@ export function ItemScreen(props: { id: string; version: string; sidebar: boolea
         cmd: () => {
           const it = item()
           if (it?.kind === "failed_run") route.navigate({ name: "run", id: it.subjectId })
+          else if (it?.kind === "agent_error") route.navigate({ name: "agent", id: it.subjectId })
           else if (it?.issueId) route.navigate({ name: "thread", id: it.issueId })
         },
       },
@@ -271,12 +319,22 @@ function NotYet() {
 
 function Body(props: { item: InboxItem; detail: ItemDetail } & Pick) {
   const { theme } = useTheme()
+  const company = useCompany()
   const d = props.detail
   const all = () => (props.choices.length ? props.choices : inert(d))
   const links = useTaskRefs()
   const pick = () => ({ choices: props.choices, cursor: props.cursor, selection: props.selection, onPick: props.onPick })
   return (
-    <Switch fallback={<Markdown content={props.item.summary ?? props.item.whyNow} links={links} />}>
+    <Switch
+      fallback={
+        <box flexDirection="column">
+          <Markdown content={props.item.summary ?? props.item.whyNow} links={links} />
+          <text fg={theme().muted} marginTop={1}>
+            clipode cannot decide this kind of item yet; use Paperclip's web UI.
+          </text>
+        </box>
+      }
+    >
       <Match when={d.kind === "question" && d}>
         {(q: Accessor<Extract<ItemDetail, { kind: "question" }>>) => (
           <box flexDirection="column">
@@ -320,6 +378,20 @@ function Body(props: { item: InboxItem; detail: ItemDetail } & Pick) {
         {(a: Accessor<Extract<ItemDetail, { kind: "approval" }>>) => (
           <box flexDirection="column">
             <Markdown content={a().summary} links={links} />
+            <Show when={a().comments.length}>
+              <Section title="Discussion" />
+              <For each={a().comments}>
+                {(c) => (
+                  <box flexDirection="column" marginBottom={1}>
+                    <text fg={theme().muted}>
+                      <span style={{ fg: theme().text, attributes: TextAttributes.BOLD }}>{c.agentId ? (company.agents.byId(c.agentId)?.name ?? "agent") : "You"}</span> ·{" "}
+                      {dateTime(c.at)}
+                    </text>
+                    <Markdown content={c.body} links={links} />
+                  </box>
+                )}
+              </For>
+            </Show>
             <Section title="Answer" />
             <Options {...pick()} show={all()} />
             <Show when={!props.choices.length}>
@@ -356,6 +428,60 @@ function Body(props: { item: InboxItem; detail: ItemDetail } & Pick) {
             <box backgroundColor={theme().panel} paddingLeft={1} paddingRight={1}>
               <text fg={theme().text}>{f().error}</text>
             </box>
+            <Section title="Answer" />
+            <Options {...pick()} show={all()} />
+            <Show when={!props.choices.length}>
+              <NotYet />
+            </Show>
+          </box>
+        )}
+      </Match>
+      <Match when={d.kind === "agent_error" && d}>
+        {(e: Accessor<Extract<ItemDetail, { kind: "agent_error" }>>) => (
+          <box flexDirection="column">
+            <text fg={theme().text}>{props.item.whyNow}</text>
+            <Section title="Error" />
+            <box backgroundColor={theme().panel} paddingLeft={1} paddingRight={1}>
+              <text fg={theme().text}>{e().error}</text>
+            </box>
+            <Section title="Answer" />
+            <Options {...pick()} show={all()} />
+            <Show when={!props.choices.length}>
+              <NotYet />
+            </Show>
+          </box>
+        )}
+      </Match>
+      <Match when={d.kind === "decision" && d}>
+        {(dec: Accessor<Extract<ItemDetail, { kind: "decision" }>>) => (
+          <box flexDirection="column">
+            <Markdown content={dec().body} links={links} />
+            <Show when={dec().inputs.length}>
+              <text fg={theme().muted} marginTop={1}>
+                Choosing asks for: {dec().inputs.map((i) => `${i.label}${i.required ? "" : " (optional)"}`).join(", ")}
+              </text>
+            </Show>
+            <Section title="Answer" />
+            <Options {...pick()} show={all()} />
+            <Show when={!props.choices.length}>
+              <NotYet />
+            </Show>
+          </box>
+        )}
+      </Match>
+      <Match when={d.kind === "recovery" && d}>
+        {(r: Accessor<Extract<ItemDetail, { kind: "recovery" }>>) => (
+          <box flexDirection="column">
+            <text fg={theme().text}>{props.item.whyNow}</text>
+            <Markdown content={r().summary} links={links} />
+            <Show when={r().cause}>
+              <text fg={theme().muted}>Cause: {r().cause!.replace(/_/g, " ")}</text>
+            </Show>
+            <Section title="Resolve" />
+            <Options {...pick()} show={all()} />
+            <Show when={!props.choices.length}>
+              <NotYet />
+            </Show>
           </box>
         )}
       </Match>

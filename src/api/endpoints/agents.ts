@@ -36,3 +36,11 @@ export const resumeAgent = (client: Client, agentId: string) => client.post(agen
 export function wakeAgent(client: Client, agentId: string, idempotencyKey: string, reason?: string) {
   return client.post(agentPath(agentId, "wakeup"), { source: "on_demand", triggerDetail: "manual", idempotencyKey, ...(reason ? { reason } : {}) })
 }
+
+/** Runs a failed run that had no task again, as the web UI's retry does. The server checks the run did fail. */
+export function retryRun(client: Client, agentId: string, failedRunId: string, idempotencyKey: string) {
+  return client.post(agentPath(agentId, "wakeup"), { source: "on_demand", triggerDetail: "manual", reason: "retry_failed_run", failedRunId, idempotencyKey })
+}
+
+/** Returns an agent in error status to idle. Any other status answers 409. */
+export const clearAgentError = (client: Client, agentId: string) => client.post(agentPath(agentId, "clear-error"), {})

@@ -1,5 +1,5 @@
 // What can be chosen in an opened inbox item, and the answers built from those choices.
-import type { Answer, ApprovalDecision, ItemDetail, Question, ReviewDecision } from "../store/attention.ts"
+import { RECOVERY_OUTCOMES, type Answer, type ApprovalDecision, type DecisionOption, type ItemDetail, type Question, type RecoveryOutcome, type ReviewDecision } from "../store/attention.ts"
 
 export type Choice =
   | { kind: "option"; questionId: string; optionId: string; label: string }
@@ -7,6 +7,15 @@ export type Choice =
   | { kind: "accept" | "reject"; label: string }
   | { kind: "approval"; decision: ApprovalDecision; label: string }
   | { kind: "review"; action: ReviewDecision; label: string }
+  | { kind: "approval-comment"; label: string }
+  | { kind: "decision"; option: DecisionOption; label: string }
+  | { kind: "decision-dismiss"; label: string }
+  | { kind: "retry" | "clear-error"; label: string }
+  | { kind: "recovery"; outcome: RecoveryOutcome; label: string }
+
+/** An option's label with what choosing it does, so effects are never a surprise. */
+const optionLabel = (o: DecisionOption) =>
+  `${o.label}${o.description ? `: ${o.description}` : ""} (${o.effects.length ? o.effects.join(", ") : "no effects"})`
 
 /** Every choice in display order, so one cursor can move through all of them. */
 export function choicesFor(detail: ItemDetail): Choice[] {
@@ -27,8 +36,18 @@ export function choicesFor(detail: ItemDetail): Choice[] {
       { kind: "approval", decision: "approve", label: "Approve" },
       { kind: "approval", decision: "reject", label: "Reject" },
       { kind: "approval", decision: "request-revision", label: "Request revision" },
+      { kind: "approval-comment", label: "Comment on the approval" },
     ]
   }
+  if (detail.kind === "decision") {
+    return [
+      ...detail.options.map((option): Choice => ({ kind: "decision", option, label: optionLabel(option) })),
+      { kind: "decision-dismiss", label: "Dismiss: close it, and nothing happens" },
+    ]
+  }
+  if (detail.kind === "failed_run") return [{ kind: "retry", label: "Retry the run" }]
+  if (detail.kind === "agent_error") return [{ kind: "clear-error", label: "Clear the error and return the agent to idle" }]
+  if (detail.kind === "recovery") return RECOVERY_OUTCOMES.map((outcome): Choice => ({ kind: "recovery", outcome, label: outcome.label }))
   if (detail.kind === "review" && detail.stalled) {
     return [
       { kind: "review", action: "approve", label: "Approve, and mark the task done" },

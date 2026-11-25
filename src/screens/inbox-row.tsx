@@ -9,7 +9,10 @@ export const MARKERS: Record<InboxItem["kind"], string> = {
   confirmation: "!",
   approval: "◆",
   review: "◇",
+  decision: "◈",
   failed_run: "✗",
+  agent_error: "⊘",
+  recovery: "↻",
   blocked: "■",
   other: "•",
 }
@@ -19,14 +22,17 @@ export const KIND_LABELS: Record<InboxItem["kind"], [singular: string, plural: s
   confirmation: ["confirmation", "Confirmations"],
   approval: ["approval", "Approvals"],
   review: ["review", "Reviews"],
+  decision: ["decision", "Decisions"],
   failed_run: ["failed run", "Failed runs"],
+  agent_error: ["agent error", "Agent errors"],
+  recovery: ["recovery", "Recoveries"],
   blocked: ["blocked task", "Blocked tasks"],
   other: ["other", "Other"],
 }
 
 export function markerColor(kind: InboxItem["kind"], theme: Theme): RGBA {
-  if (kind === "failed_run") return theme.error
-  if (kind === "confirmation" || kind === "blocked") return theme.warning
+  if (kind === "failed_run" || kind === "agent_error") return theme.error
+  if (kind === "confirmation" || kind === "blocked" || kind === "recovery") return theme.warning
   if (kind === "other") return theme.muted
   return theme.accent
 }

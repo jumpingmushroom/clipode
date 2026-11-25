@@ -1,0 +1,26 @@
+{
+  "method": "POST",
+  "status": 202,
+  "request": {
+    "idempotencyKey": "00000000-0000-4000-8000-000000000001",
+    "observedRunId": "00000000-0000-4000-8000-000000000002"
+  },
+  "response": {
+    "requestId": "00000000-0000-4000-8000-000000000003",
+    "accepted": true,
+    "stale": false,
+    "observedRunId": "00000000-0000-4000-8000-000000000002",
+    "presentation": {
+      "intentId": null,
+      "responsibility": "example responsibility",
+      "state": "working",
+      "nextRetryAt": null,
+      "canRetry": false,
+      "userAction": null,
+      "sourceRunIds": [
+        "00000000-0000-4000-8000-000000000002"
+      ],
+      "observedRunId": "00000000-0000-4000-8000-000000000002"
+    }
+  }
+}
