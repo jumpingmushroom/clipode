@@ -33,7 +33,7 @@ export function ArtifactsScreen(props: { version: string; sidebar: boolean }) {
   const current = () => entries()[Math.min(selected(), entries().length - 1)]
   const agent = (a: Artifact) => company.agents.byId(a.agentId)?.name ?? ""
   const mainWidth = useMainWidth(() => props.sidebar, 2)
-  const titleWidth = () => Math.max(10, mainWidth() - 4 - 2 - 10 - 12)
+  const titleWidth = () => Math.max(10, mainWidth() - 2 - 4 - 2 - 10 - 12)
   const move = (delta: number) => {
     const next = Math.max(0, Math.min(entries().length - 1, selected() + delta))
     setSelected(next)

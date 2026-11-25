@@ -29,6 +29,7 @@ test("g f lists artifacts; enter opens a document on the document screen, a file
   expect(text).toMatch(/▤ Launch plan\s+DEMO-1/)
   expect(text).toMatch(/▣ screenshot\.png\s+DEMO-1/)
   expect(text).toContain("Ship on Friday")
+  expect(text).toMatch(/Updated\s+\S/)
   app.mockInput.pressEnter()
   text = await app.frame()
   expect(text).toContain("Document ·")
