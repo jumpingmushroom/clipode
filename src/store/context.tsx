@@ -4,18 +4,20 @@ import { createAgentsStore } from "./agents.ts"
 import { createAttentionStore } from "./attention.ts"
 import { createIssuesStore } from "./issues.ts"
 import { listActivity } from "../api/endpoints/activity.ts"
+import { getCommentaryBody, listCommentary } from "../api/endpoints/commentary.ts"
 import { listArtifacts } from "../api/endpoints/artifacts.ts"
 import { approvalTask, listDecided } from "../api/endpoints/decided.ts"
 import { listRoutines } from "../api/endpoints/routines.ts"
 import { searchCompany } from "../api/endpoints/search.ts"
-import type { ActivityEntry, Artifact, DecidedEntry, RoutineSummary } from "../api/model.ts"
-import { createResource } from "./resource.ts"
+import type { ActivityEntry, Artifact, CommentaryEntry, DecidedEntry, RoutineSummary } from "../api/model.ts"
+import { createResource, type Resource } from "./resource.ts"
 import { createCostsStore } from "./costs.ts"
 import { createRoutineStore } from "./routine.ts"
 import { createRunsStore } from "./runs.ts"
 import type { Session } from "./session.ts"
 
 export function createCompanyStores(session: Session, companyId: string) {
+  const commentaryBodies = new Map<string, Resource<string | null>>()
   const routines = createResource<RoutineSummary[]>(() => listRoutines(session.client(), companyId), [], session.handleError)
   return {
     companyId,
@@ -27,6 +29,12 @@ export function createCompanyStores(session: Session, companyId: string) {
     routines,
     routine: createRoutineStore(session, routines),
     activity: createResource<ActivityEntry[]>(() => listActivity(session.client(), companyId), [], session.handleError),
+    commentary: createResource<CommentaryEntry[]>(() => listCommentary(session.client(), companyId), [], session.handleError),
+    /** The whole text of one commentary entry, read once. */
+    commentaryBody(entryId: string): Resource<string | null> {
+      if (!commentaryBodies.has(entryId)) commentaryBodies.set(entryId, createResource<string | null>(() => getCommentaryBody(session.client(), companyId, entryId), null, session.handleError))
+      return commentaryBodies.get(entryId)!
+    },
     artifacts: createResource<Artifact[]>(() => listArtifacts(session.client(), companyId), [], session.handleError),
     decided: createResource<DecidedEntry[]>(() => listDecided(session.client(), companyId), [], session.handleError),
     approvalTask: (approvalId: string) => approvalTask(session.client(), approvalId),

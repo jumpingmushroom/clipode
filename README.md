@@ -36,7 +36,7 @@ clipode opens on the inbox. The following keys work everywhere:
 | `g d` | Go to Decided: answered questions, accepted and rejected confirmations, decisions and approvals, newest first, with who decided and the note; `enter` opens the task |
 | `g c` | Go to costs: runs, tokens and spend by agent, model and project, rolling windows, quotas and budgets; `a` switches between this month and all time |
 | `g p` | Go to projects: status and task counts; `enter` shows a project's tasks |
-| `g r`, `g h` | Go to routines (schedules, next and last runs; `enter` opens one with its runs, `o` its task) or activity (what happened in the company; `a` shows bookkeeping too) |
+| `g r`, `g h` | Go to routines (schedules, next and last runs; `enter` opens one with its runs, `o` its task) or activity (what happened in the company; `a` shows bookkeeping too, `c` agents' complaints and suggestions, `enter` reads one in full) |
 | `g /` or `ctrl+x /` | Search tasks, comments, documents, agents and projects |
 | `j`, `k`, `enter`, `esc` | Move, open, go back |
 | `/` | Filter the task list |

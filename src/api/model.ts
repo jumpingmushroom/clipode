@@ -303,3 +303,16 @@ export type Artifact = {
   agentId: string | null
   updatedAt: string
 }
+
+/** An agent's complaint or suggestion about its work, filed from a run. */
+export type CommentaryEntry = {
+  id: string
+  kind: string
+  /** The start of the text; the whole of it is read when the entry is opened. */
+  preview: string
+  at: string
+  agentId: string
+  agentName: string
+  runId: string
+  task: { id: string; identifier: string | null; title: string } | null
+}
