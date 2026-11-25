@@ -2,7 +2,7 @@
 
 clipode is a terminal client for a self-hosted [Paperclip](https://github.com/paperclipai/paperclip) instance, in the style of the OpenCode terminal client. It shows what a board operator needs: the attention inbox, tasks and their threads, agent run transcripts, and the agents, with live updates.
 
-You can answer what agents ask, accept or reject confirmations, approve, reject or discuss approvals, decide agents' decisions and stalled task reviews, retry failed runs, clear an agent's error, resolve recovery actions, comment on tasks with files attached, dismiss or snooze inbox items, create, edit, assign and triage tasks, wake, pause and resume agents, and cancel runs. clipode sends only those writes, each to one specific route, and refuses any other change to your instance. To make it read-only, set `"readOnly": true` in `cli.json`.
+You can answer what agents ask, accept or reject confirmations, approve, reject or discuss approvals, decide agents' decisions and stalled task reviews, retry failed runs, clear an agent's error, resolve recovery actions, comment on tasks with files attached, dismiss or snooze inbox items, create, edit, assign and triage tasks, wake, pause and resume agents, cancel runs, and run, pause or resume routines. clipode sends only those writes, each to one specific route, and refuses any other change to your instance. To make it read-only, set `"readOnly": true` in `cli.json`.
 
 clipode is tested against Paperclip `2026.1117.0`. The oldest supported server is `2026.1106.0`.
 
@@ -33,7 +33,7 @@ clipode opens on the inbox. The following keys work everywhere:
 | `g i`, `g t`, `g a` | Go to the inbox, tasks, or agents |
 | `g c` | Go to costs: runs, tokens and spend by agent, model and project, rolling windows, quotas and budgets; `a` switches between this month and all time |
 | `g p` | Go to projects: status and task counts; `enter` shows a project's tasks |
-| `g r`, `g h` | Go to routines (schedules, next and last runs) or activity (what happened in the company; `a` shows bookkeeping too) |
+| `g r`, `g h` | Go to routines (schedules, next and last runs; `enter` opens one with its runs, `o` its task) or activity (what happened in the company; `a` shows bookkeeping too) |
 | `g /` or `ctrl+x /` | Search tasks, comments, documents, agents and projects |
 | `j`, `k`, `enter`, `esc` | Move, open, go back |
 | `/` | Filter the task list |
@@ -44,7 +44,7 @@ clipode opens on the inbox. The following keys work everywhere:
 | `d`, `s`, `u` | Dismiss, snooze, or restore the selected inbox item |
 | `n` | New task (in Tasks): description, optional title, project, assignee, model, plan or ask mode, private, and files (paste or drag their paths; `ctrl+v` on the Files row pastes a clipboard image) |
 | `s`, `p`, `a`, `e` | Change status or priority, assign, or edit the title and description (in a task thread, or on the selected task in Tasks) |
-| `w`, `p` | Wake an agent, or pause or resume it (on Agents and agent detail) |
+| `w`, `p` | Wake an agent, or pause or resume it (on Agents and agent detail); run a routine now, or pause or resume it (on Routines and a routine) |
 | `x` | Cancel a live run (in its transcript), or clear an agent's error (on Agents and agent detail) |
 | `ctrl+b` | Show or hide the sidebar |
 | `ctrl+t` | Switch theme, with a live preview |

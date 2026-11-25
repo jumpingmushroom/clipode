@@ -191,6 +191,18 @@ export type RoutineSummary = {
   concurrency: string
 }
 
+export type RoutineTrigger = { label: string; enabled: boolean; nextRunAt: string | null; timezone: string | null }
+
+export type RoutineDetail = RoutineSummary & {
+  description: string | null
+  triggers: RoutineTrigger[]
+  /** What happens to runs missed while the server was down: "skip_missed", "enqueue_missed_with_cap", … */
+  catchUp: string
+}
+
+/** One run of a routine: the task it created, or why it made none ("coalesced" into a run still going, "skipped", "failed"). */
+export type RoutineRun = { id: string; status: string; source: string; at: string; taskId: string | null; identifier: string | null; failure: string | null }
+
 /** One line of company activity, already worded; names of agents are looked up by the screen. */
 export type ActivityEntry = {
   id: string

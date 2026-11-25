@@ -26,6 +26,7 @@ import { SignInScreen } from "./sign-in.tsx"
 import { TasksScreen } from "./tasks.tsx"
 import { ThreadScreen } from "./thread.tsx"
 import { DocumentScreen } from "./document.tsx"
+import { RoutineScreen } from "./routine.tsx"
 import { RunScreen } from "./run.tsx"
 import { AgentsScreen } from "./agents.tsx"
 import { AgentScreen } from "./agent.tsx"
@@ -196,7 +197,7 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
   ]
   useCommands(() => commands)
 
-  const param = (name: "item" | "thread" | "run" | "agent") => {
+  const param = (name: "item" | "thread" | "run" | "agent" | "routine") => {
     const r = route.current()
     return r.name === name ? r.id : undefined
   }
@@ -217,6 +218,9 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
         </Match>
         <Match when={param("run")} keyed>
           {(id: string) => <RunScreen id={id} version={props.version} sidebar={showSidebar()} />}
+        </Match>
+        <Match when={param("routine")} keyed>
+          {(id: string) => <RoutineScreen id={id} version={props.version} sidebar={showSidebar()} />}
         </Match>
         <Match when={param("agent")} keyed>
           {(id: string) => <AgentScreen id={id} version={props.version} sidebar={showSidebar()} />}

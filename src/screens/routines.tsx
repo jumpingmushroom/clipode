@@ -1,4 +1,5 @@
-// Routines: scheduled work, with when each runs next and how its last run went. The sidebar shows the selected one.
+// Routines: scheduled work, with when each runs next and how its last run went. The sidebar shows the selected one;
+// enter opens the routine, o the task it is working on or last created.
 import { RGBA, TextAttributes, type ScrollBoxRenderable } from "@opentui/core"
 import { useBindings } from "@opentui/keymap/solid"
 import { createSignal, For, onCleanup, onMount, Show } from "solid-js"
@@ -10,6 +11,7 @@ import { useTheme } from "../theme/context.tsx"
 import { age, dateTime, fit, until } from "../ui/format.ts"
 import { Frame, useMainWidth } from "./frame.tsx"
 import { SidebarHeader, SidebarLine } from "./inbox-sidebar.tsx"
+import { useRoutineActions } from "./routine-actions.tsx"
 
 const schedule = (r: RoutineSummary) => (r.schedule ?? "no trigger") + (r.moreTriggers ? ` +${r.moreTriggers}` : "")
 /** The task to open: the one a run is working on, else the last run's. */
@@ -42,7 +44,8 @@ export function RoutinesScreen(props: { version: string; sidebar: boolean }) {
     setSelected(next)
     scroll?.scrollChildIntoView(`routine-row-${next}`)
   }
-  const open = () => {
+  const open = () => current() && route.navigate({ name: "routine", id: current()!.id })
+  const openTask = () => {
     const id = current() && taskOf(current()!)
     if (id) route.navigate({ name: "thread", id })
   }
@@ -53,8 +56,10 @@ export function RoutinesScreen(props: { version: string; sidebar: boolean }) {
       { key: "down,j", cmd: () => move(1) },
       { key: "up,k", cmd: () => move(-1) },
       { key: "return", cmd: open },
+      { key: "o", cmd: openTask },
     ],
   }))
+  useRoutineActions(current)
   useCommands(() => [{ name: "routines.refresh", title: "Refresh", category: "View", keys: "r", run: () => void company.routines.refresh() }])
 
   return (
@@ -63,7 +68,7 @@ export function RoutinesScreen(props: { version: string; sidebar: boolean }) {
       badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<Show when={current()}>{(r: () => RoutineSummary) => <RoutineSidebar routine={r()} now={now()} />}</Show>}
-      hints={[["j/k", "move"], ["enter", "open last task"], ["r", "refresh"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
+      hints={[["j/k", "move"], ["enter", "open"], ["o", "open task"], ["w", "run now"], ["p", "pause/resume"], ["r", "refresh"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
       narrowHints={[["j/k", "move"], ["enter", "open"], ["^p", "cmds"]]}
       version={props.version}
     >

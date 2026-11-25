@@ -27,7 +27,7 @@ const activity = [
   ...Array.from({ length: 60 }, (_, i) => ({ id: `f${i}`, actorType: "agent", actorId: "gone", action: "issue.checked_out", entityType: "issue", entityId: "x", details: {}, createdAt: "2026-01-01T00:00:00.000Z" })),
 ]
 
-test("g r lists routines with schedule, next and last run; enter opens the last run's task", async () => {
+test("g r lists routines with schedule, next and last run; o opens the last run's task", async () => {
   app = await startApp({ before: (s) => s.set(`/api/companies/${COMPANY_ID}/routines`, routines) })
   await app.frame()
   app.mockInput.pressKey("g")
@@ -37,7 +37,7 @@ test("g r lists routines with schedule, next and last run; enter opens the last 
   expect(text).toMatch(/Inbox sweep\s+example name\s+Every 30 min\s+in 2\dm\s+completed 5m/)
   expect(text).toMatch(/Monthly close\s+—\s+no trigger\s+paused\s+never/)
   expect(text).toContain("Every 30 min")
-  app.mockInput.pressEnter()
+  app.mockInput.pressKey("o")
   text = await app.frame()
   expect(text.split("\n")[0]).toContain("Task · ")
 })

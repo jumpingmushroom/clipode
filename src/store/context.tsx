@@ -9,10 +9,12 @@ import { searchCompany } from "../api/endpoints/search.ts"
 import type { ActivityEntry, RoutineSummary } from "../api/model.ts"
 import { createResource } from "./resource.ts"
 import { createCostsStore } from "./costs.ts"
+import { createRoutineStore } from "./routine.ts"
 import { createRunsStore } from "./runs.ts"
 import type { Session } from "./session.ts"
 
 export function createCompanyStores(session: Session, companyId: string) {
+  const routines = createResource<RoutineSummary[]>(() => listRoutines(session.client(), companyId), [], session.handleError)
   return {
     companyId,
     attention: createAttentionStore(session, companyId),
@@ -20,7 +22,8 @@ export function createCompanyStores(session: Session, companyId: string) {
     runs: createRunsStore(session, companyId),
     issues: createIssuesStore(session, companyId),
     costs: createCostsStore(session, companyId),
-    routines: createResource<RoutineSummary[]>(() => listRoutines(session.client(), companyId), [], session.handleError),
+    routines,
+    routine: createRoutineStore(session, routines),
     activity: createResource<ActivityEntry[]>(() => listActivity(session.client(), companyId), [], session.handleError),
     /** Searches the company on the server; an expired session is handled like any other read. */
     search: (q: string) =>

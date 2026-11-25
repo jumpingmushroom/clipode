@@ -1,0 +1,29 @@
+{
+  "method": "POST",
+  "status": 202,
+  "request": {
+    "source": "manual",
+    "idempotencyKey": "00000000-0000-4000-8000-000000000009"
+  },
+  "response": {
+    "id": "00000000-0000-4000-8000-00000000000a",
+    "companyId": "00000000-0000-4000-8000-000000000002",
+    "routineId": "00000000-0000-4000-8000-000000000001",
+    "triggerId": null,
+    "source": "manual",
+    "status": "issue_created",
+    "triggeredAt": "2026-11-25T11:51:38.565Z",
+    "routineRevisionId": "00000000-0000-4000-8000-000000000008",
+    "responsibleUserId": "createdByUserId-1",
+    "idempotencyKey": "00000000-0000-4000-8000-000000000009",
+    "triggerPayload": null,
+    "createdByRunId": null,
+    "dispatchFingerprint": "example dispatchFingerprint",
+    "linkedIssueId": "00000000-0000-4000-8000-00000000000b",
+    "coalescedIntoRunId": null,
+    "failureReason": null,
+    "completedAt": null,
+    "createdAt": "2026-11-25T11:51:38.559Z",
+    "updatedAt": "2026-11-25T11:51:39.084Z"
+  }
+}

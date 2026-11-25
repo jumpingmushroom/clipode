@@ -1,7 +1,7 @@
 // HTTP access to one Paperclip instance: base URL, cookie jar, Origin header, write guard, typed errors.
 
 // GET goes anywhere. Sign-in and sign-out are always allowed; the writes below only when the client allows writes.
-// Phase 3 adds creating and updating tasks, agent and run controls, and the inbox's other decisions. Each pattern is a whole path; an id segment is anything but "/", and paths with "." or ".." segments never match.
+// Phase 3 adds creating and updating tasks, agent and run controls, the inbox's other decisions, and running, pausing and resuming routines. Each pattern is a whole path; an id segment is anything but "/", and paths with "." or ".." segments never match.
 const AUTH = [/^\/api\/auth\/sign-(in\/email|out)$/]
 const ID = "[^/]+"
 const WRITES: Record<string, RegExp[]> = {
@@ -17,8 +17,9 @@ const WRITES: Record<string, RegExp[]> = {
     new RegExp(`^/api/companies/${ID}/issues/${ID}/attachments$`),
     new RegExp(`^/api/agents/${ID}/(pause|resume|wakeup|clear-error)$`),
     new RegExp(`^/api/heartbeat-runs/${ID}/cancel$`),
+    new RegExp(`^/api/routines/${ID}/run$`),
   ],
-  PATCH: [new RegExp(`^/api/issues/${ID}$`)],
+  PATCH: [new RegExp(`^/api/issues/${ID}$`), new RegExp(`^/api/routines/${ID}$`)],
   DELETE: [new RegExp(`^/api/companies/${ID}/inbox-dismissals/${ID}$`)],
 }
 

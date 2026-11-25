@@ -1,0 +1,39 @@
+{
+  "method": "PATCH",
+  "status": 200,
+  "request": {
+    "status": "paused"
+  },
+  "response": {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "companyId": "00000000-0000-4000-8000-000000000002",
+    "projectId": null,
+    "folderId": null,
+    "goalId": null,
+    "parentIssueId": null,
+    "title": "example title",
+    "description": "example description",
+    "assigneeAgentId": "00000000-0000-4000-8000-000000000003",
+    "priority": "medium",
+    "status": "paused",
+    "concurrencyPolicy": "example concurrencyPolicy",
+    "catchUpPolicy": "example catchUpPolicy",
+    "activityGatePolicy": "example activityGatePolicy",
+    "activityGateScope": "example activityGateScope",
+    "originKind": "manual",
+    "originId": null,
+    "variables": [],
+    "env": null,
+    "latestRevisionId": "00000000-0000-4000-8000-000000000004",
+    "latestRevisionNumber": 2,
+    "createdByAgentId": null,
+    "createdByUserId": "createdByUserId-1",
+    "responsibleUserId": "createdByUserId-1",
+    "updatedByAgentId": null,
+    "updatedByUserId": "createdByUserId-1",
+    "lastTriggeredAt": null,
+    "lastEnqueuedAt": null,
+    "createdAt": "2026-11-25T11:51:37.833Z",
+    "updatedAt": "2026-11-25T11:51:37.890Z"
+  }
+}
