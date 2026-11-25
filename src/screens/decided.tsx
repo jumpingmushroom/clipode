@@ -103,7 +103,7 @@ export function DecidedScreen(props: { version: string; sidebar: boolean }) {
                   <span style={{ fg: theme().muted }}>{fit(age(e.at, now()), 4)}</span>
                   <span style={{ fg: markerColor(MARKER_KIND[e.kind], theme()) }}>{MARKERS[MARKER_KIND[e.kind]]}</span>
                   {" "}
-                  <span style={{ fg: resultColor(e.outcome, theme()) }}>{fit(e.result, 18)}</span>
+                  <span style={{ fg: resultColor(e.outcome, theme()) }}>{fit(e.result, 20)}</span>
                   <span style={{ fg: theme().muted }}>{fit(e.identifier ?? "", 9)}</span>
                   {e.title}
                 </text>
