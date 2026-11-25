@@ -26,7 +26,8 @@ const empty = { issueId: THREAD_ID, queueId: null, state: null, targetRunId: nul
 test("a thread shows held comments with the server's reason; w sends them after a confirmation", async () => {
   app = await startApp({ route: { name: "thread", id: THREAD_ID }, before: (s) => (s.set(QUEUE, queue()), s.set(`${QUEUE}/interrupt`, empty)) })
   let text = await app.frame()
-  expect(text).toContain("Held, not sent to the agent yet  w sends now")
+  expect(text).toContain("Held, not sent to the agent yet")
+  expect(text).toContain("w sends it now.")
   expect(text).toContain("no verified stop record")
   expect(text).toMatch(/You · .*Look into it/)
   expect(text).toContain("w send held")

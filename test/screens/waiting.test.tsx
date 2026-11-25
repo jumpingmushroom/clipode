@@ -24,10 +24,10 @@ const TASK = `/api/issues/${THREAD_ID}`
 test("a task with a monitor says when the agent looks again; w checks now", async () => {
   app = await startApp({ route: { name: "thread", id: THREAD_ID }, before: (s) => (s.set(TASK, monitor), s.set(`${TASK}/monitor/check-now`, checked.response)) })
   const text = await app.frame()
-  expect(text).toMatch(/Resumes in 1h\s+w check now/)
+  expect(text).toContain("Resumes in 1h")
   expect(text).toMatch(/8 of 16 checks done · watching radarr-sonarr · gives up/)
   expect(text).toContain("Read-only: history and queue")
-  expect(text).toContain("A comment wakes the agent now, before the scheduled check.")
+  expect(text).toContain("w checks now. A comment also wakes the agent.")
   expect(text).toContain("w check now")
   app.mockInput.pressKey("w")
   await Bun.sleep(80)
@@ -50,7 +50,8 @@ test("a scheduled retry: w retries now, and an outcome that did not start is rep
     before: (s) => (s.set(TASK, retry), s.set(`${TASK}/scheduled-retry/retry-now`, { outcome: "waiting", message: "The retry is waiting for its gate", scheduledRetry: null })),
   })
   const text = await app.frame()
-  expect(text).toMatch(/Retrying in 1h\s+w retry now/)
+  expect(text).toContain("Retrying in 1h")
+  expect(text).toContain("w retries now.")
   expect(text).toContain("transient failure")
   app.mockInput.pressKey("w")
   await Bun.sleep(80)

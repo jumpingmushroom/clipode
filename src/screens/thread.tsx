@@ -258,7 +258,7 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
               {(held: () => HeldComments) => (
                 <box flexDirection="column" marginTop={1} backgroundColor={theme().panel} paddingLeft={1} paddingRight={1}>
                   <text fg={theme().warning} attributes={TextAttributes.BOLD}>
-                    Held, not sent to the agent yet{session.client().writes ? <span style={{ fg: theme().muted, attributes: 0 }}>{"  w sends now"}</span> : ""}
+                    Held, not sent to the agent yet
                   </text>
                   <text fg={theme().muted}>{held().reason ?? (held().targetRunId ? "Waiting for the agent's current run to finish." : "Waiting for the agent to start.")}</text>
                   <For each={held().comments}>
@@ -269,6 +269,11 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
                       </text>
                     )}
                   </For>
+                  <Show when={session.client().writes}>
+                    <text fg={theme().text} marginTop={1}>
+                      <span style={{ fg: theme().accent, attributes: TextAttributes.BOLD }}>w</span> sends {held().comments.length === 1 ? "it" : "them"} now.
+                    </text>
+                  </Show>
                 </box>
               )}
             </Show>
@@ -277,7 +282,6 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
                 <box flexDirection="column" marginTop={1} backgroundColor={theme().panel} paddingLeft={1} paddingRight={1}>
                   <text fg={theme().accent} attributes={TextAttributes.BOLD}>
                     {w().at ? `${w().kind === "monitor" ? "Resumes" : "Retrying"} ${until(w().at, now())}` : "Retry scheduled"}
-                    {session.client().writes && !thread.held.data ? <span style={{ fg: theme().muted, attributes: 0 }}>{`  w ${wakeLabel()}`}</span> : ""}
                   </text>
                   <text fg={theme().muted}>{waitingLine(w())}</text>
                   <Show when={w().kind === "monitor" && (w() as Extract<Waiting, { kind: "monitor" }>).notes}>
@@ -286,7 +290,16 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
                   <Show when={w().kind === "retry" && (w() as Extract<Waiting, { kind: "retry" }>).reason}>
                     <text fg={theme().text}>{(w() as Extract<Waiting, { kind: "retry" }>).reason!.replace(/_/g, " ")}</text>
                   </Show>
-                  <text fg={theme().muted}>A comment wakes the agent now, before the scheduled {w().kind === "monitor" ? "check" : "retry"}.</text>
+                  <text fg={theme().text} marginTop={1}>
+                    {session.client().writes && !thread.held.data ? (
+                      <>
+                        <span style={{ fg: theme().accent, attributes: TextAttributes.BOLD }}>w</span>
+                        {` ${w().kind === "monitor" ? "checks" : "retries"} now. A comment also wakes the agent.`}
+                      </>
+                    ) : (
+                      `A comment wakes the agent now, before the scheduled ${w().kind === "monitor" ? "check" : "retry"}.`
+                    )}
+                  </text>
                 </box>
               )}
             </Show>
