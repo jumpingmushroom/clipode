@@ -4,10 +4,11 @@ import { createAgentsStore } from "./agents.ts"
 import { createAttentionStore } from "./attention.ts"
 import { createIssuesStore } from "./issues.ts"
 import { listActivity } from "../api/endpoints/activity.ts"
+import { listArtifacts } from "../api/endpoints/artifacts.ts"
 import { approvalTask, listDecided } from "../api/endpoints/decided.ts"
 import { listRoutines } from "../api/endpoints/routines.ts"
 import { searchCompany } from "../api/endpoints/search.ts"
-import type { ActivityEntry, DecidedEntry, RoutineSummary } from "../api/model.ts"
+import type { ActivityEntry, Artifact, DecidedEntry, RoutineSummary } from "../api/model.ts"
 import { createResource } from "./resource.ts"
 import { createCostsStore } from "./costs.ts"
 import { createRoutineStore } from "./routine.ts"
@@ -26,6 +27,7 @@ export function createCompanyStores(session: Session, companyId: string) {
     routines,
     routine: createRoutineStore(session, routines),
     activity: createResource<ActivityEntry[]>(() => listActivity(session.client(), companyId), [], session.handleError),
+    artifacts: createResource<Artifact[]>(() => listArtifacts(session.client(), companyId), [], session.handleError),
     decided: createResource<DecidedEntry[]>(() => listDecided(session.client(), companyId), [], session.handleError),
     approvalTask: (approvalId: string) => approvalTask(session.client(), approvalId),
     /** Searches the company on the server; an expired session is handled like any other read. */

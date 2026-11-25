@@ -53,6 +53,7 @@ export function startLiveSync(
   const refreshActivity = debounce(ifOpened(company.activity))
   const refreshRoutines = debounce(ifOpened(company.routines))
   const refreshDecided = debounce(ifOpened(company.decided))
+  const refreshArtifacts = debounce(ifOpened(company.artifacts))
   const refreshAll = () => {
     refreshInbox()
     refreshTasks()
@@ -61,6 +62,7 @@ export function startLiveSync(
     refreshActivity()
     refreshRoutines()
     refreshDecided()
+    refreshArtifacts()
   }
 
   const onEvent = (event: LiveEvent) => {
@@ -72,6 +74,7 @@ export function startLiveSync(
         refreshTasks()
         refreshActivity()
         refreshDecided()
+        refreshArtifacts()
         if (entityType?.startsWith("routine")) refreshRoutines()
         if (issueId) company.issues.refreshThread(issueId)
         break
@@ -128,6 +131,7 @@ export function startLiveSync(
       ifOpened(company.activity)()
       ifOpened(company.routines)()
       ifOpened(company.decided)()
+      ifOpened(company.artifacts)()
     }
   }, 1000)
   tick.unref?.()

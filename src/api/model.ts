@@ -289,3 +289,17 @@ export type DecidedEntry = {
   identifier: string | null
   note: string | null
 }
+
+/** A file an agent produced: a task's document, or an image, text or other file recorded as a work product. */
+export type Artifact = {
+  id: string
+  kind: "document" | "image" | "text" | "video" | "file"
+  title: string
+  preview: string | null
+  contentType: string | null
+  /** The document's key, for a document; it opens on the document screen. */
+  documentKey: string | null
+  issue: { id: string; identifier: string | null; title: string } | null
+  agentId: string | null
+  updatedAt: string
+}

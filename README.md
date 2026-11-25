@@ -32,6 +32,7 @@ clipode opens on the inbox. The following keys work everywhere:
 | `?` or `ctrl+x h` | Every key binding |
 | `g i`, `g t`, `g a` | Go to the inbox, tasks, or agents |
 | `g m` | Go to Mine: the tasks you are on, unread first (`●`), as in the web UI's Mine inbox. The header counts unread tasks; opening one marks it read |
+| `g f` | Go to artifacts: documents, images and files agents produced, newest first; `enter` opens a document, or a file's task, and `o` the task |
 | `g d` | Go to Decided: answered questions, accepted and rejected confirmations, decisions and approvals, newest first, with who decided and the note; `enter` opens the task |
 | `g c` | Go to costs: runs, tokens and spend by agent, model and project, rolling windows, quotas and budgets; `a` switches between this month and all time |
 | `g p` | Go to projects: status and task counts; `enter` shows a project's tasks |
