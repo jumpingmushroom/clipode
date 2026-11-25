@@ -71,12 +71,8 @@ export function Composer(props: { target?: ComposerTarget }) {
     setFiles((f) => [...new Set([...f, ...added.files])])
     if (added.problem) toast.show(added.problem, "warning")
   }
-  /** The attach prompt is a dialog, which hands the keys back to the screen on close; the comment takes them again. */
-  const attachPaths = () =>
-    dialog.replace(
-      () => <AttachPrompt onDone={(added) => (addFiles(added), dialog.clear())} />,
-      () => setTimeout(() => open() && (setMode(keymap, "input"), input?.focus()), 5),
-    )
+  // The dialog gives the keys and focus back to the comment when it closes.
+  const attachPaths = () => dialog.replace(() => <AttachPrompt onDone={(added) => (addFiles(added), dialog.clear())} />)
   useBindings(() => ({
     mode: "input",
     enabled: open(),

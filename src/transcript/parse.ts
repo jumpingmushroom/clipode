@@ -29,14 +29,17 @@ export function parseLine(line: LogLine): TranscriptEvent[] {
 /** Folds events into items: text deltas join, and each tool call collects its updates and its result. */
 export function fold(events: TranscriptEvent[], into: TranscriptItem[] = []): TranscriptItem[] {
   const items = into
-  const tools = new Map<string, ToolEntry>()
-  for (const item of items) if (item.kind === "tool") tools.set(item.id, item)
+  // Where each tool call sits. A changed item is replaced rather than edited: the run screen keys its rows by item,
+  // so an edit in place would never reach the screen.
+  const tools = new Map<string, number>()
+  items.forEach((item, i) => item.kind === "tool" && tools.set(item.id, i))
+  const tool = (at: number) => items[at] as ToolEntry
   for (const e of events) {
     const last = items.at(-1)
     switch (e.kind) {
       case "assistant":
       case "thinking":
-        if (e.delta && last?.kind === e.kind) last.text += e.text
+        if (e.delta && last?.kind === e.kind) items[items.length - 1] = { ...last, text: last.text + e.text }
         else items.push({ kind: e.kind, ts: e.ts, text: e.text })
         break
       case "user":
@@ -44,26 +47,20 @@ export function fold(events: TranscriptEvent[], into: TranscriptItem[] = []): Tr
         break
       case "tool_call": {
         const id = e.toolUseId ?? `${e.name}-${items.length}`
-        const existing = tools.get(id)
-        if (existing) {
+        const at = tools.get(id)
+        if (at !== undefined) {
           // ACP sends a call, then updates for the same id; keep the most specific name and input.
-          if (e.name && e.name !== "acp_tool") existing.name = e.name
-          existing.input = e.input
+          items[at] = { ...tool(at), name: e.name && e.name !== "acp_tool" ? e.name : tool(at).name, input: e.input }
         } else {
-          const tool: ToolEntry = { kind: "tool", id, ts: e.ts, name: e.name, input: e.input, output: null, status: "running" }
-          tools.set(id, tool)
-          items.push(tool)
+          tools.set(id, items.length)
+          items.push({ kind: "tool", id, ts: e.ts, name: e.name, input: e.input, output: null, status: "running" })
         }
         break
       }
       case "tool_result": {
-        const tool = tools.get(e.toolUseId)
-        if (tool) {
-          tool.output = e.content
-          tool.status = e.isError ? "error" : "done"
-        } else {
-          items.push({ kind: "tool", id: e.toolUseId, ts: e.ts, name: e.toolName ?? "tool", input: {}, output: e.content, status: e.isError ? "error" : "done" })
-        }
+        const at = tools.get(e.toolUseId)
+        if (at !== undefined) items[at] = { ...tool(at), output: e.content, status: e.isError ? "error" : "done" }
+        else items.push({ kind: "tool", id: e.toolUseId, ts: e.ts, name: e.toolName ?? "tool", input: {}, output: e.content, status: e.isError ? "error" : "done" })
         break
       }
       case "init":

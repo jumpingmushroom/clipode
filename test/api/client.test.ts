@@ -222,4 +222,16 @@ describe("write allowlist", () => {
     await expect(writer.request("PUT", "/api/issues/i1", { body: {} })).rejects.toBeInstanceOf(ReadOnlyError)
     expect(seen).toHaveLength(0)
   })
+
+  test("the check is made on the URL as sent: backslashes, encoded dot segments and other hosts are refused", async () => {
+    const writer = new Client(base, `${SESSION}=tok123`, undefined, true)
+    // Each would pass a check of the path as written, and reach a route outside the list.
+    await expect(writer.request("PATCH", "/api/issues/..\\agents\\a1", { body: {} })).rejects.toBeInstanceOf(ReadOnlyError)
+    await expect(writer.post("/api/companies/%2e%2e/issues", {})).rejects.toBeInstanceOf(ReadOnlyError)
+    await expect(writer.post("/api/companies/c1/%2E%2E/%2e%2e/agents/a1/pause/../../../issues", {})).rejects.toBeInstanceOf(ReadOnlyError)
+    // A path that does not start at the instance would carry the session to another host.
+    await expect(writer.get("@elsewhere.example/x")).rejects.toBeInstanceOf(ReadOnlyError)
+    await expect(writer.get("api/companies")).rejects.toBeInstanceOf(ReadOnlyError)
+    expect(seen).toHaveLength(0)
+  })
 })

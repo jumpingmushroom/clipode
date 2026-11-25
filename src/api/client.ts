@@ -98,9 +98,14 @@ export class Client {
 
   async request<T>(method: string, path: string, opts: { query?: Query; body?: unknown } = {}): Promise<T> {
     const verb = method.toUpperCase()
-    if (!allowed(verb, path, this.writes)) throw new ReadOnlyError(verb, path)
-
+    if (!path.startsWith("/")) throw new ReadOnlyError(verb, path)
     const url = new URL(this.baseUrl + path)
+    // Check what will be sent, not what was written: the URL parser turns "\" into "/" and drops "%2e%2e" segments,
+    // and a path without a leading "/" can name another host. Nothing leaves the instance, whatever the method.
+    const prefix = new URL(this.baseUrl).pathname.replace(/\/$/, "")
+    const sent = url.pathname.startsWith(`${prefix}/`) ? url.pathname.slice(prefix.length) : null
+    if (url.origin !== this.origin || sent === null || !allowed(verb, sent, this.writes)) throw new ReadOnlyError(verb, path)
+
     for (const [key, value] of Object.entries(opts.query ?? {})) {
       if (value !== undefined) url.searchParams.set(key, String(value))
     }

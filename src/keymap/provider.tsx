@@ -57,3 +57,5 @@ export function KeysProvider(props: ParentProps<{ leader?: string; keybinds?: Re
 export function setMode(keymap: { setData(name: string, value: unknown): void }, mode: Mode) {
   keymap.setData(MODE_KEY, mode)
 }
+
+export const getMode = (keymap: { getData(name: string): unknown }): Mode => (keymap.getData(MODE_KEY) as Mode | undefined) ?? "base"

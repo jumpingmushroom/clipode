@@ -76,6 +76,18 @@ test("n opens the new task dialog; a description alone creates the task and open
   expect(text).toContain("Task · ")
 })
 
+test("ctrl+s twice while saving sends the task once", async () => {
+  app = await startApp({ route: { name: "tasks" } })
+  await app.frame()
+  app.mockInput.pressKey("n")
+  await app.frame()
+  await app.mockInput.typeText("Only once, please")
+  app.mockInput.pressKey("s", { ctrl: true })
+  app.mockInput.pressKey("s", { ctrl: true })
+  await Bun.sleep(120)
+  expect(app.server.writes.filter((w) => w.method === "POST" && w.path.endsWith("/issues"))).toHaveLength(1)
+})
+
 test("every field: project, assignee, model, plan mode and private; the description survives the pickers", async () => {
   app = await startApp({ route: { name: "tasks" } })
   await app.frame()

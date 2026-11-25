@@ -2,9 +2,9 @@
 import { RGBA, TextAttributes, type Renderable } from "@opentui/core"
 import { useBindings, useKeymap } from "@opentui/keymap/solid"
 import { useRenderer, useTerminalDimensions } from "@opentui/solid"
-import { batch, createContext, createEffect, Show, useContext, type JSX, type ParentProps } from "solid-js"
+import { batch, createContext, createEffect, on, Show, useContext, type JSX, type ParentProps } from "solid-js"
 import { createStore } from "solid-js/store"
-import { setMode } from "../keymap/provider.tsx"
+import { getMode, setMode, type Mode } from "../keymap/provider.tsx"
 import { useTheme } from "../theme/context.tsx"
 
 /** Runs after the current key dispatch: the keymap forbids adding or removing layers during one. */
@@ -73,7 +73,20 @@ function init() {
       if (store.stack.length === 0 && focus && !focus.isDestroyed) focus.focus()
     }, 1)
 
-  createEffect(() => setMode(keymap, store.stack.length > 0 ? "modal" : "base"))
+  // Closing the last dialog gives the keys back to whatever had them, such as a comment being written, not always to
+  // the screen.
+  let before: Mode = "base"
+  createEffect(
+    on(
+      () => store.stack.length > 0,
+      (open, was) => {
+        if (open && !was) {
+          before = getMode(keymap)
+          setMode(keymap, "modal")
+        } else if (!open && was) setMode(keymap, before)
+      },
+    ),
+  )
 
   const api = {
     /** Replaces whatever is open with this dialog. */

@@ -76,7 +76,8 @@ export function connectLive(opts: LiveOptions) {
       failed = true
       ws = null
       const check = await opts.check()
-      if (closed) return
+      // A reconnect (ctrl+r) during the check has opened a socket already; a second would deliver every event twice.
+      if (closed || ws) return
       if (check === "unauthorized") {
         closed = true
         return opts.onUnauthorized()

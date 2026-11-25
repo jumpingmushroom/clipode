@@ -92,6 +92,30 @@ test("a dropped connection reconnects with backoff and asks for a resync", async
   live.close()
 })
 
+test("a reconnect while a failed connect is being checked leaves one socket, not two", async () => {
+  const s = wsServer()
+  let answer: (v: "ok") => void = () => {}
+  const live = connectLive({
+    url: s.url,
+    headers: () => ({}),
+    onEvent: () => {},
+    onState: () => {},
+    onResync: () => {},
+    check: () => new Promise((done) => (answer = done)),
+    onUnauthorized: () => {},
+    baseDelayMs: 10,
+  })
+  await until(() => s.sockets.length === 1)
+  s.sockets[0]!.close()
+  await Bun.sleep(30)
+  live.reconnect()
+  await until(() => s.sockets.length === 2)
+  answer("ok")
+  await Bun.sleep(80)
+  expect(s.sockets).toHaveLength(2)
+  live.close()
+})
+
 test("a refused upgrade with an expired session signs out; an unreachable server is offline", async () => {
   const s = wsServer({ requireCookie: "sid=valid" })
   let unauthorized = 0

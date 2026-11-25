@@ -88,6 +88,8 @@ export function TaskDialog(props: {
     if (f === "private") return set({ private: !form().private })
   }
   const submit = async () => {
+    // A second ctrl+s while saving would send the task again, with a new idempotency key.
+    if (busy()) return
     const value = { ...form(), ...texts() }
     if (!value.description.trim() && !value.title.trim()) return setError("Write a description (or a title)")
     setBusy(true)
