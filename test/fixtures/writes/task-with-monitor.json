@@ -1,0 +1,52 @@
+{
+  "method": "GET",
+  "status": 200,
+  "request": null,
+  "response": {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "identifier": "DEMO-1",
+    "title": "example title",
+    "status": "in_progress",
+    "priority": "medium",
+    "assigneeAgentId": "00000000-0000-4000-8000-000000000002",
+    "assigneeUserId": null,
+    "parentId": null,
+    "projectId": null,
+    "description": "example description",
+    "createdAt": "2026-11-25T12:20:32.163Z",
+    "updatedAt": "2026-11-25T12:20:47.993Z",
+    "monitorNextCheckAt": "2026-11-25T15:20:42.000Z",
+    "monitorAttemptCount": 0,
+    "monitorNotes": "example monitorNotes",
+    "monitorScheduledBy": "example monitorScheduledBy",
+    "executionState": {
+      "status": "idle",
+      "monitor": {
+        "kind": "external_service",
+        "notes": "example notes",
+        "status": "scheduled",
+        "clearedAt": null,
+        "timeoutAt": "2026-11-26T12:20:42Z",
+        "clearReason": null,
+        "externalRef": "example externalRef",
+        "maxAttempts": 3,
+        "nextCheckAt": "2026-11-25T15:20:42Z",
+        "scheduledBy": "example scheduledBy",
+        "serviceName": "example serviceName",
+        "attemptCount": 0,
+        "recoveryPolicy": null,
+        "lastTriggeredAt": null
+      },
+      "reviewRequest": null,
+      "currentStageId": null,
+      "lastDecisionId": null,
+      "returnAssignee": null,
+      "currentStageType": null,
+      "completedStageIds": [],
+      "currentStageIndex": null,
+      "currentParticipant": null,
+      "lastDecisionOutcome": null
+    },
+    "scheduledRetry": null
+  }
+}

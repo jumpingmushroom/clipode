@@ -2,7 +2,7 @@
 import type { Issue, IssueComment, Project } from "@paperclipai/shared"
 import { basename } from "node:path"
 import type { Client } from "../client.ts"
-import type { DocumentSummary, HeldComments, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../model.ts"
+import type { DocumentSummary, HeldComments, Waiting, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../model.ts"
 
 const id = encodeURIComponent
 
@@ -39,6 +39,11 @@ type IssueDetail = IssueRow & {
   ancestors?: { identifier: string | null; title: string }[]
   blockedBy?: { identifier: string | null; title: string; status: string }[]
   documentSummaries?: WireDocument[]
+  monitorNextCheckAt?: string | null
+  monitorAttemptCount?: number
+  monitorNotes?: string | null
+  executionState?: { monitor?: { serviceName?: string | null; maxAttempts?: number | null; timeoutAt?: string | null } | null } | null
+  scheduledRetry?: { status: string; scheduledRetryAt: string | null; scheduledRetryAttempt: number; scheduledRetryReason: string | null } | null
   workProducts?: { title: string; type: string; status: string; url: string | null }[]
 }
 
@@ -65,7 +70,40 @@ export async function getTask(client: Client, issueId: string): Promise<TaskDeta
     createdAt: String(i.createdAt),
     documents: (i.documentSummaries ?? []).map(toDocument),
     workProducts: (i.workProducts ?? []).map((w) => ({ title: w.title, type: w.type, status: w.status, url: w.url })),
+    waiting: waitingOf(i),
   }
+}
+
+function waitingOf(i: IssueDetail): Waiting | null {
+  const m = i.executionState?.monitor
+  if (i.monitorNextCheckAt) {
+    return {
+      kind: "monitor",
+      at: i.monitorNextCheckAt,
+      checksDone: i.monitorAttemptCount ?? 0,
+      maxAttempts: m?.maxAttempts ?? null,
+      service: m?.serviceName ?? null,
+      notes: i.monitorNotes ?? null,
+      until: m?.timeoutAt ?? null,
+    }
+  }
+  const r = i.scheduledRetry
+  if (r?.status === "scheduled_retry") return { kind: "retry", at: r.scheduledRetryAt, attempt: r.scheduledRetryAttempt, reason: r.scheduledRetryReason }
+  return null
+}
+
+/** Runs the agent's scheduled monitor check now. Answers 409 with a reason when no check can start. */
+export function checkMonitorNow(client: Client, issueId: string) {
+  return client.post(`/api/issues/${id(issueId)}/monitor/check-now`, {})
+}
+
+/**
+ * Starts a scheduled retry now. The server answers 200 either way; the outcome says whether it started ("promoted",
+ * "already_promoted") or why not, in `message`.
+ */
+export async function retryNow(client: Client, issueId: string): Promise<void> {
+  const r = await client.post<{ outcome: string; message: string }>(`/api/issues/${id(issueId)}/scheduled-retry/retry-now`, {})
+  if (r.outcome !== "promoted" && r.outcome !== "already_promoted") throw new Error(`Not retried: ${r.message}`)
 }
 
 /** One document with its text, at its latest revision. */

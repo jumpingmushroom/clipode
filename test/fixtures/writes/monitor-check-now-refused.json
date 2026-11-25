@@ -1,0 +1,8 @@
+{
+  "method": "POST",
+  "status": 409,
+  "request": {},
+  "response": {
+    "error": "example error"
+  }
+}

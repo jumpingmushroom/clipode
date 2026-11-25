@@ -8,9 +8,9 @@ import { afterDispatch, useDialog } from "../ui/dialog.tsx"
 import { useToast } from "../ui/toast.tsx"
 import { DialogSelect } from "../ui/dialog-select.tsx"
 import { useCompany, useStores } from "../store/context.tsx"
-import type { HeldComments, TaskDetail, ThreadEntry } from "../store/issues.ts"
+import type { HeldComments, TaskDetail, ThreadEntry, Waiting } from "../store/issues.ts"
 import { useTheme } from "../theme/context.tsx"
-import { dateTime, elapsed, fit } from "../ui/format.ts"
+import { dateTime, elapsed, fit, until } from "../ui/format.ts"
 import { Markdown } from "../ui/markdown.tsx"
 import { Spinner } from "../ui/spinner.tsx"
 import { Frame } from "./frame.tsx"
@@ -69,14 +69,28 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
       { key: "o", cmd: () => openRuns() },
       { key: "d", cmd: () => openDocuments() },
       { key: "t", cmd: () => openRelated() },
-      { key: "w", cmd: () => afterDispatch(() => void sendHeld()) },
+      { key: "w", cmd: () => afterDispatch(() => void wake()) },
     ],
   }))
 
+  /** What w does here: send held comments, else run a scheduled monitor check or retry now; null when nothing waits. */
+  const wakeLabel = () => (thread.held.data ? "send held" : detail()?.waiting?.kind === "monitor" ? "check now" : detail()?.waiting ? "retry now" : null)
+  const wake = async () => {
+    if (!session.client().writes) return
+    const waiting = detail()?.waiting
+    if (!thread.held.data && waiting) {
+      // As in the web UI, one press: the agent only looks again sooner.
+      return company.issues.wakeNow(props.id, waiting.kind).then(
+        () => toast.show(waiting.kind === "monitor" ? "Check started" : "Retry started", "success"),
+        (err) => toast.error(err),
+      )
+    }
+    await sendHeld()
+  }
   /** Sends held comments after saying what that overrides: an unconfirmed stop, or a run still going. */
   const sendHeld = async () => {
     const held = thread.held.data
-    if (!held || !session.client().writes) return
+    if (!held) return
     const n = held.comments.length === 1 ? "the held comment" : `${held.comments.length} held comments`
     const why = held.targetRunId
       ? "This stops the agent's current run and starts a new one with them."
@@ -157,7 +171,7 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
         ["esc", "back"],
         ...(detail()?.documents.length ? [["d", "documents"] as [string, string]] : []),
         ...(detail()?.parentId || company.issues.children(props.id).length ? [["t", "sub-tasks"] as [string, string]] : []),
-        ...(thread.held.data && session.client().writes ? [["w", "send held"] as [string, string]] : []),
+        ...(wakeLabel() && session.client().writes ? [["w", wakeLabel()!] as [string, string]] : []),
         ["s/p/a", "status, priority, assign"],
         ["e", "edit"],
         ["f", "attach"],
@@ -258,6 +272,24 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
                 </box>
               )}
             </Show>
+            <Show when={detail()!.waiting}>
+              {(w: () => Waiting) => (
+                <box flexDirection="column" marginTop={1} backgroundColor={theme().panel} paddingLeft={1} paddingRight={1}>
+                  <text fg={theme().accent} attributes={TextAttributes.BOLD}>
+                    {w().at ? `${w().kind === "monitor" ? "Resumes" : "Retrying"} ${until(w().at, now())}` : "Retry scheduled"}
+                    {session.client().writes && !thread.held.data ? <span style={{ fg: theme().muted, attributes: 0 }}>{`  w ${wakeLabel()}`}</span> : ""}
+                  </text>
+                  <text fg={theme().muted}>{waitingLine(w())}</text>
+                  <Show when={w().kind === "monitor" && (w() as Extract<Waiting, { kind: "monitor" }>).notes}>
+                    <text fg={theme().text}>{(w() as Extract<Waiting, { kind: "monitor" }>).notes}</text>
+                  </Show>
+                  <Show when={w().kind === "retry" && (w() as Extract<Waiting, { kind: "retry" }>).reason}>
+                    <text fg={theme().text}>{(w() as Extract<Waiting, { kind: "retry" }>).reason!.replace(/_/g, " ")}</text>
+                  </Show>
+                  <text fg={theme().muted}>A comment wakes the agent now, before the scheduled {w().kind === "monitor" ? "check" : "retry"}.</text>
+                </box>
+              )}
+            </Show>
           </scrollbox>
         </Match>
       </Switch>
@@ -283,6 +315,19 @@ function RunLine(props: { entry: Extract<ThreadEntry, { kind: "run" }>; name?: s
       <text fg={theme().muted}>{dateTime(props.entry.at)}</text>
     </box>
   )
+}
+
+/** "Wed 25 Nov, 14:36 · 9 of 16 checks done · watching radarr-sonarr", the facts of the web UI's banner. */
+function waitingLine(w: Waiting): string {
+  const parts = [
+    w.at ? dateTime(w.at) : null,
+    w.kind === "monitor" ? `${w.checksDone}${w.maxAttempts ? ` of ${w.maxAttempts}` : ""} checks done` : `attempt ${w.attempt}`,
+  ]
+  if (w.kind === "monitor") {
+    if (w.service) parts.push(`watching ${w.service}`)
+    if (w.until) parts.push(`gives up ${dateTime(w.until)}`)
+  }
+  return parts.filter(Boolean).join(" · ")
 }
 
 /** Work products as a Markdown list, so a pull request's or preview's link can be followed. */

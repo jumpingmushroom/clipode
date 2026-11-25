@@ -2,12 +2,12 @@
 import { basename } from "node:path"
 import { createMemo } from "solid-js"
 import { createStore } from "solid-js/store"
-import { commentAndAssign, createTask, getDocument, getHeldComments, getTask, getTaskCost, getThread, handBackAgent, listProjects, listTasks, postComment, sendHeldComments, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
+import { checkMonitorNow, commentAndAssign, createTask, getDocument, getHeldComments, getTask, getTaskCost, getThread, handBackAgent, listProjects, listTasks, postComment, retryNow, sendHeldComments, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
 import { ApiError } from "../api/client.ts"
 import type { HeldComments, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
 import { createResource, type Resource } from "./resource.ts"
 import type { Session } from "./session.ts"
-export type { DocumentSummary, HeldComments, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
+export type { DocumentSummary, HeldComments, Waiting, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
 export type { NewTask, TaskPatch } from "../api/endpoints/issues.ts"
 
 export const IN_FLIGHT = ["in_progress", "in_review", "blocked"]
@@ -119,6 +119,13 @@ export function createIssuesStore(session: Session, companyId: string) {
       void t.entries.refresh()
       void t.cost.refresh()
       void t.held.refresh()
+    },
+    /** Wakes the agent now for its scheduled monitor check or retry; the thread is read again after. */
+    async wakeNow(issueId: string, kind: "monitor" | "retry") {
+      await (kind === "monitor" ? checkMonitorNow(session.client(), issueId) : retryNow(session.client(), issueId)).catch((err) =>
+        Promise.reject(err instanceof ApiError ? notSent(err) : err),
+      )
+      this.refreshThread(issueId)
     },
     /** Sends the task's held comments now; the thread is read again after. */
     async sendHeld(issueId: string, held: HeldComments) {

@@ -136,7 +136,13 @@ export type TaskDetail = TaskSummary & {
   documents: DocumentSummary[]
   /** What the work produced: pull requests, branches, previews, files. */
   workProducts: { title: string; type: string; status: string; url: string | null }[]
+  /** A scheduled wake-up: the agent's monitor of something outside Paperclip, or a retry after a failed run. */
+  waiting: Waiting | null
 }
+
+export type Waiting =
+  | { kind: "monitor"; at: string; checksDone: number; maxAttempts: number | null; service: string | null; notes: string | null; until: string | null }
+  | { kind: "retry"; at: string | null; attempt: number; reason: string | null }
 
 /**
  * Comments the server keeps from the agent for now: until the current run ends, or, with a `reason`, until Paperclip

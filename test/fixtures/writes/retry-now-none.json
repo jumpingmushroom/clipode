@@ -1,0 +1,10 @@
+{
+  "method": "POST",
+  "status": 200,
+  "request": {},
+  "response": {
+    "outcome": "no_scheduled_retry",
+    "message": "example message",
+    "scheduledRetry": null
+  }
+}
