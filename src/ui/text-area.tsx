@@ -1,4 +1,4 @@
-// A multi-line text field that grows with its content. enter is left to the caller (usually "send");
+// A multi-line text field that grows with its content, for a row: it fills the row's free width and wraps in it. enter is left to the caller (usually "send");
 // shift+enter (where the terminal reports it) and ctrl+j insert a line break. ctrl+v pastes the clipboard's text, or
 // hands its image to onImage where the field takes files.
 import type { TextareaRenderable } from "@opentui/core"
@@ -24,6 +24,12 @@ export function TextArea(props: {
   const { theme } = useTheme()
   const [lines, setLines] = createSignal(1)
   let area: TextareaRenderable | undefined
+  /** The field's height: its lines, wrapped ones included, up to maxLines. */
+  const measure = () => {
+    if (!area || area.isDestroyed) return
+    // virtualLineCount stops at the lines on screen (one, in a one-line field); lineInfo has every wrapped line.
+    setLines(Math.min(props.maxLines ?? 6, Math.max(1, area.lineCount, area.lineInfo.lineStartCols.length)))
+  }
   const readClipboard = useReadClipboard()
   const toast = useToast()
   // Terminals send ctrl+v as a key rather than a paste, so the field reads the clipboard itself.
@@ -55,18 +61,19 @@ export function TextArea(props: {
         if (props.initial) queueMicrotask(() => !r.isDestroyed && r.gotoBufferEnd())
       }}
       flexGrow={1}
+      // Grow from nothing into the row's free space; by default the field starts at its text's width, and a long line
+      // ran past the dialog instead of wrapping.
+      flexBasis={0}
+      minWidth={0}
       height={lines()}
       wrapMode="word"
       initialValue={props.initial ?? ""}
       onContentChange={() => {
-        // Line breaks count at once; wrapped lines are known only after layout, so measure again then.
-        const measure = () => {
-          if (!area || area.isDestroyed) return
-          setLines(Math.min(props.maxLines ?? 6, Math.max(1, area.lineCount, area.virtualLineCount)))
-        }
         measure()
         setTimeout(measure, 0)
       }}
+      // Wrapped lines are known only once layout has given the field its width.
+      onSizeChange={() => setTimeout(measure, 0)}
       placeholder={props.placeholder}
       placeholderColor={theme().muted}
       textColor={theme().text}

@@ -12,7 +12,8 @@ export function DialogPrompt(props: { title: string; placeholder?: string; initi
   return (
     <box flexDirection="column" gap={1}>
       <DialogHeader title={props.title} />
-      <box paddingLeft={DIALOG_INSET} paddingRight={DIALOG_INSET}>
+      {/* A row, as TextArea expects: it takes the row's width and wraps within it. */}
+      <box flexDirection="row" paddingLeft={DIALOG_INSET} paddingRight={DIALOG_INSET}>
         <TextArea
           mode="modal"
           background="background"
