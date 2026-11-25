@@ -189,3 +189,33 @@ test("a reject reason can span lines", async () => {
   await Bun.sleep(60)
   expect(writesTo("/reject")[0]?.body).toEqual({ reason: "Not this one.\nPick green." })
 })
+
+test("a reject reason the server refused is offered again, and dropped once it is sent", async () => {
+  const reject = `/api/issues/${CONFIRMATION.subject.metadata.issueId}/interactions/${CONFIRMATION.subject.id}/reject`
+  app = await startApp({ route: { name: "item", id: CONFIRMATION.id }, before: (s) => s.set(reject, { error: "Server busy" }, 500) })
+  await app.frame()
+  app.mockInput.pressKey("j")
+  app.mockInput.pressEnter()
+  await app.frame()
+  await app.mockInput.typeText("A long reason I do not want to type twice")
+  app.mockInput.pressEnter()
+  await Bun.sleep(80)
+  expect(await app.frame()).toContain("Not sent: Server busy")
+  app.renderer.destroy()
+
+  app = await startApp({ route: { name: "item", id: CONFIRMATION.id } })
+  await app.frame()
+  app.mockInput.pressKey("j")
+  app.mockInput.pressEnter()
+  expect(await app.frame()).toContain("A long reason I do not want to type twice")
+  app.mockInput.pressEnter()
+  await Bun.sleep(80)
+  expect(writesTo("/reject")[0]?.body).toEqual({ reason: "A long reason I do not want to type twice" })
+  app.renderer.destroy()
+
+  app = await startApp({ route: { name: "item", id: CONFIRMATION.id } })
+  await app.frame()
+  app.mockInput.pressKey("j")
+  app.mockInput.pressEnter()
+  expect(await app.frame()).not.toContain("A long reason")
+})

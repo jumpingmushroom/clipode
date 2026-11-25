@@ -9,7 +9,6 @@ export type State = {
   lastEmail?: string
   lastCompany?: Record<string, string>
   theme?: string
-  lastView?: string
   tabs?: Record<string, string[]>
 }
 

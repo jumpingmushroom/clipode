@@ -64,3 +64,18 @@ test("o on an inbox item opens its task thread", async () => {
   app.mockInput.pressKey("o")
   expect(await app.frame()).toMatch(/Task · DEMO-\d+/)
 })
+
+test("opening a task again reads its thread again", async () => {
+  app = await startApp({ route: { name: "tasks" } })
+  await app.frame()
+  const reads = () => app!.server.requests.filter((r) => /^GET \/api\/issues\/[^/]+\/comments$/.test(r)).length
+  app.mockInput.pressEnter()
+  await app.frame()
+  expect(reads()).toBe(1)
+  app.mockInput.pressEscape()
+  await Bun.sleep(40)
+  await app.frame()
+  app.mockInput.pressEnter()
+  await app.frame()
+  expect(reads()).toBe(2)
+})

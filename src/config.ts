@@ -15,9 +15,8 @@ export type Config = {
   keybinds?: Record<string, string>
   sidebar?: "auto" | "show" | "hide"
   /** Polling intervals in seconds when there is no WebSocket. */
-  polling?: { inbox?: number; list?: number; log?: number }
+  polling?: { inbox?: number; list?: number }
   mouse?: boolean
-  animations?: boolean
   plugins?: (string | [string, Record<string, unknown>])[]
   /** Desktop notifications for new inbox items while the terminal is in the background; on unless false. */
   notifications?: boolean

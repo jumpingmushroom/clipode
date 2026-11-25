@@ -28,3 +28,13 @@ test("grouping keeps the server order inside each shelf", () => {
   expect(g.decide.map((i) => i.id)).toEqual(["b"])
   expect(g.earlier.map((i) => i.id)).toEqual(["a", "c"])
 })
+
+test("a bare decide-by date is a local day, also west of UTC", () => {
+  // In a process of its own, since the time zone is read once.
+  const script = `import { shelfOf } from "./src/store/shelves.ts"
+    const now = new Date(2026, 10, 20, 15, 0)
+    const item = { snoozed: false, severity: "medium", expiresAt: null, createdAt: new Date(2026, 10, 10).toISOString() }
+    console.log(shelfOf({ ...item, decideBy: "2026-11-21" }, now), shelfOf({ ...item, decideBy: "2026-11-20" }, now))`
+  const out = Bun.spawnSync([process.execPath, "-e", script], { env: { ...process.env, TZ: "America/New_York" } })
+  expect(out.stdout.toString().trim()).toBe("earlier decide")
+})

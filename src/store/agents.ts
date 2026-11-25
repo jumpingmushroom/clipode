@@ -45,6 +45,8 @@ export function createAgentsStore(session: Session, companyId: string) {
       return runs.get(agentId)!
     },
     byId: (id: string | null | undefined) => (id ? list.data.find((a) => a.id === id) : undefined),
+    /** The team as screens count it: every agent except terminated ones. */
+    active: () => list.data.filter((a) => a.status !== "terminated"),
   }
 }
 

@@ -29,6 +29,10 @@ export function connectLive(opts: LiveOptions) {
   const Impl = opts.WebSocketImpl ?? (WebSocket as unknown as NonNullable<LiveOptions["WebSocketImpl"]>)
   let ws: WebSocket | null = null
   let attempt = 0
+  // When the current socket opened. The backoff starts over only after a connection that lasted: a server that accepts
+  // and then drops connections (an overloaded one closes with 1013) would otherwise be asked again every second.
+  let openedAt = 0
+  const STABLE_MS = 30_000
   let opened = 0
   let timer: ReturnType<typeof setTimeout> | null = null
   let closed = false
@@ -51,7 +55,7 @@ export function connectLive(opts: LiveOptions) {
     ws = socket
     let failed = false
     socket.onopen = () => {
-      attempt = 0
+      openedAt = Date.now()
       state("live")
       socket.send(JSON.stringify({ type: "live.hello", version: 1, capabilities: ["run-interests"] }))
       if (opened++ > 0) opts.onResync()
@@ -75,6 +79,8 @@ export function connectLive(opts: LiveOptions) {
       if (failed || closed || ws !== socket) return
       failed = true
       ws = null
+      if (openedAt && Date.now() - openedAt >= STABLE_MS) attempt = 0
+      openedAt = 0
       const check = await opts.check()
       // A reconnect (ctrl+r) during the check has opened a socket already; a second would deliver every event twice.
       if (closed || ws) return

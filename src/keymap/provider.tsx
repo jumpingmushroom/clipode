@@ -17,6 +17,9 @@ const MODE_KEY = "clipode.mode"
 /** Bindings from cli.json `keybinds`, command name to binding; they replace a command's default keys. */
 const Keybinds = createContext<Record<string, string>>({})
 export const useKeybinds = () => useContext(Keybinds)
+/** The leader key from cli.json, for showing bindings as they are typed. */
+const Leader = createContext("ctrl+x")
+export const useLeader = () => useContext(Leader)
 
 export function KeysProvider(props: ParentProps<{ leader?: string; keybinds?: Record<string, string> }>) {
   const keymap = createDefaultOpenTuiKeymap(useRenderer())
@@ -49,7 +52,9 @@ export function KeysProvider(props: ParentProps<{ leader?: string; keybinds?: Re
   onCleanup(() => dispose.reverse().forEach((d) => d()))
   return (
     <KeymapProvider keymap={keymap}>
-      <Keybinds.Provider value={props.keybinds ?? {}}>{props.children}</Keybinds.Provider>
+      <Keybinds.Provider value={props.keybinds ?? {}}>
+        <Leader.Provider value={props.leader ?? "ctrl+x"}>{props.children}</Leader.Provider>
+      </Keybinds.Provider>
     </KeymapProvider>
   )
 }

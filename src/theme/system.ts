@@ -2,13 +2,6 @@
 import { RGBA, type TerminalColors } from "@opentui/core"
 import { ansiToRgba, tint, type Palette } from "./format.ts"
 
-export function terminalMode(colors: TerminalColors): "dark" | "light" | undefined {
-  const bg = colors.defaultBackground
-  if (!bg) return
-  const { r, g, b } = RGBA.fromHex(bg)
-  return 0.299 * r + 0.587 * g + 0.114 * b > 0.5 ? "light" : "dark"
-}
-
 /** A theme built from the terminal's own palette, shown as "system" in the theme switcher. */
 export function generateSystem(colors: TerminalColors, mode: "dark" | "light"): Palette {
   const bg = RGBA.fromHex(colors.defaultBackground ?? colors.palette[0]!)

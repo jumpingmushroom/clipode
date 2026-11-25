@@ -1,6 +1,6 @@
 // The inbox: attention items for the selected company, the badge count, and item details fetched on open.
 import { createSignal } from "solid-js"
-import { createStore } from "solid-js/store"
+import { createStore, reconcile } from "solid-js/store"
 import {
   approvalDetail,
   blockedDetail,
@@ -134,7 +134,8 @@ export function createAttentionStore(session: Session, companyId: string) {
     /** Drops cached details, for a refresh after a live event. */
     refresh() {
       interactions.clear()
-      setDetails({})
+      // reconcile replaces the store; setDetails({}) would merge nothing into it and keep every cached detail.
+      setDetails(reconcile({}))
       return feed.refresh()
     },
   }

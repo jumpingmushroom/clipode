@@ -96,7 +96,6 @@ export function createTranscriptReader() {
       carry = emptyCarry()
       return items
     },
-    items: () => items,
   }
 }
 

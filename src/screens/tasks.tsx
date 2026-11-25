@@ -1,8 +1,7 @@
 // Tasks grouped by status, with a filter line, priority markers, live-run spinners and sub-task progress.
 import { RGBA, TextAttributes, type InputRenderable, type ScrollBoxRenderable } from "@opentui/core"
 import { useBindings, useKeymap } from "@opentui/keymap/solid"
-import { useTerminalDimensions } from "@opentui/solid"
-import { createMemo, createSignal, For, onCleanup, onMount, Show } from "solid-js"
+import { createMemo, createSignal, For, Index, onCleanup, onMount, Show } from "solid-js"
 import { useCommands } from "../keymap/commands.tsx"
 import { setMode } from "../keymap/provider.tsx"
 import { useRoute } from "../route.tsx"
@@ -13,7 +12,7 @@ import { useTheme } from "../theme/context.tsx"
 import type { Theme } from "../theme/tokens.ts"
 import { fit, elapsed } from "../ui/format.ts"
 import { Spinner } from "../ui/spinner.tsx"
-import { Frame, SIDEBAR_MIN_COLUMNS, SIDEBAR_WIDTH } from "./frame.tsx"
+import { Frame, useMainWidth } from "./frame.tsx"
 import { useTaskActions } from "./task-actions.tsx"
 import { SidebarHeader, SidebarLine } from "./inbox-sidebar.tsx"
 
@@ -48,7 +47,6 @@ export function TasksScreen(props: { version: string; sidebar: boolean; filter?:
   const company = useCompany()
   const route = useRoute()
   const keymap = useKeymap()
-  const dimensions = useTerminalDimensions()
   const issues = company.issues
   const [query, setQuery] = createSignal(props.filter ?? "")
   const [filtering, setFiltering] = createSignal(false)
@@ -93,9 +91,8 @@ export function TasksScreen(props: { version: string; sidebar: boolean; filter?:
     return row?.type === "task" ? row.task : undefined
   })
 
-  const wide = () => dimensions().width >= SIDEBAR_MIN_COLUMNS
-  const mainWidth = () => dimensions().width - (wide() && props.sidebar ? SIDEBAR_WIDTH : 0) - 2
-  const idWidth = () => Math.max(7, ...issues.list.data.map((t) => (t.identifier ?? "").length))
+  const mainWidth = useMainWidth(() => props.sidebar, 2)
+  const idWidth = createMemo(() => Math.max(7, ...issues.list.data.map((t) => (t.identifier ?? "").length)))
   const titleWidth = () => Math.max(10, mainWidth() - 2 - 2 - (idWidth() + 2) - 3 - 10 - 5 - 2)
 
   const move = (delta: number) => {
@@ -135,7 +132,6 @@ export function TasksScreen(props: { version: string; sidebar: boolean; filter?:
       { key: "pagedown", cmd: () => move(10) },
       { key: "pageup", cmd: () => move(-10) },
       { key: "return", cmd: open },
-      { key: "/", cmd: startFilter },
       { key: "escape", cmd: () => query() && stopFilter(true) },
     ],
   }))
@@ -153,8 +149,9 @@ export function TasksScreen(props: { version: string; sidebar: boolean; filter?:
     { name: "tasks.refresh", title: "Refresh", category: "View", keys: "r", run: () => void issues.list.refresh() },
   ])
 
-  const indexOf = (row: Row) => rows().indexOf(row)
-  const rowFor = (task: TaskSummary) => rows().find((r) => r.type === "task" && r.task === task)
+  // Each row's place in the list, worked out once per list rather than searched for by every row.
+  const position = createMemo(() => new Map(rows().map((r, i) => [r.type === "task" ? r.task.id : `more:${r.status}`, i])))
+  const isCurrent = (at: number) => Math.min(selected(), rows().length - 1) === at
 
   return (
     <Frame
@@ -197,25 +194,26 @@ export function TasksScreen(props: { version: string; sidebar: boolean; filter?:
               No tasks match.
             </text>
           </Show>
-          <For each={groups()}>
+          {/* Index, not For: groups are rebuilt on every change, and their rows should stay when their tasks do. */}
+          <Index each={groups()}>
             {(group) => (
               <box flexDirection="column" marginBottom={1}>
                 <text fg={theme().text} paddingLeft={2}>
-                  <span style={{ attributes: TextAttributes.BOLD }}>{group.title}</span>
-                  <span style={{ fg: theme().muted }}>{`  ${group.all.length}`}</span>
+                  <span style={{ attributes: TextAttributes.BOLD }}>{group().title}</span>
+                  <span style={{ fg: theme().muted }}>{`  ${group().all.length}`}</span>
                 </text>
-                <For each={group.visible}>
+                <For each={group().visible}>
                   {(task) => {
-                    const row = () => rowFor(task)!
+                    const at = () => position().get(task.id)!
                     const progress = () => issues.progress(task.id)
                     const pri = () => PRIORITY[task.priority] ?? PRIORITY.medium!
                     return (
                       <box
-                        id={`task-row-${indexOf(row())}`}
+                        id={`task-row-${at()}`}
                         flexDirection="row"
                         paddingLeft={2}
-                        backgroundColor={current() === row() ? theme().selection : RGBA.fromInts(0, 0, 0, 0)}
-                        onMouseDown={() => setSelected(indexOf(row()))}
+                        backgroundColor={isCurrent(at()) ? theme().selection : RGBA.fromInts(0, 0, 0, 0)}
+                        onMouseDown={() => setSelected(at())}
                         onMouseUp={open}
                       >
                         <box width={2} flexShrink={0}>
@@ -234,24 +232,24 @@ export function TasksScreen(props: { version: string; sidebar: boolean; filter?:
                     )
                   }}
                 </For>
-                <Show when={group.all.length > group.visible.length}>
+                <Show when={group().all.length > group().visible.length}>
                   {(() => {
-                    const row = () => rows().find((r) => r.type === "more" && r.status === group.status)!
+                    const at = () => position().get(`more:${group().status}`)!
                     return (
                       <box
-                        id={`task-row-${indexOf(row())}`}
+                        id={`task-row-${at()}`}
                         paddingLeft={4 + idWidth() + 2}
-                        backgroundColor={current() === row() ? theme().selection : RGBA.fromInts(0, 0, 0, 0)}
-                        onMouseUp={() => setExpanded((e) => [...e, group.status])}
+                        backgroundColor={isCurrent(at()) ? theme().selection : RGBA.fromInts(0, 0, 0, 0)}
+                        onMouseUp={() => setExpanded((e) => [...e, group().status])}
                       >
-                        <text fg={theme().muted}>… {group.all.length - group.visible.length} more</text>
+                        <text fg={theme().muted}>… {group().all.length - group().visible.length} more</text>
                       </box>
                     )
                   })()}
                 </Show>
               </box>
             )}
-          </For>
+          </Index>
         </scrollbox>
       </Show>
     </Frame>

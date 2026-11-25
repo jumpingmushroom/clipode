@@ -1,5 +1,5 @@
 // One agent: what it is doing now and its recent runs; enter opens a run's transcript.
-import { RGBA, TextAttributes } from "@opentui/core"
+import { RGBA, TextAttributes, type ScrollBoxRenderable } from "@opentui/core"
 import { useBindings } from "@opentui/keymap/solid"
 import { createSignal, For, onCleanup, onMount, Show } from "solid-js"
 import { useRoute } from "../route.tsx"
@@ -24,14 +24,20 @@ export function AgentScreen(props: { id: string; version: string; sidebar: boole
   onMount(() => {
     void company.agents.list.load()
     void company.issues.list.load()
-    void runs.load()
+    // Cached for the session, and no live event updates it, so read it again on every visit.
+    void runs.refresh()
   })
   const tick = setInterval(() => setNow(Date.now()), 1000)
   onCleanup(() => clearInterval(tick))
 
   const agent = () => company.agents.byId(props.id)
   useAgentActions(agent)
-  const move = (d: number) => setSelected((s) => Math.max(0, Math.min(runs.data.length - 1, s + d)))
+  let scroll: ScrollBoxRenderable | undefined
+  const move = (d: number) => {
+    const next = Math.max(0, Math.min(runs.data.length - 1, selected() + d))
+    setSelected(next)
+    scroll?.scrollChildIntoView(`run-row-${next}`)
+  }
   const open = () => {
     const run = runs.data[selected()]
     if (run) route.navigate({ name: "run", id: run.id })
@@ -59,7 +65,7 @@ export function AgentScreen(props: { id: string; version: string; sidebar: boole
         {(() => {
           const state = () => nowOf(agent()!, now())
           return (
-            <box flexDirection="column" paddingLeft={2} paddingRight={2}>
+            <box flexDirection="column" paddingLeft={2} paddingRight={2} flexShrink={0}>
               <text fg={theme().text}>
                 <span style={{ attributes: TextAttributes.BOLD }}>{agent()!.name}</span>
                 <span style={{ fg: theme().muted }}>{`  ${agent()!.title ?? agent()!.role} · ${agent()!.model ?? agent()!.adapterType}`}</span>
@@ -77,10 +83,11 @@ export function AgentScreen(props: { id: string; version: string; sidebar: boole
       </Show>
       <Show when={runs.loadedAt} fallback={<text fg={theme().muted} paddingLeft={2}>{runs.status === "error" ? `✗ ${runs.error}` : "loading"}</text>}>
         <Show when={runs.data.length} fallback={<text fg={theme().muted} paddingLeft={2}>No runs yet.</text>}>
-          <scrollbox flexGrow={1} scrollbarOptions={{ visible: false }}>
+          <scrollbox ref={(r: ScrollBoxRenderable) => (scroll = r)} flexGrow={1} minHeight={0} scrollbarOptions={{ visible: false }}>
             <For each={runs.data}>
               {(run, i) => (
                 <box
+                  id={`run-row-${i()}`}
                   flexDirection="row"
                   paddingLeft={2}
                   backgroundColor={selected() === i() ? theme().selection : RGBA.fromInts(0, 0, 0, 0)}

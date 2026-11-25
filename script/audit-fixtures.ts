@@ -11,18 +11,14 @@ import { FIELD_KEY } from "./scrub.ts"
 const root = new URL("../test/fixtures/", import.meta.url).pathname
 const client = await signedInClient()
 const secrets = new Set<string>()
-try {
-  secrets.add(new URL(client.baseUrl).hostname)
-  const session = await getSession(client)
-  for (const v of [session?.user.email, session?.user.name, session?.user.email?.split("@")[0]]) if (v) secrets.add(v)
-  for (const c of await client.get<Company[]>("/api/companies")) {
-    secrets.add(c.name)
-    if (c.issuePrefix) secrets.add(`${c.issuePrefix}-`)
-    for (const a of await client.get<Agent[]>(`/api/companies/${c.id}/agents`)) secrets.add(a.name)
-    for (const i of await client.get<{ title: string }[]>(`/api/companies/${c.id}/issues`)) secrets.add(i.title)
-  }
-} finally {
-  // The cached session stays valid for the next script.
+secrets.add(new URL(client.baseUrl).hostname)
+const session = await getSession(client)
+for (const v of [session?.user.email, session?.user.name, session?.user.email?.split("@")[0]]) if (v) secrets.add(v)
+for (const c of await client.get<Company[]>("/api/companies")) {
+  secrets.add(c.name)
+  if (c.issuePrefix) secrets.add(`${c.issuePrefix}-`)
+  for (const a of await client.get<Agent[]>(`/api/companies/${c.id}/agents`)) secrets.add(a.name)
+  for (const i of await client.get<{ title: string }[]>(`/api/companies/${c.id}/issues`)) secrets.add(i.title)
 }
 const needles = [...secrets].filter((s) => s.length >= 3).map((s) => s.toLowerCase())
 

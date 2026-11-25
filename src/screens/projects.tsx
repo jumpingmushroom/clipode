@@ -1,7 +1,6 @@
 // Projects: status and task counts per project; enter shows the project's tasks. The sidebar shows the selected one.
 import { RGBA, TextAttributes, type ScrollBoxRenderable } from "@opentui/core"
 import { useBindings } from "@opentui/keymap/solid"
-import { useTerminalDimensions } from "@opentui/solid"
 import { createMemo, createSignal, For, onMount, Show } from "solid-js"
 import type { ProjectSummary } from "../api/model.ts"
 import { useCommands } from "../keymap/commands.tsx"
@@ -10,7 +9,7 @@ import { useCompany } from "../store/context.tsx"
 import { IN_FLIGHT } from "../store/issues.ts"
 import { useTheme } from "../theme/context.tsx"
 import { fit } from "../ui/format.ts"
-import { Frame, SIDEBAR_MIN_COLUMNS, SIDEBAR_WIDTH } from "./frame.tsx"
+import { Frame, useMainWidth } from "./frame.tsx"
 import { SidebarHeader, SidebarLine } from "./inbox-sidebar.tsx"
 
 const CLOSED = ["done", "cancelled"]
@@ -20,7 +19,6 @@ export function ProjectsScreen(props: { version: string; sidebar: boolean }) {
   const { theme } = useTheme()
   const company = useCompany()
   const route = useRoute()
-  const dimensions = useTerminalDimensions()
   const [selected, setSelected] = createSignal(0)
   let scroll: ScrollBoxRenderable | undefined
 
@@ -36,7 +34,7 @@ export function ProjectsScreen(props: { version: string; sidebar: boolean }) {
     const tasks = company.issues.list.data.filter((t) => t.projectId === p.id)
     return { open: tasks.filter((t) => !CLOSED.includes(t.status)).length, inFlight: tasks.filter((t) => IN_FLIGHT.includes(t.status)).length, done: tasks.filter((t) => t.status === "done").length }
   }
-  const mainWidth = () => dimensions().width - (dimensions().width >= SIDEBAR_MIN_COLUMNS && props.sidebar ? SIDEBAR_WIDTH : 0) - 4
+  const mainWidth = useMainWidth(() => props.sidebar, 4)
   const nameWidth = () => Math.max(12, mainWidth() - STATUS - 3 * COUNT)
   const move = (delta: number) => {
     const next = Math.max(0, Math.min(projects().length - 1, selected() + delta))

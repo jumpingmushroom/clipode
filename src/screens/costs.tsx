@@ -2,14 +2,13 @@
 // quotas and budgets. One scrolling report; `a` switches between this month and all time.
 import { TextAttributes, type ScrollBoxRenderable } from "@opentui/core"
 import { useBindings } from "@opentui/keymap/solid"
-import { useTerminalDimensions } from "@opentui/solid"
 import { For, onMount, Show, type JSX } from "solid-js"
 import { useCommands } from "../keymap/commands.tsx"
 import { useCompany } from "../store/context.tsx"
 import type { CostReport, Usage } from "../store/costs.ts"
 import { useTheme } from "../theme/context.tsx"
 import { count, fit, money, until } from "../ui/format.ts"
-import { Frame, SIDEBAR_MIN_COLUMNS, SIDEBAR_WIDTH } from "./frame.tsx"
+import { Frame, useMainWidth } from "./frame.tsx"
 import { SidebarHeader, SidebarLine } from "./inbox-sidebar.tsx"
 
 const NUM = 9
@@ -19,7 +18,6 @@ export function CostsScreen(props: { version: string; sidebar: boolean }) {
   const { theme } = useTheme()
   const company = useCompany()
   const costs = company.costs
-  const dimensions = useTerminalDimensions()
   let scroll: ScrollBoxRenderable | undefined
 
   // Usage changes with every run, so read it again each time the screen opens.
@@ -27,7 +25,7 @@ export function CostsScreen(props: { version: string; sidebar: boolean }) {
 
   const report = () => costs.report.data
   const withCost = () => (report()?.total.cents ?? 0) > 0
-  const mainWidth = () => dimensions().width - (dimensions().width >= SIDEBAR_MIN_COLUMNS && props.sidebar ? SIDEBAR_WIDTH : 0) - 4
+  const mainWidth = useMainWidth(() => props.sidebar, 4)
   const nameWidth = () => Math.max(12, mainWidth() - NUM * (withCost() ? 5 : 4))
   const heading = () => fit("", nameWidth()) + ["Runs", "Input", "Cached", "Output", ...(withCost() ? ["Cost"] : [])].map((h) => fit(h, NUM, "right")).join("")
   const row = (u: Usage) => [u.runs === null ? "—" : String(u.runs), count(u.input), count(u.cached), count(u.output), ...(withCost() ? [money(u.cents)] : [])].map((v) => fit(v, NUM, "right")).join("")

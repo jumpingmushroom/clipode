@@ -1,5 +1,6 @@
 import { afterEach, expect, test } from "bun:test"
-import { THREAD_ID } from "../fake-server.ts"
+import { COMPANY_ID, THREAD_ID } from "../fake-server.ts"
+import agents from "../fixtures/company/agents.json"
 import details from "../fixtures/company/issue-details.json"
 import { startApp, type Running } from "../helpers.tsx"
 
@@ -52,4 +53,39 @@ test("ctrl+x s opens settings with the instance, company and theme", async () =>
   expect(text).toMatch(/Instance\s+127\.0\.0\.1/)
   expect(text).toMatch(/Theme\s+clipode dark/)
   expect(text).toMatch(/Signed in as\s+Operator/)
+})
+
+test("in a short terminal the agent screens keep their headings, and the selected run stays in view", async () => {
+  app = await startApp({ route: { name: "agents" }, height: 20 })
+  expect(await app.frame()).toMatch(/Name\s+Role\s+Model\s+Now/)
+  app.renderer.destroy()
+
+  app = await startApp({ route: { name: "agent", id: "00000000-0000-4000-8000-00000000000f" }, height: 16 })
+  let text = await app.frame()
+  expect(text).toContain("Recent runs")
+  for (let i = 0; i < 15; i++) app.mockInput.pressKey("j")
+  text = await app.frame()
+  expect(text).toContain("Recent runs")
+  // The last of the 16 runs is selected; its row is on screen.
+  const runs = (await import("../fixtures/company/heartbeat-runs.json")).default.filter((r) => r.agentId === "00000000-0000-4000-8000-00000000000f")
+  expect(text).toContain(runs.at(-1)!.id.slice(0, 8))
+})
+
+test('"sidebar": "show" shows the sidebar below 100 columns too', async () => {
+  app = await startApp({ width: 90, config: { sidebar: "show" } })
+  expect(await app.frame()).toContain("Needs you")
+  app.renderer.destroy()
+  app = await startApp({ width: 90 })
+  expect(await app.frame()).not.toContain("Needs you")
+})
+
+test("a terminated agent is counted nowhere: not in the list, the Team count or the inbox sidebar", async () => {
+  const withRetired = [...agents, { ...agents[0]!, id: "retired", name: "Retired", status: "terminated" }]
+  app = await startApp({ before: (s) => s.set(`/api/companies/${COMPANY_ID}/agents`, withRetired) })
+  expect(await app.frame()).toMatch(/Agents\s+9\b/)
+  app.mockInput.pressKey("g")
+  app.mockInput.pressKey("a")
+  const text = await app.frame()
+  expect(text).toMatch(/Agents {2}9/)
+  expect(text).toMatch(/Team\s+9/)
 })

@@ -19,17 +19,28 @@ export function createTranscript(session: Session, runId: string) {
   const reader = createTranscriptReader()
   let offset = 0
   let reading: Promise<void> | null = null
+  let again = false
 
-  /** Reads what the log has beyond the last read; ends the transcript when the run has finished. */
-  const read = () =>
-    (reading ??= (async () => {
+  /**
+   * Reads what the log has beyond the last read; ends the transcript when the run has finished. A read asked for during
+   * another runs once more after it, since the log (or the run's status) may have moved on since that one started.
+   */
+  const read = (): Promise<void> => {
+    if (reading) {
+      again = true
+      return reading
+    }
+    reading = (async () => {
       try {
-        for (let i = 0; i < MAX_RANGES; i++) {
-          const chunk = await getRunLog(session.client(), runId, offset)
-          offset = chunk.next
-          if (chunk.content) setItems([...reader.push(chunk.content)])
-          if (!chunk.more) break
-        }
+        do {
+          again = false
+          for (let i = 0; i < MAX_RANGES; i++) {
+            const chunk = await getRunLog(session.client(), runId, offset)
+            offset = chunk.next
+            if (chunk.content) setItems([...reader.push(chunk.content)])
+            if (!chunk.more) break
+          }
+        } while (again)
         if (run.data && !LIVE_STATUSES.includes(run.data.status)) setItems([...reader.finish()])
         setError(null)
       } catch (err) {
@@ -38,7 +49,9 @@ export function createTranscript(session: Session, runId: string) {
       } finally {
         reading = null
       }
-    })())
+    })()
+    return reading
+  }
 
   return {
     run,

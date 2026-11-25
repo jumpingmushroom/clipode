@@ -6,6 +6,7 @@ import { createSignal, Match, onCleanup, onMount, Show, Switch } from "solid-js"
 import type { Config } from "../config.ts"
 import { useCommands, type AppCommand } from "../keymap/commands.tsx"
 import { CommandPalette, HelpDialog } from "../keymap/palette.tsx"
+import { useLeader } from "../keymap/provider.tsx"
 import { useRoute, type Route } from "../route.tsx"
 import { useCompany, useStores } from "../store/context.tsx"
 import { startLiveSync } from "../store/live.ts"
@@ -105,6 +106,7 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
   const openCompanies = useCompanyDialog()
   const tabs = useTabs()!
   const pending = useKeymapSelector((k) => k.getPendingSequence())
+  const leader = useLeader()
   const [quitArmed, setQuitArmed] = createSignal(false)
   const [sidebar, setSidebar] = createSignal(props.config?.sidebar !== "hide")
   const [focused, setFocused] = createSignal(true)
@@ -241,7 +243,7 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
       <Show when={pending().length > 0}>
         <box position="absolute" bottom={0} left={1} zIndex={100}>
           <text fg={theme.theme().text} bg={theme.theme().selection}>
-            {` ${formatKeySequence(pending(), { tokenDisplay: { leader: "ctrl+x" } })} … `}
+            {` ${formatKeySequence(pending(), { tokenDisplay: { leader } })} … `}
           </text>
         </box>
       </Show>

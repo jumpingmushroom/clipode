@@ -16,6 +16,9 @@ import { Spinner } from "../ui/spinner.tsx"
 import { Frame } from "./frame.tsx"
 import { KIND_LABELS, MARKERS, markerColor } from "./inbox-row.tsx"
 
+/** Reasons and notes typed for a decision, kept until the server takes it, so a refused one need not be typed again. */
+const drafts = new Map<string, string>()
+
 export function ItemScreen(props: { id: string; version: string; sidebar: boolean }) {
   const { theme } = useTheme()
   const company = useCompany()
@@ -46,13 +49,20 @@ export function ItemScreen(props: { id: string; version: string; sidebar: boolea
     return d?.kind === "question" ? d.questions : []
   }
 
+  /** Asks for a reason or note, starting from what was typed last time for this item and choice. */
+  const note = async (key: string, title: string, placeholder: string) => {
+    const text = await dialogs.prompt(title, placeholder, drafts.get(`${props.id}:${key}`))
+    if (text !== null) drafts.set(`${props.id}:${key}`, text)
+    return text
+  }
   /** Leaves the item and sends; the store hides it at once and brings it back if the server refuses. */
-  const send = async (done: string, action: (it: InboxItem) => Promise<void>) => {
+  const send = async (done: string, action: (it: InboxItem) => Promise<void>, draft?: string) => {
     const it = item()
     if (!it) return
     route.back()
     try {
       await action(it)
+      if (draft) drafts.delete(`${it.id}:${draft}`)
       toast.show(done, "success")
     } catch (err) {
       toast.error(err)
@@ -70,22 +80,22 @@ export function ItemScreen(props: { id: string; version: string; sidebar: boolea
     if (choice.kind === "accept") return send("Accepted", (it) => company.attention.accept(it))
     // Rejections and approval decisions are confirmed: the prompt shows what is sent and takes an optional reason.
     if (choice.kind === "reject") {
-      const reason = await dialogs.prompt(`Reject: ${choice.label}`, "Optional reason, then enter to send")
-      if (reason !== null) void send("Rejected", (it) => company.attention.reject(it, reason || undefined))
+      const reason = await note("reject", `Reject: ${choice.label}`, "Optional reason, then enter to send")
+      if (reason !== null) void send("Rejected", (it) => company.attention.reject(it, reason || undefined), "reject")
       return
     }
     if (choice.kind === "review") {
       // Request changes needs a note; approving and sending back take one optionally.
       const required = choice.action === "request_changes"
-      const note = await dialogs.prompt(choice.label, required ? "What should change? Required" : "Optional note, then enter to send")
-      if (note === null) return
-      if (required && !note.trim()) return toast.show("Request changes needs a note", "warning")
-      void send(`${choice.label}: sent`, (it) => company.attention.review(it, choice.action, note.trim() || undefined))
+      const text = await note(choice.action, choice.label, required ? "What should change? Required" : "Optional note, then enter to send")
+      if (text === null) return
+      if (required && !text.trim()) return toast.show("Request changes needs a note", "warning")
+      void send(`${choice.label}: sent`, (it) => company.attention.review(it, choice.action, text.trim() || undefined), choice.action)
       return
     }
     if (choice.kind === "approval") {
-      const note = await dialogs.prompt(choice.label, "Optional note, then enter to send")
-      if (note !== null) void send(`${choice.label}: sent`, (it) => company.attention.decide(it, choice.decision, note || undefined))
+      const text = await note(choice.decision, choice.label, "Optional note, then enter to send")
+      if (text !== null) void send(`${choice.label}: sent`, (it) => company.attention.decide(it, choice.decision, text || undefined), choice.decision)
     }
   }
 

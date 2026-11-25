@@ -272,7 +272,7 @@ Confirmed on `2026.1117.0`: the WebSocket upgrade succeeds with only the session
 
 ### Stores
 
-Each store is a Solid store with the same small surface: `load()`, `refresh()`, a `status` of `idle | loading | ready | error | stale`, and the data. Screens never call the API directly. `load()` reuses a request on its way; `refresh()` always asks again, and only the newest answer is kept, so a refresh after a write or a changed sort never shows an older answer (since 1.12.2). Transcript items are replaced, not edited, when a later log chunk adds to them, because the run screen keys its rows by item.
+Each store is a Solid store with the same small surface: `load()`, `refresh()`, a `status` of `idle | loading | ready | error`, and the data. Screens never call the API directly. `load()` reuses a request on its way; `refresh()` always asks again, and only the newest answer is kept, so a refresh after a write or a changed sort never shows an older answer (since 1.12.2). Transcript items are replaced, not edited, when a later log chunk adds to them, because the run screen keys its rows by item.
 
 The write allowlist is checked against the URL as it will be sent, after the URL parser has resolved `\`, `%2e%2e` and dot segments, and every path must start with `/` and stay on the instance's origin; any other request throws `ReadOnlyError` before it is sent (since 1.12.2).
 
@@ -447,7 +447,7 @@ Plugins are listed under `plugins` in the config file, as a path or a `[path, op
 
 | File | Purpose |
 | --- | --- |
-| `~/.config/clipode/cli.json` (JSONC) | Instance URL, theme, leader key, keybinds, sidebar behaviour, polling intervals, mouse, animations, plugins |
+| `~/.config/clipode/cli.json` (JSONC) | Instance URL, theme, leader key, keybinds, sidebar behaviour, polling intervals, mouse, plugins, notifications, read-only |
 | `~/.local/state/clipode/auth.json` | Session cookie per instance, mode `0600` |
 | `~/.local/state/clipode/kv.json` | Runtime choices: last company, open tabs, last view, theme picked in the switcher |
 

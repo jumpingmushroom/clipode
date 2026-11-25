@@ -1,7 +1,6 @@
 // The home screen: attention items on three shelves plus a collapsed Snoozed group.
 import { RGBA, TextAttributes, type ScrollBoxRenderable } from "@opentui/core"
 import { useBindings } from "@opentui/keymap/solid"
-import { useTerminalDimensions } from "@opentui/solid"
 import { createMemo, createSignal, For, Match, onCleanup, onMount, Show, Switch } from "solid-js"
 import { useCommands } from "../keymap/commands.tsx"
 import { useRoute } from "../route.tsx"
@@ -14,7 +13,7 @@ import { useToast } from "../ui/toast.tsx"
 import { groupByShelf, SHELVES } from "../store/shelves.ts"
 import { useTheme } from "../theme/context.tsx"
 import { Spinner } from "../ui/spinner.tsx"
-import { Frame, SIDEBAR_MIN_COLUMNS, SIDEBAR_WIDTH } from "./frame.tsx"
+import { Frame, useMainWidth } from "./frame.tsx"
 import { columns, InboxRow } from "./inbox-row.tsx"
 import { InboxSidebar } from "./inbox-sidebar.tsx"
 import { Slot } from "../plugin/host.tsx"
@@ -25,7 +24,6 @@ export function InboxScreen(props: { version: string; sidebar: boolean }) {
   const { theme } = useTheme()
   const company = useCompany()
   const route = useRoute()
-  const dimensions = useTerminalDimensions()
   const attention = company.attention
   const [selected, setSelected] = createSignal(0)
   const [showSnoozed, setShowSnoozed] = createSignal(false)
@@ -56,8 +54,7 @@ export function InboxScreen(props: { version: string; sidebar: boolean }) {
   const current = () => rows()[Math.min(selected(), rows().length - 1)]
   const agentName = (item: InboxItem) => item.agentName ?? company.agents.byId(item.agentId)?.name ?? "—"
 
-  const wide = () => dimensions().width >= SIDEBAR_MIN_COLUMNS
-  const mainWidth = () => dimensions().width - (wide() && props.sidebar ? SIDEBAR_WIDTH : 0) - 2
+  const mainWidth = useMainWidth(() => props.sidebar, 2)
   const cols = () => columns(mainWidth(), Math.max(7, ...items().map((i) => (i.identifier ?? "").length)))
 
   const move = (delta: number) => {

@@ -1,5 +1,6 @@
 // Tasks: the full list for the Tasks screen and the sidebars, projects, and a cache of opened threads.
 import { basename } from "node:path"
+import { createMemo } from "solid-js"
 import { createStore } from "solid-js/store"
 import { createTask, getTask, getTaskCost, getThread, listProjects, listTasks, postComment, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
 import { ApiError } from "../api/client.ts"
@@ -33,6 +34,16 @@ export function createIssuesStore(session: Session, companyId: string) {
   }
   const byId = (id: string | null | undefined) => (id ? list.data.find((t) => t.id === id) : undefined)
   const children = (id: string) => list.data.filter((t) => t.parentId === id)
+  // Done and total sub-tasks per parent, counted once per list rather than once per row on screen.
+  const counts = createMemo(() => {
+    const map = new Map<string, [done: number, total: number]>()
+    for (const t of list.data) {
+      if (!t.parentId) continue
+      const c = map.get(t.parentId) ?? [0, 0]
+      map.set(t.parentId, [c[0] + (t.status === "done" ? 1 : 0), c[1] + 1])
+    }
+    return map
+  })
 
   return {
     list,
@@ -41,10 +52,7 @@ export function createIssuesStore(session: Session, companyId: string) {
     children,
     inFlight: () => list.data.filter((t) => IN_FLIGHT.includes(t.status)),
     /** Done and total sub-tasks, or null for a task without any. */
-    progress(id: string): [done: number, total: number] | null {
-      const kids = children(id)
-      return kids.length ? [kids.filter((k) => k.status === "done").length, kids.length] : null
-    },
+    progress: (id: string): [done: number, total: number] | null => counts().get(id) ?? null,
     projectName: (id: string | null) => (id ? projects.data.find((p) => p.id === id)?.name : undefined),
     /**
      * Posts a comment with files: the files are uploaded first and the comment carries the ones the server took. Retries

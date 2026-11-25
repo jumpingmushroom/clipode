@@ -45,7 +45,7 @@ export function InboxSidebar(props: { items: InboxItem[]; now: number }) {
     for (const extra of ["review", "other"] as const) if (active().some((i) => i.kind === extra)) shown.push(extra)
     return shown
   }
-  const agents = () => company.agents.list.data
+  const agents = () => company.agents.active()
   const waiting = () => new Set(active().map((i) => i.agentId ?? i.agentName).filter(Boolean)).size
   const tasks = () => company.issues.inFlight()
   const runs = () => company.runs.live.data

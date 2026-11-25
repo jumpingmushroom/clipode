@@ -116,6 +116,25 @@ test("a reconnect while a failed connect is being checked leaves one socket, not
   live.close()
 })
 
+test("a server that accepts and then drops each connection is asked again later and later", async () => {
+  const server = Bun.serve({ port: 0, fetch: (req, srv) => (srv.upgrade(req) ? undefined : new Response("no", { status: 400 })), websocket: { open: (ws) => ws.close(1013, "busy"), message() {} } })
+  servers.push(server)
+  const attempts: number[] = []
+  const live = connectLive({
+    url: `ws://127.0.0.1:${server.port}/`,
+    headers: () => ({}),
+    onEvent: () => {},
+    onState: (st) => st.status === "polling" && attempts.push(st.attempt),
+    onResync: () => {},
+    check: async () => "ok",
+    onUnauthorized: () => {},
+    baseDelayMs: 5,
+  })
+  await until(() => attempts.length >= 3)
+  live.close()
+  expect(attempts.slice(0, 3)).toEqual([1, 2, 3])
+})
+
 test("a refused upgrade with an expired session signs out; an unreachable server is offline", async () => {
   const s = wsServer({ requireCookie: "sid=valid" })
   let unauthorized = 0

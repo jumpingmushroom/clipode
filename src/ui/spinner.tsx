@@ -4,9 +4,9 @@ import type { RGBA } from "@opentui/core"
 
 const FRAMES = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
 
-export function Spinner(props: { color: RGBA; interval?: number }) {
+export function Spinner(props: { color: RGBA }) {
   const [frame, setFrame] = createSignal(0)
-  const timer = setInterval(() => setFrame((f) => (f + 1) % FRAMES.length), props.interval ?? 80)
+  const timer = setInterval(() => setFrame((f) => (f + 1) % FRAMES.length), 80)
   onCleanup(() => clearInterval(timer))
   return <text fg={props.color}>{FRAMES[frame()]}</text>
 }

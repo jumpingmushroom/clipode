@@ -13,12 +13,6 @@ export async function getInbox(client: Client, companyId: string, sort: "activit
   return { items: feed.items.map(toInboxItem), totalCount: feed.totalCount }
 }
 
-/** Badge count. Servers before 2026.1117.0 have no summary route; the caller then counts the feed. */
-export async function getInboxCount(client: Client, companyId: string): Promise<number> {
-  const summary = await client.get<{ totalCount: number }>(`/api/companies/${id(companyId)}/attention/summary`)
-  return summary.totalCount
-}
-
 function kindOf(item: AttentionItem): ItemKind {
   if (item.sourceKind === "review") return "review"
   switch (item.detail?.kind) {

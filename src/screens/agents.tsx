@@ -54,7 +54,7 @@ export function AgentsScreen(props: { version: string; sidebar: boolean }) {
   const tick = setInterval(() => setNow(Date.now()), 1000)
   onCleanup(() => clearInterval(tick))
 
-  const agents = createMemo(() => company.agents.list.data.filter((a) => a.status !== "terminated"))
+  const agents = createMemo(() => company.agents.active())
   const current = () => agents()[Math.min(selected(), agents().length - 1)]
   useAgentActions(current)
   const move = (delta: number) => {
@@ -84,14 +84,14 @@ export function AgentsScreen(props: { version: string; sidebar: boolean }) {
       narrowHints={[["j/k", "move"], ["enter", "open"], ["^p", "cmds"]]}
       version={props.version}
     >
-      <text fg={theme().text} paddingLeft={2}>
+      <text fg={theme().text} paddingLeft={2} flexShrink={0}>
         <span style={{ attributes: TextAttributes.BOLD }}>Agents</span>
         <span style={{ fg: theme().muted }}>{`  ${agents().length}`}</span>
       </text>
-      <text fg={theme().muted} paddingLeft={4} marginTop={1} wrapMode="none">
+      <text fg={theme().muted} paddingLeft={4} marginTop={1} wrapMode="none" flexShrink={0}>
         {fit("Name", 10) + fit("Role", 20) + fit("Model", 22) + "Now"}
       </text>
-      <scrollbox ref={(r: ScrollBoxRenderable) => (scroll = r)} flexGrow={1} scrollbarOptions={{ visible: false }}>
+      <scrollbox ref={(r: ScrollBoxRenderable) => (scroll = r)} flexGrow={1} minHeight={0} scrollbarOptions={{ visible: false }}>
         <For each={agents()}>
           {(agent, i) => {
             const state = () => nowOf(agent, now())
@@ -137,7 +137,7 @@ function AgentSidebar(props: { agent: AgentSummary; now: number }) {
   const company = useCompany()
   const nowOf = useAgentNow()
   const state = () => nowOf(props.agent, props.now)
-  const agents = () => company.agents.list.data
+  const agents = () => company.agents.active()
   const count = (s: string) => agents().filter((a) => nowOf(a, props.now).state === s).length
   return (
     <box flexDirection="column" gap={1}>

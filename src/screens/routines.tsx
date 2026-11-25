@@ -1,7 +1,6 @@
 // Routines: scheduled work, with when each runs next and how its last run went. The sidebar shows the selected one.
 import { RGBA, TextAttributes, type ScrollBoxRenderable } from "@opentui/core"
 import { useBindings } from "@opentui/keymap/solid"
-import { useTerminalDimensions } from "@opentui/solid"
 import { createSignal, For, onCleanup, onMount, Show } from "solid-js"
 import type { RoutineSummary } from "../api/model.ts"
 import { useCommands } from "../keymap/commands.tsx"
@@ -9,7 +8,7 @@ import { useRoute } from "../route.tsx"
 import { useCompany } from "../store/context.tsx"
 import { useTheme } from "../theme/context.tsx"
 import { age, dateTime, fit, until } from "../ui/format.ts"
-import { Frame, SIDEBAR_MIN_COLUMNS, SIDEBAR_WIDTH } from "./frame.tsx"
+import { Frame, useMainWidth } from "./frame.tsx"
 import { SidebarHeader, SidebarLine } from "./inbox-sidebar.tsx"
 
 const schedule = (r: RoutineSummary) => (r.schedule ?? "no trigger") + (r.moreTriggers ? ` +${r.moreTriggers}` : "")
@@ -20,7 +19,6 @@ export function RoutinesScreen(props: { version: string; sidebar: boolean }) {
   const { theme } = useTheme()
   const company = useCompany()
   const route = useRoute()
-  const dimensions = useTerminalDimensions()
   const [selected, setSelected] = createSignal(0)
   const [now, setNow] = createSignal(Date.now())
   let scroll: ScrollBoxRenderable | undefined
@@ -35,7 +33,7 @@ export function RoutinesScreen(props: { version: string; sidebar: boolean }) {
 
   // Agent, schedule, next and last run are fixed; the title takes the rest.
   const AGENT = 13, SCHEDULE = 24, NEXT = 8, LAST = 14
-  const mainWidth = () => dimensions().width - (dimensions().width >= SIDEBAR_MIN_COLUMNS && props.sidebar ? SIDEBAR_WIDTH : 0) - 4
+  const mainWidth = useMainWidth(() => props.sidebar, 4)
   const titleWidth = () => Math.max(12, mainWidth() - AGENT - SCHEDULE - NEXT - LAST - 2)
   const routines = () => company.routines.data
   const current = () => routines()[Math.min(selected(), routines().length - 1)]

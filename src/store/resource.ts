@@ -1,7 +1,7 @@
 // One loadable value with the store surface every store shares: load(), refresh(), status, data, error.
 import { createStore } from "solid-js/store"
 
-export type Status = "idle" | "loading" | "ready" | "error" | "stale"
+export type Status = "idle" | "loading" | "ready" | "error"
 
 export type Resource<T> = {
   readonly status: Status
@@ -12,8 +12,6 @@ export type Resource<T> = {
   load(): Promise<void>
   /** Fetches again, keeping the current data on screen while it loads; an older request still on its way is ignored. */
   refresh(): Promise<void>
-  /** Marks the data out of date, for example after a live event. */
-  invalidate(): void
 }
 
 export function createResource<T>(fetcher: () => Promise<T>, initial: T, onError?: (err: unknown) => void): Resource<T> {
@@ -54,8 +52,5 @@ export function createResource<T>(fetcher: () => Promise<T>, initial: T, onError
     },
     load: () => (state.status === "idle" ? fetch() : (inflight ?? Promise.resolve())),
     refresh: fetch,
-    invalidate: () => {
-      if (state.status === "ready") set("status", "stale")
-    },
   }
 }

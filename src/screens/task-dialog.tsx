@@ -55,7 +55,7 @@ export function TaskDialog(props: {
 
   const fields = (): Field[] => (props.edit ? ["description", "title", "project", "assignee"] : ["description", "title", "project", "assignee", "model", "mode", "private", "files"])
   const set = (patch: Partial<TaskForm>) => setForm((f) => ({ ...f, ...patch }))
-  const agents = () => company.agents.list.data.filter((a) => a.status !== "terminated")
+  const agents = () => company.agents.active()
   const assignee = () => agents().find((a) => a.id === form().assigneeAgentId)
   const models = createMemo(() => (assignee() ? company.agents.models(assignee()!.adapterType) : undefined))
   createEffect(() => void models()?.load())

@@ -47,7 +47,7 @@ export function useTaskActions(task: () => TaskSummary | undefined, opts: { desc
     later(async () => {
       const t = task()
       if (!t) return
-      const agents = company.agents.list.data.filter((a) => a.status !== "terminated")
+      const agents = company.agents.active()
       const next = await dialogs.select("Assign to", [
         { title: "Unassigned", value: "", footer: t.assigneeAgentId ? undefined : "current" },
         ...agents.map((a) => ({ title: a.name, value: a.id, footer: a.id === t.assigneeAgentId ? "current" : (a.title ?? a.role) })),

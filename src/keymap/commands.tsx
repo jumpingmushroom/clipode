@@ -2,7 +2,7 @@
 import { formatCommandBindings } from "@opentui/keymap/extras"
 import { useBindings, useKeymapSelector } from "@opentui/keymap/solid"
 import type { Accessor } from "solid-js"
-import { useKeybinds } from "./provider.tsx"
+import { useKeybinds, useLeader } from "./provider.tsx"
 
 export type AppCommand = {
   /** Unique id without spaces, for example "app.inbox". */
@@ -17,8 +17,6 @@ export type AppCommand = {
 }
 
 export type CommandEntry = { name: string; title: string; category: string; keys?: string; hidden: boolean }
-
-const DISPLAY = { tokenDisplay: { leader: "ctrl+x" } }
 
 /** Registers commands for as long as the calling component lives. `mode` decides when they are active. */
 export function useCommands(
@@ -40,8 +38,8 @@ export function useCommands(
 }
 
 /** Every registered command with its bindings formatted for display, for the palette and help. */
-export function useCommandEntries(leader = "ctrl+x"): Accessor<CommandEntry[]> {
-  const display = { ...DISPLAY, tokenDisplay: { leader } }
+export function useCommandEntries(): Accessor<CommandEntry[]> {
+  const display = { tokenDisplay: { leader: useLeader() } }
   return useKeymapSelector((keymap) =>
     keymap
       .getCommandEntries({ visibility: "registered" })

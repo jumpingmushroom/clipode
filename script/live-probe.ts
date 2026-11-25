@@ -42,17 +42,13 @@ function connect(label: string, url: string, headers: Record<string, string>, ru
   })
 }
 
-try {
-  const companies = await client.get<{ id: string }[]>("/api/companies")
-  const company = companies[0]
-  if (!company) throw new Error("no companies visible to this user")
-  const runs = await client.get<{ id: string }[]>(`/api/companies/${company.id}/heartbeat-runs`, { limit: 1 })
-  const url = `${client.origin.replace(/^http/, "ws")}/api/companies/${company.id}/events/ws`
-  console.log(`WebSocket ${url.replace(company.id, "<company id>")}, hold ${holdMs / 1000} s`)
+const companies = await client.get<{ id: string }[]>("/api/companies")
+const company = companies[0]
+if (!company) throw new Error("no companies visible to this user")
+const runs = await client.get<{ id: string }[]>(`/api/companies/${company.id}/heartbeat-runs`, { limit: 1 })
+const url = `${client.origin.replace(/^http/, "ws")}/api/companies/${company.id}/events/ws`
+console.log(`WebSocket ${url.replace(company.id, "<company id>")}, hold ${holdMs / 1000} s`)
 
-  await connect("cookie only, no Origin", url, { Cookie: client.cookieHeader() }, runs[0]?.id ?? null, holdMs)
-  await connect("cookie and Origin", url, { Cookie: client.cookieHeader(), Origin: client.origin }, null, 3000)
-  await connect("no cookie (control)", url, {}, null, 3000)
-} finally {
-  // The cached session stays valid for the next script.
-}
+await connect("cookie only, no Origin", url, { Cookie: client.cookieHeader() }, runs[0]?.id ?? null, holdMs)
+await connect("cookie and Origin", url, { Cookie: client.cookieHeader(), Origin: client.origin }, null, 3000)
+await connect("no cookie (control)", url, {}, null, 3000)

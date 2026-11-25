@@ -104,3 +104,14 @@ test("G is shift+g, so a screen that binds G still lets g start a sequence", asy
   app.mockInput.pressKey("i")
   expect((await app.frame()).split("\n")[0]).toContain("Inbox")
 })
+
+test("a leader set in cli.json is the one shown in the palette and in the pending-key hint", async () => {
+  app = await startApp({ config: { leader: "ctrl+a" } })
+  await app.frame()
+  app.mockInput.pressKey("p", { ctrl: true })
+  expect(await app.frame()).toMatch(/Inbox\s+ctrl\+a i {2}g i/)
+  app.mockInput.pressEscape()
+  await Bun.sleep(40)
+  app.mockInput.pressKey("a", { ctrl: true })
+  expect(await app.frame()).toContain(" ctrl+a … ")
+})

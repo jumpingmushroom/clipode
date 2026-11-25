@@ -38,9 +38,10 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
   const tabs = useTabs()
   onMount(() => {
     tabs?.open(props.id)
-    void thread.detail.load()
-    void thread.entries.load()
-    void thread.cost.load()
+    // The thread is cached for the session; read it again, since live events reach it only while it is watched.
+    void thread.detail.refresh()
+    void thread.entries.refresh()
+    void thread.cost.refresh()
     void company.issues.list.load()
     void company.agents.list.load()
   })

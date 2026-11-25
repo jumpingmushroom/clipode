@@ -17,8 +17,10 @@ const startOfDay = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDat
 function decideByDue(decideBy: string | null, now: Date): boolean {
   if (!decideBy) return false
   if (decideBy === "today") return true
-  // A date (YYYY-MM-DD or a timestamp) that is today or earlier. "this_week" is not due yet.
-  const at = Date.parse(decideBy)
+  // A date (YYYY-MM-DD or a timestamp) that is today or earlier. "this_week" is not due yet. A bare date is a local
+  // day: Date.parse would read it as midnight UTC, the day before anywhere west of UTC.
+  const day = /^(\d{4})-(\d{2})-(\d{2})$/.exec(decideBy)
+  const at = day ? new Date(Number(day[1]), Number(day[2]) - 1, Number(day[3])).getTime() : Date.parse(decideBy)
   return !Number.isNaN(at) && startOfDay(new Date(at)) <= startOfDay(now)
 }
 

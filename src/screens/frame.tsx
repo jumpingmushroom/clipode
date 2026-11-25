@@ -14,6 +14,12 @@ export const SIDEBAR_MIN_COLUMNS = 100
 
 export type Hint = [key: string, label: string]
 
+/** Columns left for a screen's main column, beside the sidebar when the shell shows it, less the screen's inset. */
+export function useMainWidth(sidebar: () => boolean, inset: number) {
+  const dimensions = useTerminalDimensions()
+  return () => dimensions().width - (sidebar() ? SIDEBAR_WIDTH : 0) - inset
+}
+
 export function Frame(
   props: ParentProps<{
     view: string
@@ -32,7 +38,8 @@ export function Frame(
   const { session, company } = useStores()
   const dimensions = useTerminalDimensions()
   const wide = () => dimensions().width >= SIDEBAR_MIN_COLUMNS
-  const sidebarShown = () => wide() && props.showSidebar !== false && !!props.sidebar
+  // The shell decides (width, ctrl+b and "sidebar" in cli.json); a second width check here would undo "show".
+  const sidebarShown = () => props.showSidebar !== false && !!props.sidebar
   const companyName = () => session.state.companies.find((c) => c.id === company()?.companyId)?.name ?? ""
   const connection = () => session.state.connection
   const dot = () => ({ live: theme().success, polling: theme().warning, offline: theme().error, connecting: theme().muted })[connection()]
