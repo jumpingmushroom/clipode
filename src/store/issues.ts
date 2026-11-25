@@ -2,9 +2,9 @@
 import { basename } from "node:path"
 import { createMemo } from "solid-js"
 import { createStore } from "solid-js/store"
-import { checkMonitorNow, commentAndAssign, createTask, getDocument, getHeldComments, getTask, getTaskCost, getThread, handBackAgent, listMine, listProjects, listTasks, markRead, postComment, retryNow, sendHeldComments, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
+import { checkMonitorNow, commentAndAssign, createTask, getDocument, getHeldComments, getRevisions, getTask, getTaskCost, getThread, handBackAgent, listMine, listProjects, listTasks, markRead, postComment, retryNow, sendHeldComments, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
 import { ApiError } from "../api/client.ts"
-import type { HeldComments, MineTask, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
+import type { DocumentRevision, HeldComments, MineTask, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
 import { createResource, type Resource } from "./resource.ts"
 import type { Session } from "./session.ts"
 export type { DocumentSummary, HeldComments, MineTask, Waiting, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
@@ -24,6 +24,7 @@ export function createIssuesStore(session: Session, companyId: string) {
   const projects = createResource<ProjectSummary[]>(() => listProjects(session.client(), companyId), [], session.handleError)
   const [threads, setThreads] = createStore<Record<string, Thread>>({})
   const documents = new Map<string, Resource<TaskDocument | null>>()
+  const revisions = new Map<string, Resource<DocumentRevision[]>>()
 
   /** Uploads files to a task one by one; returns the new attachments' ids and the files the server did not take. */
   async function attach(issueId: string, paths: string[]): Promise<{ ids: string[]; failed: { path: string; reason: string }[] }> {
@@ -146,6 +147,12 @@ export function createIssuesStore(session: Session, companyId: string) {
       const k = `${issueId}/${key}`
       if (!documents.has(k)) documents.set(k, createResource<TaskDocument | null>(() => getDocument(session.client(), issueId, key), null, session.handleError))
       return documents.get(k)!
+    },
+    /** Every revision of a document, newest first, created on first use. */
+    revisions(issueId: string, key: string): Resource<DocumentRevision[]> {
+      const k = `${issueId}/${key}`
+      if (!revisions.has(k)) revisions.set(k, createResource<DocumentRevision[]>(() => getRevisions(session.client(), issueId, key), [], session.handleError))
+      return revisions.get(k)!
     },
     /** The thread of one task, created on first use and kept for the session. */
     thread(id: string): Thread {

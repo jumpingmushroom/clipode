@@ -83,3 +83,33 @@ test("t moves to the parent or a sub-task", async () => {
   await Bun.sleep(100)
   expect(await app.frame()).toContain(`Task · ${kid!.identifier}`)
 })
+
+test("[ and ] step through older revisions with their change notes, read once", async () => {
+  const rev = (n: number, body: string, changeSummary: string | null) => ({ key: "plan", revisionNumber: n, title: "Launch plan", body, changeSummary, createdByAgentId: null, createdAt: `2026-11-2${n}T10:00:00.000Z` })
+  app = await startApp({
+    route: { name: "document", issueId: THREAD_ID, key: "plan" },
+    before: (s) => {
+      s.set(`/api/issues/${THREAD_ID}/documents/plan`, { ...doc, key: "plan", title: "Launch plan", latestRevisionNumber: 3, body: "Ship on Friday." })
+      s.set(`/api/issues/${THREAD_ID}/documents/plan/revisions`, [rev(3, "Ship on Friday.", "Moved to Friday"), rev(2, "Ship on Thursday.", "Moved to Thursday"), rev(1, "Ship on Monday.", null)])
+    },
+  })
+  let text = await app.frame()
+  expect(text).toContain("Ship on Friday.")
+  expect(app.server.requests).not.toContain(`GET /api/issues/${THREAD_ID}/documents/plan/revisions`)
+  app.mockInput.pressKey("[")
+  text = await app.frame()
+  expect(text).toContain("revision 2 of 3")
+  expect(text).toContain("Moved to Thursday")
+  expect(text).toContain("Ship on Thursday.")
+  app.mockInput.pressKey("[")
+  app.mockInput.pressKey("[")
+  text = await app.frame()
+  expect(text).toContain("revision 1 of 3")
+  expect(text).toContain("Ship on Monday.")
+  app.mockInput.pressKey("]")
+  app.mockInput.pressKey("]")
+  text = await app.frame()
+  expect(text).toContain("Ship on Friday.")
+  expect(text).not.toContain(" of 3")
+  expect(app.server.requests.filter((r) => r.endsWith("/revisions"))).toHaveLength(1)
+})

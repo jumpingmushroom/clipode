@@ -43,7 +43,7 @@ clipode opens on the inbox. The following keys work everywhere:
 | `c` | Comment on the task on screen; `ctrl+j` adds a line, `ctrl+v` pastes the clipboard's text, or attaches it if it is an image, `ctrl+o` attaches files by path, `enter` sends. On a task assigned to you, the comment hands it back to the agent that gave it to you (shown as "to <agent>"), which wakes it; `ctrl+t` picks another agent or none |
 | `w` | In a task thread, wake the agent now: send comments the server is holding, or run its scheduled monitor check or retry (both shown at the end of the thread) |
 | `enter`, `o` | In a task thread, open the run going now (else the latest), or pick any run; a run that is going also shows in the thread as it works |
-| `d`, `t` | Open the task's documents (plans, specs), or move to its parent or a sub-task (in a task thread) |
+| `d`, `t` | Open the task's documents (plans, specs; `[` and `]` step through older revisions), or move to its parent or a sub-task (in a task thread) |
 | `f` | Attach files to the task on screen or the selected task, without a comment (`ctrl+v` in the prompt pastes a clipboard image) |
 | `d`, `s`, `u` | Dismiss, snooze, or restore the selected inbox item |
 | `n` | New task (in Tasks): description, optional title, project, assignee, model, plan or ask mode, private, and files (paste or drag their paths; `ctrl+v` on the Files row pastes a clipboard image) |

@@ -164,6 +164,9 @@ export type DocumentSummary = { key: string; title: string; revision: number; up
 
 export type TaskDocument = DocumentSummary & { body: string }
 
+/** One revision of a document, with the agent's note on what changed. */
+export type DocumentRevision = TaskDocument & { summary: string | null }
+
 export type ThreadEntry =
   | { kind: "comment"; id: string; at: string; agentId: string | null; userId: string | null; body: string }
   | { kind: "run"; id: string; at: string; agentId: string; status: string; startedAt: string | null; finishedAt: string | null; costUsd: number | null }

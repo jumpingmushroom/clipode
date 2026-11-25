@@ -2,7 +2,7 @@
 import type { Issue, IssueComment, Project } from "@paperclipai/shared"
 import { basename } from "node:path"
 import type { Client } from "../client.ts"
-import type { DocumentSummary, HeldComments, MineTask, Waiting, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../model.ts"
+import type { DocumentRevision, DocumentSummary, HeldComments, MineTask, Waiting, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../model.ts"
 
 const id = encodeURIComponent
 
@@ -121,6 +121,16 @@ export async function retryNow(client: Client, issueId: string): Promise<void> {
 export async function getDocument(client: Client, issueId: string, key: string): Promise<TaskDocument> {
   const d = await client.get<WireDocument & { body: string }>(`/api/issues/${id(issueId)}/documents/${id(key)}`)
   return { ...toDocument(d), body: d.body }
+}
+
+type WireRevision = { key: string; revisionNumber: number; title: string | null; body: string; changeSummary: string | null; createdByAgentId: string | null; createdAt: string }
+
+/** Every revision of a document with its text, newest first. */
+export async function getRevisions(client: Client, issueId: string, key: string): Promise<DocumentRevision[]> {
+  const rows = await client.get<WireRevision[]>(`/api/issues/${id(issueId)}/documents/${id(key)}/revisions`)
+  return rows
+    .map((r) => ({ key: r.key, title: r.title || r.key, revision: r.revisionNumber, updatedAt: r.createdAt, agentId: r.createdByAgentId, body: r.body, summary: r.changeSummary || null }))
+    .sort((a, b) => b.revision - a.revision)
 }
 
 type RunRow = { runId: string; agentId: string; status: string; createdAt: string; startedAt: string | null; finishedAt: string | null; usageJson?: { costUsd?: number } | null }
