@@ -97,6 +97,9 @@ test("cli.json keybinds replace the default keys of global and screen commands",
 
 test("G is shift+g, so a screen that binds G still lets g start a sequence", async () => {
   app = await startApp({ route: { name: "thread", id: THREAD_ID }, height: 12 })
+  await app.frame()
+  // The thread opens at its end; scroll up so G has somewhere to go.
+  for (let i = 0; i < 5; i++) app.mockInput.pressKey("k")
   const top = await app.frame()
   app.mockInput.pressKey("G")
   expect(await app.frame()).not.toBe(top)

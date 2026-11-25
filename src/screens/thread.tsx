@@ -13,7 +13,8 @@ import { Markdown } from "../ui/markdown.tsx"
 import { Spinner } from "../ui/spinner.tsx"
 import { Frame } from "./frame.tsx"
 import { SidebarHeader } from "./inbox-sidebar.tsx"
-import { PRIORITY, priorityColor, StatusMark } from "./tasks.tsx"
+import { PRIORITY, priorityColor } from "./tasks.tsx"
+import { STATUS_GLYPHS, statusColor, useTaskRefs } from "./task-refs.tsx"
 import { useTabs } from "./tabs.tsx"
 import { Slot } from "../plugin/host.tsx"
 import { useTaskActions } from "./task-actions.tsx"
@@ -36,6 +37,7 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
   let scroll: ScrollBoxRenderable | undefined
 
   const tabs = useTabs()
+  const links = useTaskRefs()
   onMount(() => {
     tabs?.open(props.id)
     // The thread is cached for the session; read it again, since live events reach it only while it is watched.
@@ -112,14 +114,14 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
           </box>
         </Match>
         <Match when={detail()}>
-          <scrollbox ref={(r: ScrollBoxRenderable) => (scroll = r)} flexGrow={1} paddingLeft={2} paddingRight={2} scrollbarOptions={{ visible: false }}>
+          <scrollbox ref={(r: ScrollBoxRenderable) => (scroll = r)} flexGrow={1} paddingLeft={2} paddingRight={2} scrollbarOptions={{ visible: false }} stickyScroll stickyStart="bottom">
             <Slot name="thread_header" />
             <text fg={theme().text} attributes={TextAttributes.BOLD}>
               <span style={{ fg: theme().muted }}>{detail()!.identifier ?? ""}</span>
               {"  " + detail()!.title}
             </text>
             <Show when={detail()!.description}>
-              <Markdown content={detail()!.description!} />
+              <Markdown content={detail()!.description!} links={links} />
             </Show>
             <Show when={thread.entries.status === "error"}>
               <text fg={theme().error} marginTop={1}>
@@ -141,7 +143,7 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
                           <text fg={theme().muted}>{dateTime(c.at)}</text>
                         </box>
                         <box paddingLeft={2}>
-                          <Markdown content={c.body} />
+                          <Markdown content={c.body} links={links} />
                         </box>
                       </box>
                     )
@@ -216,12 +218,9 @@ function ThreadSidebar(props: { task: TaskDetail; now: number }) {
           <SidebarHeader title="Sub-tasks" count={`${kids().filter((k) => k.status === "done").length}/${kids().length}`} />
           <For each={kids()}>
             {(kid) => (
-              <box flexDirection="row">
-                <StatusMark status={kid.status} />
-                <text fg={theme().muted} wrapMode="none">
-                  {" " + fit(kid.title, 26)}
-                </text>
-              </box>
+              <text fg={theme().muted} wrapMode="none">
+                <span style={{ fg: statusColor(kid.status, theme()) }}>{STATUS_GLYPHS[kid.status] ?? "○"}</span> {fit(kid.title, 26)}
+              </text>
             )}
           </For>
         </box>
@@ -232,7 +231,7 @@ function ThreadSidebar(props: { task: TaskDetail; now: number }) {
           <For each={props.task.blockers}>
             {(b) => (
               <text fg={theme().muted} wrapMode="none">
-                <span style={{ fg: theme().warning }}>■</span> {fit(`${b.identifier ?? ""} ${b.title}`, 26)}
+                <span style={{ fg: statusColor(b.status, theme()) }}>{STATUS_GLYPHS[b.status] ?? "○"}</span> {fit(`${b.identifier ?? ""} ${b.title}`, 26)}
               </text>
             )}
           </For>

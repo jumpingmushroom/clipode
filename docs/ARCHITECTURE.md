@@ -318,7 +318,7 @@ The app opens on the attention inbox and everything else is one or two keys away
 | Inbox (home) | Attention items on three shelves: Decide now, New today, Earlier, plus a collapsed Snoozed group. Each row has a kind marker, title, task identifier, agent and age. The list sorts by latest activity or by decide-by date. There is no mine / unassigned / company switch, because the server has no such filter. | Item detail |
 | Item detail | The request as the agent wrote it: question, confirmation, approval, failed run or blocked task, with Markdown, code and tables rendered. Answer options are listed but inactive in phase 1. | The task thread or the run |
 | Tasks | Tasks grouped by status, with filters for status, priority, assignee and project, and a search field. A tree view by parent comes after the flat list. | Task thread |
-| Task thread | Title and description, then comments and run activity in time order. Sidebar: status, priority, assignee, project and goal, parent and sub-tasks, blockers, live run, cost. | Run transcript |
+| Task thread | Title and description, then comments and run activity in time order; it opens at the latest entry and follows new ones until scrolled up. Task references (links to a task, and bare identifiers of known tasks) show the task's status glyph and open it on click, in the thread and in inbox items. Sidebar: status, priority, assignee, project and goal, parent and sub-tasks, blockers, live run, cost. | Run transcript |
 | Run transcript | Messages, reasoning, collapsible tool calls with output, and the final result. Follows the tail while the run is live. A footer line gives agent, model, duration, tokens and cost. | Back to the thread |
 | Agents | The team: status, model, what each agent is doing now. | Agent detail with recent runs |
 
@@ -348,7 +348,7 @@ Defaults follow opencode and pasode, and every binding can be changed in the con
 | `r` | Refresh the current screen |
 | `ctrl+c` twice, `leader q` | Quit |
 
-Minimum terminal size is 80 by 24. Mouse support is on by default: click to select, wheel to scroll, click a tab to switch.
+Minimum terminal size is 80 by 24. Mouse support is on by default: click to select, wheel to scroll, click a tab to switch, click a task reference to open it.
 
 ### Agreed mockup
 

@@ -14,6 +14,7 @@ import { age, dateTime, elapsed } from "../ui/format.ts"
 import { Markdown } from "../ui/markdown.tsx"
 import { Spinner } from "../ui/spinner.tsx"
 import { Frame } from "./frame.tsx"
+import { useTaskRefs } from "./task-refs.tsx"
 import { KIND_LABELS, MARKERS, markerColor } from "./inbox-row.tsx"
 
 /** Reasons and notes typed for a decision, kept until the server takes it, so a refused one need not be typed again. */
@@ -272,21 +273,22 @@ function Body(props: { item: InboxItem; detail: ItemDetail } & Pick) {
   const { theme } = useTheme()
   const d = props.detail
   const all = () => (props.choices.length ? props.choices : inert(d))
+  const links = useTaskRefs()
   const pick = () => ({ choices: props.choices, cursor: props.cursor, selection: props.selection, onPick: props.onPick })
   return (
-    <Switch fallback={<Markdown content={props.item.summary ?? props.item.whyNow} />}>
+    <Switch fallback={<Markdown content={props.item.summary ?? props.item.whyNow} links={links} />}>
       <Match when={d.kind === "question" && d}>
         {(q: Accessor<Extract<ItemDetail, { kind: "question" }>>) => (
           <box flexDirection="column">
           <Show when={q().context}>
             <Section title="Context" />
-            <Markdown content={q().context!} />
+            <Markdown content={q().context!} links={links} />
           </Show>
           <For each={q().questions}>
             {(question, i) => (
               <box flexDirection="column">
                 <Section title={q().questions.length > 1 ? `Question ${i() + 1}` : "Question"} />
-                <Markdown content={question.prompt} />
+                <Markdown content={question.prompt} links={links} />
                 <Section title="Answer" />
                 <Options {...pick()} show={all().filter((c) => "questionId" in c && c.questionId === question.id)} multiple={question.multiple} />
                 <Show when={i() === q().questions.length - 1 && !props.choices.length}>
@@ -301,10 +303,10 @@ function Body(props: { item: InboxItem; detail: ItemDetail } & Pick) {
       <Match when={d.kind === "confirmation" && d}>
         {(c: Accessor<Extract<ItemDetail, { kind: "confirmation" }>>) => (
           <box flexDirection="column">
-            <Markdown content={c().prompt} />
+            <Markdown content={c().prompt} links={links} />
             <Show when={c().detailsMarkdown}>
               <Section title="Details" />
-              <Markdown content={c().detailsMarkdown!} />
+              <Markdown content={c().detailsMarkdown!} links={links} />
             </Show>
             <Section title="Answer" />
             <Options {...pick()} show={all()} />
@@ -317,7 +319,7 @@ function Body(props: { item: InboxItem; detail: ItemDetail } & Pick) {
       <Match when={d.kind === "approval" && d}>
         {(a: Accessor<Extract<ItemDetail, { kind: "approval" }>>) => (
           <box flexDirection="column">
-            <Markdown content={a().summary} />
+            <Markdown content={a().summary} links={links} />
             <Section title="Answer" />
             <Options {...pick()} show={all()} />
             <Show when={!props.choices.length}>
@@ -380,7 +382,7 @@ function Body(props: { item: InboxItem; detail: ItemDetail } & Pick) {
             </Show>
             <Show when={b().description}>
               <Section title="Description" />
-              <Markdown content={b().description!} />
+              <Markdown content={b().description!} links={links} />
             </Show>
           </box>
         )}
