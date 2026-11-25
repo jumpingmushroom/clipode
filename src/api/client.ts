@@ -9,7 +9,7 @@ const WRITES: Record<string, RegExp[]> = {
     new RegExp(`^/api/issues/${ID}/interactions/${ID}/(respond|accept|reject)$`),
     new RegExp(`^/api/approvals/${ID}/(approve|reject|request-revision|comments)$`),
     new RegExp(`^/api/decisions/${ID}/(decide|dismiss)$`),
-    new RegExp(`^/api/issues/${ID}/(retry|recovery-actions/resolve)$`),
+    new RegExp(`^/api/issues/${ID}/(retry|recovery-actions/resolve|queued-comments/interrupt)$`),
     new RegExp(`^/api/issues/${ID}/stalled-review-decision$`),
     new RegExp(`^/api/issues/${ID}/comments$`),
     new RegExp(`^/api/companies/${ID}/inbox-dismissals$`),

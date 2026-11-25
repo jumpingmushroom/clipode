@@ -14,6 +14,7 @@ import { afterDispatch, useDialog } from "../ui/dialog.tsx"
 import { truncate } from "../ui/format.ts"
 import { TextArea } from "../ui/text-area.tsx"
 import { useToast } from "../ui/toast.tsx"
+import type { CommentResult } from "../store/issues.ts"
 import { AttachPrompt, saveImage, type Added } from "./attach-prompt.tsx"
 
 /**
@@ -22,7 +23,7 @@ import { AttachPrompt, saveImage, type Added } from "./attach-prompt.tsx"
  */
 export type ComposerTarget = {
   label: string
-  send: (text: string, files: string[], assignTo: string | null) => Promise<{ path: string; reason: string }[]>
+  send: (text: string, files: string[], assignTo: string | null) => Promise<CommentResult>
   handBack?: () => Promise<string | null>
 }
 
@@ -55,9 +56,10 @@ export function Composer(props: { target?: ComposerTarget }) {
     if ((!text && !files().length) || sending() || !props.target) return
     setSending(true)
     try {
-      const failed = await props.target.send(text, files(), assignTo())
+      const { failed, held } = await props.target.send(text, files(), assignTo())
       const posted = `Comment posted${assignTo() ? `, ${props.target.label} handed to ${agentName(assignTo())}` : ""}`
-      if (failed.length) toast.show(`${posted}; not attached: ${failed.map((f) => `${basename(f.path)} (${f.reason})`).join(", ")}`, "warning", 8000)
+      if (held) toast.show(`${posted}, but held from the agent: ${held} w in the task sends it anyway.`, "warning", 10000)
+      else if (failed.length) toast.show(`${posted}; not attached: ${failed.map((f) => `${basename(f.path)} (${f.reason})`).join(", ")}`, "warning", 8000)
       else toast.show(files().length ? `${posted} with ${files().length} file${files().length === 1 ? "" : "s"}` : posted, "success")
       close()
     } catch (err) {

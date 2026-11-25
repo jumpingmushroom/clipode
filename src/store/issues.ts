@@ -2,17 +2,20 @@
 import { basename } from "node:path"
 import { createMemo } from "solid-js"
 import { createStore } from "solid-js/store"
-import { commentAndAssign, createTask, getDocument, getTask, getTaskCost, getThread, handBackAgent, listProjects, listTasks, postComment, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
+import { commentAndAssign, createTask, getDocument, getHeldComments, getTask, getTaskCost, getThread, handBackAgent, listProjects, listTasks, postComment, sendHeldComments, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
 import { ApiError } from "../api/client.ts"
-import type { ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
+import type { HeldComments, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
 import { createResource, type Resource } from "./resource.ts"
 import type { Session } from "./session.ts"
-export type { DocumentSummary, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
+export type { DocumentSummary, HeldComments, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../api/model.ts"
 export type { NewTask, TaskPatch } from "../api/endpoints/issues.ts"
 
 export const IN_FLIGHT = ["in_progress", "in_review", "blocked"]
 
-export type Thread = { detail: Resource<TaskDetail | null>; entries: Resource<ThreadEntry[]>; cost: Resource<TaskCost | null> }
+export type Thread = { detail: Resource<TaskDetail | null>; entries: Resource<ThreadEntry[]>; cost: Resource<TaskCost | null>; held: Resource<HeldComments | null> }
+
+/** What a comment did: files the server refused, and the reason the server holds the comment from the agent, if it does. */
+export type CommentResult = { failed: { path: string; reason: string }[]; held: string | null }
 
 export function createIssuesStore(session: Session, companyId: string) {
   const notSent = (err: unknown) => session.notSent(err)
@@ -60,7 +63,7 @@ export function createIssuesStore(session: Session, companyId: string) {
      * agent to assign, the comment hands the task to it in the same request, which wakes it. Retries once after a
      * network error with the same request id, refreshes the thread, and returns the files that were not attached.
      */
-    async comment(issueId: string, body: string, files: string[] = [], assignTo: string | null = null) {
+    async comment(issueId: string, body: string, files: string[] = [], assignTo: string | null = null): Promise<CommentResult> {
       const { ids, failed } = files.length ? await attach(issueId, files) : { ids: [], failed: [] }
       if (files.length && !ids.length && !body) throw new Error(`Not sent: no file was attached (${failed.map((f) => f.reason).join(", ")})`)
       const requestId = crypto.randomUUID()
@@ -75,7 +78,11 @@ export function createIssuesStore(session: Session, companyId: string) {
         void list.refresh()
         if (threads[issueId]) void threads[issueId]!.detail.refresh()
       }
-      return failed
+      // The server may keep the comment from the agent (SKO-226, 2026-11-25); say so rather than report it delivered.
+      const held = await getHeldComments(session.client(), issueId).catch(() => null)
+      if (threads[issueId]) void threads[issueId]!.held.refresh()
+      const mine = held?.comments.some((c) => c.clientRequestId === requestId)
+      return { failed, held: mine && held!.reason ? held!.reason : null }
     },
     /**
      * For a task assigned to you, the agent a comment should hand it back to, as the web UI suggests; null for other
@@ -111,6 +118,12 @@ export function createIssuesStore(session: Session, companyId: string) {
       void t.detail.refresh()
       void t.entries.refresh()
       void t.cost.refresh()
+      void t.held.refresh()
+    },
+    /** Sends the task's held comments now; the thread is read again after. */
+    async sendHeld(issueId: string, held: HeldComments) {
+      await sendHeldComments(session.client(), issueId, held).catch((err) => Promise.reject(notSent(err)))
+      this.refreshThread(issueId)
     },
     /** One document of a task, created on first use; the screen reads it again on every visit. */
     document(issueId: string, key: string): Resource<TaskDocument | null> {
@@ -126,6 +139,7 @@ export function createIssuesStore(session: Session, companyId: string) {
           detail: createResource<TaskDetail | null>(() => getTask(client(), id), null, session.handleError),
           entries: createResource<ThreadEntry[]>(() => getThread(client(), id), [], session.handleError),
           cost: createResource<TaskCost | null>(() => getTaskCost(client(), id), null),
+          held: createResource<HeldComments | null>(() => getHeldComments(client(), id), null),
         })
       }
       return threads[id]!

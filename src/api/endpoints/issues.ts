@@ -2,7 +2,7 @@
 import type { Issue, IssueComment, Project } from "@paperclipai/shared"
 import { basename } from "node:path"
 import type { Client } from "../client.ts"
-import type { DocumentSummary, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../model.ts"
+import type { DocumentSummary, HeldComments, ProjectSummary, TaskCost, TaskDetail, TaskDocument, TaskSummary, ThreadEntry } from "../model.ts"
 
 const id = encodeURIComponent
 
@@ -126,6 +126,36 @@ export async function listProjects(client: Client, companyId: string): Promise<P
 /** Posts a comment. The same clientRequestId makes a retry safe: the server creates no second comment. */
 export function postComment(client: Client, issueId: string, body: string, clientRequestId: string, attachmentIds: string[] = []) {
   return client.post(`/api/issues/${id(issueId)}/comments`, { body, clientRequestId, ...(attachmentIds.length ? { attachmentIds } : {}) })
+}
+
+type WireQueue = {
+  queueId: string | null
+  revision: string
+  targetRunId: string | null
+  executionWait?: { reason: string; message: string } | null
+  entries: { comment: { id: string; body: string; createdAt: string; authorAgentId: string | null; clientRequestId?: string | null } }[]
+}
+
+/** The task's held comments, or null when none are held. */
+export async function getHeldComments(client: Client, issueId: string): Promise<HeldComments | null> {
+  const q = await client.get<WireQueue>(`/api/issues/${id(issueId)}/queued-comments`)
+  if (!q.queueId || !q.entries.length) return null
+  return {
+    queueId: q.queueId,
+    revision: q.revision,
+    targetRunId: q.targetRunId,
+    reason: q.executionWait?.message ?? null,
+    comments: q.entries.map(({ comment: c }) => ({ id: c.id, body: c.body, at: c.createdAt, agentId: c.authorAgentId, clientRequestId: c.clientRequestId ?? null })),
+  }
+}
+
+/**
+ * Sends held comments now, as the web UI's Send does: the server takes it as the user's word to start the agent,
+ * also when it could not confirm the last run stopped, and stops a run still going first. A queue that changed since
+ * it was read answers 409.
+ */
+export function sendHeldComments(client: Client, issueId: string, held: HeldComments) {
+  return client.post(`/api/issues/${id(issueId)}/queued-comments/interrupt`, { queueId: held.queueId, targetRunId: held.targetRunId, revision: held.revision })
 }
 
 /**

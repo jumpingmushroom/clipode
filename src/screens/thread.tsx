@@ -3,10 +3,12 @@ import { TextAttributes, type ScrollBoxRenderable } from "@opentui/core"
 import { useBindings } from "@opentui/keymap/solid"
 import { createSignal, For, Match, onCleanup, onMount, Show, Switch } from "solid-js"
 import { useRoute } from "../route.tsx"
-import { useDialog } from "../ui/dialog.tsx"
+import { createDialogs } from "../plugin/dialogs.tsx"
+import { afterDispatch, useDialog } from "../ui/dialog.tsx"
+import { useToast } from "../ui/toast.tsx"
 import { DialogSelect } from "../ui/dialog-select.tsx"
-import { useCompany } from "../store/context.tsx"
-import type { TaskDetail, ThreadEntry } from "../store/issues.ts"
+import { useCompany, useStores } from "../store/context.tsx"
+import type { HeldComments, TaskDetail, ThreadEntry } from "../store/issues.ts"
 import { useTheme } from "../theme/context.tsx"
 import { dateTime, elapsed, fit } from "../ui/format.ts"
 import { Markdown } from "../ui/markdown.tsx"
@@ -33,6 +35,9 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
   const route = useRoute()
   const thread = company.issues.thread(props.id)
   const dialog = useDialog()
+  const dialogs = createDialogs(dialog)
+  const toast = useToast()
+  const { session } = useStores()
   const [now, setNow] = createSignal(Date.now())
   let scroll: ScrollBoxRenderable | undefined
 
@@ -44,6 +49,7 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
     void thread.detail.refresh()
     void thread.entries.refresh()
     void thread.cost.refresh()
+    void thread.held.refresh()
     void company.issues.list.load()
     void company.agents.list.load()
   })
@@ -59,12 +65,28 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
       { key: "pagedown,space", cmd: () => scroll?.scrollBy(10) },
       { key: "pageup", cmd: () => scroll?.scrollBy(-10) },
       { key: "G,end", cmd: () => scroll?.scrollTo(scroll.scrollHeight) },
-      { key: "r", cmd: () => void Promise.all([thread.detail.refresh(), thread.entries.refresh(), thread.cost.refresh()]) },
+      { key: "r", cmd: () => company.issues.refreshThread(props.id) },
       { key: "o", cmd: () => openRuns() },
       { key: "d", cmd: () => openDocuments() },
       { key: "t", cmd: () => openRelated() },
+      { key: "w", cmd: () => afterDispatch(() => void sendHeld()) },
     ],
   }))
+
+  /** Sends held comments after saying what that overrides: an unconfirmed stop, or a run still going. */
+  const sendHeld = async () => {
+    const held = thread.held.data
+    if (!held || !session.client().writes) return
+    const n = held.comments.length === 1 ? "the held comment" : `${held.comments.length} held comments`
+    const why = held.targetRunId
+      ? "This stops the agent's current run and starts a new one with them."
+      : `${held.reason ?? "Paperclip is holding them."} Sending starts the agent anyway.`
+    if (!(await dialogs.confirm(`Send ${n} now?`, why))) return
+    company.issues.sendHeld(props.id, held).then(
+      () => toast.show("Held comments sent", "success"),
+      (err) => toast.error(err),
+    )
+  }
 
   const openDocument = (key: string) => route.navigate({ name: "document", issueId: props.id, key })
   const openDocuments = () => {
@@ -135,6 +157,7 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
         ["esc", "back"],
         ...(detail()?.documents.length ? [["d", "documents"] as [string, string]] : []),
         ...(detail()?.parentId || company.issues.children(props.id).length ? [["t", "sub-tasks"] as [string, string]] : []),
+        ...(thread.held.data && session.client().writes ? [["w", "send held"] as [string, string]] : []),
         ["s/p/a", "status, priority, assign"],
         ["e", "edit"],
         ["f", "attach"],
@@ -217,6 +240,24 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
                 </Show>
               )}
             </For>
+            <Show when={thread.held.data}>
+              {(held: () => HeldComments) => (
+                <box flexDirection="column" marginTop={1} backgroundColor={theme().panel} paddingLeft={1} paddingRight={1}>
+                  <text fg={theme().warning} attributes={TextAttributes.BOLD}>
+                    Held, not sent to the agent yet{session.client().writes ? <span style={{ fg: theme().muted, attributes: 0 }}>{"  w sends now"}</span> : ""}
+                  </text>
+                  <text fg={theme().muted}>{held().reason ?? (held().targetRunId ? "Waiting for the agent's current run to finish." : "Waiting for the agent to start.")}</text>
+                  <For each={held().comments}>
+                    {(c) => (
+                      <text fg={theme().text}>
+                        <span style={{ fg: theme().muted }}>{`${c.agentId ? (agentName(c.agentId) ?? "agent") : "You"} · ${dateTime(c.at)}  `}</span>
+                        {c.body}
+                      </text>
+                    )}
+                  </For>
+                </box>
+              )}
+            </Show>
           </scrollbox>
         </Match>
       </Switch>

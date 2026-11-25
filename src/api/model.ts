@@ -138,6 +138,19 @@ export type TaskDetail = TaskSummary & {
   workProducts: { title: string; type: string; status: string; url: string | null }[]
 }
 
+/**
+ * Comments the server keeps from the agent for now: until the current run ends, or, with a `reason`, until Paperclip
+ * can start new work on the task (it could not confirm the last run stopped, for example).
+ */
+export type HeldComments = {
+  queueId: string
+  revision: string
+  /** The run still going that the comments wait for; null when nothing is running. */
+  targetRunId: string | null
+  reason: string | null
+  comments: { id: string; body: string; at: string; agentId: string | null; clientRequestId: string | null }[]
+}
+
 export type DocumentSummary = { key: string; title: string; revision: number; updatedAt: string; agentId: string | null }
 
 export type TaskDocument = DocumentSummary & { body: string }
