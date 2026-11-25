@@ -255,3 +255,15 @@ test("without an image on the clipboard, or without a way to read it, ctrl+v say
   await Bun.sleep(40)
   expect(await app.frame()).toContain("This system offers no way to read clipboard images")
 })
+
+test("f attaches files to the task without a comment; ctrl+v in the prompt adds the clipboard image", async () => {
+  app = await startApp({ route: { name: "thread", id: THREAD_ID }, readImage: async () => new Uint8Array([137, 80, 78, 71]) })
+  await app.frame()
+  app.mockInput.pressKey("f")
+  expect(await app.frame()).toContain("Attach files")
+  app.mockInput.pressKey("v", { ctrl: true })
+  await Bun.sleep(80)
+  const text = await app.frame()
+  expect(app.server.writes.map((w) => w.path)).toEqual([expect.stringMatching(new RegExp(`/issues/${THREAD_ID}/attachments$`))])
+  expect(text).toMatch(/DEMO-\d+: 1 file attached/)
+})

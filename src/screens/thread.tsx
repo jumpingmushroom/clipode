@@ -93,10 +93,10 @@ export function ThreadScreen(props: { id: string; version: string; sidebar: bool
       badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<Show when={detail()}>{(d: () => TaskDetail) => <ThreadSidebar task={d()} now={now()} />}</Show>}
-      hints={[["esc", "back"], ["s/p/a", "status, priority, assign"], ["e", "edit"], ["o", "open run"], ["j/k", "scroll"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
+      hints={[["esc", "back"], ["s/p/a", "status, priority, assign"], ["e", "edit"], ["f", "attach"], ["o", "open run"], ["j/k", "scroll"], ["g", "go to"], ["ctrl+p", "commands"], ["?", "help"]]}
       narrowHints={[["esc", "back"], ["j/k", "scroll"], ["^p", "cmds"]]}
       version={props.version}
-      composer={{ label: detail()?.identifier ?? "this task", send: (text) => company.issues.comment(props.id, text) }}
+      composer={{ label: detail()?.identifier ?? "this task", send: (text, files) => company.issues.comment(props.id, text, files) }}
     >
       <Switch>
         <Match when={thread.detail.status === "error" && !detail()}>

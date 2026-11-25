@@ -1,4 +1,7 @@
 import { afterEach, expect, test } from "bun:test"
+import { mkdtemp, rm } from "node:fs/promises"
+import { tmpdir } from "node:os"
+import { join } from "node:path"
 import { THREAD_ID } from "../fake-server.ts"
 import { startApp, type Running } from "../helpers.tsx"
 
@@ -64,4 +67,34 @@ test("ctrl+j adds a line; enter sends the whole multi-line comment", async () =>
   app.mockInput.pressEnter()
   await Bun.sleep(80)
   expect((app.server.writes[0]?.body as { body: string }).body).toBe("First line\nSecond line")
+})
+
+test("ctrl+v and ctrl+o add files to a comment; they are uploaded first and the comment carries their ids", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "clipode-composer-"))
+  await Bun.write(join(dir, "notes.txt"), "some notes")
+  app = await startApp({ route: { name: "thread", id: THREAD_ID }, readImage: async () => new Uint8Array([137, 80, 78, 71]) })
+  await app.frame()
+  app.mockInput.pressKey("c")
+  await app.frame()
+  await app.mockInput.typeText("See attached")
+  app.mockInput.pressKey("v", { ctrl: true })
+  await Bun.sleep(40)
+  app.mockInput.pressKey("o", { ctrl: true })
+  let text = await app.frame()
+  expect(text).toContain("Attach files")
+  await app.mockInput.typeText(join(dir, "notes.txt"))
+  app.mockInput.pressEnter()
+  text = await app.frame()
+  expect(text).toContain("› [2 files] See attached")
+  // The comment keeps the keys after the prompt closes.
+  await app.mockInput.typeText(" now")
+  app.mockInput.pressEnter()
+  await Bun.sleep(80)
+  text = await app.frame()
+  const uploads = app.server.writes.filter((w) => w.path.endsWith("/attachments"))
+  expect(uploads.map((u) => (u.body as { file: string }).file)).toEqual([expect.stringMatching(/^clipode-clipboard-.*\.png$/), "notes.txt"])
+  const comment = app.server.writes.find((w) => w.path.endsWith("/comments"))
+  expect(comment?.body).toEqual({ body: "See attached now", clientRequestId: expect.any(String), attachmentIds: ["att-1", "att-2"] })
+  expect(text).toContain("Comment posted with 2 files")
+  await rm(dir, { recursive: true, force: true })
 })

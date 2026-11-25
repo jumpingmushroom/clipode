@@ -1,4 +1,5 @@
 // Tasks: the full list for the Tasks screen and the sidebars, projects, and a cache of opened threads.
+import { basename } from "node:path"
 import { createStore } from "solid-js/store"
 import { createTask, getTask, getTaskCost, getThread, listProjects, listTasks, postComment, updateTask, uploadAttachment, type NewTask, type TaskPatch } from "../api/endpoints/issues.ts"
 import { ApiError } from "../api/client.ts"
@@ -18,6 +19,18 @@ export function createIssuesStore(session: Session, companyId: string) {
   const projects = createResource<ProjectSummary[]>(() => listProjects(session.client(), companyId), [], session.handleError)
   const [threads, setThreads] = createStore<Record<string, Thread>>({})
 
+  /** Uploads files to a task one by one; returns the new attachments' ids and the files the server did not take. */
+  async function attach(issueId: string, paths: string[]): Promise<{ ids: string[]; failed: { path: string; reason: string }[] }> {
+    const ids: string[] = []
+    const failed: { path: string; reason: string }[] = []
+    for (const path of paths) {
+      await uploadAttachment(session.client(), companyId, issueId, path).then(
+        (attachmentId) => ids.push(attachmentId),
+        (err) => failed.push({ path, reason: notSent(err).message.replace(/^Not sent: /, "") }),
+      )
+    }
+    return { ids, failed }
+  }
   const byId = (id: string | null | undefined) => (id ? list.data.find((t) => t.id === id) : undefined)
   const children = (id: string) => list.data.filter((t) => t.parentId === id)
 
@@ -33,14 +46,23 @@ export function createIssuesStore(session: Session, companyId: string) {
       return kids.length ? [kids.filter((k) => k.status === "done").length, kids.length] : null
     },
     projectName: (id: string | null) => (id ? projects.data.find((p) => p.id === id)?.name : undefined),
-    /** Posts a comment, retrying once after a network error with the same request id, then refreshes the thread. */
-    async comment(issueId: string, body: string) {
+    /**
+     * Posts a comment with files: the files are uploaded first and the comment carries the ones the server took. Retries
+     * the comment once after a network error with the same request id, refreshes the thread, and returns the files
+     * that were not attached.
+     */
+    async comment(issueId: string, body: string, files: string[] = []) {
+      const { ids, failed } = files.length ? await attach(issueId, files) : { ids: [], failed: [] }
+      if (files.length && !ids.length && !body) throw new Error(`Not sent: no file was attached (${failed.map((f) => f.reason).join(", ")})`)
       const requestId = crypto.randomUUID()
-      const send = () => postComment(session.client(), issueId, body, requestId)
+      // The server needs some text; a comment of files alone names them.
+      const text = body || `Attached ${files.filter((f) => !failed.some((x) => x.path === f)).map((f) => basename(f)).join(", ")}`
+      const send = () => postComment(session.client(), issueId, text, requestId, ids)
       await send()
         .catch((err) => (err instanceof ApiError && err.kind === "network" ? send() : Promise.reject(err)))
         .catch((err) => Promise.reject(notSent(err)))
       if (threads[issueId]) void threads[issueId]!.entries.refresh()
+      return failed
     },
     /** Creates a task, retrying once after a network error with the same idempotency key, then refreshes the list. */
     async create(task: NewTask): Promise<TaskSummary> {
@@ -52,14 +74,7 @@ export function createIssuesStore(session: Session, companyId: string) {
       void list.refresh()
       return created
     },
-    /** Uploads files to a task one by one; returns the files the server did not take, with its reason. */
-    async attach(issueId: string, paths: string[]): Promise<{ path: string; reason: string }[]> {
-      const failed: { path: string; reason: string }[] = []
-      for (const path of paths) {
-        await uploadAttachment(session.client(), companyId, issueId, path).catch((err) => failed.push({ path, reason: notSent(err).message.replace(/^Not sent: /, "") }))
-      }
-      return failed
-    },
+    attach,
     /** Changes a task's fields, then refreshes the list and, if open, its thread. */
     async update(issueId: string, patch: TaskPatch): Promise<void> {
       await updateTask(session.client(), issueId, patch).catch((err) => Promise.reject(notSent(err)))

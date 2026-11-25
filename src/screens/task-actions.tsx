@@ -8,6 +8,7 @@ import { afterDispatch, useDialog } from "../ui/dialog.tsx"
 import { useToast } from "../ui/toast.tsx"
 import { PRIORITY, STATUS_GROUPS } from "./tasks.tsx"
 import { TaskDialog } from "./task-dialog.tsx"
+import { AttachPrompt, type Added } from "./attach-prompt.tsx"
 
 export function useTaskActions(task: () => TaskSummary | undefined, opts: { description?: () => string | null } = {}) {
   const { session } = useStores()
@@ -81,6 +82,23 @@ export function useTaskActions(task: () => TaskSummary | undefined, opts: { desc
         "large",
       )
     })
+  /** Uploads files straight to the task, without a comment. */
+  const attachFiles = () =>
+    later(async () => {
+      const t = task()
+      if (!t) return
+      const done = async (added: Added) => {
+        dialog.clear()
+        if (added.problem) toast.show(added.problem, "warning")
+        if (!added.files.length) return
+        const { failed } = await company.issues.attach(t.id, added.files)
+        company.issues.refreshThread(t.id)
+        const sent = added.files.length - failed.length
+        if (failed.length) toast.show(`${sent ? `${t.identifier ?? "Task"}: ${sent} attached; ` : ""}not attached: ${failed.map((f) => `${f.path.split("/").pop()} (${f.reason})`).join(", ")}`, "warning", 8000)
+        else toast.show(`${t.identifier ?? "Task"}: ${sent} file${sent === 1 ? "" : "s"} attached`, "success")
+      }
+      dialog.replace(() => <AttachPrompt onDone={(added) => void done(added)} />)
+    })
   const create = () =>
     later(async () => {
       const t = task()
@@ -101,7 +119,7 @@ export function useTaskActions(task: () => TaskSummary | undefined, opts: { desc
                 private: form.private,
               })
               // Files go up once the task exists, as in the web UI; the task stays even if some are refused.
-              const failed = form.files.length ? await company.issues.attach(created.id, form.files) : []
+              const { failed } = form.files.length ? await company.issues.attach(created.id, form.files) : { failed: [] }
               dialog.clear()
               if (failed.length) toast.show(`${created.identifier ?? "Task"} created; not attached: ${failed.map((f) => `${f.path.split("/").pop()} (${f.reason})`).join(", ")}`, "warning", 8000)
               else toast.show(`${created.identifier ?? "Task"} created${form.files.length ? ` with ${form.files.length} file${form.files.length === 1 ? "" : "s"}` : ""}`, "success")
@@ -120,6 +138,7 @@ export function useTaskActions(task: () => TaskSummary | undefined, opts: { desc
           { name: "task.status", title: "Change status", category: "Task", keys: "s", run: status },
           { name: "task.priority", title: "Change priority", category: "Task", keys: "p", run: priority },
           { name: "task.assign", title: "Assign", category: "Task", keys: "a", run: assign },
+          { name: "task.attach", title: "Attach files", category: "Task", keys: "f", run: attachFiles },
           { name: "task.edit", title: "Edit title and description", category: "Task", keys: "e", run: edit },
           { name: "task.new", title: "New task", category: "Task", keys: "n", run: create },
         ] satisfies AppCommand[])

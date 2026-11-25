@@ -104,8 +104,8 @@ export async function listProjects(client: Client, companyId: string): Promise<P
 }
 
 /** Posts a comment. The same clientRequestId makes a retry safe: the server creates no second comment. */
-export function postComment(client: Client, issueId: string, body: string, clientRequestId: string) {
-  return client.post(`/api/issues/${id(issueId)}/comments`, { body, clientRequestId })
+export function postComment(client: Client, issueId: string, body: string, clientRequestId: string, attachmentIds: string[] = []) {
+  return client.post(`/api/issues/${id(issueId)}/comments`, { body, clientRequestId, ...(attachmentIds.length ? { attachmentIds } : {}) })
 }
 
 /** A new task. Without a title the server takes one from the description and generates a better one later. */
@@ -144,8 +144,10 @@ export async function updateTask(client: Client, issueId: string, patch: TaskPat
 }
 
 /** Uploads a local file to a task. The server decides which types and sizes it accepts. */
-export async function uploadAttachment(client: Client, companyId: string, issueId: string, path: string): Promise<void> {
+/** Uploads one file to a task and returns the attachment's id, which a comment can then carry. */
+export async function uploadAttachment(client: Client, companyId: string, issueId: string, path: string): Promise<string> {
   const form = new FormData()
   form.append("file", Bun.file(path), basename(path))
-  await client.post(`/api/companies/${id(companyId)}/issues/${id(issueId)}/attachments`, form)
+  const attachment = await client.post<{ id: string }>(`/api/companies/${id(companyId)}/issues/${id(issueId)}/attachments`, form)
+  return attachment.id
 }
