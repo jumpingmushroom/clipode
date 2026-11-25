@@ -218,6 +218,15 @@ Mine and unread (1.19), as decided on 2026-11-25 after a comparison with the web
 
 Verified in the scratch company on 2026-11-25: CLI-17 was unread, `POST …/read` answered with the read state, and Mine then reported it read.
 
+Decided (1.19, `g d`), from the same comparison: the inbox drops an item once it is resolved, and the web UI keeps a history of them. The screen reads two routes each time it is first opened, and again on activity events and polls:
+
+| Part | Route at `2026.1117.0` | Notes |
+| --- | --- | --- |
+| Resolved items | `GET /api/companies/{companyId}/attention/history?limit=100` | `items` with `sourceKind`, `title`, `label` (the result in words: "Approved", the chosen option, "Answers recorded"), `outcome`, `resolvedAt`, who resolved it, and the task; a `nextCursor` clipode does not follow |
+| Approvals | `GET /api/companies/{companyId}/approvals` | every approval with `status`, `payload.title`, `decisionNote`, `decidedByUserId` and `decidedAt`; those without `decidedAt` are left out |
+
+Probed on 2026-11-25: the history holds questions, confirmations and decisions but no approvals (one company had 145 decided approvals and a history of interactions only), which is why both are read. Rows show age, the inbox's marker, the result (green when approved, accepted, answered or decided, red when rejected or sent back), the task and the title; the sidebar adds who decided, when, and the note. `enter` opens the task, for an approval through `GET /api/approvals/{id}/issues`.
+
 ## Provenance and licensing
 
 The new repository is MIT licensed, and no pasode source is copied into it. A public repository without a licence gives no reuse rights by default, so pasode is used as a design reference only. This is a working rule and not legal advice.

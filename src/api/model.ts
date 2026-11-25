@@ -270,3 +270,19 @@ export type RunDetail = {
   inputTokens: number | null
   outputTokens: number | null
 }
+
+/** A resolved question, confirmation, decision or approval, for the Decided screen. */
+export type DecidedEntry = {
+  id: string
+  kind: "approval" | "interaction" | "decision" | "other"
+  /** What was decided: the interaction's or decision's title, or the approval's. */
+  title: string
+  /** The result in words ("Approved", the chosen option, "Answers recorded"). */
+  result: string
+  outcome: string
+  at: string
+  by: { type: "user" | "agent"; id: string } | null
+  issueId: string | null
+  identifier: string | null
+  note: string | null
+}
