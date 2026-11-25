@@ -1,5 +1,6 @@
 import { afterEach, expect, test } from "bun:test"
 import { COMPANY_ID, THREAD_ID } from "../fake-server.ts"
+import projects from "../fixtures/company/projects.json"
 import { startApp, type Running } from "../helpers.tsx"
 
 let app: Running | undefined
@@ -11,7 +12,7 @@ const hit = { score: 1, href: "", matchedFields: ["comment"], snippet: null, upd
 const response = {
   results: [
     { ...hit, id: THREAD_ID, type: "issue", title: "Importer", sourceLabel: "Comment", issue: { id: THREAD_ID, identifier: "DEMO-7", title: "Importer" }, snippets: [{ field: "comment", label: "Comment", text: "the csv importer drops rows", highlights: [{ start: 4, end: 7 }] }] },
-    { ...hit, id: "p1", type: "project", title: "Website", sourceLabel: "Project", snippets: [] },
+    { ...hit, id: projects[3]!.id, type: "project", title: "Website", sourceLabel: "Project", snippets: [] },
   ],
   hasMore: true,
 }
@@ -36,7 +37,7 @@ test("g / searches the company after typing; enter opens the task", async () => 
   expect(text.split("\n")[0]).toContain("Task · ")
 })
 
-test("a project opens Tasks filtered by it; a refused search says why", async () => {
+test("a project opens exactly its tasks; a refused search says why", async () => {
   app = await startApp({ before: (s) => s.set(`/api/companies/${COMPANY_ID}/search`, response) })
   await app.frame()
   app.mockInput.pressKey("g")
@@ -48,7 +49,8 @@ test("a project opens Tasks filtered by it; a refused search says why", async ()
   app.mockInput.pressArrow("down")
   app.mockInput.pressEnter()
   let text = await app.frame()
-  expect(text).toContain("project:website")
+  expect(text.split("\n")[0]).toContain("Tasks · example name")
+  expect(text).toContain("54 tasks")
 
   app.server.set(`/api/companies/${COMPANY_ID}/search`, { error: "Search rate limit exceeded" }, 429)
   app.mockInput.pressKey("g")

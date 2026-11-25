@@ -108,7 +108,16 @@ export type ThreadEntry =
 
 export type TaskCost = { costUsd: number; runCount: number; inputTokens: number; outputTokens: number }
 
-export type ProjectSummary = { id: string; name: string }
+export type ProjectSummary = {
+  id: string
+  name: string
+  /** "backlog", "planned", "in_progress", "completed" or "cancelled". */
+  status: string
+  description: string | null
+  leadAgentId: string | null
+  targetDate: string | null
+  archived: boolean
+}
 
 /** One company search hit. A task hit also stands for a match in its comments, documents or files. */
 export type SearchResult = {

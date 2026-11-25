@@ -1,5 +1,5 @@
 // Tasks (Paperclip calls them issues): the list, one task with its thread, and its cost.
-import type { Issue, IssueComment } from "@paperclipai/shared"
+import type { Issue, IssueComment, Project } from "@paperclipai/shared"
 import { basename } from "node:path"
 import type { Client } from "../client.ts"
 import type { ProjectSummary, TaskCost, TaskDetail, TaskSummary, ThreadEntry } from "../model.ts"
@@ -91,8 +91,16 @@ export async function getTaskCost(client: Client, issueId: string): Promise<Task
 }
 
 export async function listProjects(client: Client, companyId: string): Promise<ProjectSummary[]> {
-  const rows = await client.get<{ id: string; name: string }[]>(`/api/companies/${id(companyId)}/projects`)
-  return rows.map((p) => ({ id: p.id, name: p.name }))
+  const rows = await client.get<Project[]>(`/api/companies/${id(companyId)}/projects`)
+  return rows.map((p) => ({
+    id: p.id,
+    name: p.name,
+    status: p.status,
+    description: p.description,
+    leadAgentId: p.leadAgentId,
+    targetDate: p.targetDate ? String(p.targetDate) : null,
+    archived: !!p.archivedAt,
+  }))
 }
 
 /** Posts a comment. The same clientRequestId makes a retry safe: the server creates no second comment. */

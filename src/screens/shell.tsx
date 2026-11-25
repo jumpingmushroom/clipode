@@ -28,6 +28,7 @@ import { RunScreen } from "./run.tsx"
 import { AgentsScreen } from "./agents.tsx"
 import { AgentScreen } from "./agent.tsx"
 import { ActivityScreen } from "./activity.tsx"
+import { ProjectsScreen } from "./projects.tsx"
 import { RoutinesScreen } from "./routines.tsx"
 import { KIND_LABELS } from "./inbox-row.tsx"
 import { SearchDialog } from "./search.tsx"
@@ -137,6 +138,7 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
     { name: "go.tasks", title: "Tasks", category: "Go to", keys: "<leader>t,g t", run: () => route.reset({ name: "tasks" }) },
     { name: "app.search", title: "Search", category: "Go to", keys: "<leader>/,g /", run: () => dialog.replace(() => <SearchDialog />, undefined, "large") },
     { name: "go.agents", title: "Agents", category: "Go to", keys: "<leader>a,g a", run: () => route.reset({ name: "agents" }) },
+    { name: "go.projects", title: "Projects", category: "Go to", keys: "g p", run: () => route.reset({ name: "projects" }) },
     { name: "go.routines", title: "Routines", category: "Go to", keys: "g r", run: () => route.reset({ name: "routines" }) },
     { name: "go.activity", title: "Activity", category: "Go to", keys: "g h", run: () => route.reset({ name: "activity" }) },
     ...Array.from({ length: 9 }, (_, i): AppCommand => ({ name: `tabs.${i + 1}`, title: `Tab ${i + 1}`, category: "Tabs", keys: `<leader>${i + 1}`, hidden: true, run: () => tabs.jump(i) })),
@@ -211,6 +213,9 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
         <Match when={param("agent")} keyed>
           {(id: string) => <AgentScreen id={id} version={props.version} sidebar={showSidebar()} />}
         </Match>
+        <Match when={route.current().name === "projects"}>
+          <ProjectsScreen version={props.version} sidebar={showSidebar()} />
+        </Match>
         <Match when={route.current().name === "routines"}>
           <RoutinesScreen version={props.version} sidebar={showSidebar()} />
         </Match>
@@ -222,7 +227,7 @@ function Main(props: { version: string; config?: Config; onRestart?: () => void 
         </Match>
         {/* Keyed on the route, so opening Tasks with a filter from search rebuilds an open Tasks screen. */}
         <Match when={route.current().name === "tasks" && route.current()} keyed>
-          {(r: Route) => <TasksScreen filter={r.name === "tasks" ? r.filter : undefined} version={props.version} sidebar={showSidebar()} />}
+          {(r: Route) => <TasksScreen filter={r.name === "tasks" ? r.filter : undefined} projectId={r.name === "tasks" ? r.projectId : undefined} version={props.version} sidebar={showSidebar()} />}
         </Match>
         <Match when={true}>
           <InboxScreen version={props.version} sidebar={showSidebar()} />

@@ -53,8 +53,7 @@ export function SearchDialog() {
     dialog.clear()
     if (r.type === "task") route.navigate({ name: "thread", id: r.id })
     else if (r.type === "agent") route.navigate({ name: "agent", id: r.id })
-    // shortcut: the Tasks filter matches word starts, so a project whose first word another project shares shows both.
-    else route.navigate({ name: "tasks", filter: `project:${r.title.split(/\s+/)[0]!.toLowerCase()}` })
+    else route.navigate({ name: "tasks", projectId: r.id })
   }
 
   const options = (): SelectOption<SearchResult>[] =>

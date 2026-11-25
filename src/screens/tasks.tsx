@@ -42,7 +42,8 @@ export function priorityColor(priority: string, theme: Theme): RGBA {
 
 type Row = { type: "task"; task: TaskSummary } | { type: "more"; status: string; count: number }
 
-export function TasksScreen(props: { version: string; sidebar: boolean; filter?: string }) {
+/** With a projectId, only that project's tasks; the frame names the project. */
+export function TasksScreen(props: { version: string; sidebar: boolean; filter?: string; projectId?: string }) {
   const { theme } = useTheme()
   const company = useCompany()
   const route = useRoute()
@@ -71,7 +72,7 @@ export function TasksScreen(props: { version: string; sidebar: boolean; filter?:
 
   const assignee = (t: TaskSummary) => company.agents.byId(t.assigneeAgentId)?.name ?? (t.assigneeUserId ? "you" : undefined)
   const filter = createMemo(() => parseFilter(query()))
-  const shown = createMemo(() => issues.list.data.filter((t) => matchesFilter(t, filter(), { assignee, project: (t) => issues.projectName(t.projectId) })))
+  const shown = createMemo(() => issues.list.data.filter((t) => (!props.projectId || t.projectId === props.projectId) && matchesFilter(t, filter(), { assignee, project: (t) => issues.projectName(t.projectId) })))
   const liveTasks = createMemo(() => new Set(company.runs.live.data.map((r) => r.issueId).filter(Boolean)))
   const groups = createMemo(() =>
     STATUS_GROUPS.map((g) => {
@@ -157,7 +158,7 @@ export function TasksScreen(props: { version: string; sidebar: boolean; filter?:
 
   return (
     <Frame
-      view="Tasks"
+      view={props.projectId ? `Tasks · ${issues.projectName(props.projectId) ?? "project"}` : "Tasks"}
       badge={company.attention.badge()}
       showSidebar={props.sidebar}
       sidebar={<TasksSidebar tasks={shown()} now={now()} />}
